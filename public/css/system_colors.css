@@ -1,0 +1,53 @@
+.page-background{
+
+    background-color : #eeeeee !important;
+
+}
+
+.first-background{
+
+    background-color : #0d47a1 !important;
+
+}
+
+.first-text{
+
+    color : #0d47a1 !important;    
+
+}
+
+.second-background{
+
+    background-color : #f44336 !important;
+
+}
+
+.second-text{
+
+    color : #f44336 !important;
+
+}
+
+.third-background{
+
+    background-color : #ffd600 !important;
+
+}
+
+.third-text{
+
+    color : #ffd600 !important;
+
+}
+
+.error-text{
+
+    color : #d50000 !important;
+
+}
+
+.ok-text{
+
+    color : #64dd17 !important;
+
+}
