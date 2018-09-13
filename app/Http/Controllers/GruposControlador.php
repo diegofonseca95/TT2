@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
+use App\User;
 use App\Grupo;
 use App\AdministradorGrupo;
 use App\UsuarioGrupo;
+use Auth;
 
 class GruposControlador extends Controller
 {
     public function administrarGrupos(){
+        if(!Auth::check()){
+            return view('index');
+        }
 
         $grupo = new Grupo;
 
@@ -20,26 +24,39 @@ class GruposControlador extends Controller
     }
 
     public function verGrupos(){
+        if(!Auth::check()){
+            return view('index');
+        }
 
-    	return view('admin_manage_groups_list');
+    	return view('admin_manage_groups_list', ['nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
     }
 
     public function agregarGrupo(){
+        if(!Auth::check()){
+            return view('index');
+        }
 
-    	$usuario = new Usuario;
+    	$usuario = new User;
     	$query = $usuario->where('estado', '!=', 0)->get();
 
     	return view('admin_create_groups', [ 'usuarios' => $query]);
     }
 
     public function obtenerLiderTabla(){
-    	$usuario = new Usuario;
+        if(!Auth::check()){
+            return view('index');
+        }
+
+    	$usuario = new User;
     	$query = $usuario->whereIn('idUsuario', request("usuarios"))->get();
 
     	return view('tabla_lider',['usuarios' => $query]);
     }
 
     public function agregarGrupoBD(){
+        if(!Auth::check()){
+            return view('index');
+        }
 
         $grupo = new Grupo;
     	$grupo->nombreGrupo = request("nombreGrupo");
@@ -67,6 +84,10 @@ class GruposControlador extends Controller
     }
 
     public function editarGrupo($idGrupo){
+        if(!Auth::check()){
+            return view('index');
+        }
+
         $grupo = new Grupo;
 
         $query = $grupo->where('idGrupo', '=', $idGrupo)->get();
@@ -75,6 +96,10 @@ class GruposControlador extends Controller
     }
 
     public function obtenerGrupo(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
         $grupo = new Grupo;
 
         $query = $grupo->where('idGrupo', '=', request('idGrupo'))->get();
@@ -83,6 +108,10 @@ class GruposControlador extends Controller
     }
 
     public function eliminarGrupo(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
         try{
             $grupo = Grupo::findOrFail(request('idGrupo'));
             $grupo->estado = 3;
@@ -101,8 +130,12 @@ class GruposControlador extends Controller
     }
 
     public function obtenerUsuariosGrupo(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
         $usuarioGrupo = new UsuarioGrupo;
-        $usuario = new Usuario;
+        $usuario = new User;
         $query = $usuarioGrupo->where('idGrupo', '=', request('idGrupo'))->get();
         $arrays = array();
         foreach ($query as $value) {
@@ -114,6 +147,10 @@ class GruposControlador extends Controller
     }
 
     public function obtenerGrupos(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
         $grupo = new Grupo;
         
         return $grupo->where('estado', '!=', 3)->get();

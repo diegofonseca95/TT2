@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
+use App\User;
 use App\Mail\RecuperarContrasena;
-
+use Auth;
 class SesionControlador extends Controller
 {
     public function iniciarSesion(){
 
-    	$usuario = new Usuario;
+    	$usuario = new User;
 
         $query = $usuario->where([['correo', '=', request('correo')],['contrasena', '=', request('contrasena')]])->get();
 
@@ -19,6 +19,8 @@ class SesionControlador extends Controller
             
             session(['usuario.nombre' => $query[0]->nombre]);
             session(['usuario.idUsuario' => $query[0]->idUsuario]);
+            
+            Auth::login($query[0]);
 
             return response()->json([
                 'status'=> 'OK',
@@ -39,7 +41,7 @@ class SesionControlador extends Controller
 
     public function recuperarContrasena(){
 
-        $usuario = new Usuario;
+        $usuario = new User;
         $query = $usuario->where([['correo', '=', request('userId')],['estado', '!=', 0]])->get();
 
         if(!$query->isNotEmpty()){
@@ -49,7 +51,7 @@ class SesionControlador extends Controller
             ]);
         }
         try{
-            $usuario = Usuario::find($query[0]->idUsuario);
+            $usuario = User::find($query[0]->idUsuario);
             $usuario->contrasena = substr(md5($usuario->nombre.$usuario->contrasena), 0, 10);
 
             \Mail::to(request('userId'))->send(new RecuperarContrasena($usuario));
@@ -72,6 +74,14 @@ class SesionControlador extends Controller
     }
 
     public function iniciarSesionAdmin(){
+        if(Auth::check())
         return view('index_admin');
+
+        return view('index');
+    }
+
+    public function cerrarSesion(){
+        Auth::logout(); 
+        return view('index');
     }
 }
