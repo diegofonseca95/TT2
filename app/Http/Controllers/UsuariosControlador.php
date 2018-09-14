@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
-
+use App\User;
+use Auth;
 class UsuariosControlador extends Controller
 {
     public function agregarUsuario(){
-
+        
     	return view('registro');
     }
 
     public function index(){
+        if(Auth::check()) return view('index_admin');
     	return view('index');
     }
 
@@ -20,15 +21,22 @@ class UsuariosControlador extends Controller
         return view('admin_users');
     }
     public function agregarUsuarioBD(){
-    	$usuario = new Usuario;
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+    	$usuario = new User;
         $query = $usuario->where([['correo', '=', request('correo')]])->get();
 
-        if($query->isNotEmpty()){
+        if($query->isNotEmpty() ){
             return response()->json([
                 'status'=> 'ERROR',
                 'result'=> 'Ya existe una cuenta con ese correo'
                 ]);
         }
+
 
     	$usuario->nombre = request('nombre');
     	$usuario->apellidoPaterno = request('apellidoPaterno');
@@ -47,20 +55,34 @@ class UsuariosControlador extends Controller
     }
 
     public function obtenerUsuario(){
-        $usuario = new Usuario;
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+
+        $usuario = new User;
         $query = $usuario->where([['idUsuario','=', request('idUsuario')]]);
 
         return $query;
     }
 
     public function obtenerUsuarios(){
-        $usuario = new Usuario;
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+        
+        $usuario = new User;
         
         return $usuario->where('estado', '!=', 3)->get();
     }
 
     public function validarUsuario(){
-        $usuario = Usuario::find(request('idUsuario'));
+        $usuario = User::find(request('idUsuario'));
 
         if($usuario->estado == 2){
             $usuario->estado = 1;
@@ -85,7 +107,7 @@ class UsuariosControlador extends Controller
 
     public function eliminarUsuario(){
         try{
-            $usuario = Usuario::findOrFail(request('idUsuario'));
+            $usuario = User::findOrFail(request('idUsuario'));
             $usuario->estado = 3;
             $usuario->save();
 
