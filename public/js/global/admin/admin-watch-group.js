@@ -3,6 +3,7 @@ var AdminWatchGroupVue = new Vue({
   data : {
     users : [
       { // User Begin
+        idUsuario : 0,
         nombre : 'Jose María',
         apellidoPaterno : 'Morelos',
         apellidoMaterno : 'Y Pavón',
@@ -10,6 +11,7 @@ var AdminWatchGroupVue = new Vue({
         telefono : '5555555555'
       }, // User End
       { // User Begin
+        idUsuario : 1,
         nombre : 'Josefa',
         apellidoPaterno : 'Ortíz',
         apellidoMaterno : 'De Domínguez',
@@ -17,6 +19,7 @@ var AdminWatchGroupVue = new Vue({
         telefono : '5566666666'
       }, // User End
       { // User Begin
+        idUsuario : 2,
         nombre : 'Jose Joaquín',
         apellidoPaterno : 'Fernández',
         apellidoMaterno : 'De Elizalde',
