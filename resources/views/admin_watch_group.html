@@ -40,78 +40,12 @@
     <div class="section"></div>
     <div class="row" id="admin-watch-group-box">
 
-      <!-- Group Info Begins -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Nombre del grupo</b></span>
-          <div class="row">
-            <span class="title col s12" style="word-break: break-all;">Descripción del grupo</span>
-            <span class="title col s12" style="word-break: break-all;">Líder del grupo: Nombre Apellido</span>
-            <div class="col s12">
-              <button title="Editar" data-target="modal_groupInfo" class="btn-floating btn-large modal-trigger remove-button-background right"><i
-                  class="material-icons">mode_edit</i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Group Info Ends -->
+      <!-- TODO : Calculate the actual set of members -->
+      <group-info-card :group-members="users">
+      </group-info-card>
 
-      <!-- Group Users Begin -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Usuarios</b></span>
-          <ul class="collection scrollable-collection">
-            <!-- User Begins -->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
-              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
-                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
-                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
-                <div class="right">
-                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
-                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
-                </div>
-              </div>
-            </li>
-            <!-- User Ends -->
-
-            <!-- User Begins -->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
-              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
-                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
-                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
-                <div class="right">
-                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
-                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
-                </div>
-              </div>
-            </li>
-            <!-- User Ends -->
-
-            <!-- User Begins -->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
-              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
-                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
-                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
-                <div class="right">
-                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
-                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
-                </div>
-              </div>
-            </li>
-            <!-- User Ends -->
-          </ul>
-          <div class="row">
-            <div class="col s12">
-              <button title="Agregar usuarios" data-target="modal_addUserToGroup" class="btn-floating btn-large modal-trigger remove-button-background right"><i
-                  class="material-icons">add</i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Group Users End -->
+      <group-members-card :group-members="users">
+      </group-members-card>
 
       <!-- Group Projects Begin -->
       <div class="card">
@@ -173,7 +107,7 @@
           </ul>
           <div class="row">
             <div class="col s12">
-              <a href="#!" title="Agregar proyecto" class="btn-floating btn-large modal-trigger remove-button-background right"><i class="material-icons">add</i></a>
+              <a href="#!" title="Agregar proyecto" class="btn-floating btn-large remove-button-background right"><i class="material-icons">add</i></a>
             </div>
           </div>
         </div>
@@ -190,118 +124,6 @@
         </div>
       </div>
       <!-- Group File Tree Ends-->
-
-      <!-- Group Modal Definition Begins -->
-      <div id="modal_groupInfo" class="modal modal-fixed-footer">
-        <div class="modal-content">
-          <h4>Editar información del grupo</h4>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Nombre del grupo" value="Nombre del grupo" id="group_name" type="text" class="validate">
-                  <label for="group_name">Nombre del grupo</label>
-                </div>
-                <div class="input-field col s12">
-                  <input placeholder="Descripción del grupo" value="Descripción del grupo" id="group_desc" type="text"
-                    class="validate">
-                  <label for="group_desc">Descripción del grupo</label>
-                </div>
-              </div>
-              <!-- Group Users Begin -->
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title first-text"><b>Seleccionar líder</b></span>
-                  <form action="#">
-                    <ul class="collection">
-                      <!-- User Begins -->
-                      <li class="collection-item avatar">
-                        <i class="material-icons circle third-background">person</i>
-                        <div class="row">
-                          <div class="col s12 m9">
-                            <span class="title truncate col s12">Nombre Apellidos </span>
-                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                            <span class="title truncate col s12">Teléfono : 5555555555</span>
-                          </div>
-                          <div class="col s12 m3">
-                            <label class="right">
-                              <input name="group1" type="radio" checked />
-                              <span>Líder</span>
-                            </label>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- User Ends -->
-
-                      <!-- User Begins -->
-                      <li class="collection-item avatar">
-                        <i class="material-icons circle third-background">person</i>
-                        <div class="row">
-                          <div class="col s12 m9">
-                            <span class="title truncate col s12">Nombre Apellidos </span>
-                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                            <span class="title truncate col s12">Teléfono : 5555555555</span>
-                          </div>
-                          <div class="col s12 m3">
-                            <label class="right">
-                              <input name="group1" type="radio" />
-                              <span>Líder</span>
-                            </label>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- User Ends -->
-
-                      <!-- User Begins -->
-                      <li class="collection-item avatar">
-                        <i class="material-icons circle third-background">person</i>
-                        <div class="row">
-                          <div class="col s12 m9">
-                            <span class="title truncate col s12">Nombre Apellidos </span>
-                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                            <span class="title truncate col s12">Teléfono : 5555555555</span>
-                          </div>
-                          <div class="col s12 m3">
-                            <label class="right">
-                              <input name="group1" type="radio" />
-                              <span>Líder</span>
-                            </label>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- User Ends -->
-
-                      <!-- User Begins -->
-                      <li class="collection-item avatar">
-                          <i class="material-icons circle third-background">person</i>
-                          <div class="row">
-                            <div class="col s12 m9">
-                              <span class="title truncate col s12">Nombre Apellidos </span>
-                              <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                              <span class="title truncate col s12">Teléfono : 5555555555</span>
-                            </div>
-                            <div class="col s12 m3">
-                              <label class="right">
-                                <input name="group1" type="radio" />
-                                <span>Líder</span>
-                              </label>
-                            </div>
-                          </div>
-                        </li>
-                        <!-- User Ends -->
-                    </ul>
-                  </form>
-                </div>
-              </div>
-              <!-- Group Users End -->
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
-        </div>
-      </div>
-      <!-- Group Modal Definition Ends-->
 
       <!-- User Modal Definition Begins -->
       <div id="modal_userInfo" class="modal modal-fixed-footer">
@@ -443,81 +265,8 @@
       <div id="modal_addUserToGroup" class="modal modal-fixed-footer">
         <div class="modal-content">
           <h4>Agregar usuarios al grupo</h4>
-          <div class="row">
-            <form class="col s12">
-              <!-- Group Users Begin -->
-              <div class="card">
-                <div class="card-content">
-                  <div class="row">
-                    <div class='input-field col s12'>
-                        <i class='material-icons prefix third-text'>search</i>
-                        <input placeholder='Ingresa palabras clave' type='text' class='validate'>
-                      <label>Búsqueda de Usuarios</label>
-                    </div>
-                  </div>
-                  <ul class="collection scrollable-collection">
-                    <!-- User Begins -->
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle third-background">person</i>
-                      <div class="row">
-                        <div class="col s12 m9">
-                          <span class="title truncate col s12">Nombre Apellidos </span>
-                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                          <span class="title truncate col s12">Teléfono : 5555555555</span>
-                        </div>
-                        <div class="col s12 m3">
-                          <label class="right">
-                            <input type="checkbox" />
-                            <span>Agregar</span>
-                          </label>
-                        </div>
-                      </div>
-                    </li>
-                    <!-- User Ends -->
-
-                    <!-- User Begins -->
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle third-background">person</i>
-                      <div class="row">
-                        <div class="col s12 m9">
-                          <span class="title truncate col s12">Nombre Apellidos </span>
-                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                          <span class="title truncate col s12">Teléfono : 5555555555</span>
-                        </div>
-                        <div class="col s12 m3">
-                          <label class="right">
-                            <input type="checkbox" />
-                            <span>Agregar</span>
-                          </label>
-                        </div>
-                      </div>
-                    </li>
-                    <!-- User Ends -->
-
-                    <!-- User Begins -->
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle third-background">person</i>
-                      <div class="row">
-                        <div class="col s12 m9">
-                          <span class="title truncate col s12">Nombre Apellidos </span>
-                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                          <span class="title truncate col s12">Teléfono : 5555555555</span>
-                        </div>
-                        <div class="col s12 m3">
-                          <label class="right">
-                            <input type="checkbox" />
-                            <span>Agregar</span>
-                          </label>
-                        </div>
-                      </div>  
-                    </li>
-                    <!-- User Ends -->
-                  </ul>
-                </div>
-              </div>
-              <!-- Group Users End -->
-            </form>
-          </div>
+          <new-member-list :users="users">
+          </new-member-list>
         </div>
         <div class="modal-footer">
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
@@ -533,9 +282,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-  <script src="../js/toasts.js"></script>
-  <script src="../js/admin_create_groups.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../../public/js/toasts.js"></script>
+  <!-- Vue Components Begin -->
+  <script src="../../public/js/components/admin-watch-group/new-leader-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-leader-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/edit-group-info-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-info-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-members-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list.js"></script>
+  <!-- Vue Components End -->
+  <script src="../../public/js/global/admin/admin-watch-group.js"></script>
   <script>
     M.AutoInit();
   </script>
