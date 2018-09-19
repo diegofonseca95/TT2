@@ -15,6 +15,17 @@ Vue.component('group-member-list-item', {
       return fullName;
     }
   },
+  methods : {
+    removeMember : function(){
+      // TODO : Remove member from group.
+    },
+    observeMember : function(){
+      // TODO : Throw event member-selected to display info in toast.
+    },
+    messageMember : function(){
+      // TODO : Add functionality when chat is working.
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">person</i>
@@ -31,15 +42,18 @@ Vue.component('group-member-list-item', {
         </p>
         <div class="right">
           <a class="btn remove-button-background"
-            href="#!" title="Eliminar">
+            href="#!" title="Eliminar"
+            @click="removeMember">
             <i class="material-icons">remove</i>
           </a>
           <button class="btn modal-trigger remove-button-background"
-            title="Ver" data-target="modal_userInfo">
+            title="Ver" data-target="modal_userInfo"
+            @click="observeMember">
             <i class="material-icons">remove_red_eye</i>
           </button>
           <a class="btn remove-button-background"
-            href="#!" title="Contactar">
+            href="#!" title="Contactar"
+            @click="messageMember">
             <i class="material-icons">send</i>
           </a>
         </div>
