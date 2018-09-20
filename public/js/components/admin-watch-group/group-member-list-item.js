@@ -20,7 +20,7 @@ Vue.component('group-member-list-item', {
       // TODO : Remove member from group.
     },
     observeMember : function(){
-      // TODO : Throw event member-selected to display info in toast.
+      this.$emit('member-selected', this.member.idUsuario);
     },
     messageMember : function(){
       // TODO : Add functionality when chat is working.

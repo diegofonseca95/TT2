@@ -3,11 +3,17 @@ Vue.component('group-member-list', {
   data : function(){
     return {};
   },
+  methods : {
+    handleMemberSelected : function(userId){
+      this.$emit('member-selected', userId);
+    }
+  },
   template : `
     <ul class="collection scrollable-collection">
       <group-member-list-item 
         v-for="member in groupMembers" 
-        :key="member.idUsuario" 
+        @member-selected="handleMemberSelected($event)"
+        :key="member.idUsuario"
         :member="member">
       </group-member-list-item>
     </ul>
