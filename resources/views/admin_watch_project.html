@@ -69,7 +69,8 @@
                 <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
                 <div class="right">
                   <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
                   <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
                 </div>
               </div>
@@ -83,7 +84,8 @@
                 <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
                 <div class="right">
                   <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
                   <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
                 </div>
               </div>
@@ -97,7 +99,8 @@
                 <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
                 <div class="right">
                   <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
-                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i class="material-icons">remove_red_eye</i></button>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
                   <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
                 </div>
               </div>
@@ -106,7 +109,7 @@
           </ul>
           <div class="row">
             <div class="col s12">
-              <button title="Agregar usuarios" data-target="modal_addUserToGroup" class="btn-floating btn-large modal-trigger remove-button-background right"><i
+              <button title="Agregar usuarios" data-target="modal_addUserToProject" class="btn-floating btn-large modal-trigger remove-button-background right"><i
                   class="material-icons">add</i></button>
             </div>
           </div>
@@ -162,26 +165,36 @@
             </li>
             <!-- Iteration Ends -->
           </ul>
-          <div class="row">
-            <div class="col s12">
-              <button title="Agregar Iteración" data-target="modal_addIteration" class="btn-floating btn-large modal-trigger remove-button-background right"><i
-                class="material-icons">add</i></button>
-            </div>
-          </div>
         </div>
       </div>
       <!-- Project Iterations End-->
 
-      <!-- Group File Tree Begins -->
+      <!-- Add Iteration Begins -->
       <div class="card">
         <div class="card-content">
-          <span class="card-title first-text"><b>Árbol de archivos</b></span>
+          <span class="card-title first-text"><b>Agregar Iteración</b></span>
           <div class="row">
-            <span class="title truncate col s12">Aquí va el árbol de archivos</span>
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s9">
+                  <textarea placeholder="Descripción de la Iteración" id="iteration_desc" class="materialize-textarea"></textarea>
+                  <label for="iteration_desc">Descripción de la Iteración</label>
+                </div>
+                <div class="input-field col s3">
+                  <input type="text" class="datepicker" id="iteration_date">
+                  <label for="iteration_date">Fecha de inicio</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <a href="#!" title="Contactar" class="btn remove-button-background right">Agregar</a>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Group File Tree Ends-->
+      <!-- Add Iteration Ends-->
 
       <!-- Project Modal Definition Begins -->
       <div id="modal_projectInfo" class="modal modal-fixed-footer">
@@ -191,7 +204,8 @@
             <form class="col s12">
               <div class="row">
                 <div class="input-field col s12">
-                  <input placeholder="Nombre del proyecto" value="Nombre del proyecto" id="project_name" type="text" class="validate">
+                  <input placeholder="Nombre del proyecto" value="Nombre del proyecto" id="project_name" type="text"
+                    class="validate">
                   <label for="project_name">Nombre del proyecto</label>
                 </div>
                 <div class="input-field col s12">
@@ -265,22 +279,22 @@
 
                       <!-- User Begins -->
                       <li class="collection-item avatar">
-                          <i class="material-icons circle third-background">person</i>
-                          <div class="row">
-                            <div class="col s12 m9">
-                              <span class="title truncate col s12">Nombre Apellidos </span>
-                              <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                              <span class="title truncate col s12">Teléfono : 5555555555</span>
-                            </div>
-                            <div class="col s12 m3">
-                              <label class="right">
-                                <input name="group1" type="radio" />
-                                <span>Líder</span>
-                              </label>
-                            </div>
+                        <i class="material-icons circle third-background">person</i>
+                        <div class="row">
+                          <div class="col s12 m9">
+                            <span class="title truncate col s12">Nombre Apellidos </span>
+                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                            <span class="title truncate col s12">Teléfono : 5555555555</span>
                           </div>
-                        </li>
-                        <!-- User Ends -->
+                          <div class="col s12 m3">
+                            <label class="right">
+                              <input name="group1" type="radio" />
+                              <span>Líder</span>
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- User Ends -->
                     </ul>
                   </form>
                 </div>
@@ -294,31 +308,6 @@
         </div>
       </div>
       <!-- Project Modal Definition Ends-->
-
-      <!-- Add Iteration Modal Begins -->
-      <div id="modal_addIteration" class="modal modal-fixed-footer">
-        <div class="modal-content">
-          <h4>Agregar Iteración</h4>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Descripción de la Iteración" value="Descripción de la Iteración" id="iteration_desc" type="text" class="validate">
-                  <label for="iteration_desc">Descripción de la Iteración</label>
-                </div>
-                <div class="input-field col s12">
-                  <input type="text" class="datepicker">
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
-        </div>
-      </div>
-      <!-- Add Iteration Modal Ends-->
-
 
       <!-- User Modal Definition Begins -->
       <div id="modal_userInfo" class="modal modal-fixed-footer">
@@ -456,10 +445,10 @@
       </div>
       <!-- User Modal Definition Ends-->
 
-      <!-- Add User to Group Modal Definition Begins -->
-      <div id="modal_addUserToGroup" class="modal modal-fixed-footer">
+      <!-- Add User to Project Modal Definition Begins -->
+      <div id="modal_addUserToProject" class="modal modal-fixed-footer">
         <div class="modal-content">
-          <h4>Agregar usuarios al grupo</h4>
+          <h4>Agregar usuarios al proyecto</h4>
           <div class="row">
             <form class="col s12">
               <!-- Group Users Begin -->
@@ -467,8 +456,8 @@
                 <div class="card-content">
                   <div class="row">
                     <div class='input-field col s12'>
-                        <i class='material-icons prefix third-text'>search</i>
-                        <input placeholder='Ingresa palabras clave' type='text' class='validate'>
+                      <i class='material-icons prefix third-text'>search</i>
+                      <input placeholder='Ingresa palabras clave' type='text' class='validate'>
                       <label>Búsqueda de Usuarios</label>
                     </div>
                   </div>
@@ -526,7 +515,7 @@
                             <span>Agregar</span>
                           </label>
                         </div>
-                      </div>  
+                      </div>
                     </li>
                     <!-- User Ends -->
                   </ul>
