@@ -4,8 +4,8 @@ Vue.component('group-member-list', {
     return {};
   },
   methods : {
-    handleMemberSelected : function(userId){
-      this.$emit('member-selected', userId);
+    handleMemberSelected : function(user){
+      this.$emit('member-selected', user);
     }
   },
   template : `

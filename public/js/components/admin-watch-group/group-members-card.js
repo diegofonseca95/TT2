@@ -2,12 +2,12 @@ Vue.component('group-members-card', {
   props : ['groupMembers','users'],
   data : function(){
     return {
-      displayedUserId : null
+      displayedUser : null
     };
   },
   methods : {
-    handleMemberSelected : function(userId){
-      this.displayedUserId = userId;
+    handleMemberSelected : function(selectedUser){
+      this.displayedUser = selectedUser;
     }
   },
   template : `
@@ -32,9 +32,6 @@ Vue.component('group-members-card', {
       <add-new-member-modal
         :users="users">
       </add-new-member-modal>
-      <user-info-modal
-        :user-id="displayedUserId">
-      </user-info-modal>
     </div>
   `
 });

@@ -1,11 +1,12 @@
 Vue.component('user-info-modal', {
-  props : ['userId'],
+  props : ['user'],
   data : function(){
     return {};
   },
   watch : {
     userId : function(){
-      console.log('CHANGED FOREVER ' + this.userId);
+      console.log('CHANGED FOREVER ');
+      console.log(this.user);
     }
   },
   template : `
