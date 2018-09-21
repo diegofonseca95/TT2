@@ -189,12 +189,87 @@
           </div>
           <div class="row">
             <div class="col s12">
-              <a href="#!" title="Contactar" class="btn remove-button-background right">Agregar</a>
+              <a href="#!" title="Agregar Iteración" class="btn remove-button-background right">Agregar</a>
             </div>
           </div>
         </div>
       </div>
       <!-- Add Iteration Ends-->
+
+      <!-- Project Tasks Begin -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Tareas sin asignar</b></span>
+          <ul class="collection scrollable-collection">
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-1</span>
+                <span class="title truncate col s12">Descripción de la tarea 1</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-2</span>
+                <span class="title truncate col s12">Descripción de la tarea 2</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-3</span>
+                <span class="title truncate col s12">Descripción de la tarea 3</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+          </ul>
+        </div>
+      </div>
+      <!-- Project Tasks End-->
+
+      <!-- Add Task Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Agregar tarea</b></span>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea placeholder="Descripción de la tarea" id="task_desc" class="materialize-textarea"></textarea>
+                  <label for="task_desc">Descripción de la tarea</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea placeholder="Evidencia solicitada" id="task_evidence" class="materialize-textarea"></textarea>
+                  <label for="task_evidence">Evidencia solicitada</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <a href="#!" title="Agregar tarea" class="btn remove-button-background right">Agregar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Task Ends-->
 
       <!-- Project Modal Definition Begins -->
       <div id="modal_projectInfo" class="modal modal-fixed-footer">
@@ -529,7 +604,95 @@
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
         </div>
       </div>
-      <!-- Add User to Group Modal Definition Ends-->
+      <!-- Add User to Project Modal Definition Ends-->
+
+      <!-- Assign Users to Task Modal Definition Begins -->
+      <div id="modal_assignTask" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Asignar tarea</h4>
+          <div class="row">
+            <form class="col s12">
+              <!-- Project Users Begin -->
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class='input-field col s12'>
+                      <i class='material-icons prefix third-text'>search</i>
+                      <input placeholder='Ingresa palabras clave' type='text' class='validate'>
+                      <label>Búsqueda de Usuarios</label>
+                    </div>
+                  </div>
+                  <ul class="collection">
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" checked />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+                  </ul>
+                </div>
+              </div>
+              <!-- Project Users End -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Asignar tarea</a>
+        </div>
+      </div>
+      <!-- Assign Users to Task Modal Definition Ends-->
+
     </div>
   </div>
   <!-- Content End -->
@@ -539,11 +702,69 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-  <script src="../js/toasts.js"></script>
-  <script src="../js/admin_create_groups.js"></script>
 
   <script>
     M.AutoInit();
+    document.addEventListener('DOMContentLoaded', function () {
+      var options = {
+        i18n : {
+          cancel : "Cancelar",
+          clear : "Limpiar",
+          done : "Listo",
+          months : [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ],
+          monthsShort : [
+            "Ene",
+            "Feb",
+            "Mar",
+            "Abr",
+            "May",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dic"
+          ],
+          weekdays : [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado"
+          ],
+          weekdaysShort : [
+            "Dom",
+            "Lun",
+            "Mar",
+            "Mie",
+            "Jue",
+            "Vie",
+            "Sáb"
+          ],
+          weekdaysAbbrev : [
+            'D', 'L', 'M', 'M', 'J', 'V', 'S'
+          ]
+        }
+      };
+      var elems = document.querySelectorAll('.datepicker');
+      var instances = M.Datepicker.init(elems, options);
+    });
   </script>
   <!-- Scripts End -->
 </body>
