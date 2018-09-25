@@ -26,7 +26,6 @@ var AdminWatchGroupVue = new Vue({
     fetch('/obtenerUsuariosActivos', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
@@ -40,10 +39,10 @@ var AdminWatchGroupVue = new Vue({
     fetch('/obtenerIdUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.memberIds = response.result;
       }
+      // TODO : Handle non 'OK' status.
     }.bind(this));
 
     console.log(this.memberIds);
