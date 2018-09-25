@@ -27,5 +27,15 @@ var AdminWatchGroupVue = new Vue({
         telefono : '5577777777'
       } // User End
     ]
+  },
+  beforeCreate : function(){
+    var authToken = document.querySelector('input[name="_token"]');
+    var groupId = document.querySelector('input[name="group-id"]');
+    alert(authToken);
+    alert(groupId);
+    /*var requestData = {
+      _token : 
+    };
+    fetch*/
   }
 });
