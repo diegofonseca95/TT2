@@ -43,7 +43,7 @@ var AdminWatchGroupVue = new Vue({
     .then(responseData => responseData.json())
     .then(function(response){
       if(response.status === 'OK'){
-        this.users = response;
+        this.users = response.result;
       }
     }.bind(this));
   }
