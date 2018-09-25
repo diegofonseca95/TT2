@@ -40,8 +40,12 @@ var AdminWatchGroupVue = new Vue({
       body : requestData,
       method : 'POST'
     })
-    .then(responseData => responseData.json())
     .then(function(response){
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
