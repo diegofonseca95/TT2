@@ -31,8 +31,8 @@ var AdminWatchGroupVue = new Vue({
   beforeCreate : function(){
     var authToken = document.querySelector('input[name="_token"]');
     var groupId = document.querySelector('input[name="group-id"]');
-    alert(authToken);
-    alert(groupId);
+    alert(authToken.value);
+    alert(groupId.value);
     /*var requestData = {
       _token : 
     };
