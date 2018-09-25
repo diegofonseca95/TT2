@@ -26,7 +26,7 @@ Vue.component('admin-group-list-item', {
             }.bind(this));
         },
         editGroup : function(){
-            window.location.replace('/editarGrupo/' + this.group.idGrupo);
+            window.location.replace('/verGrupo/' + this.group.idGrupo);
         }
     },
     template : 
