@@ -37,7 +37,8 @@ var AdminWatchGroupVue = new Vue({
       _token : authToken
     };
     fetch('/obtenerUsuariosActivos', {
-      body : requestData,
+      headers: { 'Content-Type' : 'application/json' },
+      body : JSON.stringify(requestData),
       method : 'POST'
     })
     .then(function(response){
