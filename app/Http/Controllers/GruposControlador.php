@@ -145,7 +145,27 @@ class GruposControlador extends Controller
         $result = $usuario->whereIn('idUsuario', $arrays)->get();
         return view('tabla_grupo',  ['usuarios'=> $result]);
     }
+    public function obtenerIdUsuariosGrupo(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'No tienes acceso a esta vista :('
+                ]);;
+        }
 
+        $usuarioGrupo = new UsuarioGrupo;
+        $usuario = new User;
+        $query = $usuarioGrupo->where('idGrupo', '=', request('idGrupo'))->get();
+        $arrays = array();
+        foreach ($query as $value) {
+            array_push($arrays, $value->idUsuario);
+        }
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> $arrays
+                ]);
+        
+    }
     public function obtenerGrupos(){
         if(!Auth::check()){
             return view('index');
