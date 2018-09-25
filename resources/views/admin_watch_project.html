@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
+    media="screen,projection">
+  <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
+  <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
+  <title>Ver Proyecto</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="page-background">
+  <!-- Navbar Begin -->
+  <nav>
+    <div class="nav-wrapper second-background">
+      <ul class="left">
+        <li>
+          <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
+            <i class="material-icons left">view_module</i>
+          </a>
+        </li>
+      </ul>
+      <a href="#!" class="brand-logo center">
+        <i class="material-icons">computer</i>
+        <span class="hide-on-small-only">Ver Proyecto</span>
+      </a>
+      <ul class="right">
+        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Content begin -->
+  <div class="container">
+    <div class="section"></div>
+    <div class="row" id="admin-watch-group-box">
+
+      <!-- Project Info Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Nombre del proyecto</b></span>
+          <div class="row">
+            <span class="title col s12" style="word-break: break-all;">Descripción del proyecto</span>
+            <span class="title col s12" style="word-break: break-all;">Líder del proyecto: Nombre Apellido</span>
+            <span class="title col s12" style="word-break: break-all;">Fecha de inicio: 18 / 09 / 2018</span>
+            <div class="col s12">
+              <button title="Editar" data-target="modal_projectInfo" class="btn-floating btn-large modal-trigger remove-button-background right"><i
+                  class="material-icons">mode_edit</i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Project Info Ends -->
+
+      <!-- Project Users Begin -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Usuarios</b></span>
+          <ul class="collection scrollable-collection">
+            <!-- User Begins -->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
+              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
+                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
+                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
+                <div class="right">
+                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
+                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+
+            <!-- User Begins -->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
+              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
+                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
+                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
+                <div class="right">
+                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
+                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+
+            <!-- User Begins -->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
+              <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
+                  LastName LastName </span><span class="title truncate col s12 hide-on-med-and-up">Push-Relabel</span>
+                <p class="truncate col s12">Correo : algorithm@mail.com<br>Teléfono : 5555555555</p>
+                <div class="right">
+                  <a href="#!" title="Eliminar" class="btn remove-button-background"><i class="material-icons">remove</i></a>
+                  <button title="Ver" data-target="modal_userInfo" class="btn modal-trigger remove-button-background"><i
+                      class="material-icons">remove_red_eye</i></button>
+                  <a href="#!" title="Contactar" class="btn remove-button-background"><i class="material-icons">send</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+          </ul>
+          <div class="row">
+            <div class="col s12">
+              <button title="Agregar usuarios" data-target="modal_addUserToProject" class="btn-floating btn-large modal-trigger remove-button-background right"><i
+                  class="material-icons">add</i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Project Users End -->
+
+      <!-- Project Iterations Begin -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Iteraciones</b></span>
+          <ul class="collection scrollable-collection">
+            <!-- Iteration Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">Iteración 1</span>
+                <span class="title truncate col s12">Descripción corta<span class="hide-on-small-only">
+                    descripción extra de la iteración</span></span>
+                <span class="title truncate col s12">Fecha de inicio: 18 / 09 / 2018</span>
+                <span class="title truncate col s12">Fecha de término: 19 / 09 / 2018</span>
+                <div class="right">
+                  <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- Iteration Ends -->
+            <!-- Iteration Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">Iteración 2</span>
+                <span class="title truncate col s12">Descripción corta<span class="hide-on-small-only">
+                    descripción extra de la iteración</span></span>
+                <span class="title truncate col s12">Fecha de inicio: 18 / 09 / 2018</span>
+                <span class="title truncate col s12">Fecha de término: 19 / 09 / 2018</span>
+                <div class="right">
+                  <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- Iteration Ends -->
+            <!-- Iteration Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">Iteración 3</span>
+                <span class="title truncate col s12">Descripción corta<span class="hide-on-small-only">
+                    descripción extra de la iteración</span></span>
+                <span class="title truncate col s12">Fecha de inicio: 18 / 09 / 2018</span>
+                <span class="title truncate col s12">Fecha de término: 19 / 09 / 2018</span>
+                <div class="right">
+                  <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                </div>
+              </div>
+            </li>
+            <!-- Iteration Ends -->
+          </ul>
+        </div>
+      </div>
+      <!-- Project Iterations End-->
+
+      <!-- Add Iteration Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Agregar Iteración</b></span>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s9">
+                  <textarea placeholder="Descripción de la Iteración" id="iteration_desc" class="materialize-textarea"></textarea>
+                  <label for="iteration_desc">Descripción de la Iteración</label>
+                </div>
+                <div class="input-field col s3">
+                  <input type="text" class="datepicker" id="iteration_date">
+                  <label for="iteration_date">Fecha de inicio</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <a href="#!" title="Agregar Iteración" class="btn remove-button-background right">Agregar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Iteration Ends-->
+
+      <!-- Project Tasks Begin -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Tareas sin asignar</b></span>
+          <ul class="collection scrollable-collection">
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-1</span>
+                <span class="title truncate col s12">Descripción de la tarea 1</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-2</span>
+                <span class="title truncate col s12">Descripción de la tarea 2</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-3</span>
+                <span class="title truncate col s12">Descripción de la tarea 3</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <div class="right">
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background right">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+          </ul>
+        </div>
+      </div>
+      <!-- Project Tasks End-->
+
+      <!-- Add Task Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Agregar tarea</b></span>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea placeholder="Descripción de la tarea" id="task_desc" class="materialize-textarea"></textarea>
+                  <label for="task_desc">Descripción de la tarea</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea placeholder="Evidencia solicitada" id="task_evidence" class="materialize-textarea"></textarea>
+                  <label for="task_evidence">Evidencia solicitada</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <a href="#!" title="Agregar tarea" class="btn remove-button-background right">Agregar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Task Ends-->
+
+      <!-- Project Modal Definition Begins -->
+      <div id="modal_projectInfo" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Editar información del proyecto</h4>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Nombre del proyecto" value="Nombre del proyecto" id="project_name" type="text"
+                    class="validate">
+                  <label for="project_name">Nombre del proyecto</label>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="Descripción del proyecto" value="Descripción del proyecto" id="project_desc" type="text"
+                    class="validate">
+                  <label for="project_desc">Descripción del proyecto</label>
+                </div>
+              </div>
+              <!-- Project Users Begin -->
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title first-text"><b>Seleccionar líder</b></span>
+                  <form action="#">
+                    <ul class="collection">
+                      <!-- User Begins -->
+                      <li class="collection-item avatar">
+                        <i class="material-icons circle third-background">person</i>
+                        <div class="row">
+                          <div class="col s12 m9">
+                            <span class="title truncate col s12">Nombre Apellidos </span>
+                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                            <span class="title truncate col s12">Teléfono : 5555555555</span>
+                          </div>
+                          <div class="col s12 m3">
+                            <label class="right">
+                              <input name="group1" type="radio" checked />
+                              <span>Líder</span>
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- User Ends -->
+
+                      <!-- User Begins -->
+                      <li class="collection-item avatar">
+                        <i class="material-icons circle third-background">person</i>
+                        <div class="row">
+                          <div class="col s12 m9">
+                            <span class="title truncate col s12">Nombre Apellidos </span>
+                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                            <span class="title truncate col s12">Teléfono : 5555555555</span>
+                          </div>
+                          <div class="col s12 m3">
+                            <label class="right">
+                              <input name="group1" type="radio" />
+                              <span>Líder</span>
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- User Ends -->
+
+                      <!-- User Begins -->
+                      <li class="collection-item avatar">
+                        <i class="material-icons circle third-background">person</i>
+                        <div class="row">
+                          <div class="col s12 m9">
+                            <span class="title truncate col s12">Nombre Apellidos </span>
+                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                            <span class="title truncate col s12">Teléfono : 5555555555</span>
+                          </div>
+                          <div class="col s12 m3">
+                            <label class="right">
+                              <input name="group1" type="radio" />
+                              <span>Líder</span>
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- User Ends -->
+
+                      <!-- User Begins -->
+                      <li class="collection-item avatar">
+                        <i class="material-icons circle third-background">person</i>
+                        <div class="row">
+                          <div class="col s12 m9">
+                            <span class="title truncate col s12">Nombre Apellidos </span>
+                            <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                            <span class="title truncate col s12">Teléfono : 5555555555</span>
+                          </div>
+                          <div class="col s12 m3">
+                            <label class="right">
+                              <input name="group1" type="radio" />
+                              <span>Líder</span>
+                            </label>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- User Ends -->
+                    </ul>
+                  </form>
+                </div>
+              </div>
+              <!-- Project Users End -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
+        </div>
+      </div>
+      <!-- Project Modal Definition Ends-->
+
+      <!-- User Modal Definition Begins -->
+      <div id="modal_userInfo" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Nombre y Apellidos del usuario</h4>
+          <!-- User Groups Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Grupos en los que ha participado</b></span>
+              <ul class="collection scrollable-collection">
+                <!-- Group Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">group</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del grupo<span class="hide-on-small-only">
+                        descripción extra del nombre de grupo</span></span>
+                    <span class="title truncate col s12">Líder del grupo: Nombre apellido</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Group Ends -->
+                <!-- Group Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">group</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del grupo<span class="hide-on-small-only">
+                        descripción extra del nombre de grupo</span></span>
+                    <span class="title truncate col s12">Líder del grupo: Nombre apellido</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Group Ends -->
+                <!-- Group Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">group</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del grupo<span class="hide-on-small-only">
+                        descripción extra del nombre de grupo</span></span>
+                    <span class="title truncate col s12">Líder del grupo: Nombre apellido</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Group Ends -->
+                <!-- Group Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">group</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del grupo<span class="hide-on-small-only">
+                        descripción extra del nombre de grupo</span></span>
+                    <span class="title truncate col s12">Líder del grupo: Nombre apellido</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Group Ends -->
+              </ul>
+            </div>
+          </div>
+          <!-- User Groups End -->
+
+          <!-- User Projects Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Proyectos en los que ha colaborado</b></span>
+              <ul class="collection scrollable-collection">
+                <!-- Project Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">folder</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del proyecto<span class="hide-on-small-only">
+                        descripción extra del nombre de proyecto</span></span>
+                    <span class="title truncate col s12">Líder del proyecto: Nombre Apellidos</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Project Ends -->
+                <!-- Project Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">folder</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del proyecto<span class="hide-on-small-only">
+                        descripción extra del nombre de proyecto</span></span>
+                    <span class="title truncate col s12">Líder del proyecto: Nombre Apellidos</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Project Ends -->
+              </ul>
+            </div>
+          </div>
+          <!-- User Projects End -->
+
+          <!-- User Tasks Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Tareas que ha realizado</b></span>
+              <ul class="collection scrollable-collection">
+                <!-- Task Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre de la tarea realizada</span>
+                    <span class="title truncate col s12"> </span>
+                    <span class="title truncate col s12">Para el grupo: Nombre del grupo</span>
+                    <span class="title truncate col s12">Para el proyecto: Nombre del proyecto</span>
+                    <span class="title truncate col s12">Descripción de la tarea realizada</span>
+                    <span class="title truncate col s12"><a href="#!">Descargar evidencia</a></span>
+                  </div>
+                </li>
+                <!-- Task Ends -->
+                <!-- Task Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre de la tarea realizada</span>
+                    <span class="title truncate col s12"> </span>
+                    <span class="title truncate col s12">Para el grupo: Nombre del grupo</span>
+                    <span class="title truncate col s12">Para el proyecto: Nombre del proyecto</span>
+                    <span class="title truncate col s12">Descripción de la tarea realizada</span>
+                    <span class="title truncate col s12"><a href="#!">Descargar evidencia</a></span>
+                  </div>
+                </li>
+                <!-- Task Ends -->
+              </ul>
+            </div>
+          </div>
+          <!-- User Tasks End -->
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Entendido</a>
+        </div>
+      </div>
+      <!-- User Modal Definition Ends-->
+
+      <!-- Add User to Project Modal Definition Begins -->
+      <div id="modal_addUserToProject" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Agregar usuarios al proyecto</h4>
+          <div class="row">
+            <form class="col s12">
+              <!-- Group Users Begin -->
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class='input-field col s12'>
+                      <i class='material-icons prefix third-text'>search</i>
+                      <input placeholder='Ingresa palabras clave' type='text' class='validate'>
+                      <label>Búsqueda de Usuarios</label>
+                    </div>
+                  </div>
+                  <ul class="collection scrollable-collection">
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input type="checkbox" />
+                            <span>Agregar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input type="checkbox" />
+                            <span>Agregar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input type="checkbox" />
+                            <span>Agregar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+                  </ul>
+                </div>
+              </div>
+              <!-- Group Users End -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
+        </div>
+      </div>
+      <!-- Add User to Project Modal Definition Ends-->
+
+      <!-- Assign Users to Task Modal Definition Begins -->
+      <div id="modal_assignTask" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Asignar tarea</h4>
+          <div class="row">
+            <form class="col s12">
+              <!-- Project Users Begin -->
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class='input-field col s12'>
+                      <i class='material-icons prefix third-text'>search</i>
+                      <input placeholder='Ingresa palabras clave' type='text' class='validate'>
+                      <label>Búsqueda de Usuarios</label>
+                    </div>
+                  </div>
+                  <ul class="collection">
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" checked />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+
+                    <!-- User Begins -->
+                    <li class="collection-item avatar">
+                      <i class="material-icons circle third-background">person</i>
+                      <div class="row">
+                        <div class="col s12 m9">
+                          <span class="title truncate col s12">Nombre Apellidos </span>
+                          <span class="title truncate col s12">Correo : algorithm@mail.com</span>
+                          <span class="title truncate col s12">Teléfono : 5555555555</span>
+                        </div>
+                        <div class="col s12 m3">
+                          <label class="right">
+                            <input name="group1" type="radio" />
+                            <span>Asignar</span>
+                          </label>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- User Ends -->
+                  </ul>
+                </div>
+              </div>
+              <!-- Project Users End -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Asignar tarea</a>
+        </div>
+      </div>
+      <!-- Assign Users to Task Modal Definition Ends-->
+
+    </div>
+  </div>
+  <!-- Content End -->
+
+  <!-- Scripts Begin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
+
+  <script>
+    M.AutoInit();
+    document.addEventListener('DOMContentLoaded', function () {
+      var options = {
+        i18n : {
+          cancel : "Cancelar",
+          clear : "Limpiar",
+          done : "Listo",
+          months : [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+          ],
+          monthsShort : [
+            "Ene",
+            "Feb",
+            "Mar",
+            "Abr",
+            "May",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dic"
+          ],
+          weekdays : [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado"
+          ],
+          weekdaysShort : [
+            "Dom",
+            "Lun",
+            "Mar",
+            "Mie",
+            "Jue",
+            "Vie",
+            "Sáb"
+          ],
+          weekdaysAbbrev : [
+            'D', 'L', 'M', 'M', 'J', 'V', 'S'
+          ]
+        }
+      };
+      var elems = document.querySelectorAll('.datepicker');
+      var instances = M.Datepicker.init(elems, options);
+    });
+  </script>
+  <!-- Scripts End -->
+</body>
+
+</html>
