@@ -47,7 +47,7 @@ Vue.component('admin-group-list-item', {
                     "</div>" +
                     "<div class='col s4 offset-s2 m2 l3 offset-l1'>" +
                         "<a href='#!' v-on:click='editGroup' class='btn light-blue darken-2' title='Ver'>" +
-                            "<i class='material-icons'>edit</i>" +
+                            "<i class='material-icons'>remove_red_eye</i>" +
                         "</a>" +
                     "</div>" +
                 "</div>" +
