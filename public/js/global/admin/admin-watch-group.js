@@ -1,53 +1,51 @@
 var AdminWatchGroupVue = new Vue({
   el : '#admin-watch-group-box',
   data : {
-    users : [
-      { // User Begin
-        idUsuario : 0,
-        nombre : 'Jose María',
-        apellidoPaterno : 'Morelos',
-        apellidoMaterno : 'Y Pavón',
-        correo : 'jose.maria@morelos.com',
-        telefono : '5555555555'
-      }, // User End
-      { // User Begin
-        idUsuario : 1,
-        nombre : 'Josefa',
-        apellidoPaterno : 'Ortíz',
-        apellidoMaterno : 'De Domínguez',
-        correo : 'josefa@ortiz.com',
-        telefono : '5566666666'
-      }, // User End
-      { // User Begin
-        idUsuario : 2,
-        nombre : 'Jose Joaquín',
-        apellidoPaterno : 'Fernández',
-        apellidoMaterno : 'De Elizalde',
-        correo : 'jose.joaquin@fernandez.com',
-        telefono : '5577777777'
-      } // User End
-    ]
+    groupId : null,
+    memberIds : [],
+    users : []
   },
   beforeCreate : function(){
+    // Get the group id from the hidden input.
+    this.groupId = document.querySelector('input[name="group-id"]');
+
     var authToken = document.querySelector('input[name="_token"]');
-    var groupId = document.querySelector('input[name="group-id"]');
-    //alert(authToken.value);
-    //alert(groupId.value);
+
+    // Request data for the 'fetch' function.
     var requestData = {
-      _token : authToken.value
-    };
-    console.log(requestData);
-    fetch('/obtenerUsuariosActivos', {
       headers: { 'Content-Type' : 'application/json' },
-      body : JSON.stringify(requestData),
       method : 'POST'
-    })
+    };
+
+    // The body of our request.
+    var requestBody = { _token : authToken.value };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the users list.
+    fetch('/obtenerUsuariosActivos', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
+      // TODO : Handle non 'OK' status.
     }.bind(this));
+
+    // Add the group identifier to the request body.
+    requestBody.idGrupo = this.groupId;
+    requestData.body = JSON.stringify(requestBody);
+
+    fetch('/obtenerIdUsuariosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.memberIds = response.result;
+      }
+    }.bind(this));
+
+    console.log(this.memberIds);
   }
 });
