@@ -80,7 +80,21 @@ class UsuariosControlador extends Controller
         
         return $usuario->where('estado', '!=', 3)->get();
     }
-
+    public function obtenerUsuariosActivos(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+        
+        $usuario = new User;
+        
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> $usuario->where('estado', '=', 1)->get()
+                ]);
+    }
     public function validarUsuario(){
         $usuario = User::find(request('idUsuario'));
 

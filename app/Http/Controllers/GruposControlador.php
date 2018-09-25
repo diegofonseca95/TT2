@@ -180,6 +180,6 @@ class GruposControlador extends Controller
             return view('index');
         }
 
-        return view("admin_watch_group", ['idGrupo' => $idGrupo]);
+        return view('admin_watch_group', ['idGrupo' => $idGrupo]);
     }
 }

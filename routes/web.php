@@ -31,6 +31,7 @@ Route::get('/agregarGrupo', 'GruposControlador@agregarGrupo');
 Route::post('/obtenerLiderTabla', 'GruposControlador@obtenerLiderTabla');
 Route::post('/agregarGrupo', 'GruposControlador@agregarGrupoBD');
 Route::post('/obtenerUsuarios', 'UsuariosControlador@obtenerUsuarios');
+Route::post('/obtenerUsuariosActivos', 'UsuariosControlador@obtenerUsuariosActivos');
 Route::post('/eliminarUsuario', 'UsuariosControlador@eliminarUsuario');
 Route::post('/validarUsuario', 'UsuariosControlador@validarUsuario');
 Route::post('/obtenerGrupos', 'GruposControlador@obtenerGrupos');
