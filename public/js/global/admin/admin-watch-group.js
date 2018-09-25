@@ -7,7 +7,8 @@ var AdminWatchGroupVue = new Vue({
   },
   beforeCreate : function(){
     // Get the group id from the hidden input.
-    this.groupId = document.querySelector('input[name="group-id"]');
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+    this.groupId = groupIdInput.value;
 
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -35,8 +36,6 @@ var AdminWatchGroupVue = new Vue({
     // Add the group identifier to the request body.
     requestBody.idGrupo = this.groupId;
     requestData.body = JSON.stringify(requestBody);
-
-    console.log(requestBody);
 
     fetch('/obtenerIdUsuariosGrupo', requestData)
     .then(response => response.json())
