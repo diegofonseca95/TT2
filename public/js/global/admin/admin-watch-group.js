@@ -36,6 +36,8 @@ var AdminWatchGroupVue = new Vue({
     requestBody.idGrupo = this.groupId;
     requestData.body = JSON.stringify(requestBody);
 
+    console.log(requestBody);
+
     fetch('/obtenerIdUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
