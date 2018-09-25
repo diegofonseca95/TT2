@@ -31,11 +31,20 @@ var AdminWatchGroupVue = new Vue({
   beforeCreate : function(){
     var authToken = document.querySelector('input[name="_token"]');
     var groupId = document.querySelector('input[name="group-id"]');
-    alert(authToken.value);
-    alert(groupId.value);
-    /*var requestData = {
-      _token : 
+    //alert(authToken.value);
+    //alert(groupId.value);
+    var requestData = {
+      _token : authToken
     };
-    fetch*/
+    fetch('/obtenerUsuariosActivos', {
+      body : requestData,
+      method : 'POST'
+    })
+    .then(responseData => responseData.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.users = response;
+      }
+    }.bind(this));
   }
 });
