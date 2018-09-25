@@ -3,7 +3,7 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="../css/system_colors.css">
+        <link rel="stylesheet" type="text/css" href="/css/system_colors.css">
         
         <title>Administrar Grupos</title>
 
@@ -63,10 +63,10 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="../js/toasts.js"></script>  
-        <script src="../js/components/admin-group-list-item.js"></script>
-        <script src="../js/components/admin-group-list.js"></script>
-        <script src="../js/admin_groups.js"></script>
+        <script src="/js/toasts.js"></script>  
+        <script src="/js/components/admin-group-list-item.js"></script>
+        <script src="/js/components/admin-group-list.js"></script>
+        <script src="/js/admin_groups.js"></script>
         <!-- Scripts End -->
     </body>
 </html>
