@@ -39,6 +39,7 @@ Route::post('/eliminarGrupo', 'GruposControlador@eliminarGrupo');
 Route::post('/obtenerUsuariosGrupo', 'GruposControlador@obtenerUsuariosGrupo');
 //Route::get('/recuperarContrasena?userId={userId}', 'SesionControlador@recuperarContrasena');
 Route::get('/editarGrupo/{idGrupo}', 'GruposControlador@editarGrupo');
+Route::get('/verGrupo/{idGrupo}', 'GruposControlador@verGrupo');
 //Route::get('/publicacionesGrupo/{idGrupo}', 'PublicacionControlador@publicacionesGrupo');
 Route::get('/publicacionesGrupo', 'PublicacionControlador@publicacionesGrupo');
 Route::post('/recuperarContrasena', 'SesionControlador@recuperarContrasena');

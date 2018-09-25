@@ -175,4 +175,11 @@ class GruposControlador extends Controller
         
         return $grupo->where('estado', '!=', 3)->get();
     }
+    public function verGrupo($idGrupo){
+    	if(!Auth::check()){
+            return view('index');
+        }
+
+        return view("admin_watch_group", ['idGrupo' => $idGrupo]);
+    }
 }
