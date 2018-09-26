@@ -5,6 +5,18 @@ var AdminWatchGroupVue = new Vue({
     memberIds : [],
     users : []
   },
+  computed : {
+    nonMemberList : function(){
+      return this.users.filter(
+        user => !this.memberIds.contains(user.idUsuario)
+      );
+    },
+    memberList : function(){
+      return this.users.filter(
+        user => this.memberIds.contains(user.idUsuario)
+      );
+    }
+  },
   beforeCreate : function(){
     // Get the group id from the hidden input.
     var groupIdInput = document.querySelector('input[name="group-id"]');
@@ -40,13 +52,10 @@ var AdminWatchGroupVue = new Vue({
     fetch('/obtenerIdUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.memberIds = response.result;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
-
-    console.log(this.memberIds);
   }
 });
