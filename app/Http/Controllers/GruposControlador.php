@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Grupo;
 use App\AdministradorGrupo;
+use App\AdministradorProyecto;
 use App\UsuarioGrupo;
+use App\ProyectoGrupo;
+use App\Proyecto;
 use Auth;
-
+use Illuminate\Support\Facades\Log;
 class GruposControlador extends Controller
 {
     public function administrarGrupos(){
@@ -157,6 +160,7 @@ class GruposControlador extends Controller
         $usuario = new User;
         $query = $usuarioGrupo->where('idGrupo', '=', request('idGrupo'))->get();
         $arrays = array();
+
         foreach ($query as $value) {
             array_push($arrays, $value->idUsuario);
         }
@@ -181,5 +185,35 @@ class GruposControlador extends Controller
         }
 
         return view('admin_watch_group', ['idGrupo' => $idGrupo]);
+    }
+    public function obtenerProyectosGrupo(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'No tienes acceso a esta vista :('
+                ]);;
+        }
+
+        $proyectoGrupo = new ProyectoGrupo;
+        $usuario = new User;
+        $proyecto = new Proyecto;
+        $query = $proyectoGrupo->where('idGrupo', '=', request('idGrupo'))->get();
+        $arrays = array();
+        
+        foreach ($query as $value) {
+            array_push($arrays, $value->idProyecto);
+        }
+
+        $adminProyecto = new AdministradorProyecto;
+        $queryProyectov = $proyecto->whereIn('idProyecto',$arrays)->get();
+        foreach($queryProyecto as &$proyecto){
+        	$adminProyecto->where('idProyecto', '=', $proyecto->idProyecto)->get();
+        	$proyecto->lider = $usuario->where('idUsuario', '=', $adminProyecto[0]->idUsuario)->get();
+        }
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> $queryProyecto
+                ]);
+        
     }
 }

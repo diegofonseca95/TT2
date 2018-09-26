@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Log;
+
 class UsuariosControlador extends Controller
 {
     public function agregarUsuario(){
@@ -89,7 +91,7 @@ class UsuariosControlador extends Controller
         }
         
         $usuario = new User;
-        
+        Log::info( $usuario->where('estado', '=', 1)->get());
         return response()->json([
                 'status'=> 'OK',
                 'result'=> $usuario->where('estado', '=', 1)->get()
