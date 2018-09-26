@@ -1,5 +1,5 @@
 Vue.component('new-member-list-item', {
-  props : ['user'],
+  props : ['user','isSelected'],
   data : function(){
     return {
       selected : false

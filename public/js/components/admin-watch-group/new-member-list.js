@@ -2,6 +2,7 @@ Vue.component('new-member-list', {
   props : ['users'],
   data : function(){
     return {
+      selectedBucket : {},
       searchInput : ''
     };
   },
@@ -26,6 +27,14 @@ Vue.component('new-member-list', {
       });
     }
   },
+  watch : {
+    users : function(){
+      this.selectedBucket = {};
+      for(var x in this.users){
+        this.selectedBucket[this.users[x].idUsuario] = false;
+      }   
+    }
+  },
   template : `
     <div class="row">
       <form class="col s12">
@@ -43,6 +52,7 @@ Vue.component('new-member-list', {
             <ul class="collection scrollable-collection">
               <new-member-list-item
                 v-for="user in filteredList"
+                :is-selected="selectedBucket[user.idUsuario]"
                 :key="user.idUsuario"
                 :user="user">
               </new-member-list-item>
