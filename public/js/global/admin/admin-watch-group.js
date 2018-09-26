@@ -8,12 +8,12 @@ var AdminWatchGroupVue = new Vue({
   computed : {
     nonMemberList : function(){
       return this.users.filter(
-        user => !this.memberIds.contains(user.idUsuario)
+        user => !this.memberIds.includes(user.idUsuario)
       );
     },
     memberList : function(){
       return this.users.filter(
-        user => this.memberIds.contains(user.idUsuario)
+        user => this.memberIds.includes(user.idUsuario)
       );
     }
   },
