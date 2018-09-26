@@ -5,8 +5,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
     media="screen,projection">
-  <link rel="stylesheet" type="text/css" href="/css/system_colors.css">
-  <link rel="stylesheet" type="text/css" href="/css/helpers.css">
+  <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
+  <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
   <title>Ver Grupo</title>
 
   <meta charset="utf-8">
@@ -14,11 +14,6 @@
 </head>
 
 <body class="page-background">
-
-  <input type="hidden" value="<?= $idGrupo ?>" name="group-id" />
-
-  {{ csrf_field() }}
-
   <!-- Navbar Begin -->
   <nav>
     <div class="nav-wrapper second-background">
@@ -47,16 +42,16 @@
 
       <!-- TODO : Calculate the actual set of members -->
       <group-info-card 
-        :group-members="memberList">
+        :group-members="users">
       </group-info-card>
 
       <group-members-card 
-        :group-members="memberList"
-        :users="nonMemberList">
+        :group-members="users"
+        :users="users">
       </group-members-card>
 
       <group-projects-card
-        :group-id="groupId">
+        :group-id="0">
       </group-projects-card>
 
       <!-- Group File Tree Begins -->
@@ -165,26 +160,26 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="/js/toasts.js"></script>
+  <script src="../../public/js/toasts.js"></script>
   <!-- Vue Components Begin -->
-  <script src="/js/components/admin-watch-group/new-leader-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list.js"></script>
-  <script src="/js/components/admin-watch-group/edit-group-info-modal.js"></script>
-  <script src="/js/components/admin-watch-group/group-info-card.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/add-new-member-modal.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-group-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-group-list.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-modal.js"></script>
-  <script src="/js/components/admin-watch-group/group-members-card.js"></script>
-  <script src="/js/components/admin-watch-group/project-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/project-list.js"></script>
-  <script src="/js/components/admin-watch-group/group-projects-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-leader-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-leader-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/edit-group-info-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-info-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/add-new-member-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/user-info-group-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/user-info-group-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/user-info-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-members-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/project-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/project-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-projects-card.js"></script>
   <!-- Vue Components End -->
-  <script src="/js/global/admin/admin-watch-group.js"></script>
+  <script src="../../public/js/global/admin/admin-watch-group.js"></script>
   <script>
     M.AutoInit();
   </script>
