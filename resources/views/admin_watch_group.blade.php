@@ -47,16 +47,16 @@
 
       <!-- TODO : Calculate the actual set of members -->
       <group-info-card 
-        :group-members="users">
+        :group-members="memberList">
       </group-info-card>
 
       <group-members-card 
-        :group-members="users"
-        :users="users">
+        :group-members="memberList"
+        :users="nonMemberList">
       </group-members-card>
 
       <group-projects-card
-        :group-id="0">
+        :group-id="groupId">
       </group-projects-card>
 
       <!-- Group File Tree Begins -->
