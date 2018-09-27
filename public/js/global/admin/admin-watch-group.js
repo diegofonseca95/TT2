@@ -17,6 +17,11 @@ var AdminWatchGroupVue = new Vue({
       );
     }
   },
+  methods : {
+    handleNewMembersAdded : function(memberList){
+      this.memberIds.push(memberList);
+    }
+  },
   beforeCreate : function(){
     // Get the group id from the hidden input.
     var groupIdInput = document.querySelector('input[name="group-id"]');
@@ -53,6 +58,7 @@ var AdminWatchGroupVue = new Vue({
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
+        console.log(response.result);
         this.memberIds = response.result;
       }
       // TODO : Handle non 'OK' status.

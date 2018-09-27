@@ -2,53 +2,46 @@ Vue.component('project-list', {
   props : ['groupId'],
   data : function(){
     return {
-      groupProjectsInfo : [
-        {
-          project : {
-            idProyecto : 0,
-            nombreProyecto : 'First Project'
-          },
-          projectLeader : {
-            idUsuario : 0,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          project : {
-            idProyecto : 1,
-            nombreProyecto : 'Second Project'
-          },
-          projectLeader : {
-            idUsuario : 1,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          project : {
-            idProyecto : 2,
-            nombreProyecto : 'Third Project'
-          },
-          projectLeader : {
-            idUsuario : 2,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        }
-      ]
+      projects : []
     };
+  },
+  watch : {
+    groupId : function(){
+      // TODO : Check if it works.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        _token : authToken.value,
+        idGrupo : this.idGrupo
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/obtenerProyectosGrupo', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.projects = response.result;
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    }
   },
   template : `
     <ul class="collection scrollable-collection">
       <project-list-item
-        v-for="projectInfo in groupProjectsInfo"
-        :project-leader="projectInfo.projectLeader"
-        :key="projectInfo.project.idProyecto"
-        :project="projectInfo.project">
+        v-for="project in projects"
+        :project-leader="project.lider"
+        :key="project.idProyecto"
+        :project="project">
       </project-list-item>
     </ul>
   `

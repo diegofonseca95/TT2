@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Log;
+
 class UsuariosControlador extends Controller
 {
     public function agregarUsuario(){
@@ -80,7 +82,21 @@ class UsuariosControlador extends Controller
         
         return $usuario->where('estado', '!=', 3)->get();
     }
-
+    public function obtenerUsuariosActivos(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+        
+        $usuario = new User;
+        Log::info( $usuario->where('estado', '=', 1)->get());
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> $usuario->where('estado', '=', 1)->get()
+                ]);
+    }
     public function validarUsuario(){
         $usuario = User::find(request('idUsuario'));
 

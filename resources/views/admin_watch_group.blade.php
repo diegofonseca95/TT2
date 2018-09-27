@@ -51,6 +51,7 @@
       </group-info-card>
 
       <group-members-card 
+        @new-members-added="handleNewMembersAdded"
         :group-members="memberList"
         :users="nonMemberList">
       </group-members-card>
