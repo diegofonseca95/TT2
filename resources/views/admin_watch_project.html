@@ -271,6 +271,74 @@
       </div>
       <!-- Add Task Ends-->
 
+      <!-- DropBox Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Archivos compartidos del proyecto</b></span>
+          <!-- Search Component Begins -->
+          <div class="row">
+            <div class='input-field col s12'>
+              <i class='material-icons prefix third-text'>search</i>
+              <input placeholder='Ingresa palabras clave' type='text' class='validate'>
+              <label>Búsqueda de Archivos</label>
+            </div>
+          </div>
+          <!-- Search Component Ends -->
+          <!-- File Collection Begins -->
+          <ul class="collection scrollable-collection">
+            <!-- File Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
+              <div class="row">
+                <span class="title truncate col s12">Archivo 1</span>
+                <span class="title truncate col s12">Breve descripción del archivo 1</span>
+                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
+              </div>
+            </li>
+            <!-- File Ends -->
+            <!-- File Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
+              <div class="row">
+                <span class="title truncate col s12">Archivo 2</span>
+                <span class="title truncate col s12">Breve descripción del archivo 2</span>
+                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
+              </div>
+            </li>
+            <!-- File Ends -->
+            <!-- File Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
+              <div class="row">
+                <span class="title truncate col s12">Archivo 3</span>
+                <span class="title truncate col s12">Breve descripción del archivo 3</span>
+                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
+              </div>
+            </li>
+            <!-- File Ends -->
+            <!-- File Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
+              <div class="row">
+                <span class="title truncate col s12">Archivo 4</span>
+                <span class="title truncate col s12">Breve descripción del archivo 4</span>
+                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
+              </div>
+            </li>
+            <!-- File Ends -->
+          </ul>
+          <!-- File Collections Ends -->
+          <div class="row">
+            <div class="file-field input-field">
+              <div class="btn remove-button-background">
+                <span>Subir archivo</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- DropBox Ends-->
+
       <!-- Project Modal Definition Begins -->
       <div id="modal_projectInfo" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -707,12 +775,12 @@
     M.AutoInit();
     document.addEventListener('DOMContentLoaded', function () {
       var options = {
-        format : "dd / mmm / yyyy",
-        i18n : {
-          cancel : "Cancelar",
-          clear : "Limpiar",
-          done : "Listo",
-          months : [
+        format: "dd / mmm / yyyy",
+        i18n: {
+          cancel: "Cancelar",
+          clear: "Limpiar",
+          done: "Listo",
+          months: [
             "Enero",
             "Febrero",
             "Marzo",
@@ -726,7 +794,7 @@
             "Noviembre",
             "Diciembre"
           ],
-          monthsShort : [
+          monthsShort: [
             "01",
             "02",
             "03",
@@ -740,7 +808,7 @@
             "11",
             "12"
           ],
-          weekdays : [
+          weekdays: [
             "Domingo",
             "Lunes",
             "Martes",
@@ -749,7 +817,7 @@
             "Viernes",
             "Sábado"
           ],
-          weekdaysShort : [
+          weekdaysShort: [
             "Dom",
             "Lun",
             "Mar",
@@ -758,7 +826,7 @@
             "Vie",
             "Sáb"
           ],
-          weekdaysAbbrev : [
+          weekdaysAbbrev: [
             'D', 'L', 'M', 'M', 'J', 'V', 'S'
           ]
         }
