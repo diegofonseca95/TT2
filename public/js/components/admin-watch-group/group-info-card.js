@@ -30,15 +30,15 @@ Vue.component('group-info-card', {
 
     requestData.body = JSON.stringify(requestBody);
 
-    console.log(requestBody);
-
     // Fetch the users list.
     fetch('/obtenerGrupo', requestData)
-    .then(response => response.json())
+    //.then(response => response.json())
     .then(function(response){
+      console.log(response);
+      return;
       if(response.status === 'OK'){
         this.groupInfo.description = response.result.descripcion;
-        this.groupInfo.name = response.result.nombre;
+        this.groupInfo.name = response.result.nombreGrupo;
         for(var i in this.groupMembers){
           if(this.groupMembers[i].idUsuario === response.result.lider){
             this.groupInfo.leader = this.groupMembers[i];
