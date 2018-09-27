@@ -45,6 +45,91 @@
     <div class="section"></div>
     <admin-watch-group-view>
     </admin-watch-group-view>
+    <!-- User Modal Definition Begins -->
+      <div id="modal_userInfo" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Nombre y Apellidos del usuario</h4>
+          <!-- User Groups Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Grupos en los que ha participado</b></span>
+              <user-info-group-list :user-id="0">
+              </user-info-group-list>
+            </div>
+          </div>
+          <!-- User Groups End -->
+
+          <!-- User Projects Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Proyectos en los que ha colaborado</b></span>
+              <ul class="collection scrollable-collection">
+                <!-- Project Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">folder</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del proyecto</span>
+                    <span class="title truncate col s12">Líder del proyecto: Nombre Apellidos</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Project Ends -->
+                <!-- Project Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">folder</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre del proyecto</span>
+                    <span class="title truncate col s12">Líder del proyecto: Nombre Apellidos</span>
+                    <div class="right">
+                      <a href="#!" title="Ver" class="btn remove-button-background"><i class="material-icons">remove_red_eye</i></a>
+                    </div>
+                  </div>
+                </li>
+                <!-- Project Ends -->
+              </ul>
+            </div>
+          </div>
+          <!-- User Projects End -->
+
+          <!-- User Tasks Begin -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Tareas que ha realizado</b></span>
+              <ul class="collection scrollable-collection">
+                <!-- Task Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre de la tarea realizada</span>
+                    <span class="title truncate col s12"> </span>
+                    <span class="title truncate col s12">Para el grupo: Nombre del grupo</span>
+                    <span class="title truncate col s12">Para el proyecto: Nombre del proyecto</span>
+                    <span class="title truncate col s12">Descripción de la tarea realizada</span>
+                    <span class="title truncate col s12"><a href="#!">Descargar evidencia</a></span>
+                  </div>
+                </li>
+                <!-- Task Ends -->
+                <!-- Task Begins-->
+                <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
+                  <div class="row">
+                    <span class="title truncate col s12">Nombre de la tarea realizada</span>
+                    <span class="title truncate col s12"> </span>
+                    <span class="title truncate col s12">Para el grupo: Nombre del grupo</span>
+                    <span class="title truncate col s12">Para el proyecto: Nombre del proyecto</span>
+                    <span class="title truncate col s12">Descripción de la tarea realizada</span>
+                    <span class="title truncate col s12"><a href="#!">Descargar evidencia</a></span>
+                  </div>
+                </li>
+                <!-- Task Ends -->
+              </ul>
+            </div>
+          </div>
+          <!-- User Tasks End -->
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Entendido</a>
+        </div>
+      </div>
+      <!-- User Modal Definition Ends-->
   </div>
   <!-- Content End -->
 
