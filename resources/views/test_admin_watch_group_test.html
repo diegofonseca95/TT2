@@ -36,24 +36,13 @@
   <!-- Navbar End -->
 
   <!-- Content begin -->
-  <div class="container">
+  <div class="container" id="admin-watch-group-box">
     <div class="section"></div>
-    <div class="row" id="admin-watch-group-box">
 
-      <!-- TODO : Calculate the actual set of members -->
-      <group-info-card 
-        :group-members="users">
-      </group-info-card>
-
-      <group-members-card 
-        @new-members-added="handleNewMembersAdded"
-        :group-members="users"
-        :users="users">
-      </group-members-card>
-
-      <group-projects-card
-        :group-id="0">
-      </group-projects-card>
+    <admin-watch-group-view>
+    </admin-watch-group-view>
+    
+    <div class="row">
 
       <!-- Group File Tree Begins -->
       <div class="card">
@@ -179,6 +168,7 @@
   <script src="../../public/js/components/admin-watch-group/project-list-item.js"></script>
   <script src="../../public/js/components/admin-watch-group/project-list.js"></script>
   <script src="../../public/js/components/admin-watch-group/group-projects-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/admin-watch-group-view.js"></script>
   <!-- Vue Components End -->
   <script src="../../public/js/global/admin/admin-watch-group.js"></script>
   <script>
