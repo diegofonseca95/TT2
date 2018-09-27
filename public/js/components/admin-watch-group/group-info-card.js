@@ -3,29 +3,79 @@ Vue.component('group-info-card', {
   data : function(){
     return {
       groupInfo : {
-        nombre : 'El mejor grupo del mundo',
-        descripcion : 'La peor descripcion del universo'
+        name : 'El mejor grupo del mundo',
+        description : 'La peor descripcion del universo',
+        leader : null
       }
     };
   },
   methods : {
     handleUpdatedInfo : function(newInfo){
-      // TODO : Update info from server.
-      console.log('Updating Group Info...');
+      // Get the group id from the hidden input.
+      var groupIdInput = document.querySelector('input[name="group-id"]');
+      var groupId = groupIdInput.value;
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        descripcion : newInfo.description,
+        idUsuario : newInfo.leaderId,
+        _token : authToken.value,
+        nombre : newInfo.name,
+        idGrupo : groupId
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the users list.
+      fetch('/editarGrupo', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.groupInfo.description = newInfo.description;
+          this.groupInfo.name = newInfo.name;
+          for(var i in this.groupMembers){
+            if(this.groupMembers[i].idUsuario === newInfo.leaderId){
+              this.groupInfo.leader = this.groupMembers[i];
+              break;
+            }
+          }
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    }
+  },
+  computed : {
+    leaderFullName : function(){
+      var fullName = this.groupInfo.leader.nombre;
+      if(this.groupInfo.leader.apellidoPaterno !== ''){
+        fullName += ' ' + this.groupInfo.leader.apellidoPaterno;
+      }
+      if(this.groupInfo.leader.apellidoMaterno !== ''){
+        fullName += ' ' + this.groupInfo.leader.apellidoMaterno;
+      }
+      return fullName;
     }
   },
   template : `
     <div class="card">
       <div class="card-content">
         <span class="card-title first-text">
-          <b>{{ groupInfo.nombre }}</b>
+          <b>{{ groupInfo.name }}</b>
         </span>
         <div class="row">
           <span class="title col s12" style="word-break: break-all;">
-            {{ groupInfo.descripcion }}
+            {{ groupInfo.description }}
           </span>
           <span class="title col s12" style="word-break: break-all;">
-            Líder del grupo: Nombre Apellido
+            Líder del grupo: {{ leaderFullName }}
           </span>
           <div class="col s12">
             <button title="Editar" data-target="edit-group-info-modal" 

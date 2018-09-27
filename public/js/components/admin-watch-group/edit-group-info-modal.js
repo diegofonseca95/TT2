@@ -10,14 +10,13 @@ Vue.component('edit-group-info-modal', {
   methods : {
     handleLeaderChosen : function(userId){
       this.newLeaderId = userId;
-      console.log(this.newLeaderId);
     },
     handleModalClose : function(){
       // TODO : Submit info.
       // TODO : Trigger group-info-updated event on edit success.
       this.$emit('group-info-updated', {
         description : this.newGroupDescription,
-        leader : this.newLeaderId,
+        leaderId : this.newLeaderId,
         name : this.newGroupName
       }); // Only do on success.
     }
