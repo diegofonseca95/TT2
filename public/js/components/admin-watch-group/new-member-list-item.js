@@ -1,9 +1,7 @@
 Vue.component('new-member-list-item', {
-  props : ['user','isSelected'],
+  props : ['user','selected'],
   data : function(){
-    return {
-      selected : false
-    };
+    return {};
   },
   computed : {
     userFullName : function(){
@@ -18,13 +16,12 @@ Vue.component('new-member-list-item', {
     }
   },
   methods : {
-    handleChange : function(){
-      if(this.selected){
+    handleChange : function(event){
+      if(event.target.checked){
         this.$emit('add-new-member', this.user.idUsuario);
       }else{
         this.$emit('remove-new-member', this.user.idUsuario);
       }
-      console.log(this.selected);
     }
   },
   template : `
@@ -35,18 +32,18 @@ Vue.component('new-member-list-item', {
           <span class="title truncate col s12">
             {{ userFullName }}
           </span>
-          <span class="title truncate col s12">
+          <span class="truncate col s12">
             Correo : {{ user.correo }}
           </span>
-          <span class="title truncate col s12">
+          <span class="truncate col s12">
             Teléfono : {{ user.telefono }}
           </span>
         </div>
         <div class="col s12 m3">
           <label class="right">
             <input type="checkbox" 
-              v-model:checked="selected" 
-              @change="handleChange" />
+              @change="handleChange($event)"
+              :checked="selected"/>
             <span>Agregar</span>
           </label>
         </div>

@@ -8,6 +8,9 @@ Vue.component('group-members-card', {
   methods : {
     handleMemberSelected : function(selectedUser){
       this.displayedUser = selectedUser;
+    },
+    handleNewMembersAdded : function(memberList){
+      this.$emit('new-members-added', memberList);
     }
   },
   template : `
@@ -30,6 +33,7 @@ Vue.component('group-members-card', {
         </div>
       </div>
       <add-new-member-modal
+        @new-members-added="handleNewMembersAdded"
         :users="users">
       </add-new-member-modal>
     </div>

@@ -3,7 +3,26 @@ var AdminWatchGroupVue = new Vue({
   data : {
     groupId : null,
     memberIds : [],
-    users : []
+    users : [
+      {
+        idUsuario : 0,
+        nombre : 'Blabla',
+        apellidoMaterno : 'Blabla',
+        apellidoPaterno : 'Blabla'
+      },
+      {
+        idUsuario : 1,
+        nombre : 'AhoCora',
+        apellidoMaterno : 'AhoCora',
+        apellidoPaterno : 'AhoCora'
+      },
+      {
+        idUsuario : 2,
+        nombre : 'CojMexicano',
+        apellidoMaterno : 'CojMexicano',
+        apellidoPaterno : 'CojMexicano'
+      }
+    ]
   },
   computed : {
     nonMemberList : function(){
@@ -15,6 +34,11 @@ var AdminWatchGroupVue = new Vue({
       return this.users.filter(
         user => this.memberIds.includes(user.idUsuario)
       );
+    }
+  },
+  methods : {
+    handleNewMembersAdded : function(memberList){
+      this.memberIds.push(memberList);
     }
   },
   beforeCreate : function(){
