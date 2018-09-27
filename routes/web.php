@@ -46,3 +46,4 @@ Route::get('/publicacionesGrupo', 'PublicacionControlador@publicacionesGrupo');
 Route::post('/recuperarContrasena', 'SesionControlador@recuperarContrasena');
 Route::get('/iniciarSesionAdmin', 'SesionControlador@iniciarSesionAdmin');
 Route::post('/obtenerIdUsuariosGrupo','GruposControlador@obtenerIdUsuariosGrupo');
+Route::post('/agregarUsuariosGrupo', 'GruposControlador@agregarUsuario');

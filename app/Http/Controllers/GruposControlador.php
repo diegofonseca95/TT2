@@ -85,7 +85,38 @@ class GruposControlador extends Controller
     	
     	return view("welcome");
     }
+    public function agregarUsuario(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia Sesion para continuar'
+                ]);
+        }
 
+        $idGrupo = request("idGrupo");
+   
+
+    	$integrantes = request("integrantes");
+
+    	try{
+    		foreach ($integrantes as $value) {
+	            $usuarioGrupo = new UsuarioGrupo;
+	            $usuarioGrupo->idUsuario = $value;
+	            $usuarioGrupo->idGrupo = $idGrupo;
+	            $usuarioGrupo->save();
+        	}
+
+	    	return response()->json([
+	                'status'=> 'OK',
+	                ]);
+    	}catch(Exception $e){
+    		return response()->json([
+    			'status'=> 'ERROR',
+    			'result'=> $e
+    		]);
+    	}
+        
+    }
     public function editarGrupo($idGrupo){
         if(!Auth::check()){
             return view('index');
