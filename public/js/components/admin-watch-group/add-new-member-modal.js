@@ -70,8 +70,10 @@ Vue.component('add-new-member-modal', {
       .then(function(response){
         if(response.status === 'OK'){
           // TODO : Toast if succeeded
+          console.log('IM HERE');
           this.$emit('new-members-added', this.newMemberList);
           this.newMemberList = [];
+          console.log(this.newMemberList);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
