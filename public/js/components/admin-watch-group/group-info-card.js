@@ -9,6 +9,44 @@ Vue.component('group-info-card', {
       }
     };
   },
+  beforeCreate : function(){
+    // Get the group id from the hidden input.
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+    var groupId = groupIdInput.value;
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value,
+      idGrupo : groupId
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the users list.
+    fetch('/obtenerGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.groupInfo.description = response.result.descripcion;
+        this.groupInfo.name = response.result.nombre;
+        for(var i in this.groupMembers){
+          if(this.groupMembers[i].idUsuario === response.result.lider){
+            this.groupInfo.leader = this.groupMembers[i];
+            break;
+          }
+        }
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+  },
   methods : {
     handleUpdatedInfo : function(newInfo){
       // Get the group id from the hidden input.
