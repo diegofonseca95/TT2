@@ -20,6 +20,8 @@ var AdminWatchGroupVue = new Vue({
   methods : {
     handleNewMembersAdded : function(memberList){
       this.memberIds.push(memberList);
+      for(var i in this.memberIds)
+        console.log(this.memberIds[i]);
     }
   },
   beforeCreate : function(){
