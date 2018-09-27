@@ -3,26 +3,7 @@ var AdminWatchGroupVue = new Vue({
   data : {
     groupId : null,
     memberIds : [],
-    users : [
-      {
-        idUsuario : 0,
-        nombre : 'Blabla',
-        apellidoMaterno : 'Blabla',
-        apellidoPaterno : 'Blabla'
-      },
-      {
-        idUsuario : 1,
-        nombre : 'AhoCora',
-        apellidoMaterno : 'AhoCora',
-        apellidoPaterno : 'AhoCora'
-      },
-      {
-        idUsuario : 2,
-        nombre : 'CojMexicano',
-        apellidoMaterno : 'CojMexicano',
-        apellidoPaterno : 'CojMexicano'
-      }
-    ]
+    users : []
   },
   computed : {
     nonMemberList : function(){
@@ -77,6 +58,7 @@ var AdminWatchGroupVue = new Vue({
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
+        console.log(response.result);
         this.memberIds = response.result;
       }
       // TODO : Handle non 'OK' status.
