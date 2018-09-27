@@ -59,7 +59,6 @@ var AdminWatchGroupVue = new Vue({
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
-        console.log(response.result);
         this.memberIds = response.result;
       }
       // TODO : Handle non 'OK' status.
