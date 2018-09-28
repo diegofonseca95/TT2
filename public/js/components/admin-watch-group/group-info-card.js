@@ -35,12 +35,12 @@ Vue.component('group-info-card', {
     .then(response => response.json())
     .then(function(response){
       console.log(response.result);
-      return;
       if(response.status === 'OK'){
-        this.groupInfo.description = response.result.descripcion;
-        this.groupInfo.name = response.result.nombreGrupo;
+        var result = response.result;
+        this.groupInfo.description = result.grupo.descripcion;
+        this.groupInfo.name = result.grupo.nombreGrupo;
         for(var i in this.groupMembers){
-          if(this.groupMembers[i].idUsuario === response.result.lider){
+          if(this.groupMembers[i].idUsuario === result.lider){
             this.groupInfo.leader = this.groupMembers[i];
             break;
           }
