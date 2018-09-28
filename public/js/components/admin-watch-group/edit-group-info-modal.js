@@ -2,9 +2,9 @@ Vue.component('edit-group-info-modal', {
   props : ['groupInfo','groupMembers'],
   data : function(){
     return {
-      newGroupDescription : this.groupInfo.descripcion,
-      newGroupName : this.groupInfo.nombre,
-      newLeaderId : null
+      newGroupDescription : '',
+      newLeaderId : null,
+      newGroupName : ''
     };
   },
   methods : {
@@ -14,11 +14,21 @@ Vue.component('edit-group-info-modal', {
     handleModalClose : function(){
       // TODO : Submit info.
       // TODO : Trigger group-info-updated event on edit success.
+      if(this.newLeaderId === null){
+        return;
+      }
       this.$emit('group-info-updated', {
         description : this.newGroupDescription,
         leaderId : this.newLeaderId,
         name : this.newGroupName
       }); // Only do on success.
+    }
+  },
+  watch : {
+    groupInfo : function(){
+      this.newGroupDescription = this.groupInfo.description;
+      this.newLeaderId = this.groupInfo.leader.idUsuario;
+      this.newGroupName = this.groupInfo.name;
     }
   },
   template : `
