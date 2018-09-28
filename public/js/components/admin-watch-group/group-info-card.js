@@ -37,14 +37,16 @@ Vue.component('group-info-card', {
       console.log(response.result);
       if(response.status === 'OK'){
         var result = response.result;
-        this.groupInfo.description = result.grupo.descripcion;
-        this.groupInfo.name = result.grupo.nombreGrupo;
+        var newInfo = {};
+        newInfo.description = result.grupo.descripcion;
+        newInfo.name = result.grupo.nombreGrupo;
         for(var i in this.groupMembers){
           if(this.groupMembers[i].idUsuario === result.lider){
-            this.groupInfo.leader = this.groupMembers[i];
+            newInfo.leader = this.groupMembers[i];
             break;
           }
         }
+        this.groupInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
