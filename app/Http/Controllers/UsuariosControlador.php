@@ -23,12 +23,7 @@ class UsuariosControlador extends Controller
         return view('admin_users');
     }
     public function agregarUsuarioBD(){
-        if(!Auth::check()){
-            return response()->json([
-                'status'=> 'ERROR',
-                'result'=> 'Inicia sesion para continuar'
-                ]);
-        }
+        
     	$usuario = new User;
         $query = $usuario->where([['correo', '=', request('correo')]])->get();
 

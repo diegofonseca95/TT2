@@ -117,13 +117,30 @@ class GruposControlador extends Controller
     	}
         
     }
-    public function editarGrupo($idGrupo){
+    public function editarGrupo(){
         if(!Auth::check()){
             return view('index');
         }
+        try{
+        	$grupo = Grupo::findOrFail(request('idGrupo'));
+       	 	$grupo->descripcion = request('descripcion');
+        	$grupo->nombreGrupo = request('nombre');
 
-        $grupo = new Grupo;
+        	$adminGrupo = AdministradorGrupo::where('idGrupo', '=', $grupo->idGrupo)->update(['idUsuario' => request('idUsuario')]);
 
+        	return response()->json([
+                'status'=> 'OK',
+                ]);
+        }catch(Exception $e){
+        	return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Grupo no existe'
+                ]);
+        }
+        
+        
+
+        $lider = request('lider');
         $query = $grupo->where('idGrupo', '=', $idGrupo)->get();
 
         return view("admin_manage_groups", ['grupo' => $query[0]]);
@@ -135,10 +152,19 @@ class GruposControlador extends Controller
         }
 
         $grupo = new Grupo;
+        $lider = new AdministradorGrupo;
 
-        $query = $grupo->where('idGrupo', '=', request('idGrupo'))->get();
-
-        return $query;
+        $info = $grupo->where([['idGrupo', '=', request('idGrupo')]])->get();
+        $query = $lider->where([['idGrupo', '=', request('idGrupo')]])->get();
+        //$info->tesla = $query[0]->idUsuario;
+        //$nueva->tesla = $query[0]->idUsuario;;
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> array(
+                	'grupo'=>$info[0],
+                	'lider'=>$query[0]->idUsuario
+                )
+                ]);
     }
 
     public function eliminarGrupo(){
@@ -170,7 +196,7 @@ class GruposControlador extends Controller
 
         $usuarioGrupo = new UsuarioGrupo;
         $usuario = new User;
-        $query = $usuarioGrupo->where('idGrupo', '=', request('idGrupo'))->get();
+        $query = $usuarioGrupo->where([['idGrupo', '=', request('idGrupo')], ['estado', '=', 1]])->get();
         $arrays = array();
         foreach ($query as $value) {
             array_push($arrays, $value->idUsuario);
@@ -189,7 +215,7 @@ class GruposControlador extends Controller
 
         $usuarioGrupo = new UsuarioGrupo;
         $usuario = new User;
-        $query = $usuarioGrupo->where('idGrupo', '=', request('idGrupo'))->get();
+        $query = $usuarioGrupo->where([['idGrupo', '=', request('idGrupo')], ['estado', '=', 1]])->get();
         $arrays = array();
 
         foreach ($query as $value) {
@@ -236,7 +262,7 @@ class GruposControlador extends Controller
         }
 
         $adminProyecto = new AdministradorProyecto;
-        $queryProyectov = $proyecto->whereIn('idProyecto',$arrays)->get();
+        $queryProyecto = $proyecto->whereIn('idProyecto',$arrays)->get();
         foreach($queryProyecto as &$proyecto){
         	$adminProyecto->where('idProyecto', '=', $proyecto->idProyecto)->get();
         	$proyecto->lider = $usuario->where('idUsuario', '=', $adminProyecto[0]->idUsuario)->get();
