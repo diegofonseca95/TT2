@@ -3,9 +3,9 @@ Vue.component('group-info-card', {
   data : function(){
     return {
       groupInfo : {
-        name : 'El mejor grupo del mundo',
-        description : 'La peor descripcion del universo',
-        leader : null
+        description : '',
+        leader : {},
+        name : ''
       }
     };
   },
