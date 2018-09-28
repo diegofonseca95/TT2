@@ -1,5 +1,5 @@
 Vue.component('new-leader-list', {
-  props : ['groupMembers'],
+  props : ['groupMembers','leaderId'],
   data : function(){
     return {};
   },
@@ -19,6 +19,7 @@ Vue.component('new-leader-list', {
             <new-leader-list-item
               v-for="member in groupMembers"
               @new-leader-chosen="handleNewLeader($event)"
+              :is-checked="leaderId === member.idUsuario"
               :key="member.idUsuario"
               :member="member">
             </new-leader-list-item>

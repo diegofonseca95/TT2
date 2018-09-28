@@ -1,5 +1,5 @@
 Vue.component('new-leader-list-item', {
-  props : ['member'],
+  props : ['member','isChecked'],
   data : function(){
     return {};
   },
@@ -35,6 +35,7 @@ Vue.component('new-leader-list-item', {
           <label class="right">
             <input name="new-leader-list-input" 
               @change="handleChange"
+              :checked="isChecked"
               type="radio" />
             <span>Líder</span>
           </label>
