@@ -36,7 +36,7 @@ Vue.component('group-member-list-item', {
             <i class="material-icons">remove</i>
           </a>
           <button class="btn modal-trigger remove-button-background"
-            title="Ver" data-target="modal_userInfo"
+            title="Ver" data-target="user-info-modal"
             @click="observeMember">
             <i class="material-icons">remove_red_eye</i>
           </button>
