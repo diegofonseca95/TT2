@@ -44,6 +44,7 @@ Vue.component('user-info-project-list', {
   },
   watch : {
     user : function(){
+      return;
       // TODO : Featch the projects the user has participated in.
       // TODO : Check if it works.
       var authToken = document.querySelector('input[name="_token"]');
