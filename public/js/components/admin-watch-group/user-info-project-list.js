@@ -45,6 +45,32 @@ Vue.component('user-info-project-list', {
   watch : {
     user : function(){
       // TODO : Featch the projects the user has participated in.
+      // TODO : Check if it works.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idUsuario : this.user.idUsuario,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/agregarUsuariosGrupo', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          // TODO : Toast if succeeded
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `

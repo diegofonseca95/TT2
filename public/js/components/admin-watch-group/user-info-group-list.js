@@ -48,6 +48,34 @@ Vue.component('user-info-group-list', {
   watch : {
     user : function(){
       // TODO : Fetch the groups related to the user.
+
+      // TODO : Check if it works.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idUsuario : this.user.idUsuario,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/obtenerGruposUsuario', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        console.log(response);
+        if(response.status === 'OK'){
+          // TODO : Toast if succeeded
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `
