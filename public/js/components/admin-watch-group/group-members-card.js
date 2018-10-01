@@ -2,7 +2,7 @@ Vue.component('group-members-card', {
   props : ['groupMembers','users'],
   data : function(){
     return {
-      displayedUser : null
+      displayedUser : {}
     };
   },
   methods : {
@@ -36,6 +36,8 @@ Vue.component('group-members-card', {
         @new-members-added="handleNewMembersAdded"
         :users="users">
       </add-new-member-modal>
+      <user-info-modal :user="displayedUser">
+      </user-info-modal>
     </div>
   `
 });

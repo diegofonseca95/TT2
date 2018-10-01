@@ -100,7 +100,6 @@
                 <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
                   <div class="row">
                     <span class="title truncate col s12">Nombre de la tarea realizada</span>
-                    <span class="title truncate col s12"> </span>
                     <span class="title truncate col s12">Para el grupo: Nombre del grupo</span>
                     <span class="title truncate col s12">Para el proyecto: Nombre del proyecto</span>
                     <span class="title truncate col s12">Descripción de la tarea realizada</span>
@@ -141,23 +140,40 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="/js/toasts.js"></script>
   <!-- Vue Components Begin -->
-  <script src="/js/components/admin-watch-group/new-leader-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list.js"></script>
-  <script src="/js/components/admin-watch-group/edit-group-info-modal.js"></script>
-  <script src="/js/components/admin-watch-group/group-info-card.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/add-new-member-modal.js"></script>
+  <!-- Common Components Begin -->
+  <script src="/js/components/common/user-full-name-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="/js/components/admin-watch-group/user-info-project-list-item.js"></script>
   <script src="/js/components/admin-watch-group/user-info-group-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-group-list.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-modal.js"></script>
-  <script src="/js/components/admin-watch-group/group-members-card.js"></script>
+  <script src="/js/components/admin-watch-group/user-info-task-list-item.js"></script>
+  <script src="/js/components/admin-watch-group/group-member-list-item.js"></script>
+  <script src="/js/components/admin-watch-group/new-leader-list-item.js"></script>
+  <script src="/js/components/admin-watch-group/new-member-list-item.js"></script>
   <script src="/js/components/admin-watch-group/project-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="/js/components/admin-watch-group/user-info-project-list.js"></script>
+  <script src="/js/components/admin-watch-group/user-info-group-list.js"></script>
+  <script src="/js/components/admin-watch-group/user-info-task-list.js"></script>
+  <script src="/js/components/admin-watch-group/group-member-list.js"></script>
+  <script src="/js/components/admin-watch-group/new-leader-list.js"></script>
+  <script src="/js/components/admin-watch-group/new-member-list.js"></script>
   <script src="/js/components/admin-watch-group/project-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <script src="/js/components/admin-watch-group/edit-group-info-modal.js"></script>
+  <script src="/js/components/admin-watch-group/add-new-member-modal.js"></script>
+  <script src="/js/components/admin-watch-group/user-info-modal.js"></script>
+  <!-- Modals End -->
+  <!-- Cards Begin -->
   <script src="/js/components/admin-watch-group/group-projects-card.js"></script>
+  <script src="/js/components/admin-watch-group/group-members-card.js"></script>
+  <script src="/js/components/admin-watch-group/group-info-card.js"></script>
+  <!-- Cards End -->
+  <!-- Others Begin -->
   <script src="/js/components/admin-watch-group/admin-watch-group-view.js"></script>
+  <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/admin/admin-watch-group.js"></script>
   <script>

@@ -1,5 +1,5 @@
 Vue.component('user-info-group-list', {
-  props : ['userId'],
+  props : ['user'],
   data : function(){
     return {
       userGroupsInfo : [
@@ -44,6 +44,11 @@ Vue.component('user-info-group-list', {
         }
       ]
     };
+  },
+  watch : {
+    user : function(){
+      // TODO : Fetch the groups related to the user.
+    }
   },
   template : `
     <ul class="collection scrollable-collection">

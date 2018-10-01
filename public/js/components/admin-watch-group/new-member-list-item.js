@@ -3,18 +3,6 @@ Vue.component('new-member-list-item', {
   data : function(){
     return {};
   },
-  computed : {
-    userFullName : function(){
-      var fullName = this.user.nombre;
-      if(this.user.apellidoPaterno !== ''){
-        fullName += ' ' + this.user.apellidoPaterno;
-      }
-      if(this.user.apellidoMaterno !== ''){
-        fullName += ' ' + this.user.apellidoMaterno;
-      }
-      return fullName;
-    }
-  },
   methods : {
     handleChange : function(event){
       if(event.target.checked){
@@ -30,7 +18,8 @@ Vue.component('new-member-list-item', {
       <div class="row">
         <div class="col s12 m9">
           <span class="title truncate col s12">
-            {{ userFullName }}
+            <user-full-name-span :user="user">
+            </user-full-name-span>
           </span>
           <span class="truncate col s12">
             Correo : {{ user.correo }}

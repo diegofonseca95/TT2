@@ -3,18 +3,6 @@ Vue.component('project-list-item', {
   data : function(){
     return {};
   },
-  computed : {
-    projectLeaderFullName : function(){
-      var fullName = this.projectLeader.nombre;
-      if(this.projectLeader.apellidoPaterno !== ''){
-        fullName += ' ' + this.projectLeader.apellidoPaterno;
-      }
-      if(this.projectLeader.apellidoMaterno !== ''){
-        fullName += ' ' + this.projectLeader.apellidoMaterno;
-      }
-      return fullName;
-    }
-  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">folder</i>
@@ -23,7 +11,9 @@ Vue.component('project-list-item', {
           {{ project.nombreProyecto }}
         </span>
         <span class="title truncate col s12">
-          Líder del proyecto: {{ projectLeaderFullName }}
+          Líder del proyecto :
+          <user-full-name-span :user="projectLeader">
+          </user-full-name-span>
         </span>
         <div class="right">
           <a href="#!" title="Eliminar" class="btn remove-button-background">

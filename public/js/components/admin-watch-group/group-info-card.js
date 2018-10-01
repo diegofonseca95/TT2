@@ -94,18 +94,6 @@ Vue.component('group-info-card', {
       }.bind(this));
     }
   },
-  computed : {
-    leaderFullName : function(){
-      var fullName = this.groupInfo.leader.nombre;
-      if(this.groupInfo.leader.apellidoPaterno !== ''){
-        fullName += ' ' + this.groupInfo.leader.apellidoPaterno;
-      }
-      if(this.groupInfo.leader.apellidoMaterno !== ''){
-        fullName += ' ' + this.groupInfo.leader.apellidoMaterno;
-      }
-      return fullName;
-    }
-  },
   template : `
     <div class="card">
       <div class="card-content">
@@ -117,7 +105,10 @@ Vue.component('group-info-card', {
             {{ groupInfo.description }}
           </span>
           <span class="title col s12" style="word-break: break-all;">
-            Líder del grupo: {{ leaderFullName }}
+            Líder del grupo:
+            <user-full-name-span
+              :user="this.groupInfo.leader">
+            </user-full-name-span>
           </span>
           <div class="col s12">
             <button title="Editar" data-target="edit-group-info-modal" 

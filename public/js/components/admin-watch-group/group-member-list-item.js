@@ -3,18 +3,6 @@ Vue.component('group-member-list-item', {
   data : function(){
     return {};
   },
-  computed : {
-    memberFullName : function(){
-      var fullName = this.member.nombre;
-      if(this.member.apellidoPaterno !== ''){
-        fullName += ' ' + this.member.apellidoPaterno;
-      }
-      if(this.member.apellidoMaterno !== ''){
-        fullName += ' ' + this.member.apellidoMaterno;
-      }
-      return fullName;
-    }
-  },
   methods : {
     removeMember : function(){
       // TODO : Remove member from group.
@@ -31,7 +19,8 @@ Vue.component('group-member-list-item', {
       <i class="material-icons circle third-background">person</i>
       <div class="row">
         <span class="title truncate col s12 hide-on-small-only">
-          {{ memberFullName }}
+          <user-full-name-span :user="member">
+          </user-full-name-span>
         </span>
         <span class="title truncate col s12 hide-on-med-and-up">
           {{ member.nombre }}

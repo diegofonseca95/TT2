@@ -3,17 +3,106 @@ Vue.component('user-info-modal', {
   data : function(){
     return {};
   },
-  watch : {
-    userId : function(){
-      console.log('CHANGED FOREVER ');
-      console.log(this.user);
-    }
-  },
   template : `
-    <div class="row">
-      <div class="col s12">
-        {{ userId }}
+    <div id="user-info-modal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>
+          <user-full-name-span :user="user">
+          </user-full-name-span>
+        </h4>
+        <!-- User Groups Begin -->
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title first-text">
+              <b>Grupos en los que ha participado</b>
+            </span>
+            <user-info-group-list :user="user">
+            </user-info-group-list>
+          </div>
+        </div>
+        <!-- User Groups End -->
+        <!-- User Projects Begin -->
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title first-text">
+              <b>Proyectos en los que ha colaborado</b>
+            </span>
+            <user-info-project-list :user="user">
+            </user-info-project-list>
+          </div>
+        </div>
+        <!-- User Projects End -->
+        <!-- User Tasks Begin -->
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title first-text">
+              <b>Tareas que ha realizado</b>
+            </span>
+            <user-info-task-list :user="user">
+            </user-info-task-list>
+          </div>
+        </div>
+        <!-- User Tasks End -->
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat"
+          href="#!">
+          Entendido
+        </a>
       </div>
     </div>
   `
 });
+
+/*
+<!-- User Modal Definition Begins -->
+<div id="user-info-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>
+      <user-full-name-span :user="{}">
+      </user-full-name-span>
+    </h4>
+    <!-- User Groups Begin -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title first-text">
+          <b>Grupos en los que ha participado</b>
+        </span>
+        <user-info-group-list :user-id="0">
+        </user-info-group-list>
+      </div>
+    </div>
+    <!-- User Groups End -->
+
+    <!-- User Projects Begin -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title first-text">
+          <b>Proyectos en los que ha colaborado</b>
+        </span>
+        <user-info-project-list :user-id="0">
+        </user-info-project-list>
+      </div>
+    </div>
+    <!-- User Projects End -->
+
+    <!-- User Tasks Begin -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title first-text">
+          <b>Tareas que ha realizado</b>
+        </span>
+        <user-info-task-list :user-id="0">
+        </user-info-task-list>
+      </div>
+    </div>
+    <!-- User Tasks End -->
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+      Entendido
+    </a>
+  </div>
+</div>
+<!-- User Modal Definition Ends-->
+*/

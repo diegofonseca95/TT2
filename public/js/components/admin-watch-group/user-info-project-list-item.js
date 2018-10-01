@@ -1,18 +1,18 @@
-Vue.component('user-info-group-list-item', {
-  props : ['group','groupLeader'],
+Vue.component('user-info-project-list-item', {
+  props : ['project', 'projectLeader'],
   data : function(){
     return {};
   },
   template : `
     <li class="collection-item avatar">
-      <i class="material-icons circle third-background">group</i>
+      <i class="material-icons circle third-background">folder</i>
       <div class="row">
         <span class="title truncate col s12">
-          {{ group.nombreGrupo }}
+          {{ project.nombreProyecto }}
         </span>
         <span class="title truncate col s12">
-          Líder del grupo:
-          <user-full-name-span :user="groupLeader">
+          Líder del proyecto :
+          <user-full-name-span :user="projectLeader">
           </user-full-name-span>
         </span>
         <div class="right">
@@ -27,19 +27,12 @@ Vue.component('user-info-group-list-item', {
 });
 
 /*
-<!-- Group Begins-->
+<!-- Project Begins-->
 <li class="collection-item avatar">
-  <i class="material-icons circle third-background">group</i>
+  <i class="material-icons circle third-background">folder</i>
   <div class="row">
-    <span class="title truncate col s12">
-      Nombre del grupo
-      <span class="hide-on-small-only">
-        descripción extra del nombre de grupo
-      </span>
-    </span>
-    <span class="title truncate col s12">
-      Líder del grupo: Nombre apellido
-    </span>
+    <span class="title truncate col s12">Nombre del proyecto</span>
+    <span class="title truncate col s12">Líder del proyecto: Nombre Apellidos</span>
     <div class="right">
       <a href="#!" title="Ver" class="btn remove-button-background">
         <i class="material-icons">remove_red_eye</i>
@@ -47,5 +40,5 @@ Vue.component('user-info-group-list-item', {
     </div>
   </div>
 </li>
-<!-- Group Ends -->
+<!-- Project Ends -->
 */

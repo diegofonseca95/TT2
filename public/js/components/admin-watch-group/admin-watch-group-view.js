@@ -67,8 +67,7 @@ Vue.component('admin-watch-group-view', {
   },
   template : `
     <div class="row">
-      <group-info-card 
-        :group-members="memberList">
+      <group-info-card :group-members="memberList">
       </group-info-card>
       
       <group-members-card 
@@ -77,8 +76,7 @@ Vue.component('admin-watch-group-view', {
         :users="nonMemberList">
       </group-members-card>
 
-      <group-projects-card
-        :group-id="groupId">
+      <group-projects-card :group-id="groupId">
       </group-projects-card>
     </div>
   `
