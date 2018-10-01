@@ -43,6 +43,10 @@ Vue.component('project-list', {
         :key="project.idProyecto"
         :project="project">
       </project-list-item>
+      <li class="collection-item"
+        v-if="projects.length === 0">
+        No hay projectos disponibles.
+      </li>
     </ul>
   `
 });

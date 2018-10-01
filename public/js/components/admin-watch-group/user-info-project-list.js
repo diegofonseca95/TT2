@@ -55,6 +55,10 @@ Vue.component('user-info-project-list', {
         :key="projectInfo.project.idProyecto"
         :project="projectInfo.project">
       </user-info-project-list-item>
+      <li class="collection-item"
+        v-if="userProjectsInfo.length === 0">
+        El usuario no ha participado en algún proyecto.
+      </li>
     </ul>
   `
 });

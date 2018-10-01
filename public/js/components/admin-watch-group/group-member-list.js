@@ -16,6 +16,10 @@ Vue.component('group-member-list', {
         :key="member.idUsuario"
         :member="member">
       </group-member-list-item>
+      <li class="collection-item"
+        v-if="groupMembers.length === 0">
+        No hay miembros en el grupo.
+      </li>
     </ul>
   `
 });

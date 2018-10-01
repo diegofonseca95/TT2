@@ -58,6 +58,10 @@ Vue.component('user-info-group-list', {
         :key="groupInfo.group.idGrupo"
         :group="groupInfo.group">
       </user-info-group-list-item>
+      <li class="collection-item"
+        v-if="userGroupsInfo.length === 0">
+        El usuario no ha participado en algún grupo.
+      </li>
     </ul>
   `
 });

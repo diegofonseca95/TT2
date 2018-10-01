@@ -23,6 +23,10 @@ Vue.component('new-leader-list', {
               :key="member.idUsuario"
               :member="member">
             </new-leader-list-item>
+            <li class="collection-item"
+              v-if="groupMembers.length === 0">
+              No hay miembros en el grupo.
+            </li>
           </ul>
         </form>
       </div>

@@ -21,6 +21,10 @@ Vue.component('user-info-task-list', {
         :task-info="taskInfo"
         :key="taskInfo.key">
       </user-info-task-list-item>
+      <li class="collection-item"
+        v-if="userTasksInfo.length === 0">
+        El usuario no ha completado alguna tarea.
+      </li>
     </ul>
   `
 });

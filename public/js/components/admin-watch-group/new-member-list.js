@@ -34,6 +34,11 @@ Vue.component('new-member-list', {
           return +1; // Place 'b' before 'a'
         return 0;
       }.bind(this));
+    },
+    anyUserMatches : function(){
+      return this.filteredList.length === 0 
+        && this.searchInput !== ''
+        && this.users.length > 0;
     }
   },
   methods : {
@@ -52,7 +57,7 @@ Vue.component('new-member-list', {
             <div class="row">
               <div class='input-field col s12'>
                 <i class='material-icons prefix third-text'>search</i>
-                <input placeholder='Ingresa palabras clave' 
+                <input placeholder='Ingresa palabras clave.' 
                   type='text' class='validate'
                   v-model:value="searchInput" />
                 <label>Búsqueda de Usuarios</label>
@@ -67,6 +72,14 @@ Vue.component('new-member-list', {
                 :key="user.idUsuario"
                 :user="user">
               </new-member-list-item>
+              <li class="collection-item"
+                v-if="users.length === 0">
+                No hay usuarios disponibles para seleccionar.
+              </li>
+              <li class="collection-item"
+                v-if="anyUserMatches">
+                Ningún usuario coincide con la busqueda
+              </li>
             </ul>
           </div>
         </div>
