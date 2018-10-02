@@ -7,9 +7,6 @@ Vue.component('user-info-group-list', {
   },
   watch : {
     user : function(){
-      // TODO : Fetch the groups related to the user.
-
-      // TODO : Check if it works.
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
