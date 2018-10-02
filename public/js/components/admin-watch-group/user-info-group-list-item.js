@@ -3,6 +3,11 @@ Vue.component('user-info-group-list-item', {
   data : function(){
     return {};
   },
+  methods : {
+    watchGroup : function(){
+      window.location.replace('/verGrupo/' + this.group.idGrupo);
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">group</i>
@@ -17,7 +22,8 @@ Vue.component('user-info-group-list-item', {
         </span>
         <div class="right">
           <a class="btn remove-button-background"
-            href="#!" title="Ver">
+            href="#!" title="Ver"
+            @click="watchGroup">
             <i class="material-icons">remove_red_eye</i>
           </a>
         </div>
