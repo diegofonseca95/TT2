@@ -2,44 +2,7 @@ Vue.component('user-info-project-list', {
   props : ['user'],
   data : function(){
     return {
-      userProjectsInfo : [
-        {
-          project : {
-            idProyecto : 0,
-            nombreProyecto : 'First Project'
-          },
-          projectLeader : {
-            idUsuario : 0,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          project : {
-            idProyecto : 1,
-            nombreProyecto : 'Second Project'
-          },
-          projectLeader : {
-            idUsuario : 1,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          project : {
-            idProyecto : 2,
-            nombreProyecto : 'Third Project'
-          },
-          projectLeader : {
-            idUsuario : 2,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        }
-      ]
+      userProjectsInfo : []
     };
   },
   watch : {
@@ -64,11 +27,20 @@ Vue.component('user-info-project-list', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/agregarUsuariosGrupo', requestData)
+      fetch('/obtenerProyectosUsuario', requestData)
       .then(response => response.json())
       .then(function(response){
+        console.log(response);
         if(response.status === 'OK'){
           // TODO : Toast if succeeded
+          var projectsInfo = [];
+          for(var i in response.result){
+            projectsInfo.push({
+              projectLeader : response.result[i].lider,
+              project : response.result[i].proyecto
+            });
+          }
+          this.userProjectsInfo = projectsInfo;
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
