@@ -2,47 +2,7 @@ Vue.component('user-info-group-list', {
   props : ['user'],
   data : function(){
     return {
-      userGroupsInfo : [
-        {
-          group : {
-            idGrupo : 0,
-            nombreGrupo : 'First Group',
-            descripcion : 'blablabla'
-          },
-          groupLeader : {
-            idUsuario : 0,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          group : {
-            idGrupo : 1,
-            nombreGrupo : 'Second Group',
-            descripcion : 'blablabla'
-          },
-          groupLeader : {
-            idUsuario : 1,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        },
-        {
-          group : {
-            idGrupo : 2,
-            nombreGrupo : 'Third Group',
-            descripcion : 'blablabla'
-          },
-          groupLeader : {
-            idUsuario : 2,
-            nombre : 'Nombre',
-            apellidoMaterno : 'ApellidoM',
-            apellidoPaterno : 'ApellidoP'
-          }
-        }
-      ]
+      userGroupsInfo : []
     };
   },
   watch : {
@@ -70,7 +30,6 @@ Vue.component('user-info-group-list', {
       fetch('/obtenerGruposUsuario', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
         if(response.status === 'OK'){
           var groupsInfo = [];
           for(var i in response.result){
