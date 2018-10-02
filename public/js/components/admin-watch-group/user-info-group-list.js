@@ -70,9 +70,15 @@ Vue.component('user-info-group-list', {
       fetch('/obtenerGruposUsuario', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
         if(response.status === 'OK'){
-          // TODO : Toast if succeeded
+          var groupsInfo = [];
+          for(var i in response.result){
+            groupsInfo.push({
+              groupLeader : response.result[i].lider,
+              group : response.result[i].grupo
+            });
+          }
+          this.userGroupsInfo = groupsInfo;
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
