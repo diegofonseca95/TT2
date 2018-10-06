@@ -36,135 +36,11 @@
   <!-- Navbar End -->
 
   <!-- Content begin -->
-  <div class="container">
+  <div class="container" id="group-admin-create-project-box">
     <div class="section"></div>
-    <div class="row" id="groupAdmin-create-project-box">
-
-      <!-- Proyect Info Begins -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Información básica del proyecto</b></span>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Nombre del proyecto" id="project_name" type="text" class="validate">
-                  <label for="project_name">Nombre del proyecto</label>
-                </div>
-                <div class="input-field col s12">
-                  <textarea id="project_desc" class="materialize-textarea"></textarea>
-                  <label for="project_desc">Descripción del proyecto</label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- Proyect Info Ends -->
-
-      <!-- Add User to Project Begins -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Agregar usuarios al proyecto</b></span>
-          <div class="row">
-            <form class="col s12">
-              <!-- Search User bar begins -->
-              <div class="row">
-                <div class='input-field col s12'>
-                  <i class='material-icons prefix third-text'>search</i>
-                  <input placeholder='Ingresa palabras clave' type='text' class='validate'>
-                  <label>Búsqueda de Usuarios</label>
-                </div>
-              </div>
-              <!-- Search User bar ends -->
-              <ul class="collection scrollable-collection">
-                <!-- User Begins -->
-                <li class="collection-item avatar">
-                  <i class="material-icons circle third-background">person</i>
-                  <div class="row">
-                    <div class="col s12 m9">
-                      <span class="title truncate col s12">Nombre Apellidos </span>
-                      <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                      <span class="title truncate col s12">Teléfono : 5555555555</span>
-                    </div>
-                    <div class="col s12 m3">
-                      <label class="right">
-                        <input type="checkbox" />
-                        <span>Agregar</span>
-                      </label>
-                    </div>
-                  </div>
-                </li>
-                <!-- User Ends -->
-
-                <!-- User Begins -->
-                <li class="collection-item avatar">
-                  <i class="material-icons circle third-background">person</i>
-                  <div class="row">
-                    <div class="col s12 m9">
-                      <span class="title truncate col s12">Nombre Apellidos </span>
-                      <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                      <span class="title truncate col s12">Teléfono : 5555555555</span>
-                    </div>
-                    <div class="col s12 m3">
-                      <label class="right">
-                        <input type="checkbox" />
-                        <span>Agregar</span>
-                      </label>
-                    </div>
-                  </div>
-                </li>
-                <!-- User Ends -->
-
-                <!-- User Begins -->
-                <li class="collection-item avatar">
-                  <i class="material-icons circle third-background">person</i>
-                  <div class="row">
-                    <div class="col s12 m9">
-                      <span class="title truncate col s12">Nombre Apellidos </span>
-                      <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                      <span class="title truncate col s12">Teléfono : 5555555555</span>
-                    </div>
-                    <div class="col s12 m3">
-                      <label class="right">
-                        <input type="checkbox" />
-                        <span>Agregar</span>
-                      </label>
-                    </div>
-                  </div>
-                </li>
-                <!-- User Ends -->
-
-                <!-- User Begins -->
-                <li class="collection-item avatar">
-                  <i class="material-icons circle third-background">person</i>
-                  <div class="row">
-                    <div class="col s12 m9">
-                      <span class="title truncate col s12">Nombre Apellidos </span>
-                      <span class="title truncate col s12">Correo : algorithm@mail.com</span>
-                      <span class="title truncate col s12">Teléfono : 5555555555</span>
-                    </div>
-                    <div class="col s12 m3">
-                      <label class="right">
-                        <input type="checkbox" />
-                        <span>Agregar</span>
-                      </label>
-                    </div>
-                  </div>
-                </li>
-                <!-- User Ends -->
-              </ul>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- Add User to Project Ends -->
-
-      <div class="row">
-        <!-- Modal Trigger -->
-        <button data-target="modal-selectLeader" class="btn modal-trigger remove-button-background right">Seleccionar
-          Líder</button>
-      </div>
+    <group-admin-create-project-view>
+    </group-admin-create-project-view>
+    <div class="row">
 
       <!-- Select Leader Modal Definition Begins -->
       <div id="modal-selectLeader" class="modal modal-fixed-footer">
@@ -276,9 +152,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-  <script src="../js/toasts.js"></script>
-  <script src="../js/admin_create_groups.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../../public/js/toasts.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="../../public/js/components/common/user-full-name-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="../../public/js/components/group-admin-create-project/new-leader-list-item.js"></script>
+  <script src="../../public/js/components/group-admin-create-project/new-member-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="../../public/js/components/group-admin-create-project/new-leader-list.js"></script>
+  <script src="../../public/js/components/group-admin-create-project/new-member-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <script src="../../public/js/components/group-admin-create-project/new-leader-modal.js"></script>
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="../../public/js/components/group-admin-create-project/add-new-member-card.js"></script>
+  <!-- Cards End -->
+  <!-- Others Begin -->
+  <script src="../../public/js/components/group-admin-create-project/group-admin-create-project-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="../../public/js/global/group-admin/group-admin-create-project.js"></script>
   <script>
     M.AutoInit();
   </script>
