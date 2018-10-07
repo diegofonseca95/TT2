@@ -36,9 +36,11 @@
   <!-- Navbar End -->
 
   <!-- Content begin -->
-  <div class="container">
+  <div class="container" id="admin-watch-project-box">
     <div class="section"></div>
-    <div class="row" id="admin-watch-group-box">
+    <admin-watch-project-view>
+    </admin-watch-project-view>
+    <div class="row">
 
       <!-- Project Info Begins -->
       <div class="card">
@@ -770,7 +772,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../../public/js/toasts.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="../../public/js/components/common/user-full-name-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="../../public/js/components/admin-watch-project/new-task-card.js"></script>
+  <!-- Cards End -->
+  <!-- Others Begin -->
+  <script src="../../public/js/components/admin-watch-project/admin-watch-project-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="../../public/js/global/admin/admin-watch-project.js"></script>
   <script>
     M.AutoInit();
     document.addEventListener('DOMContentLoaded', function () {
