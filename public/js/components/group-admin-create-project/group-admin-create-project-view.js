@@ -6,20 +6,7 @@ Vue.component('group-admin-create-project-view', {
       newProjectName : '',
       newLeaderId : null,
       newMemberIds : [],
-      users : [
-        {
-          idUsuario : 0,
-          nombre : 'Vanesa',
-          apellidoPaterno : 'Romero',
-          apellidoMaterno : 'Sanchez'
-        },
-        {
-          idUsuario : 1,
-          nombre : 'Victor Alberto',
-          apellidoPaterno : 'Noriega',
-          apellidoMaterno : 'Morales'
-        }
-      ]
+      users : []
     };
   },
   computed : {
