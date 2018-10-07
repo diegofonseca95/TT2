@@ -79,9 +79,6 @@
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/group-admin/group-admin-create-project.js"></script>
-  <script>
-    M.AutoInit();
-  </script>
   <!-- Scripts End -->
 </body>
 

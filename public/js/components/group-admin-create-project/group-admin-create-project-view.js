@@ -72,6 +72,7 @@ Vue.component('group-admin-create-project-view', {
     }
   },
   mounted : function(){
+    M.updateTextFields();
     // TODO : No JQuery.
     $('#new-project-info-form').validate({
       rules : {

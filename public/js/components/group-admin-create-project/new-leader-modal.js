@@ -1,5 +1,8 @@
 Vue.component('new-leader-modal', {
   props : ['groupMembers', 'leaderId'],
+  mounted : function(){
+    M.Modal.init(document.querySelector('#new-leader-modal'));
+  },
   methods : {
     handleNewLeader : function(userId){
       this.$emit('new-leader-chosen', userId);
