@@ -3,6 +3,9 @@ Vue.component('new-leader-modal', {
   methods : {
     handleNewLeader : function(userId){
       this.$emit('new-leader-chosen', userId);
+    },
+    handleProjectSubmitted : function(){
+      this.$emit('project-submitted');
     }
   },
   template : `
@@ -17,10 +20,13 @@ Vue.component('new-leader-modal', {
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+        <a class="modal-close waves-effect waves-green btn-flat"
+          href="#!">
           Cancelar
         </a>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+        <a class="modal-close waves-effect waves-green btn-flat"
+          @click="handleProjectSubmitted"
+          href="#!" >
           Crear proyecto
         </a>
       </div>

@@ -2,16 +2,31 @@ Vue.component('group-admin-create-project-view', {
   data : function(){
     return {
       newProjectDescription : '',
+      hasValidFields : false,
       newProjectName : '',
-      newMemberList : [],
       newLeaderId : null,
-      users : [],
-      hasValidFields : false
+      newMemberIds : [],
+      users : [
+        {
+          idUsuario : 0,
+          nombre : 'Vanesa',
+          apellidoPaterno : 'Romero',
+          apellidoMaterno : 'Sanchez'
+        },
+        {
+          idUsuario : 1,
+          nombre : 'Victor Alberto',
+          apellidoPaterno : 'Noriega',
+          apellidoMaterno : 'Morales'
+        }
+      ]
     };
   },
   computed : {
-    canSubmit : function(){
-      return this.hasValidFields && this.newLeaderId !== null;
+    memberList : function(){
+      return this.users.filter(
+        user => this.newMemberIds.includes(user.idUsuario)
+      );
     }
   },
   methods : {
@@ -19,22 +34,59 @@ Vue.component('group-admin-create-project-view', {
       this.newLeaderId = userId;
     },
     handleRemoveNewMember : function(userId){
-      this.newMemberList = this.newMemberList.filter(id => {
+      this.newMemberIds = this.newMemberIds.filter(id => {
         return id !== userId;
       });
     },
     handleAddNewMember : function(userId){
-      if(!this.newMemberList.includes(userId)){
-        this.newMemberList.push(userId);
+      if(!this.newMemberIds.includes(userId)){
+        this.newMemberIds.push(userId);
       }
     },
-    handleGroupSubmit : function(){
-      
+    handleProjectSubmitted : function(){
+      if(this.newMemberIds.length === 0){
+        WarningToast(
+          'Agrega al menos un usuario' +
+          ' al proyecto.'
+        );
+        return;
+      }
+      if(this.newLeaderId === null){
+        WarningToast(
+          'Elige un líder de proyecto' +
+          ' para continuar.'
+        );
+        return;
+      }
+      this.hasValidFields = false;
+      $('#new-project-info-form').submit();
+      if(!this.hasValidFields){
+        WarningToast(
+          'Revisa la información' +
+          ' del proyecto.'
+        );
+        return;
+      }
+      console.log({
+        descripcion : this.newProjectDescription,
+        nombreProyecto : this.newProjectName,
+        miembros : this.newMemberIds,
+        idLider : this.newLeaderId
+      });
+      this.resetInformation();
+    },
+    resetInformation : function(){
+      this.newProjectDescription = '';
+      this.newProjectName = '';
+      this.newLeaderId = null;
+      this.newMemberIds = [];
+      document.querySelector('#new-project-info-form').reset();
+      M.updateTextFields();
     }
   },
   mounted : function(){
     // TODO : No JQuery.
-    $('#edit-group-info-form').validate({
+    $('#new-project-info-form').validate({
       rules : {
         'new-project-name-input' : {
           required: true
@@ -98,12 +150,14 @@ Vue.component('group-admin-create-project-view', {
       <add-new-member-card 
         @remove-new-member="handleRemoveNewMember($event)"
         @add-new-member="handleAddNewMember($event)"
+        :member-ids="newMemberIds"
         :users="users">
       </add-new-member-card>
       <new-leader-modal
         @new-leader-chosen="handleLeaderChosen($event)"
-        :leader-id="newLeaderId"
-        :group-members="users">
+        @project-submitted="handleProjectSubmitted"
+        :group-members="memberList"
+        :leader-id="newLeaderId">
       </new-leader-modal>
       <div class="row">
         <button data-target="new-leader-modal" 

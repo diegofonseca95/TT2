@@ -1,23 +1,37 @@
 Vue.component('add-new-member-card', {
-  props : ['users'],
+  props : ['memberIds','users'],
   data : function(){
     return {
       selectedBucket : {}
     };
   },
   created : function(){
+    // TODO : Try to put it inside a function, I dare you.
     var bucket = {};
-    for(var x in this.users){
-      bucket[this.users[x].idUsuario] = false;
-    }   
+    this.users.map(user => {
+      var id = user.idUsuario;
+      bucket[id] = this.memberIds.includes(id);
+      return user;
+    });
     this.selectedBucket = bucket;
   },
   watch : {
+    memberIds : function(){
+      var bucket = {};
+      this.users.map(user => {
+        var id = user.idUsuario;
+        bucket[id] = this.memberIds.includes(id);
+        return user;
+      });
+      this.selectedBucket = bucket;
+    },
     users : function(){
       var bucket = {};
-      for(var x in this.users){
-        bucket[this.users[x].idUsuario] = false;
-      }   
+      this.users.map(user => {
+        var id = user.idUsuario;
+        bucket[id] = this.memberIds.includes(id);
+        return user;
+      });
       this.selectedBucket = bucket;
     }
   },
