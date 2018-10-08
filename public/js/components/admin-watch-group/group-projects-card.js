@@ -3,7 +3,7 @@ Vue.component('group-projects-card', {
   data : function(){
     return {};
   },
-  nethods : {
+  methods : {
     handleCreateProject : function(){
       var groupIdInput = document.querySelector('input[name="group-id"]');
       window.location.replace('/agregarProyecto/' + groupIdInput.value);
@@ -21,8 +21,8 @@ Vue.component('group-projects-card', {
         <div class="row">
           <div class="col s12">
             <a class="btn-floating btn-large remove-button-background right"
-            href="#!" title="Agregar proyecto" 
-            @click="handleCreateProject">
+              href="#!" title="Agregar proyecto" 
+              @click="handleCreateProject">
               <i class="material-icons">add</i>
             </a>
           </div>
