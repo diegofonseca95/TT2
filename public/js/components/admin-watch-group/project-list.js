@@ -45,7 +45,7 @@ Vue.component('project-list', {
       </project-list-item>
       <li class="collection-item"
         v-if="projects.length === 0">
-        No hay projectos disponibles.
+        No hay proyectos disponibles.
       </li>
     </ul>
   `
