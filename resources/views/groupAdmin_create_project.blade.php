@@ -18,26 +18,9 @@
   <input type="hidden" value="<?= $idGrupo ?>" name="group-id" />
 
   {{ csrf_field() }}
-  
+
   <!-- Navbar Begin -->
-  <nav>
-    <div class="nav-wrapper second-background">
-      <ul class="left">
-        <li>
-          <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
-            <i class="material-icons left">view_module</i>
-          </a>
-        </li>
-      </ul>
-      <a href="#!" class="brand-logo center">
-        <i class="material-icons">computer</i>
-        <span class="hide-on-small-only">Crear Proyecto</span>
-      </a>
-      <ul class="right">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
-      </ul>
-    </div>
-  </nav>
+  @include('systemnavbar');
   <!-- Navbar End -->
 
   <!-- Content begin -->
