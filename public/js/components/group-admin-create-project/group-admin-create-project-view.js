@@ -99,7 +99,7 @@ Vue.component('group-admin-create-project-view', {
       var requestBody = { 
         descripcion : this.newProjectDescription,
         nombreProyecto : this.newProjectName,
-        miembros : this.newMemberIds,
+        integrantes : this.newMemberIds,
         idGrupo : groupIdInput.value,
         lider : this.newLeaderId,
         _token : authToken.value
