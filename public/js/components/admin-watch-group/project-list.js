@@ -33,7 +33,14 @@ Vue.component('project-list', {
     .then(function(response){
       console.log(response);
       if(response.status === 'OK'){
-        this.projects = response.result;
+          var projectsInfo = [];
+          for(var i in response.result){
+            projectsInfo.push({
+              projectLeader : response.result[i].lider,
+              project : response.result[i].proyecto
+            });
+          }
+          this.projects = projectsInfo;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -41,10 +48,10 @@ Vue.component('project-list', {
   template : `
     <ul class="collection scrollable-collection">
       <project-list-item
-        v-for="project in projects"
-        :project-leader="project.lider"
-        :key="project.idProyecto"
-        :project="project">
+        v-for="projectInfo in projects"
+        :project-leader="projectInfo.projectLeader"
+        :key="projectInfo.project.idProyecto"
+        :project="projectInfo.project">
       </project-list-item>
       <li class="collection-item"
         v-if="projects.length === 0">
