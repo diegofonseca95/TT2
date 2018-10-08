@@ -7,6 +7,7 @@ Vue.component('project-list', {
   },
   watch : {
     groupId : function(){
+      console.log('AHO CORASICK');
       // TODO : Check if it works.
       var authToken = document.querySelector('input[name="_token"]');
 
