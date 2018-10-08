@@ -5,35 +5,38 @@ Vue.component('project-list', {
       projects : []
     };
   },
-  watch : {
-    groupId : function(){
-      // TODO : Check if it works.
-      var authToken = document.querySelector('input[name="_token"]');
+  created : function(){
+    // Get the group id from the hidden input.
+    var groupIdInput = document.querySelector('input[name="group-id"]');
 
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
+    var authToken = document.querySelector('input[name="_token"]');
 
-      // The body of our request.
-      var requestBody = { 
-        _token : authToken.value,
-        idGrupo : this.idGrupo
-      };
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
 
-      requestData.body = JSON.stringify(requestBody);
+    // The body of our request.
+    var requestBody = { 
+      idGrupo : groupIdInput.value,
+      _token : authToken.value
+    };
 
-      // Fetch the projects list.
-      fetch('/obtenerProyectosGrupo', requestData)
-      .then(response => response.json())
-      .then(function(response){
-        if(response.status === 'OK'){
-          this.projects = response.result;
-        }
-        // TODO : Handle non 'OK' status.
-      }.bind(this));
-    }
+    console.log(requestBody);
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the projects list.
+    fetch('/obtenerProyectosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.projects = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   template : `
     <ul class="collection scrollable-collection">
@@ -45,7 +48,7 @@ Vue.component('project-list', {
       </project-list-item>
       <li class="collection-item"
         v-if="projects.length === 0">
-        No hay projectos disponibles.
+        No hay proyectos disponibles.
       </li>
     </ul>
   `

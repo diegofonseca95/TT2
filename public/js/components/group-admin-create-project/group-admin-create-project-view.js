@@ -9,6 +9,36 @@ Vue.component('group-admin-create-project-view', {
       users : []
     };
   },
+  created : function(){
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idGrupo : groupIdInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the projects list.
+    fetch('/obtenerUsuariosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.users = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+  },
   computed : {
     memberList : function(){
       return this.users.filter(
@@ -54,12 +84,40 @@ Vue.component('group-admin-create-project-view', {
         );
         return;
       }
-      console.log({
+
+      var groupIdInput = document.querySelector('input[name="group-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
         descripcion : this.newProjectDescription,
         nombreProyecto : this.newProjectName,
-        miembros : this.newMemberIds,
-        idLider : this.newLeaderId
-      });
+        integrantes : this.newMemberIds,
+        idGrupo : groupIdInput.value,
+        lider : this.newLeaderId,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/agregarProyecto', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        console.log(response);
+        if(response.status === 'OK'){
+          SuccessToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+
       this.resetInformation();
     },
     resetInformation : function(){
