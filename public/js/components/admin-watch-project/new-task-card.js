@@ -37,21 +37,26 @@ Vue.component('new-task-card', {
   },
   methods : {
     handleTaskCreation : function(){
-      var form = document.querySelector('#new-task-form');
       this.hasValidFields = false;
-      $(form).submit();
+      $('#new-task-form').submit();
       if(this.hasValidFields){
         // TODO : Submit.
         console.log(this.newTaskDescription);
         console.log(this.newTaskDeliverable);
-        form.reset();
+        this.resetInformation();
       }
     },
     resetInformation : function(){
-
-      var form = document.querySelector('#new-task-form'); 
-      form.reset();
-      
+      this.newTaskDeliverable = '';
+      this.newTaskDescription = '';
+      document.querySelector('#new-task-form').reset();
+      M.textareaAutoResize(
+        document.querySelector('#new-task-description-input')
+      );
+      M.textareaAutoResize(
+        document.querySelector('#new-task-deliverable-input')
+      );
+      M.updateTextFields();
     }
   },
   template : `
