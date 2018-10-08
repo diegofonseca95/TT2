@@ -64,6 +64,12 @@
         <div class="card-content">
           <span class="card-title first-text"><b>Usuarios</b></span>
           <ul class="collection scrollable-collection">
+            <!-- No user item Begins -->
+            <li class="collection-item">
+              <span>No hay usuarios en el proyecto</span>
+            </li>
+            <!-- No user item Ends -->
+
             <!-- User Begins -->
             <li class="collection-item avatar"><i class="material-icons circle third-background">person</i>
               <div class="row"><span class="title truncate col s12 hide-on-small-only">Push-Relabel
@@ -124,6 +130,11 @@
         <div class="card-content">
           <span class="card-title first-text"><b>Iteraciones</b></span>
           <ul class="collection scrollable-collection">
+            <!-- No iteration item Begins-->
+            <li class="collection-item">
+              <span>No hay iteraciones en el proyecto</span>
+            </li>
+            <!-- No iteration item Ends -->
             <!-- Iteration Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
               <div class="row">
@@ -203,6 +214,11 @@
         <div class="card-content">
           <span class="card-title first-text"><b>Tareas sin asignar</b></span>
           <ul class="collection scrollable-collection">
+            <!-- No task item Begins-->
+            <li class="collection-item">
+              <span>No hay tareas sin asignar</span>
+            </li>
+            <!-- No task item Ends -->
             <!-- Task Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
               <div class="row">
@@ -288,6 +304,11 @@
           <!-- Search Component Ends -->
           <!-- File Collection Begins -->
           <ul class="collection scrollable-collection">
+            <!-- No file item Begins-->
+            <li class="collection-item">
+              <span>No hay archivos compartidos en el proyecto</span>
+            </li>
+            <!-- No file item Ends -->
             <!-- File Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
               <div class="row">
@@ -327,15 +348,19 @@
           </ul>
           <!-- File Collections Ends -->
           <div class="row">
+              
             <div class="file-field input-field">
               <div class="btn remove-button-background">
-                <span>Subir archivo</span>
+                <span>Seleccionar archivo</span>
                 <input type="file">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
               </div>
             </div>
+            <div class="btn remove-button-background">
+                <span>Subir archivo</span>
+              </div>
           </div>
         </div>
       </div>
@@ -365,6 +390,12 @@
                   <span class="card-title first-text"><b>Seleccionar líder</b></span>
                   <form action="#">
                     <ul class="collection">
+                      <!-- No user item Begins -->
+                      <li class="collection-item">
+                        <span>No hay usuarios para seleccionar</span>
+                      </li>
+                      <!-- No user item Ends -->
+
                       <!-- User Begins -->
                       <li class="collection-item avatar">
                         <i class="material-icons circle third-background">person</i>
@@ -449,6 +480,7 @@
           </div>
         </div>
         <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
         </div>
       </div>
@@ -463,6 +495,11 @@
             <div class="card-content">
               <span class="card-title first-text"><b>Grupos en los que ha participado</b></span>
               <ul class="collection scrollable-collection">
+                <!-- No group item Begins-->
+                <li class="collection-item">
+                  <span>El usuario no ha participado en algún grupo</span>
+                </li>
+                <!-- No group item Ends -->
                 <!-- Group Begins-->
                 <li class="collection-item avatar"><i class="material-icons circle third-background">group</i>
                   <div class="row">
@@ -521,6 +558,11 @@
             <div class="card-content">
               <span class="card-title first-text"><b>Proyectos en los que ha colaborado</b></span>
               <ul class="collection scrollable-collection">
+                <!-- No project item Begins-->
+                <li class="collection-item">
+                  <span>El usuario no ha colaborado en algún proyecto</span>
+                </li>
+                <!-- No project item Ends -->
                 <!-- Project Begins-->
                 <li class="collection-item avatar"><i class="material-icons circle third-background">folder</i>
                   <div class="row">
@@ -555,6 +597,11 @@
             <div class="card-content">
               <span class="card-title first-text"><b>Tareas que ha realizado</b></span>
               <ul class="collection scrollable-collection">
+                <!-- No task item Begins-->
+                <li class="collection-item">
+                  <span>El usuario no ha realizado alguna tarea</span>
+                </li>
+                <!-- No task item Ends -->
                 <!-- Task Begins-->
                 <li class="collection-item avatar"><i class="material-icons circle third-background">create</i>
                   <div class="row">
@@ -607,6 +654,12 @@
                     </div>
                   </div>
                   <ul class="collection scrollable-collection">
+                    <!-- No user item Begins -->
+                    <li class="collection-item">
+                      <span>No hay usuarios para agregar al proyecto</span>
+                    </li>
+                    <!-- No user item Ends -->
+
                     <!-- User Begins -->
                     <li class="collection-item avatar">
                       <i class="material-icons circle third-background">person</i>
@@ -671,6 +724,7 @@
           </div>
         </div>
         <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
         </div>
       </div>
@@ -693,6 +747,12 @@
                     </div>
                   </div>
                   <ul class="collection">
+                    <!-- No user item Begins -->
+                    <li class="collection-item">
+                      <span>No hay usuarios registrados en el proyecto</span>
+                    </li>
+                    <!-- No user item Ends -->
+
                     <!-- User Begins -->
                     <li class="collection-item avatar">
                       <i class="material-icons circle third-background">person</i>
@@ -795,6 +855,34 @@
   <script src="../../public/js/global/admin/admin-watch-project.js"></script>
   <script>
     //M.AutoInit();
+
+    //Modal initialization - modal_projectInfo
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.getElementById('modal_projectInfo');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
+    });
+
+    //Modal initialization - modal_userInfo
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.getElementById('modal_userInfo');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
+    });
+
+    //Modal initialization - modal_addUserToProject
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.getElementById('modal_addUserToProject');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
+    });
+
+    //Modal initialization - modal_assignTask
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.getElementById('modal_assignTask');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
+    });
   </script>
   <!-- Scripts End -->
 </body>
