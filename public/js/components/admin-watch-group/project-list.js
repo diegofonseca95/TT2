@@ -5,8 +5,10 @@ Vue.component('project-list', {
       projects : []
     };
   },
-  mounted : function(){
-    // TODO : Check if it works.
+  created : function(){
+    // Get the group id from the hidden input.
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+
     var authToken = document.querySelector('input[name="_token"]');
 
     // Request data for the 'fetch' function.
@@ -17,8 +19,8 @@ Vue.component('project-list', {
 
     // The body of our request.
     var requestBody = { 
-      _token : authToken.value,
-      idGrupo : this.idGrupo
+      idGrupo : groupIdInput.value,
+      _token : authToken.value
     };
 
     console.log(requestBody);
