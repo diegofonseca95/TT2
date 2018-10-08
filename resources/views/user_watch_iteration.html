@@ -62,6 +62,11 @@
         <div class="card-content">
           <span class="card-title first-text"><b>Tareas pendientes</b></span>
           <ul class="collection scrollable-collection">
+            <!-- No task item Begins-->
+            <li class="collection-item">
+              <span>No hay tareas pendientes por realizar</span>
+            </li>
+            <!-- No task item Ends -->
             <!-- Task Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
               <div class="row">
@@ -329,6 +334,7 @@
           </div>
         </div>
         <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Listo</a>
         </div>
       </div>
@@ -345,7 +351,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
 
   <script>
-    M.AutoInit();
+    //M.AutoInit();
     document.addEventListener('DOMContentLoaded', function () {
       var options = {
         format: "dd / mmm / yyyy",
@@ -406,6 +412,13 @@
       };
       var elems = document.querySelectorAll('.datepicker');
       var instances = M.Datepicker.init(elems, options);
+    });
+
+    //Modal initialization - modal_iterationInfo
+    document.addEventListener('DOMContentLoaded', function(){
+      var elems = document.getElementById('modal_iterationInfo');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
     });
   </script>
   <!-- Scripts End -->
