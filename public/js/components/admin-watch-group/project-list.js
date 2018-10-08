@@ -6,7 +6,6 @@ Vue.component('project-list', {
     };
   },
   mounted : function(){
-    console.log('AHO CORASICK');
     // TODO : Check if it works.
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -22,12 +21,15 @@ Vue.component('project-list', {
       idGrupo : this.idGrupo
     };
 
+    console.log(requestBody);
+
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the projects list.
     fetch('/obtenerProyectosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         this.projects = response.result;
       }
