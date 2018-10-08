@@ -22,8 +22,8 @@ Vue.component('group-admin-create-project-view', {
 
     // The body of our request.
     var requestBody = { 
-      _token : authToken.value,
-      idGrupo : this.idGrupo
+      idGrupo : groupIdInput.value,
+      _token : authToken.value
     };
 
     requestData.body = JSON.stringify(requestBody);
