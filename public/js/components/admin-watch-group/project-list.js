@@ -5,36 +5,34 @@ Vue.component('project-list', {
       projects : []
     };
   },
-  watch : {
-    groupId : function(){
-      console.log('AHO CORASICK');
-      // TODO : Check if it works.
-      var authToken = document.querySelector('input[name="_token"]');
+  mounted : function(){
+    console.log('AHO CORASICK');
+    // TODO : Check if it works.
+    var authToken = document.querySelector('input[name="_token"]');
 
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
 
-      // The body of our request.
-      var requestBody = { 
-        _token : authToken.value,
-        idGrupo : this.idGrupo
-      };
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value,
+      idGrupo : this.idGrupo
+    };
 
-      requestData.body = JSON.stringify(requestBody);
+    requestData.body = JSON.stringify(requestBody);
 
-      // Fetch the projects list.
-      fetch('/obtenerProyectosGrupo', requestData)
-      .then(response => response.json())
-      .then(function(response){
-        if(response.status === 'OK'){
-          this.projects = response.result;
-        }
-        // TODO : Handle non 'OK' status.
-      }.bind(this));
-    }
+    // Fetch the projects list.
+    fetch('/obtenerProyectosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.projects = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   template : `
     <ul class="collection scrollable-collection">
