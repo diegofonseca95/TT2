@@ -108,16 +108,16 @@ Vue.component('group-admin-create-project-view', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/obtenerUsuariosGrupo', requestData)
+      fetch('/agregarProyecto', requestData)
       .then(response => response.json())
       .then(function(response){
         console.log(response);
         if(response.status === 'OK'){
-          this.users = response.result;
+          SuccessToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
-      
+
       this.resetInformation();
     },
     resetInformation : function(){
