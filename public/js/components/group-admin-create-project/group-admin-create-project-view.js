@@ -9,6 +9,35 @@ Vue.component('group-admin-create-project-view', {
       users : []
     };
   },
+  created : function(){
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value,
+      idGrupo : this.idGrupo
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the projects list.
+    fetch('/obtenerUsuariosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.users = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+  },
   computed : {
     memberList : function(){
       return this.users.filter(
