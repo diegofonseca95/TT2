@@ -57,37 +57,6 @@
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/admin/admin-watch-project.js"></script>
-  <script>
-    //M.AutoInit();
-
-    //Modal initialization - modal_projectInfo
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_projectInfo');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Modal initialization - modal_userInfo
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_userInfo');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Modal initialization - modal_addUserToProject
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_addUserToProject');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Modal initialization - modal_assignTask
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_assignTask');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-  </script>
   <!-- Scripts End -->
 </body>
 
