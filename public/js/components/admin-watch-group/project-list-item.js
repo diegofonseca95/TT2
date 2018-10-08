@@ -3,6 +3,11 @@ Vue.component('project-list-item', {
   data : function(){
     return {};
   },
+  methods : {
+    handleWatchProject : function(){
+      window.location.replace('/verProyecto/' + this.project.idProyecto);
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">folder</i>
@@ -19,7 +24,9 @@ Vue.component('project-list-item', {
           <a href="#!" title="Eliminar" class="btn remove-button-background">
             <i class="material-icons">remove</i>
           </a>
-          <a href="#!" title="Ver" class="btn remove-button-background">
+          <a class="btn remove-button-background"
+            href="#!" title="Ver" 
+            @click="handleWatchProject">
             <i class="material-icons">remove_red_eye</i>
           </a>
         </div>
