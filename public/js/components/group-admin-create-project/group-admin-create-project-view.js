@@ -32,6 +32,7 @@ Vue.component('group-admin-create-project-view', {
     fetch('/obtenerUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
