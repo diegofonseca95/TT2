@@ -95,11 +95,6 @@ Vue.component('edit-group-info-modal', {
               </div>
             </div>
           </form>
-          <new-leader-list
-            :group-members="groupMembers"
-            :leader-id="newLeaderId"
-            @new-leader-chosen="handleLeaderChosen($event)">
-          </new-leader-list>
         </div>
       </div>
       <div class="modal-footer">
