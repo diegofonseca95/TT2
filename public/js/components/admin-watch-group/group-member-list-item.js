@@ -7,7 +7,7 @@ Vue.component('group-member-list-item', {
     removeMember : function(){
       // Get the group id from the hidden input.
       var groupIdInput = document.querySelector('input[name="group-id"]');
-      console.log(groupIdInput);
+
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
