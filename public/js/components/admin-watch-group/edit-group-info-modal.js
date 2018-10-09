@@ -18,9 +18,9 @@ Vue.component('edit-group-info-modal', {
       this.newLeaderId = userId;
     },
     handleModalClose : function(){
-      this.hasValidFields = false;
+      this.hasValidFields = true;
       // TODO : Work around to avoid JQuery.
-      $('#edit-group-info-form').submit();
+      //$('#edit-group-info-form').submit();
       if(this.canSubmit){
         var modal = document.querySelector('#edit-group-info-modal');
         M.Modal.getInstance(modal).close();
