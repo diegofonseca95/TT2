@@ -9,6 +9,9 @@ Vue.component('group-members-card', {
     handleMemberSelected : function(selectedUser){
       this.displayedUser = selectedUser;
     },
+    handleMemberRemoved : function(user){
+      this.$emit('member-removed', user);
+    },
     handleNewMembersAdded : function(memberList){
       this.$emit('new-members-added', memberList);
     }
@@ -21,6 +24,7 @@ Vue.component('group-members-card', {
         </span>
         <group-member-list
           @member-selected="handleMemberSelected($event)"
+          @member-removed="handleMemberRemoved($event)"
           :group-members="groupMembers">
         </group-member-list>
         <div class="row">

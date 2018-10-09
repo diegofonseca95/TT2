@@ -23,24 +23,21 @@ Vue.component('project-list', {
       _token : authToken.value
     };
 
-    console.log(requestBody);
-
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the projects list.
     fetch('/obtenerProyectosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
-          var projectsInfo = [];
-          for(var i in response.result){
-            projectsInfo.push({
-              projectLeader : response.result[i].lider,
-              project : response.result[i].proyecto
-            });
-          }
-          this.projects = projectsInfo;
+        var projectsInfo = [];
+        for(var i in response.result){
+          projectsInfo.push({
+            projectLeader : response.result[i].lider,
+            project : response.result[i].proyecto
+          });
+        }
+        this.projects = projectsInfo;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));

@@ -22,6 +22,11 @@ Vue.component('admin-watch-group-view', {
     handleNewMembersAdded : function(memberList){
       for(var i in memberList)
         this.memberIds.push(memberList[i]);
+    },
+    handleMemberRemoved : function(user){
+      this.memberIds = this.memberIds.filter(id => {
+        return id !== user.idUsuario;
+      });
     }
   },
   beforeCreate : function(){
@@ -71,6 +76,7 @@ Vue.component('admin-watch-group-view', {
       </group-info-card>
       
       <group-members-card 
+        @member-removed="handleMemberRemoved($event)"
         @new-members-added="handleNewMembersAdded"
         :group-members="memberList"
         :users="nonMemberList">

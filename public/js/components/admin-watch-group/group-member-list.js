@@ -6,6 +6,9 @@ Vue.component('group-member-list', {
   methods : {
     handleMemberSelected : function(user){
       this.$emit('member-selected', user);
+    },
+    handleMemberRemoved : function(user){
+      this.$emit('member-removed', user);
     }
   },
   template : `
@@ -13,6 +16,7 @@ Vue.component('group-member-list', {
       <group-member-list-item 
         v-for="member in groupMembers" 
         @member-selected="handleMemberSelected($event)"
+        @member-removed="handleMemberRemoved($event)"
         :key="member.idUsuario"
         :member="member">
       </group-member-list-item>
