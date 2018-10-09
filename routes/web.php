@@ -49,3 +49,8 @@ Route::post('/obtenerIdUsuariosGrupo','GruposControlador@obtenerIdUsuariosGrupo'
 Route::post('/agregarUsuariosGrupo', 'GruposControlador@agregarUsuario');
 Route::post('/obtenerGruposUsuario', 'UsuarioGrupoControlador@obtenerInformacion');
 Route::post('/obtenerProyectosUsuario', 'UsuarioProyectoGrupoControlador@obtenerInformacion');
+Route::get('/agregarProyecto/{idGrupo}', 'GruposControlador@agregarProyecto');
+Route::post('/agregarProyecto', 'ProyectosControlador@agregarProyectoBD');
+Route::post('/obtenerProyectosGrupo', 'GruposControlador@obtenerProyectosGrupo');
+Route::get('/verProyecto/{idProyecto}', 'ProyectosControlador@verProyecto');
+Route::post('/eliminarUsuarioGrupo', 'UsuarioGrupoControlador@eliminarUsuarioGrupo');

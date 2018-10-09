@@ -35,6 +35,13 @@ class ProyectosControlador extends Controller
         return view('admin_manage_projects_list', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'computer']);
     }
 
+    public function verProyecto($idProyecto){
+        if(!Auth::check()){
+            return view('index');
+        }
+
+        return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto]);
+    }
     public function agregarProyecto(){
         if(!Auth::check()){
             return view('index');
@@ -59,12 +66,17 @@ class ProyectosControlador extends Controller
 
     public function agregarProyectoBD(){
         if(!Auth::check()){
-            return view('index');
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
         }
 
         $proyecto = new Proyecto;
         $proyecto->nombreProyecto = request("nombreProyecto");
         $proyecto->descripcion = request("descripcion");
+        $date = new \DateTime();
+        $proyecto->fecha_inicio = $date->format('Y-m-d');
         $proyecto->save();
 
         $administrarProyecto = new AdministradorProyecto;
@@ -79,14 +91,18 @@ class ProyectosControlador extends Controller
 
         $integrantes = request("integrantes");
 
-        foreach ($integrantes as $value) {
+        foreach($integrantes as $value) {
             $usarioproyectogrupo = new UsuarioProyectoGrupo;
             $usarioproyectogrupo->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
             $usarioproyectogrupo->idUsuario = $value;
             $usarioproyectogrupo->save();
         }
 
-        return view("admin_watch_group");
+        return response()->json([
+            'status' => 'OK',
+            'result' => 'Se agregó el proyecto con exito'
+        ]
+        );
     }
 
     public function editarProyecto($idProyecto){

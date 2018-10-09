@@ -10,7 +10,7 @@ use App\AdministradorProyecto;
 use App\UsuarioGrupo;
 use App\ProyectoGrupo;
 use App\Proyecto;
-
+use Auth;
 class UsuarioGrupoControlador extends Controller
 {
     public function obtenerInformacion(){
@@ -46,6 +46,42 @@ class UsuarioGrupoControlador extends Controller
                 	'grupo'=>$info[0],
                 	'lider'=>$liderInfo[0]
                );
+    }
+
+    public function eliminarUsuarioGrupo(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+        try{
+            $usuarioGrupo = new UsuarioGrupo;
+            $adminGrupo = new AdministradorGrupo;
+            $usuario = new User;
+
+            $query = $adminGrupo->where('idGrupo', '=', request('idGrupo'))->get();
+
+            if($query[0]->idUsuario == request('idUsuario')){
+                return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'No puedes eliminar al lider del grupo'
+                ]);
+            }
+
+            $userGroup = $usuarioGrupo->where([['idGrupo', '=', request('idGrupo')], ['idUsuario', '=', request('idUsuario')]])->update(['estado'=> 3]);
+            return response()->json([
+                'status' => 'OK',
+                'result' => 'Usuario Eliminado'
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Usuario no pertenece al grupo'
+            ]);
+        }
+        
+
     }
     
 }
