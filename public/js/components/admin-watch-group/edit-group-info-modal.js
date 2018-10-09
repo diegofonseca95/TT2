@@ -41,6 +41,7 @@ Vue.component('edit-group-info-modal', {
   },
   mounted : function(){
     // TODO : No JQuery.
+    /*
     $('#edit-group-info-form').validate({
       rules : {
         'edit-group-info-modal-name-input' : {
@@ -66,7 +67,7 @@ Vue.component('edit-group-info-modal', {
       submitHandler : function(form){
         this.hasValidFields = true;
       }.bind(this)
-    });
+    });*/
   },
   template : `
     <div id="edit-group-info-modal" class="modal modal-fixed-footer">
@@ -95,6 +96,11 @@ Vue.component('edit-group-info-modal', {
               </div>
             </div>
           </form>
+          <new-leader-list
+            :group-members="groupMembers"
+            :leader-id="newLeaderId"
+            @new-leader-chosen="handleLeaderChosen($event)">
+          </new-leader-list>
         </div>
       </div>
       <div class="modal-footer">
