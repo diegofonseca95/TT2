@@ -88,7 +88,7 @@ Vue.component('admin-watch-project-view', {
     requestBody.idProyecto = projectIdInput.value;
     requestData.body = JSON.stringify(requestBody);
 
-    fetch('/obtenerIdUsuariosGrupo', requestData)
+    fetch('/obtenerIdUsuariosProyecto', requestData)
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
