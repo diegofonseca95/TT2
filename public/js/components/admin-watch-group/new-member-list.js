@@ -87,30 +87,3 @@ Vue.component('new-member-list', {
     </div>
   `
 });
-
-/*
-<div class="row">
-  <form class="col s12">
-    <!-- Group Users Begin -->
-    <div class="card">
-      <div class="card-content">
-        <div class="row">
-          <div class='input-field col s12'>
-            <i class='material-icons prefix third-text'>search</i>
-            <input placeholder='Ingresa palabras clave' type='text' class='validate'>
-            <label>Búsqueda de Usuarios</label>
-          </div>
-        </div>
-        <ul class="collection scrollable-collection">
-          <new-member-list-item
-            v-for="user in users"
-            :key="user.idUsuario"
-            :user="user">
-          </new-member-list-item>
-        </ul>
-      </div>
-    </div>
-    <!-- Group Users End -->
-  </form>
-</div>
-*/

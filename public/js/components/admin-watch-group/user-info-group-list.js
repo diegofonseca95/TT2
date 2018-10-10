@@ -56,12 +56,3 @@ Vue.component('user-info-group-list', {
     </ul>
   `
 });
-
-/*
-<ul class="collection scrollable-collection">
-  <user-info-group-list-item 
-    :group-leader="null"
-    :group="group">
-  </user-info-group-list-item>
-</ul>
-*/

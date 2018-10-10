@@ -58,14 +58,3 @@ Vue.component('user-info-project-list', {
     </ul>
   `
 });
-
-/*
-<ul class="collection scrollable-collection">
-  <user-info-project-list-item
-    v-for="projectInfo in userProjectsInfo"
-    :project-leader="projectInfo.projectLeader"
-    :key="projectInfo.project.idProyecto"
-    :project="projectInfo.project">
-  </user-info-project-list-item>
-</ul>
-*/

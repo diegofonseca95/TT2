@@ -33,25 +33,3 @@ Vue.component('new-leader-list', {
     </div>
   `
 });
-
-/*
-<!-- Group Users Begin -->
-<div class="card">
-  <div class="card-content">
-    <span class="card-title first-text">
-      <b>Seleccionar líder</b>
-    </span>
-    <form action="#">
-      <ul class="collection">
-      <!-- User Begins -->
-      <new-leader-list-item
-        v-for="user in users"
-        :user="user">
-      </new-leader-list-item>
-      <!-- User Ends -->
-      </ul>
-    </form>
-  </div>
-</div>
-<!-- Group Users End -->
-*/

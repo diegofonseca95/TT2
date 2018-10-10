@@ -27,13 +27,3 @@ Vue.component('group-member-list', {
     </ul>
   `
 });
-
-/*
-<ul class="collection scrollable-collection">
-  <group-member-list-item 
-    v-for="member in groupMembers" 
-    :key="member.idUsuario" 
-    :member="member">
-  </group-member-list-item>
-</ul>
-*/

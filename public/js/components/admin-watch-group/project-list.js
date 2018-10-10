@@ -57,14 +57,3 @@ Vue.component('project-list', {
     </ul>
   `
 });
-
-/*
-<ul class="collection scrollable-collection">
-  <project-list-item
-    v-for="projectInfo in groupProjectsInfo"
-    :project-leader="projectInfo.projectLeader"
-    :key="projectInfo.project.idProyecto"
-    :project="projectInfo.project">
-  </project-list-item>
-</ul>
-*/

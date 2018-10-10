@@ -28,13 +28,3 @@ Vue.component('user-info-task-list', {
     </ul>
   `
 });
-
-/*
-<ul class="collection scrollable-collection">
-  <user-info-task-list-item
-    v-for="taskInfo in userTasksInfo"
-    :task-info="taskInfo"
-    :key="taskInfo.key">
-  </user-info-task-list-item>
-</ul>
-*/
