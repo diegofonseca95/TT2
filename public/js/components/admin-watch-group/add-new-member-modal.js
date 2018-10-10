@@ -71,6 +71,7 @@ Vue.component('add-new-member-modal', {
         if(response.status === 'OK'){
           // TODO : Toast if succeeded
           this.$emit('new-members-added', this.newMemberList);
+          SuccessToast(response.result);
           this.newMemberList = [];
         }
         // TODO : Handle non 'OK' status.
