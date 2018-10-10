@@ -5,36 +5,7 @@ Vue.component('group-member-list-item', {
   },
   methods : {
     removeMember : function(){
-      // Get the group id from the hidden input.
-      var groupIdInput = document.querySelector('input[name="group-id"]');
-
-      var authToken = document.querySelector('input[name="_token"]');
-
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
-
-      // The body of our request.
-      var requestBody = { 
-        idUsuario : this.member.idUsuario,
-        idGrupo : groupIdInput.value,
-        _token : authToken.value
-      };
-
-      requestData.body = JSON.stringify(requestBody);
-
-      // Fetch the projects list.
-      fetch('/eliminarUsuarioGrupo', requestData)
-      .then(response => response.json())
-      .then(function(response){
-        if(response.status === 'OK'){
-          this.$emit('member-removed', this.member);
-          SuccessToast(response.result);
-        }
-        // TODO : Handle non 'OK' status.
-      }.bind(this));
+      this.$emit('member-removed', this.member);
     },
     observeMember : function(){
       this.$emit('member-selected', this.member);

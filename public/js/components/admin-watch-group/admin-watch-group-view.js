@@ -24,9 +24,38 @@ Vue.component('admin-watch-group-view', {
         this.memberIds.push(memberList[i]);
     },
     handleMemberRemoved : function(user){
-      this.memberIds = this.memberIds.filter(id => {
-        return id !== user.idUsuario;
-      });
+      // Get the group id from the hidden input.
+      var groupIdInput = document.querySelector('input[name="group-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idGrupo : groupIdInput.value,
+        idUsuario : user.idUsuario,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/eliminarUsuarioGrupo', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.memberIds = this.memberIds.filter(id => {
+            return id !== user.idUsuario;
+          });
+          SuccessToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   beforeCreate : function(){
