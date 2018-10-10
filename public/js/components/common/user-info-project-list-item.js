@@ -3,6 +3,11 @@ Vue.component('user-info-project-list-item', {
   data : function(){
     return {};
   },
+  methods : {
+    handleWatchProject : function(){
+      window.location.replace('/verProyecto/' + this.project.idProyecto);
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">folder</i>
@@ -17,7 +22,8 @@ Vue.component('user-info-project-list-item', {
         </span>
         <div class="right">
           <a class="btn remove-button-background"
-            href="#!" title="Ver">
+            href="#!" title="Ver"
+            @click="handleWatchProject">
             <i class="material-icons">remove_red_eye</i>
           </a>
         </div>
