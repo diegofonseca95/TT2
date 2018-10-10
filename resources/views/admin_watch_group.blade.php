@@ -41,38 +41,38 @@
   <script src="/js/toasts.js"></script>
   <!-- Vue Components Begin -->
   <!-- Common Components Begin -->
-  <script src="/js/components/common/user-full-name-span.js"></script>
+  <script src="../../public/js/components/common/user-full-name-span.js"></script>
+  <script src="../../public/js/components/common/user-info-project-list-item.js"></script>
+  <script src="../../public/js/components/common/user-info-group-list-item.js"></script>
+  <script src="../../public/js/components/common/user-info-task-list-item.js"></script>
+  <script src="../../public/js/components/common/user-info-project-list.js"></script>
+  <script src="../../public/js/components/common/user-info-group-list.js"></script>
+  <script src="../../public/js/components/common/user-info-task-list.js"></script>
+  <script src="../../public/js/components/common/user-info-modal.js"></script>
   <!-- Common Components End -->
   <!-- List Items Begin -->
-  <script src="/js/components/admin-watch-group/user-info-project-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-group-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-task-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/project-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-leader-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list-item.js"></script>
+  <script src="../../public/js/components/admin-watch-group/project-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
-  <script src="/js/components/admin-watch-group/user-info-project-list.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-group-list.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-task-list.js"></script>
-  <script src="/js/components/admin-watch-group/group-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list.js"></script>
-  <script src="/js/components/admin-watch-group/new-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/project-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-member-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-leader-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/new-member-list.js"></script>
+  <script src="../../public/js/components/admin-watch-group/project-list.js"></script>
   <!-- Lists End -->
   <!-- Modals Begin -->
-  <script src="/js/components/admin-watch-group/edit-group-info-modal.js"></script>
-  <script src="/js/components/admin-watch-group/add-new-member-modal.js"></script>
-  <script src="/js/components/admin-watch-group/user-info-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/edit-group-info-modal.js"></script>
+  <script src="../../public/js/components/admin-watch-group/add-new-member-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
-  <script src="/js/components/admin-watch-group/group-projects-card.js"></script>
-  <script src="/js/components/admin-watch-group/group-members-card.js"></script>
-  <script src="/js/components/admin-watch-group/group-info-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-projects-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-members-card.js"></script>
+  <script src="../../public/js/components/admin-watch-group/group-info-card.js"></script>
   <!-- Cards End -->
   <!-- Others Begin -->
-  <script src="/js/components/admin-watch-group/admin-watch-group-view.js"></script>
+  <script src="../../public/js/components/admin-watch-group/admin-watch-group-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/admin/admin-watch-group.js"></script>
