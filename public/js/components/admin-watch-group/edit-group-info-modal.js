@@ -18,9 +18,9 @@ Vue.component('edit-group-info-modal', {
       this.newLeaderId = userId;
     },
     handleModalClose : function(){
-      this.hasValidFields = true;
+      this.hasValidFields = false;
       // TODO : Work around to avoid JQuery.
-      //$('#edit-group-info-form').submit();
+      $('#edit-group-info-form').submit();
       if(this.canSubmit){
         var modal = document.querySelector('#edit-group-info-modal');
         M.Modal.getInstance(modal).close();
@@ -41,7 +41,6 @@ Vue.component('edit-group-info-modal', {
   },
   mounted : function(){
     // TODO : No JQuery.
-    /*
     $('#edit-group-info-form').validate({
       rules : {
         'edit-group-info-modal-name-input' : {
@@ -67,7 +66,7 @@ Vue.component('edit-group-info-modal', {
       submitHandler : function(form){
         this.hasValidFields = true;
       }.bind(this)
-    });*/
+    });
   },
   template : `
     <div id="edit-group-info-modal" class="modal modal-fixed-footer">
