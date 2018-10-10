@@ -60,7 +60,6 @@ Vue.component('admin-watch-project-view', {
   beforeCreate : function(){
     // Get the project id from the hidden input.
     var projectIdInput = document.querySelector('input[name="project-id"]');
-    this.projectId = projectIdInput.value;
 
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -86,7 +85,7 @@ Vue.component('admin-watch-project-view', {
     }.bind(this));
 
     // Add the project identifier to the request body.
-    requestBody.idGrupo = this.projectId;
+    requestBody.idProyecto = projectIdInput.value;
     requestData.body = JSON.stringify(requestBody);
 
     fetch('/obtenerIdUsuariosGrupo', requestData)
