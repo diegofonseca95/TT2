@@ -34,7 +34,6 @@ Vue.component('group-info-card', {
     fetch('/obtenerGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.result);
       if(response.status === 'OK'){
         var result = response.result;
         var newInfo = {};
