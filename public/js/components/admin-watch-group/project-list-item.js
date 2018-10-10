@@ -4,6 +4,36 @@ Vue.component('project-list-item', {
     return {};
   },
   methods : {
+    handleDeleteProject : function(){
+      // TODO : Check if it works.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : this.project.idProyecto,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/eliminarProyecto', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          // TODO : Toast if succeeded
+          this.$emit('project-deleted', this.project);
+          SuccessToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    },
     handleWatchProject : function(){
       window.location.replace('/verProyecto/' + this.project.idProyecto);
     }
@@ -21,7 +51,9 @@ Vue.component('project-list-item', {
           </user-full-name-span>
         </span>
         <div class="right">
-          <a href="#!" title="Eliminar" class="btn remove-button-background">
+          <a class="btn remove-button-background"
+            href="#!" title="Eliminar"
+            @click="handleDeleteProject">
             <i class="material-icons">remove</i>
           </a>
           <a class="btn remove-button-background"

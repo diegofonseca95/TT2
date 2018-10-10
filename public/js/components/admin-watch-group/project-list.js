@@ -42,11 +42,19 @@ Vue.component('project-list', {
       // TODO : Handle non 'OK' status.
     }.bind(this));
   },
+  methods : {
+    handleProjectDeleted : function(project){
+      this.projects = this.projects.filter(projectInfo => {
+        return projectInfo.project.idProyecto !== project.idProyecto;
+      });
+    }
+  },
   template : `
     <ul class="collection scrollable-collection">
       <project-list-item
         v-for="projectInfo in projects"
         :project-leader="projectInfo.projectLeader"
+        @project-deleted="handleProjectDeleted"
         :key="projectInfo.project.idProyecto"
         :project="projectInfo.project">
       </project-list-item>
