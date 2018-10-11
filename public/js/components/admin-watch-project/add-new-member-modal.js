@@ -14,7 +14,7 @@ Vue.component('add-new-member-modal', {
     this.selectedBucket = bucket;
   },
   mounted : function(){
-    var elems = document.getElementById('add-new-member-modal');
+    var elems = document.querySelector('#add-new-member-modal');
     var instances = M.Modal.init(elems);
   },
   watch : {

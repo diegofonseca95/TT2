@@ -40,6 +40,8 @@ Vue.component('edit-project-info-modal', {
     }
   },
   mounted : function(){
+    var elems = document.querySelector('#edit-project-info-modal');
+    var instances = M.Modal.init(elems);
     // TODO : No JQuery.
     $('#edit-project-info-form').validate({
       rules : {
