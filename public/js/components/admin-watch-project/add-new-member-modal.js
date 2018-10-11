@@ -48,7 +48,6 @@ Vue.component('add-new-member-modal', {
 
       // Get the project id from the hidden input.
       var projectIdInput = document.querySelector('input[name="project-id"]');
-      var projectId = projectIdInput.value;
 
       // TODO : Check if it works.
       var authToken = document.querySelector('input[name="_token"]');
@@ -61,15 +60,15 @@ Vue.component('add-new-member-modal', {
 
       // The body of our request.
       var requestBody = { 
+        idProyecto : projectIdInput.value,
         integrantes : this.newMemberList,
-        _token : authToken.value,
-        idGrupo : projectId
+        _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/agregarUsuariosGrupo', requestData)
+      fetch('/agregarUsuariosProyecto', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
@@ -84,7 +83,7 @@ Vue.component('add-new-member-modal', {
   template : `
     <div id="add-new-member-modal" class="modal modal-fixed-footer">
       <div class="modal-content">
-        <h4>Agregar usuarios al grupo</h4>
+        <h4>Agregar usuarios al proyecto</h4>
         <new-member-list
           @remove-new-member="handleRemoveNewMember"
           @add-new-member="handleAddNewMember"

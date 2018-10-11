@@ -61,6 +61,9 @@ Vue.component('admin-watch-project-view', {
     // Get the project id from the hidden input.
     var projectIdInput = document.querySelector('input[name="project-id"]');
 
+    // Get the group id from the hidden input.
+    var groupIdInput = document.querySelector('input[name="group-id"]');
+
     var authToken = document.querySelector('input[name="_token"]');
 
     // Request data for the 'fetch' function.
@@ -85,7 +88,24 @@ Vue.component('admin-watch-project-view', {
     }.bind(this));
 
     // Add the project identifier to the request body.
+    requestBody.idGrupo = groupIdInput.value;
+    requestData.body = JSON.stringify(requestBody);
+
+    fetch('/obtenerIdUsuariosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        var groupMemberIds = response.result;
+        this.users = this.users.filter(
+          user => groupMemberIds.includes(user.idUsuario)
+        );
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+
+    // Add the project identifier to the request body.
     requestBody.idProyecto = projectIdInput.value;
+    delete requestBody.idGrupo;
     requestData.body = JSON.stringify(requestBody);
 
     fetch('/obtenerIdUsuariosProyecto', requestData)

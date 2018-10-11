@@ -17,6 +17,8 @@
 
   <input type="hidden" value="<?= $idProyecto ?>" name="project-id" />
 
+  <input type="hidden" value="<?= $idGrupo ?>" name="group-id" />
+
   {{ csrf_field() }}
 
   <!-- Navbar Begin -->
