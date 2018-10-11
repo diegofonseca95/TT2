@@ -54,3 +54,6 @@ Route::post('/agregarProyecto', 'ProyectosControlador@agregarProyectoBD');
 Route::post('/obtenerProyectosGrupo', 'GruposControlador@obtenerProyectosGrupo');
 Route::get('/verProyecto/{idProyecto}', 'ProyectosControlador@verProyecto');
 Route::post('/eliminarUsuarioGrupo', 'UsuarioGrupoControlador@eliminarUsuarioGrupo');
+Route::post('/eliminarProyecto', 'ProyectoGrupoControlador@eliminarProyectoGrupo');
+Route::post('/obtenerIdUsuariosProyecto', 'ProyectosControlador@obtenerUsuariosProyecto');
+Route::post('/agregarUsuariosProyecto', 'UsuarioProyectoGrupoControlador@agregarUsuarioProyecto');

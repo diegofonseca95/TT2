@@ -21,7 +21,7 @@ class UsuarioProyectoGrupoControlador extends Controller
         $proyectoGrupo = new ProyectoGrupo;
         $query = $usuarioProyectoGrupo->where('idUsuario', '=', request('idUsuario'))->get();
         $arrays = array();
-        foreach ($arrays as $value) {
+        foreach ($query as $value) {
             array_push($arrays, $value->idProyectoGrupo);
         }
 
@@ -63,5 +63,24 @@ class UsuarioProyectoGrupoControlador extends Controller
                     'proyecto'=>$info[0],
                     'lider'=>$liderInfo[0]
                );
+    }
+
+    public function agregarUsuarioProyecto(){
+        $nuevos = request('integrantes');
+
+        $proyectoGrupo = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
+
+        foreach($nuevos as $value){
+            $usuario = new usuarioProyectoGrupo;
+            $usuario->idUsuario = $value;
+            $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
+            $usuario->save();
+        }
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => 'Usuario(s) agregado(s)'
+        ]);
+
     }
 }

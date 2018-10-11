@@ -12,6 +12,7 @@ use App\ProyectoGrupo;
 use App\Proyecto;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class GruposControlador extends Controller
 {
     public function administrarGrupos(){
@@ -100,14 +101,23 @@ class GruposControlador extends Controller
 
     	try{
     		foreach ($integrantes as $value) {
-	            $usuarioGrupo = new UsuarioGrupo;
-	            $usuarioGrupo->idUsuario = $value;
-	            $usuarioGrupo->idGrupo = $idGrupo;
-	            $usuarioGrupo->save();
+	            try{
+                    UsuarioGrupo::where([['idGrupo', '=', $idGrupo],['idUsuario', '=', $value] ])->firstOrFail();
+                    
+                    UsuarioGrupo::where([['idGrupo', '=', $idGrupo],['idUsuario', '=', $value] ])->update(['estado'=> 1]);
+                }catch(ModelNotFoundException $e){
+                    $usuarioGrupo = new UsuarioGrupo;
+                    $usuarioGrupo->idUsuario = $value;
+                    $usuarioGrupo->idGrupo = $idGrupo;
+                    $usuarioGrupo->save();
+                }
+                
+                
         	}
 
 	    	return response()->json([
 	                'status'=> 'OK',
+                    'result'=> 'Usuario(s) Agregado(s)'
 	                ]);
     	}catch(Exception $e){
     		return response()->json([
@@ -182,7 +192,7 @@ class GruposControlador extends Controller
                 'status'=> 'OK',
                 'result'=> 'El grupo ha sido eliminado'
                 ]);
-        }catch(Exception $ex){
+        }catch(ModelNotFoundException $ex){
             return response()->json([
                 'status'=> 'ERROR',
                 'result'=> 'Grupo no existe'
@@ -290,7 +300,8 @@ class GruposControlador extends Controller
         $respuesta = array();
 
         foreach($queryProyecto as $proyecto){
-           
+            if($proyecto->estado == 3) continue;
+
         	$idLider =$adminProyecto->where('idProyecto', '=', $proyecto->idProyecto)->get();
         	$usuarioP = $usuario->where('idUsuario', '=', $idLider[0]->idUsuario)->get();
             

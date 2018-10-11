@@ -39,8 +39,8 @@ class ProyectosControlador extends Controller
         if(!Auth::check()){
             return view('index');
         }
-
-        return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto]);
+        $pg = ProyectoGrupo::where('idProyecto', '=', $idProyecto)->first();
+        return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto, 'idGrupo' => $pg->idGrupo]);
     }
     public function agregarProyecto(){
         if(!Auth::check()){
@@ -161,7 +161,10 @@ class ProyectosControlador extends Controller
 
     public function obtenerUsuariosProyecto(){
         if(!Auth::check()){
-            return view('index');
+            return response()->json([
+                'status' =>'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
         }
 
         $usuarioProyectoGrupo = new UsuarioProyectoGrupo;
@@ -182,7 +185,11 @@ class ProyectosControlador extends Controller
         }
 
         $usuarios = $usuario->whereIn('idUsuario', $arrays)->get();
-        return view('tabla_proyecto',  ['usuarios'=> $usuarios]);
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => $arrays
+        ]);
     }
 
     public function obtenerProyectos(){
