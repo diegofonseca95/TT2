@@ -46,19 +46,19 @@
   <script src="/js/components/common/user-info-group-list-item.js"></script>
   <script src="/js/components/common/user-info-task-list-item.js"></script>
   <script src="/js/components/common/user-info-project-list.js"></script>
+  <script src="/js/components/common/new-leader-list-item.js"></script>
   <script src="/js/components/common/user-info-group-list.js"></script>
   <script src="/js/components/common/user-info-task-list.js"></script>
+  <script src="/js/components/common/new-leader-list.js"></script>
   <script src="/js/components/common/user-info-modal.js"></script>
   <!-- Common Components End -->
   <!-- List Items Begin -->
   <script src="/js/components/admin-watch-group/group-member-list-item.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list-item.js"></script>
   <script src="/js/components/admin-watch-group/new-member-list-item.js"></script>
   <script src="/js/components/admin-watch-group/project-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
   <script src="/js/components/admin-watch-group/group-member-list.js"></script>
-  <script src="/js/components/admin-watch-group/new-leader-list.js"></script>
   <script src="/js/components/admin-watch-group/new-member-list.js"></script>
   <script src="/js/components/admin-watch-group/project-list.js"></script>
   <!-- Lists End -->
