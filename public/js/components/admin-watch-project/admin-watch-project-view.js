@@ -119,6 +119,9 @@ Vue.component('admin-watch-project-view', {
   },
   template : `
     <div class="row z-depth-5">
+      <project-info-modal :project-members="memberList">
+      </project-info-modal>
+
       <project-members-card 
         @member-removed="handleMemberRemoved($event)"
         @new-members-added="handleNewMembersAdded"
@@ -128,6 +131,7 @@ Vue.component('admin-watch-project-view', {
       <!-- Iteration List Placeholder -->
       <new-iteration-card>
       </new-iteration-card>
+
       <!-- Unassigned Tasks Placeholder -->
       <new-task-card>
       </new-task-card>
