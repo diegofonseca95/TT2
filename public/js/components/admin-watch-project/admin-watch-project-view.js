@@ -119,8 +119,8 @@ Vue.component('admin-watch-project-view', {
   },
   template : `
     <div class="row z-depth-5">
-      <project-info-modal :project-members="memberList">
-      </project-info-modal>
+      <project-info-card :project-members="memberList">
+      </project-info-card>
 
       <project-members-card 
         @member-removed="handleMemberRemoved($event)"
