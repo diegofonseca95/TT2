@@ -36,7 +36,7 @@ Vue.component('admin-watch-project-view', {
 
       // The body of our request.
       var requestBody = { 
-        idGrupo : projectIdInput.value,
+        idProyecto : projectIdInput.value,
         idUsuario : user.idUsuario,
         _token : authToken.value
       };
@@ -44,7 +44,7 @@ Vue.component('admin-watch-project-view', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/eliminarUsuarioGrupo', requestData)
+      fetch('/eliminarUsuarioProyecto', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
