@@ -5,3 +5,8 @@
     overflow : auto !important;
 
 }
+
+.zero-padding
+{
+    padding : 0px !important;
+}
