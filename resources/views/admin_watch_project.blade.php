@@ -62,11 +62,13 @@
   <script src="/js/components/admin-watch-project/new-member-list.js"></script>
   <!-- Lists End -->
   <!-- Modals Begin -->
+  <script src="/js/components/admin-watch-project/edit-project-info-modal.js"></script>
   <script src="/js/components/admin-watch-project/add-new-member-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
-  <script src="/js/components/admin-watch-project/new-iteration-card.js"></script>
   <script src="/js/components/admin-watch-project/project-members-card.js"></script>
+  <script src="/js/components/admin-watch-project/new-iteration-card.js"></script>
+  <script src="/js/components/admin-watch-project/project-info-card.js"></script>
   <script src="/js/components/admin-watch-project/new-task-card.js"></script>
   <!-- Cards End -->
   <!-- Others Begin -->
