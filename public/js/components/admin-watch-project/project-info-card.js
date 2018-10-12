@@ -68,9 +68,9 @@ Vue.component('project-info-card', {
       var requestBody = { 
         descripcion : newInfo.description,
         idProyecto : projectIdInput.value,
+        nombreProyecto : newInfo.name,
         idUsuario : newInfo.leaderId,
-        _token : authToken.value,
-        nombre : newInfo.name
+        _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
