@@ -4,6 +4,7 @@ Vue.component('project-info-card', {
     return {
       projectInfo : {
         description : '',
+        startDate : '',
         leader : {},
         name : ''
       }
@@ -38,6 +39,7 @@ Vue.component('project-info-card', {
         var result = response.result;
         var newInfo = {};
         newInfo.description = result.proyecto.descripcion;
+        newInfo.startDate = result.proyecto.fecha_inicio;
         newInfo.name = result.proyecto.nombreProyecto;
         for(var i in this.projectMembers){
           if(this.projectMembers[i].idUsuario === result.lider){
@@ -54,7 +56,6 @@ Vue.component('project-info-card', {
     handleUpdatedInfo : function(newInfo){
       // Get the project id from the hidden input.
       var projectIdInput = document.querySelector('input[name="project-id"]');
-      var projectId = projectIdInput.value;
 
       var authToken = document.querySelector('input[name="_token"]');
 
@@ -67,10 +68,10 @@ Vue.component('project-info-card', {
       // The body of our request.
       var requestBody = { 
         descripcion : newInfo.description,
+        idProyecto : projectIdInput.value,
         idUsuario : newInfo.leaderId,
         _token : authToken.value,
-        nombre : newInfo.name,
-        idProyecto : projectId
+        nombre : newInfo.name
       };
 
       requestData.body = JSON.stringify(requestBody);
@@ -108,6 +109,9 @@ Vue.component('project-info-card', {
             <user-full-name-span
               :user="this.projectInfo.leader">
             </user-full-name-span>
+          </span>
+          <span class="title col s12" style="word-break: break-all;">
+            Fecha de inicio : {{ projectInfo.startDate }}
           </span>
           <div class="col s12">
             <button title="Editar" data-target="edit-project-info-modal" 
