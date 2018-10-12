@@ -41,7 +41,7 @@ class GruposControlador extends Controller
         }
 
     	$usuario = new User;
-    	$query = $usuario->where('estado', '!=', 0)->get();
+    	$query = $usuario->where('estado', '!=', 3)->get();
 
     	return view('admin_create_groups', [ 'usuarios' => $query]);
     }
@@ -141,20 +141,15 @@ class GruposControlador extends Controller
 
         	return response()->json([
                 'status'=> 'OK',
+                'result' => 'Informacion actualizada'
                 ]);
-        }catch(Exception $e){
+        }catch(ModelNotFoundException $e){
         	return response()->json([
                 'status'=> 'ERROR',
                 'result'=> 'Grupo no existe'
                 ]);
         }
         
-        
-
-        $lider = request('lider');
-        $query = $grupo->where('idGrupo', '=', $idGrupo)->get();
-
-        return view("admin_manage_groups", ['grupo' => $query[0]]);
     }
 
     public function obtenerGrupo(){

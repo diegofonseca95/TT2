@@ -105,20 +105,28 @@ class ProyectosControlador extends Controller
         );
     }
 
-    public function editarProyecto($idProyecto){
+    public function editarProyecto(){
         if(!Auth::check()){
             return view('index');
         }
+        try{
+            $proyecto = Proyecto::findOrFail(request('idProyecto'));
+            $proyecto->descripcion = request('descripcion');
+            $proyecto->nombreProyecto = request('nombreProyecto');
+            $proyecto->save();
+            $administrarProyecto = AdministradorProyecto::where('idProyecto', '=', $proyecto->idProyecto)->update(['idUsuario' => request('idUsuario')]);
 
-        $proyecto = new Proyecto;
 
-        $query = $proyecto->where(
-                    'idProyecto',
-                    '=',
-                    $idProyecto
-                 )->get();
-
-        return view("admin_manage_projects", ['proyecto'=> $query[0]]);
+            return response()->json([
+                'status'=> 'OK',
+                'result' => 'Informacion actualizada'
+                ]);
+        }catch(ModelNotFoundException $e){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Proyecto no existe'
+                ]);
+        }
     }
 
     public function obtenerProyecto(){
@@ -126,15 +134,20 @@ class ProyectosControlador extends Controller
             return view('index');
         }
 
-        $proyecto = new Proyecto;
+        $grupo = new Proyecto;
+        $lider = new AdministradorProyecto;
 
-        $query = $proyecto->where(
-                    'idProyecto',
-                     '=', 
-                     request('idProyecto')
-                 )->get();
-
-        return $query;
+        $info = $grupo->where([['idProyecto', '=', request('idProyecto')]])->get();
+        $query = $lider->where([['idProyecto', '=', request('idProyecto')]])->get();
+        //$info->tesla = $query[0]->idUsuario;
+        //$nueva->tesla = $query[0]->idUsuario;;
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> array(
+                    'proyecto'=>$info[0],
+                    'lider'=>$query[0]->idUsuario
+                )
+                ]);
     }
 
     public function eliminarProyecto(){
@@ -181,10 +194,11 @@ class ProyectosControlador extends Controller
 
         $arrays = array();
         foreach ($result as $value) {
-            array_push($arrays, $value->idUsuario);
+            if($value->estado == 1)
+                array_push($arrays, $value->idUsuario);
         }
 
-        $usuarios = $usuario->whereIn('idUsuario', $arrays)->get();
+        /*$usuarios = $usuario->whereIn('idUsuario', $arrays)->get();*/
 
         return response()->json([
             'status' => 'OK',

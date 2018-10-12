@@ -12,6 +12,7 @@ use App\ProyectoGrupo;
 use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsuarioProyectoGrupoControlador extends Controller
 {
@@ -70,17 +71,41 @@ class UsuarioProyectoGrupoControlador extends Controller
 
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
 
-        foreach($nuevos as $value){
-            $usuario = new usuarioProyectoGrupo;
-            $usuario->idUsuario = $value;
-            $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
-            $usuario->save();
+        try{
+            foreach($nuevos as $value){
+                usuarioProyectoGrupo::where([
+                    ['idUsuario', '=', $value],
+                    ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
+                )->firstOrFail();
+
+                usuarioProyectoGrupo::where([
+                    ['idUsuario', '=', $value],
+                    ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
+                )->update(['estado' => 1]);
+            }
+        }catch(ModelNotFoundException $e){
+                $usuario = new usuarioProyectoGrupo;
+                $usuario->idUsuario = $value;
+                $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
+                $usuario->save();
+            
         }
+        
 
         return response()->json([
             'status' => 'OK',
             'result' => 'Usuario(s) agregado(s)'
         ]);
 
+    }
+
+    public function eliminarUsuarioProyecto(){
+        $pg = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
+        UsuarioProyectoGrupo::where([['idProyectoGrupo', '=', $pg->idProyectoGrupo],['idUsuario', '=', request('idUsuario')]])->update(['estado' => 3]);
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => 'Usuario eliminado'
+        ]);
     }
 }

@@ -57,3 +57,7 @@ Route::post('/eliminarUsuarioGrupo', 'UsuarioGrupoControlador@eliminarUsuarioGru
 Route::post('/eliminarProyecto', 'ProyectoGrupoControlador@eliminarProyectoGrupo');
 Route::post('/obtenerIdUsuariosProyecto', 'ProyectosControlador@obtenerUsuariosProyecto');
 Route::post('/agregarUsuariosProyecto', 'UsuarioProyectoGrupoControlador@agregarUsuarioProyecto');
+Route::post('/eliminarUsuarioProyecto', 'UsuarioProyectoGrupoControlador@eliminarUsuarioProyecto');
+Route::get('/cerrarSesion', 'SesionControlador@cerrarSesion');
+Route::post('/obtenerProyecto', 'ProyectosControlador@obtenerProyecto');
+Route::post('/editarProyecto', 'ProyectosControlador@editarProyecto');
