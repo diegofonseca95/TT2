@@ -6,7 +6,25 @@
 
 }
 
+.scrollable-chat
+{
+
+    max-height : 112px !important;
+    overflow : auto !important;
+
+}
+
 .zero-padding
 {
     padding : 0px !important;
+}
+
+.remove-border{
+
+    border: none !important;
+}
+
+.zero-margin{
+
+    margin: 0 !important;
 }
