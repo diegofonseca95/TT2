@@ -73,32 +73,20 @@ Vue.component('admin-watch-project-view', {
     };
 
     // The body of our request.
-    var requestBody = { _token : authToken.value };
+    var requestBody = { 
+      idGrupo : groupIdInput.value,
+      _token : authToken.value
+    };
 
     requestData.body = JSON.stringify(requestBody);
 
-    // Fetch the users list.
-    fetch('/obtenerUsuariosActivos', requestData)
+    // Fetch the projects list.
+    fetch('/obtenerUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
-      }
-      // TODO : Handle non 'OK' status.
-    }.bind(this));
-
-    // Add the project identifier to the request body.
-    requestBody.idGrupo = groupIdInput.value;
-    requestData.body = JSON.stringify(requestBody);
-
-    fetch('/obtenerIdUsuariosGrupo', requestData)
-    .then(response => response.json())
-    .then(function(response){
-      if(response.status === 'OK'){
-        var groupMemberIds = response.result;
-        this.users = this.users.filter(
-          user => groupMemberIds.includes(user.idUsuario)
-        );
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
