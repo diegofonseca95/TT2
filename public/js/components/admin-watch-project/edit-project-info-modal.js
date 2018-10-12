@@ -97,7 +97,7 @@ Vue.component('edit-project-info-modal', {
               </div>
             </div>
             <new-leader-list
-              :project-members="projectMembers"
+              :group-members="projectMembers"
               :leader-id="newLeaderId"
               @new-leader-chosen="handleLeaderChosen($event)">
             </new-leader-list>

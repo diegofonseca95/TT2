@@ -13,7 +13,6 @@ Vue.component('project-info-card', {
   beforeCreate : function(){
     // Get the project id from the hidden input.
     var projectIdInput = document.querySelector('input[name="project-id"]');
-    var projectId = projectIdInput.value;
 
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -25,8 +24,8 @@ Vue.component('project-info-card', {
 
     // The body of our request.
     var requestBody = { 
-      _token : authToken.value,
-      idProyecto : projectId
+      idProyecto : projectIdInput.value,
+      _token : authToken.value
     };
 
     requestData.body = JSON.stringify(requestBody);
