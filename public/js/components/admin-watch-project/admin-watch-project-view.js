@@ -116,7 +116,10 @@ Vue.component('admin-watch-project-view', {
         :project-members="memberList"
         :users="nonMemberList">
       </project-members-card>
-      <!-- Iteration List Placeholder -->
+
+      <iterations-card>
+      </iterations-card>
+
       <new-iteration-card>
       </new-iteration-card>
 
