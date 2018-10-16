@@ -106,7 +106,7 @@ Vue.component('admin-watch-project-view', {
     }.bind(this));
   },
   template : `
-    <div class="row z-depth-5">
+    <div class="row z-depth-3">
       <project-info-card :project-members="memberList">
       </project-info-card>
 
@@ -117,11 +117,8 @@ Vue.component('admin-watch-project-view', {
         :users="nonMemberList">
       </project-members-card>
 
-      <iterations-card>
-      </iterations-card>
-
-      <new-iteration-card>
-      </new-iteration-card>
+      <iteration-card-group>
+      </iteration-card-group>
 
       <task-card-group :project-members="memberList">
       </task-card-group>

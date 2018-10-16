@@ -59,6 +59,7 @@ Vue.component('new-iteration-card', {
           );
           return;
         }
+        // TODO : Emit event with the new iteration.
         console.log(this.newIterationDescription);
         console.log(datepicker.value);
         this.resetInformation();

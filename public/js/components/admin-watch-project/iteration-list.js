@@ -1,12 +1,5 @@
 Vue.component('iteration-list', {
-  data : function(){
-    return {
-      iterations : []
-    };
-  },
-  beforeCreate : function(){
-    // TODO : Fetch iteration list.
-  },
+  props : ['iterations'],
   template : `
     <ul class="collection scrollable-collection">
       <li class="collection-item" 

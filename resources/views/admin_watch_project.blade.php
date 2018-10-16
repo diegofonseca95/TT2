@@ -81,6 +81,7 @@
   <script src="/js/components/admin-watch-project/tasks-card.js"></script>
   <!-- Cards End -->
   <!-- Card Groups Begin -->
+  <script src="/js/components/admin-watch-project/iteration-card-group.js"></script>
   <script src="/js/components/admin-watch-project/task-card-group.js"></script>
   <!-- Card Groups End -->
   <!-- Others Begin -->
