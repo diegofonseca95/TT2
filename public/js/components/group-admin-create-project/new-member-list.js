@@ -1,20 +1,34 @@
+/*
+  This component represents the list of users 
+  available to add to a new project.
+*/
 Vue.component('new-member-list', {
-  props : ['users','selectedBucket'],
+  props : [
+    'selectedBucket', // A map to check if a given user is selected.
+    'users' // The list of users that belong to the group.
+  ],
   data : function(){
     return {
-      searchInput : ''
+      searchInput : '' // The pattern to match in the user search.
     };
   },
   computed : {
+    // The list of users that match the search pattern, if any.
     filteredList : function(){
+      // Split the search pattern into tokens.
       const tokens = this.searchInput.split(' ').filter(Boolean);
+      // Filter the users that match.
       return this.users.filter(function(user){
+        // If the user is selected, include it,
+        // even if it doesn't match.
         if(this.selectedBucket[user.idUsuario]){
           return true;
         }
+        // If there is no search pattern, include the user.
         if(tokens.length == 0){
           return true;
         }
+        // Check for all string fields in the user info for a match.
         for(var i in tokens){
           const token = tokens[i];
           for(var key in user){
@@ -25,26 +39,32 @@ Vue.component('new-member-list', {
             }
           }
         }
+        // The user didn´t match any token in the pattern.
         return false;
       }.bind(this))
+      // Place the selected users first.
       .sort(function(a, b){
+        // If any of the users is selected, must go first.
         if(this.selectedBucket[a.idUsuario] === true)
           return -1; // Place 'a' before 'b'
         if(this.selectedBucket[b.idUsuario] === true)
           return +1; // Place 'b' before 'a'
+        // Both users are selected.
         return 0;
       }.bind(this));
     },
-    anyUserMatches : function(){
+    noUserMatches : function(){
       return this.filteredList.length === 0 
         && this.searchInput !== ''
         && this.users.length > 0;
     }
   },
   methods : {
+    // Pass the remove-new-member event to the parent.
     handleRemoveNewMember : function(userId){
       this.$emit('remove-new-member', userId);
     },
+    // Pass the add-new-member event to the parent.
     handleAddNewMember : function(userId){
       this.$emit('add-new-member', userId);
     }
@@ -75,7 +95,7 @@ Vue.component('new-member-list', {
             No hay usuarios disponibles para seleccionar.
           </li>
           <li class="collection-item"
-            v-if="anyUserMatches">
+            v-if="noUserMatches">
             Ningún usuario coincide con la busqueda
           </li>
         </ul>
