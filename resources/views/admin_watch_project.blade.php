@@ -56,21 +56,33 @@
   <!-- List Items Begin -->
   <script src="/js/components/admin-watch-project/project-member-list-item.js"></script>
   <script src="/js/components/admin-watch-project/new-member-list-item.js"></script>
+  <script src="/js/components/admin-watch-project/iteration-list-item.js"></script>
+  <script src="/js/components/admin-watch-project/task-user-list-item.js"></script>
+  <script src="/js/components/admin-watch-project/task-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
   <script src="/js/components/admin-watch-project/project-member-list.js"></script>
   <script src="/js/components/admin-watch-project/new-member-list.js"></script>
+  <script src="/js/components/admin-watch-project/iteration-list.js"></script>
+  <script src="/js/components/admin-watch-project/task-user-list.js"></script>
+  <script src="/js/components/admin-watch-project/task-list.js"></script>
   <!-- Lists End -->
   <!-- Modals Begin -->
   <script src="/js/components/admin-watch-project/edit-project-info-modal.js"></script>
+  <script src="/js/components/admin-watch-project/choose-task-user-modal.js"></script>
   <script src="/js/components/admin-watch-project/add-new-member-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
   <script src="/js/components/admin-watch-project/project-members-card.js"></script>
   <script src="/js/components/admin-watch-project/new-iteration-card.js"></script>
   <script src="/js/components/admin-watch-project/project-info-card.js"></script>
+  <script src="/js/components/admin-watch-project/iterations-card.js"></script>
   <script src="/js/components/admin-watch-project/new-task-card.js"></script>
+  <script src="/js/components/admin-watch-project/tasks-card.js"></script>
   <!-- Cards End -->
+  <!-- Card Groups Begin -->
+  <script src="/js/components/admin-watch-project/task-card-group.js"></script>
+  <!-- Card Groups End -->
   <!-- Others Begin -->
   <script src="/js/components/admin-watch-project/admin-watch-project-view.js"></script>
   <!-- Others End -->
