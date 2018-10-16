@@ -123,9 +123,8 @@ Vue.component('admin-watch-project-view', {
       <new-iteration-card>
       </new-iteration-card>
 
-      <!-- Unassigned Tasks Placeholder -->
-      <new-task-card>
-      </new-task-card>
+      <task-card-group :project-members="memberList">
+      </task-card-group>
     </div>
   `
 });

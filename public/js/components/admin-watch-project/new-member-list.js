@@ -78,7 +78,7 @@ Vue.component('new-member-list', {
               </li>
               <li class="collection-item"
                 v-if="anyUserMatches">
-                Ningún usuario coincide con la busqueda
+                Ningún usuario coincide con la búsqueda.
               </li>
             </ul>
           </div>
