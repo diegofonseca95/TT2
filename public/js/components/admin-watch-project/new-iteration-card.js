@@ -1,5 +1,5 @@
 const NewIterationCardDatepickerOptions = {
-  format: "dd-mmm-yyyy",
+  format: "yyyy-mmm-dd",
   i18n: {
     months: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
     monthsShort: [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" ],
