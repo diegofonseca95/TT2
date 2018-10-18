@@ -48,9 +48,11 @@ Vue.component('new-iteration-card', {
       fetch('/agregarSprint', requestData)
       .then(response => response.json())
       .then(function(response){
+        console.log(response);
         if(response.status === 'OK'){
           SuccessToast(response.result);
           iteration = response.sprint;
+          console.log(response.sprint);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -58,7 +60,6 @@ Vue.component('new-iteration-card', {
       return iteration;
     },
     handleIterationCreation : function(){
-      console.log("SOMETHING");
       // TODO : Submit.
       var datepicker = document.querySelector('#new-iteration-date-input');
       if(datepicker.value === ''){
@@ -70,7 +71,6 @@ Vue.component('new-iteration-card', {
       }
       // TODO : Emit event with the new iteration.
       var newIteration = this.submitIteration();
-      console.log(newIteration);
 
       if(newIteration !== null){
         this.$emit('iteration-created', newIteration);
