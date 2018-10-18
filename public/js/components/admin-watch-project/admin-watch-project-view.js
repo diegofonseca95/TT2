@@ -52,6 +52,8 @@ Vue.component('admin-watch-project-view', {
             return id !== user.idUsuario;
           });
           SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
