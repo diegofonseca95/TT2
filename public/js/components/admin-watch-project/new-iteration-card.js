@@ -11,41 +11,52 @@ const NewIterationCardDatepickerOptions = {
 };
 
 Vue.component('new-iteration-card', {
-  data : function(){
-    return {
-      newIterationDescription : '',
-      hasValidFields : false
-    };
-  },
   mounted : function(){
     // Initialize datepicker.
     M.Datepicker.init(
       document.querySelector('#new-iteration-date-input'), 
       NewIterationCardDatepickerOptions
     );
-    // TODO : No JQuery
-    $('#new-iteration-form').validate({
-      rules : {
-        'new-iteration-description-input' : {
-          required : true
-        }
-      },
-      messages : {
-        'new-iteration-description-input' : {
-          required : 'Ingresa la descripción de la iteración.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
   },
   methods : {
+    submitIteration : function(iteration){
+      // Get the project id from the hidden input.
+      var projectIdInput = document.querySelector('input[name="project-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      var datepicker = document.querySelector('#new-iteration-date-input');
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : projectIdInput.value,
+        fecha_fin : datepicker.value,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      var iteration = null;
+
+      // Fetch the users list.
+      fetch('/crearIteracion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          SuccessToast(response.result);
+          iteration = response.iteration;
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+
+      return iteration;
+    },
     handleIterationCreation : function(){
       this.hasValidFields = false;
       $('#new-iteration-form').submit();
@@ -60,9 +71,11 @@ Vue.component('new-iteration-card', {
           return;
         }
         // TODO : Emit event with the new iteration.
-        console.log(this.newIterationDescription);
-        console.log(datepicker.value);
-        this.resetInformation();
+        var newIteration = this.submitIteration();
+        if(newIteration !== null){
+          this.$emit('iteration-created', newIteration);
+          this.resetInformation();
+        }
       }
     },
     resetInformation : function(){
@@ -83,16 +96,6 @@ Vue.component('new-iteration-card', {
         <div class="row">
           <form class="col s12" id="new-iteration-form">
             <div class="row">
-              <div class="input-field col s9">
-                <textarea class="materialize-textarea"
-                  placeholder="Descripción de la Iteración" 
-                  name="new-iteration-description-input"
-                  id="new-iteration-description-input"
-                  v-model:value="newIterationDescription"></textarea>
-                <label for="new-iteration-description-input">
-                  Descripción de la Iteración
-                </label>
-              </div>
               <div class="input-field col s3">
                 <input class="datepicker" type="text" 
                   name="new-iteration-date-input"

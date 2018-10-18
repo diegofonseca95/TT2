@@ -8,9 +8,8 @@ Vue.component('iteration-card-group', {
     // TODO : Fetch iteration list.
   },
   methods : {
-    handleIterationCreated : function(){
-      // TODO : Add the new iteration on success
-      // to save network resources.
+    handleIterationCreated : function(iteration){
+      this.iterations.push(iteration);
     }
   },
   template : `
@@ -18,7 +17,8 @@ Vue.component('iteration-card-group', {
       <iterations-card :iterations="iterations">
       </iterations-card>
 
-      <new-iteration-card>
+      <new-iteration-card
+        @iteration-created="handleIterationCreated($event)">
       </new-iteration-card>
     </div>
   `
