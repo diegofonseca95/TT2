@@ -1,28 +1,28 @@
 /*
-  This component represents the group list at the user
+  This component represents the task list at the user
   info section in the dashboard.
 */
-Vue.component('dashboard-group-list', {
+Vue.component('dashboard-task-list', {
   props : [
     'user' // The user looking at the dashboard.
   ],
   data : function(){
     return {
-      groupsInfo : [] // The groups the user belongs to.
+      tasksInfo : [] // The tasks the user belongs to.
     };
   },
   created : function(){
-    // TODO : Fetch the group info.
+    // TODO : Fetch the task info.
   },
   template : `
     <ul class="collection scrollable-collection">
       <li class="collection-item grey-color">
         <span>
-          El usuario no ha participado en algún grupo.
+          El usuario no ha realizado alguna tarea.
         </span>
       </li>
-      <dashboard-group-list-item>
-      </dashboard-group-list-item>
+      <dashboard-task-list-item>
+      </dashboard-task-list-item>
     </ul>
   `
 });
