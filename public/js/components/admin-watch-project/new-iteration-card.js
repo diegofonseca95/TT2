@@ -58,6 +58,7 @@ Vue.component('new-iteration-card', {
       return iteration;
     },
     handleIterationCreation : function(){
+      console.log("SOMETHING");
       // TODO : Submit.
       var datepicker = document.querySelector('#new-iteration-date-input');
       if(datepicker.value === ''){
@@ -69,10 +70,11 @@ Vue.component('new-iteration-card', {
       }
       // TODO : Emit event with the new iteration.
       var newIteration = this.submitIteration();
+      console.log(newIteration);
+
       if(newIteration !== null){
         this.$emit('iteration-created', newIteration);
         this.resetInformation();
-        console.log(newIteration);
       }
     },
     resetInformation : function(){
@@ -87,18 +89,14 @@ Vue.component('new-iteration-card', {
           <b>Agregar Iteración</b>
         </span>
         <div class="row">
-          <form class="col s12" id="new-iteration-form">
-            <div class="row">
-              <div class="input-field col s3">
-                <input class="datepicker" type="text" 
-                  name="new-iteration-date-input"
-                  id="new-iteration-date-input"/>
-                <label for="new-iteration-date-input">
-                  Fecha de término
-                </label>
-              </div>
-            </div>
-          </form>
+          <div class="input-field col s12">
+            <input class="datepicker" type="text" 
+              name="new-iteration-date-input"
+              id="new-iteration-date-input"/>
+            <label for="new-iteration-date-input">
+              Fecha de término
+            </label>
+          </div>
         </div>
         <div class="row">
           <div class="col s12">
