@@ -53,6 +53,8 @@ Vue.component('admin-watch-group-view', {
             return id !== user.idUsuario;
           });
           SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
