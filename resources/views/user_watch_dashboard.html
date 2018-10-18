@@ -40,36 +40,63 @@
     <div class="section"></div>
     <div class="row">
 
-      <!-- Chat Begins -->
+    <!-- Chat Begins -->
+
+      <!-- Chat Right Sidenav Begins -->
       <ul id="slide-out-right" class="sidenav">
+        <!-- Chat Header Begins -->
         <li><a href="#!"><i class="material-icons">message</i>Víctor Noriega</a></li>
         <li><div class="divider"></div></li>
-        <li>
-          <div class="row zero-margin scrollable-chat">
-            <div class="input-field col s12 zero-margin">
-              <textarea id="textarea1" class="materialize-textarea"></textarea>
-              <label for="textarea1">Textarea</label>
+        <!-- Chat Header Ends -->
+        <!-- Message Begins -->
+        <li><a href="#!" class="low-padding">Luis: Que pasión</a></li>
+        <li><div class="divider"></div></li>
+        <!-- Message Ends -->
+        <!-- Message Begins -->
+        <li><a href="#!" class="low-padding">Víctor: Que onda woman</a></li>
+        <li><div class="divider"></div></li>
+        <!-- Message Ends -->
+        <!-- Chat Footer Begins -->
+        <li class="send-at-bottom">
+          <div class="divider"></div>
+          <div class="row zero-margin">
+            <div class="col s10 zero-margin zero-padding scrollable-chat">
+              <div class="input-field low-padding zero-margin">
+                <textarea id="textarea1" class="materialize-textarea zero-margin zero-padding" placeholder="Nuevo Mensaje"></textarea>
+              </div>
+            </div>
+            <div class="col s2">
+              <a href="#!">
+                <i title="Enviar mensaje" class="material-icons">send</i>
+              </a>
             </div>
           </div>
         </li>
-        <li><a href="#!">Luis: Que pasión</a></li>
-        <li><a href="#!">Víctor: Que onda woman</a></li>
+        <!-- Chat Footer Ends -->
       </ul>
+      <!-- Chat Right Sidenav Ends -->
 
+      <!-- Chat Left Sidenav Begins -->
       <ul id="slide-out" class="sidenav">
         <li><a href="#!"><i class="material-icons">message</i>Mis grupos de chat</a></li>
         <li><div class="divider"></div></li>
+        <!-- Contact Begins -->
         <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Diego Fonseca</a></li>
+        <li><div class="divider"></div></li>
+        <!-- Contact Ends -->
+        <!-- Contact Begins -->
         <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Víctor Noriega</a></li>
-        <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Luis Jiménez</a></li>
+        <li><div class="divider"></div></li>
+        <!-- Contact Ends -->
       </ul>
+      <!-- Chat Left Sidenav Ends -->
       
       <div class="fixed-action-btn">
         <a data-target="slide-out" class="sidenav-trigger btn-floating btn-large remove-button-background">
           <i class="large material-icons">message</i>
         </a>
       </div>
-      <!-- Chat Ends -->
+    <!-- Chat Ends -->
 
       <!-- User Card Begins -->
       <div class="card">
@@ -253,83 +280,6 @@
         <!-- User Tasks End -->
       </ul>
       <!-- Quick Access for User Ends -->
-
-      <!-- DropBox Begins -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Archivos compartidos del proyecto</b></span>
-          <!-- Search Component Begins -->
-          <div class="row">
-            <div class='input-field col s12'>
-              <i class='material-icons prefix third-text'>search</i>
-              <input placeholder='Ingresa palabras clave' type='text' class='validate'>
-              <label>Búsqueda de Archivos</label>
-            </div>
-          </div>
-          <!-- Search Component Ends -->
-          <!-- File Collection Begins -->
-          <ul class="collection scrollable-collection">
-            <!-- No file item Begins-->
-            <li class="collection-item">
-              <span>No hay archivos compartidos en el proyecto</span>
-            </li>
-            <!-- No file item Ends -->
-            <!-- File Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
-              <div class="row">
-                <span class="title truncate col s12">Archivo 1</span>
-                <span class="title truncate col s12">Breve descripción del archivo 1</span>
-                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
-              </div>
-            </li>
-            <!-- File Ends -->
-            <!-- File Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
-              <div class="row">
-                <span class="title truncate col s12">Archivo 2</span>
-                <span class="title truncate col s12">Breve descripción del archivo 2</span>
-                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
-              </div>
-            </li>
-            <!-- File Ends -->
-            <!-- File Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
-              <div class="row">
-                <span class="title truncate col s12">Archivo 3</span>
-                <span class="title truncate col s12">Breve descripción del archivo 3</span>
-                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
-              </div>
-            </li>
-            <!-- File Ends -->
-            <!-- File Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">attach_file</i>
-              <div class="row">
-                <span class="title truncate col s12">Archivo 4</span>
-                <span class="title truncate col s12">Breve descripción del archivo 4</span>
-                <span class="title truncate col s12"><a href="#">Descargar Archivo</a></span>
-              </div>
-            </li>
-            <!-- File Ends -->
-          </ul>
-          <!-- File Collections Ends -->
-          <div class="row">
-
-            <div class="file-field input-field">
-              <div class="btn remove-button-background">
-                <span>Seleccionar archivo</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
-            </div>
-            <div class="btn remove-button-background">
-              <span>Subir archivo</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- DropBox Ends-->
 
       <!-- User Settings Modal Definition Begins -->
       <div id="modal_userSettings" class="modal modal-fixed-footer">

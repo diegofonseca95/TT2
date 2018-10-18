@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
+    media="screen,projection">
+  <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
+  <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
+  <title>Crear Grupo</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="page-background">
+  <!-- Navbar Begin -->
+  <nav>
+    <div class="nav-wrapper second-background">
+      <ul class="left">
+        <li>
+          <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
+            <i class="material-icons left">view_module</i>
+          </a>
+        </li>
+      </ul>
+      <a href="#!" class="brand-logo center">
+        <i class="material-icons">computer</i>
+        <span class="hide-on-small-only">Crear Grupo</span>
+      </a>
+      <ul class="right">
+        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Content begin -->
+  <div class="container" id="admin-create-group-box">
+    <div class="section"></div>
+    <div class="row">
+
+      <!-- Group Info Card Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Información básica del grupo</b></span>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Nombre del Grupo" id="group_name" type="text" class="validate">
+                  <label for="group_name">Nombre del Grupo</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="Descripción del Grupo" id="group_desc" type="text" class="validate">
+                  <label for="group_desc">Descripción del Grupo</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Group Info Card Ends -->
+
+      <!-- Add Users to Group Card Begins -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title first-text"><b>Agregar usuarios al grupo</b></span>
+          <!-- Search Bar Begins-->
+          <div class="row">
+            <form class="col s12">
+              <div class="input-field">
+                <i class="material-icons prefix third-text">search</i>
+                <input id="search_bar" placeholder="Ingresa palabras clave" type="text" class="validate">
+                <label for="search_bar">Búsqueda de Usuarios</label>
+              </div>
+            </form>
+          </div>
+          <!-- Search Bar Ends -->
+          <!-- Users List Begins-->
+          <ul class="collection scrollable-collection">
+            <!-- No users to show item begins-->
+            <li class="collection-item">
+              No hay usuarios disponibles para seleccionar.
+            </li>
+            <!-- No users to show item ends-->
+            <!-- No user matches the search item begins-->
+            <li class="collection-item">
+              Ningún usuario coincide con los criterios de búsqueda.
+            </li>
+            <!-- No user matches the search item ends-->
+            <!-- User Begins -->
+            <li class="collection-item avatar">
+              <i class="material-icons circle third-background">person</i>
+              <div class="row">
+                <div class="col s12 m9">
+                  <span class="title truncate col s12">
+                    Nombre completo del usuario
+                  </span>
+                  <span class="truncate col s12">
+                    mi_correo@gmail.com
+                  </span>
+                  <span class="truncate col s12">
+                    +51 1 55 1234 5678
+                  </span>
+                </div>
+                <div class="col s12 m3">
+                  <label class="right">
+                    <input type="checkbox" />
+                    <span>Agregar</span>
+                  </label>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+            <!-- User Begins -->
+            <li class="collection-item avatar">
+              <i class="material-icons circle third-background">person</i>
+              <div class="row">
+                <div class="col s12 m9">
+                  <span class="title truncate col s12">
+                    Nombre completo del usuario
+                  </span>
+                  <span class="truncate col s12">
+                    mi_correo@gmail.com
+                  </span>
+                  <span class="truncate col s12">
+                    +51 1 55 1234 5678
+                  </span>
+                </div>
+                <div class="col s12 m3">
+                  <label class="right">
+                    <input type="checkbox" />
+                    <span>Agregar</span>
+                  </label>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+            <!-- User Begins -->
+            <li class="collection-item avatar">
+              <i class="material-icons circle third-background">person</i>
+              <div class="row">
+                <div class="col s12 m9">
+                  <span class="title truncate col s12">
+                    Nombre completo del usuario
+                  </span>
+                  <span class="truncate col s12">
+                    mi_correo@gmail.com
+                  </span>
+                  <span class="truncate col s12">
+                    +51 1 55 1234 5678
+                  </span>
+                </div>
+                <div class="col s12 m3">
+                  <label class="right">
+                    <input type="checkbox" />
+                    <span>Agregar</span>
+                  </label>
+                </div>
+              </div>
+            </li>
+            <!-- User Ends -->
+          </ul>
+          <!-- Users List Ends-->
+        </div>
+      </div>
+      <!-- Add Users to Group Card Ends -->
+
+      <!-- Select Leader Button Begins -->
+      <div class="row">
+        <button data-target="modal_selectLeader" class="btn modal-trigger remove-button-background right">
+          Seleccionar Líder
+        </button>
+      </div>
+      <!-- Select Leader Button Ends-->
+
+      <!-- User Settings Modal Definition Begins -->
+      <div id="modal_selectLeader" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title first-text"><b>Seleccionar líder</b></span>
+              <!-- Users List Begins-->
+              <ul class="collection">
+                <!-- No users to show item begins-->
+                <li class="collection-item">
+                  No hay usuarios disponibles para seleccionar.
+                </li>
+                <!-- No users to show item ends-->
+                <!-- User Begins -->
+                <li class="collection-item avatar">
+                  <i class="material-icons circle third-background">person</i>
+                  <div class="row">
+                    <div class="col s12 m9">
+                      <span class="title truncate col s12">
+                        Nombre completo del usuario
+                      </span>
+                      <span class="truncate col s12">
+                        mi_correo@gmail.com
+                      </span>
+                      <span class="truncate col s12">
+                        +51 1 55 1234 5678
+                      </span>
+                    </div>
+                    <div class="col s12 m3">
+                      <label class="right">
+                        <input name="group1" type="radio" />
+                        <span>Seleccionar</span>
+                      </label>
+                    </div>
+                  </div>
+                </li>
+                <!-- User Ends -->
+                <!-- User Begins -->
+                <li class="collection-item avatar">
+                    <i class="material-icons circle third-background">person</i>
+                    <div class="row">
+                      <div class="col s12 m9">
+                        <span class="title truncate col s12">
+                          Nombre completo del usuario
+                        </span>
+                        <span class="truncate col s12">
+                          mi_correo@gmail.com
+                        </span>
+                        <span class="truncate col s12">
+                          +51 1 55 1234 5678
+                        </span>
+                      </div>
+                      <div class="col s12 m3">
+                        <label class="right">
+                          <input name="group1" type="radio" />
+                          <span>Seleccionar</span>
+                        </label>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- User Ends -->
+                  <!-- User Begins -->
+                <li class="collection-item avatar">
+                    <i class="material-icons circle third-background">person</i>
+                    <div class="row">
+                      <div class="col s12 m9">
+                        <span class="title truncate col s12">
+                          Nombre completo del usuario
+                        </span>
+                        <span class="truncate col s12">
+                          mi_correo@gmail.com
+                        </span>
+                        <span class="truncate col s12">
+                          +51 1 55 1234 5678
+                        </span>
+                      </div>
+                      <div class="col s12 m3">
+                        <label class="right">
+                          <input name="group1" type="radio" />
+                          <span>Seleccionar</span>
+                        </label>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- User Ends -->
+              </ul>
+              <!-- Users List Ends-->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Crear grupo</a>
+        </div>
+      </div>
+      <!-- User Settings Modal Definition Ends -->
+
+    </div>
+  </div>
+  <!-- Content End -->
+
+  <!-- Scripts Begin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../../public/js/toasts.js"></script>
+  <script>
+    //M.AutoInit();
+
+    //Modal initialization - modal_selectLeader
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.getElementById('modal_selectLeader');
+      var options = {};
+      var instances = M.Modal.init(elems, options);
+    });
+
+  </script>
+  <!-- Scripts End -->
+</body>
+
+</html>

@@ -19,6 +19,11 @@
     padding : 0px !important;
 }
 
+.low-padding
+{
+    padding : 10px !important;
+}
+
 .remove-border{
 
     border: none !important;
@@ -27,4 +32,12 @@
 .zero-margin{
 
     margin: 0 !important;
+}
+
+.send-at-bottom{
+
+    position: absolute !important;
+    bottom: 65px;
+    left: 0px;
+    right: 0px;
 }
