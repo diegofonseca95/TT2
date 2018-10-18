@@ -11,11 +11,6 @@ const NewIterationCardDatepickerOptions = {
 };
 
 Vue.component('new-iteration-card', {
-  data : function(){
-    return {
-      newIteration : null
-    };
-  },
   mounted : function(){
     // Initialize datepicker.
     M.Datepicker.init(
@@ -52,8 +47,9 @@ Vue.component('new-iteration-card', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          this.newIteration = response.sprint;
+          this.$emit('iteration-created', response.sprint);
           SuccessToast(response.result);
+          this.resetInformation();
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -69,11 +65,6 @@ Vue.component('new-iteration-card', {
         return;
       }
       this.submitIteration();
-      console.log(this.newIteration);
-      if(this.newIteration !== null){
-        this.$emit('iteration-created', this.newIteration);
-        this.resetInformation();
-      }
     },
     resetInformation : function(){
       document.querySelector('#new-iteration-form').reset();
