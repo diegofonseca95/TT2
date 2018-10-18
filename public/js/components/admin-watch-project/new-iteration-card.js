@@ -50,7 +50,7 @@ Vue.component('new-iteration-card', {
       .then(function(response){
         if(response.status === 'OK'){
           SuccessToast(response.result);
-          iteration = response.iteration;
+          iteration = response.sprint;
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
