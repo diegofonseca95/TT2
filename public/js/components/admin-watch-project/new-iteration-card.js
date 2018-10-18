@@ -45,7 +45,7 @@ Vue.component('new-iteration-card', {
       var iteration = null;
 
       // Fetch the users list.
-      fetch('/crearIteracion', requestData)
+      fetch('/agregarSprint', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
