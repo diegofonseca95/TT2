@@ -58,32 +58,25 @@ Vue.component('new-iteration-card', {
       return iteration;
     },
     handleIterationCreation : function(){
-      this.hasValidFields = false;
-      $('#new-iteration-form').submit();
-      if(this.hasValidFields){
-        // TODO : Submit.
-        var datepicker = document.querySelector('#new-iteration-date-input');
-        if(datepicker.value === ''){
-          WarningToast(
-            'Selecciona la fecha' +
-            ' de término.'
-          );
-          return;
-        }
-        // TODO : Emit event with the new iteration.
-        var newIteration = this.submitIteration();
-        if(newIteration !== null){
-          this.$emit('iteration-created', newIteration);
-          this.resetInformation();
-        }
+      // TODO : Submit.
+      var datepicker = document.querySelector('#new-iteration-date-input');
+      if(datepicker.value === ''){
+        WarningToast(
+          'Selecciona la fecha' +
+          ' de término.'
+        );
+        return;
+      }
+      // TODO : Emit event with the new iteration.
+      var newIteration = this.submitIteration();
+      if(newIteration !== null){
+        this.$emit('iteration-created', newIteration);
+        this.resetInformation();
+        console.log(newIteration);
       }
     },
     resetInformation : function(){
-      this.newIterationDescription = '';
       document.querySelector('#new-iteration-form').reset();
-      M.textareaAutoResize(
-        document.querySelector('#new-iteration-description-input')
-      );
       M.updateTextFields();
     }
   },
