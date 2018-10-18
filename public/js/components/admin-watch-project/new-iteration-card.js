@@ -69,7 +69,7 @@ Vue.component('new-iteration-card', {
         return;
       }
       this.submitIteration();
-      if(newIteration !== null){
+      if(this.newIteration !== null){
         this.$emit('iteration-created', this.newIteration);
         this.resetInformation();
       }
