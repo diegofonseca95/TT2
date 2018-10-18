@@ -50,6 +50,7 @@ Vue.component('new-iteration-card', {
           this.$emit('iteration-created', response.sprint);
           SuccessToast(response.result);
           datepicker.value = '';
+          M.updateTextFields();
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
