@@ -49,7 +49,7 @@ Vue.component('new-iteration-card', {
         if(response.status === 'OK'){
           this.$emit('iteration-created', response.sprint);
           SuccessToast(response.result);
-          this.resetInformation();
+          datepicker.value = '';
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -65,11 +65,6 @@ Vue.component('new-iteration-card', {
         return;
       }
       this.submitIteration();
-    },
-    resetInformation : function(){
-      document.querySelector('#new-iteration-form').reset();
-      this.newIteration = null;
-      M.updateTextFields();
     }
   },
   template : `
