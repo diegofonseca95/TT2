@@ -1,7 +1,8 @@
 Vue.component('user-info-modal', {
   props : ['user'],
-  data : function(){
-    return {};
+  mounted : function(){
+    var elems = document.querySelector('#user-info-modal');
+    var instances = M.Modal.init(elems);
   },
   template : `
     <div id="user-info-modal" class="modal modal-fixed-footer">
