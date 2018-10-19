@@ -61,3 +61,5 @@ Route::post('/eliminarUsuarioProyecto', 'UsuarioProyectoGrupoControlador@elimina
 Route::get('/cerrarSesion', 'SesionControlador@cerrarSesion');
 Route::post('/obtenerProyecto', 'ProyectosControlador@obtenerProyecto');
 Route::post('/editarProyecto', 'ProyectosControlador@editarProyecto');
+Route::post('/agregarSprint', 'SprintControlador@agregarSprint');
+Route::post('/obtenerSprints', 'SprintControlador@obtenerSprints');
