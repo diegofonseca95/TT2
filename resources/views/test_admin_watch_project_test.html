@@ -225,6 +225,7 @@
                 <span class="title truncate col s12">T-1</span>
                 <span class="title truncate col s12">Descripción de la tarea 1</span>
                 <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <span class="title truncate col s12">Prioridad: Alta</span>
                 <div class="right">
                   <a href="#!" title="Eliminar tarea" class="btn remove-button-background"><i class="material-icons">remove</i></a>
                   <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background">Asignar</button>
@@ -235,9 +236,10 @@
             <!-- Task Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
               <div class="row">
-                <span class="title truncate col s12">T-2</span>
-                <span class="title truncate col s12">Descripción de la tarea 2</span>
+                <span class="title truncate col s12">T-1</span>
+                <span class="title truncate col s12">Descripción de la tarea 1</span>
                 <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <span class="title truncate col s12">Prioridad: Alta</span>
                 <div class="right">
                   <a href="#!" title="Eliminar tarea" class="btn remove-button-background"><i class="material-icons">remove</i></a>
                   <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background">Asignar</button>
@@ -248,9 +250,24 @@
             <!-- Task Begins-->
             <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
               <div class="row">
-                <span class="title truncate col s12">T-3</span>
-                <span class="title truncate col s12">Descripción de la tarea 3</span>
+                <span class="title truncate col s12">T-1</span>
+                <span class="title truncate col s12">Descripción de la tarea 1</span>
                 <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <span class="title truncate col s12">Prioridad: Alta</span>
+                <div class="right">
+                  <a href="#!" title="Eliminar tarea" class="btn remove-button-background"><i class="material-icons">remove</i></a>
+                  <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background">Asignar</button>
+                </div>
+              </div>
+            </li>
+            <!-- Task Ends -->
+            <!-- Task Begins-->
+            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
+              <div class="row">
+                <span class="title truncate col s12">T-1</span>
+                <span class="title truncate col s12">Descripción de la tarea 1</span>
+                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
+                <span class="title truncate col s12">Prioridad: Alta</span>
                 <div class="right">
                   <a href="#!" title="Eliminar tarea" class="btn remove-button-background"><i class="material-icons">remove</i></a>
                   <button title="Asignar tarea" data-target="modal_assignTask" class="btn modal-trigger remove-button-background">Asignar</button>
@@ -280,6 +297,18 @@
                   <textarea placeholder="Evidencia solicitada" id="task_evidence" class="materialize-textarea"></textarea>
                   <label for="task_evidence">Evidencia solicitada</label>
                 </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s12">
+                      <select id="priorityList">
+                        <option value="" disabled selected>Seleccione la prioridad de la tarea</option>
+                        <option value="1">Muy baja</option>
+                        <option value="2">Baja</option>
+                        <option value="3">Media</option>
+                        <option value="4">Alta</option>
+                        <option value="5">Muy alta</option>
+                      </select>
+                    </div>
               </div>
             </form>
           </div>
@@ -913,6 +942,12 @@
       var elems = document.getElementById('modal_assignTask');
       var options = {};
       var instances = M.Modal.init(elems, options);
+    });
+
+    //Priority Select
+    document.addEventListener('DOMContentLoaded', function() {
+      var elem = document.getElementById('priorityList');
+      var instance = M.FormSelect.init(elem, {});
     });
   </script>
   <!-- Scripts End -->

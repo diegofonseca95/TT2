@@ -45,68 +45,20 @@
         <div class="card-content">
           <span class="card-title first-text"><b>Proyecto X - Iteración Y</b></span>
           <div class="row">
-            <span class="title col s12" style="word-break: break-all;">Descripción de la iteración</span>
-            <span class="title col s12" style="word-break: break-all;">Fecha de inicio: 18 / 09 / 2018</span>
-            <span class="title col s12" style="word-break: break-all;">Fecha de término: 19 / 09 / 2018</span>
-            <div class="col s12">
-              <button title="Editar" data-target="modal_iterationInfo" class="btn-floating btn-large modal-trigger remove-button-background right"><i
+            <div class="col s12 m8">
+              <span class="title col s12" style="word-break: break-all;">Descripción de la iteración</span>
+              <span class="title col s12" style="word-break: break-all;">Fecha de inicio: 18 / 09 / 2018</span>
+              <span class="title col s12" style="word-break: break-all;">Fecha de término: 19 / 09 / 2018</span>
+            </div>
+            <div class="col s12 m4">
+              <input placeholder="Cambiar fecha de término" id="newDate" type="hidden" class="right datepicker">
+              <button onclick="openDatePicker();" title="Editar fecha de término" class="btn-floating btn-large remove-button-background right"><i
                   class="material-icons">mode_edit</i></button>
             </div>
           </div>
         </div>
       </div>
       <!-- Iteration Info Ends -->
-
-      <!-- Iteration Assigned Tasks Begin -->
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title first-text"><b>Tareas pendientes</b></span>
-          <ul class="collection scrollable-collection">
-            <!-- No task item Begins-->
-            <li class="collection-item">
-              <span>No hay tareas pendientes por realizar</span>
-            </li>
-            <!-- No task item Ends -->
-            <!-- Task Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
-              <div class="row">
-                <span class="title truncate col s12">T-1</span>
-                <span class="title truncate col s12">Descripción de la tarea 1</span>
-                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
-                <div class="right">
-                  <a href="#!" title="Mover al tablero" class="btn remove-button-background">Mover al tablero</a>
-                </div>
-              </div>
-            </li>
-            <!-- Task Ends -->
-            <!-- Task Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
-              <div class="row">
-                <span class="title truncate col s12">T-2</span>
-                <span class="title truncate col s12">Descripción de la tarea 2</span>
-                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
-                <div class="right">
-                  <a href="#!" title="Mover al tablero" class="btn remove-button-background">Mover al tablero</a>
-                </div>
-              </div>
-            </li>
-            <!-- Task Ends -->
-            <!-- Task Begins-->
-            <li class="collection-item avatar"><i class="material-icons circle third-background">call_made</i>
-              <div class="row">
-                <span class="title truncate col s12">T-3</span>
-                <span class="title truncate col s12">Descripción de la tarea 3</span>
-                <span class="title truncate col s12">Evidencia solicitada: Fotos del evento</span>
-                <div class="right">
-                  <a href="#!" title="Mover al tablero" class="btn remove-button-background">Mover al tablero</a>
-                </div>
-              </div>
-            </li>
-            <!-- Task Ends -->
-          </ul>
-        </div>
-      </div>
-      <!-- Iteration Assigned Tasks End-->
 
       <!-- Board Begins -->
       <div class="row">
@@ -120,7 +72,7 @@
         </div>
         <!-- Column Title Ends -->
         <!-- TO DO Column Begins -->
-        <div class="col s12 m4 light-blue lighten-4">
+        <div class="col s12 m4 light-blue lighten-4 scrollable-board">
           <!-- Column Title Begins -->
           <div class="row">
             <div class="col s12">
@@ -138,8 +90,11 @@
               <div class="card">
                 <div class="card-content">
                   <span class="card-title">Tarea 1</span>
-                  <span>Descripción de la tarea 1</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
+                  <div class="row zero-margin">
+                    <span class="col s12">Descripción de la tarea 1</span>
+                    <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                    <span class="col s12">Prioridad: alta</span>
+                  </div>
                 </div>
                 <div class="card-action">
                   <a href="#">Iniciar Tarea</a>
@@ -150,40 +105,46 @@
           <!-- Column Entry Ends -->
           <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 2</span>
-                  <span>Descripción de la tarea 2</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Iniciar Tarea</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 1</span>
+                    <div class="row zero-margin">
+                      <span class="col s12">Descripción de la tarea 1</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Iniciar Tarea</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
-          <!-- Column Entry Begins -->
+            <!-- Column Entry Ends -->
+            <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 2</span>
-                  <span>Descripción de la tarea 2</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Iniciar Tarea</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 1</span>
+                    <div class="row zero-margin">
+                      <span class="col s12">Descripción de la tarea 1</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Iniciar Tarea</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
+            <!-- Column Entry Ends -->
         </div>
         <!-- TO DO Column Ends -->
         <!-- DOING Column Begins -->
-        <div class="col s12 m4 amber lighten-4">
+        <div class="col s12 m4 amber lighten-4 scrollable-board">
           <!-- Column Title Begins -->
           <div class="row">
             <div class="col s12">
@@ -201,8 +162,11 @@
               <div class="card">
                 <div class="card-content">
                   <span class="card-title">Tarea 3</span>
-                  <span>Descripción de la tarea 3</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
+                  <div class="row zero-margin">
+                    <span class="col s12">Descripción de la tarea 3</span>
+                    <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                    <span class="col s12">Prioridad: Alta</span>
+                  </div>
                 </div>
                 <div class="card-action">
                   <a href="#">Añadir Evidencia</a>
@@ -213,40 +177,46 @@
           <!-- Column Entry Ends -->
           <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 4</span>
-                  <span>Descripción de la tarea 4</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Añadir Evidencia</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 3</span>
+                    <div class="row zero-margin">
+                      <span class="col s12">Descripción de la tarea 3</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: Alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Añadir Evidencia</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
-          <!-- Column Entry Begins -->
+            <!-- Column Entry Ends -->
+            <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 4</span>
-                  <span>Descripción de la tarea 4</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Añadir Evidencia</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 3</span>
+                    <div class="row zero-margin">
+                      <span class="col s12">Descripción de la tarea 3</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: Alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Añadir Evidencia</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
+            <!-- Column Entry Ends -->
         </div>
         <!-- DOING Column Ends -->
         <!-- DONE Column Begins -->
-        <div class="col s12 m4 light-green lighten-4">
+        <div class="col s12 m4 light-green lighten-4 scrollable-board">
           <!-- Column Title Begins -->
           <div class="row">
             <div class="col s12">
@@ -264,8 +234,11 @@
               <div class="card">
                 <div class="card-content">
                   <span class="card-title">Tarea 5</span>
-                  <span>Descripción de la tarea 5</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
+                  <div class="row">
+                    <span class="col s12">Descripción de la tarea 5</span>
+                    <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                    <span class="col s12">Prioridad: Alta</span>
+                  </div>
                 </div>
                 <div class="card-action">
                   <a href="#">Ver Evidencia</a>
@@ -276,36 +249,42 @@
           <!-- Column Entry Ends -->
           <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 6</span>
-                  <span>Descripción de la tarea 6</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Ver Evidencia</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 5</span>
+                    <div class="row">
+                      <span class="col s12">Descripción de la tarea 5</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: Alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Ver Evidencia</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
-          <!-- Column Entry Begins -->
+            <!-- Column Entry Ends -->
+            <!-- Column Entry Begins -->
           <div class="row">
-            <div class="col s12">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Tarea 6</span>
-                  <span>Descripción de la tarea 6</span>
-                  <span>Evidencia solicitada: Fotos del evento</span>
-                </div>
-                <div class="card-action">
-                  <a href="#">Ver Evidencia</a>
+              <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Tarea 5</span>
+                    <div class="row">
+                      <span class="col s12">Descripción de la tarea 5</span>
+                      <span class="col s12">Evidencia solicitada: Fotos del evento</span>
+                      <span class="col s12">Prioridad: Alta</span>
+                    </div>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Ver Evidencia</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Column Entry Ends -->
+            <!-- Column Entry Ends -->
         </div>
         <!-- DONE Column Ends -->
       </div>
@@ -420,6 +399,13 @@
       var options = {};
       var instances = M.Modal.init(elems, options);
     });
+
+    //Open Datepicker
+    function openDatePicker(){
+      var elem = document.getElementById('newDate');
+      var instance = M.Datepicker.getInstance(elem);
+      instance.open();
+    }
   </script>
   <!-- Scripts End -->
 </body>
