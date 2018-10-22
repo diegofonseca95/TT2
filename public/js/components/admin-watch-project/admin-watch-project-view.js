@@ -86,7 +86,6 @@ Vue.component('admin-watch-project-view', {
     fetch('/obtenerUsuariosGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
