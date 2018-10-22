@@ -98,9 +98,8 @@ Vue.component('new-task-card', {
               <div class="input-field col s12">
                 <select name="new-task-priority-input"
                   id="new-task-priority-input">
-                  <option value="" disabled selected>
-                    Seleccione la prioridad de la tarea.
-                  </option>
+                  <option value="" 
+                    disabled selected>Seleccione la prioridad de la tarea.</option>
                   <option value="1">
                     Muy baja
                   </option>
