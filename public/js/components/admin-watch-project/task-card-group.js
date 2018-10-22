@@ -31,7 +31,8 @@ Vue.component('task-card-group', {
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
-        this.tasks = response.result();
+        this.assignedTasksIds = response.asignadas;
+        this.tasks = response.result;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
