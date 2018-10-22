@@ -19,7 +19,12 @@ Vue.component('task-list-item', {
           {{ task.descripcion }}
         </span>
         <span class="title truncate col s12">
-          Evidencia solicitada: N/A
+          Evidencia solicitada: {{ task.evidencia }}
+        </span>
+        <span class="title truncate col s12">
+          Prioridad: 
+          <priority-span :priority="task.puntaje">
+          </priority-span>
         </span>
         <div class="right">
           <a class="btn remove-button-background"
