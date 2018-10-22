@@ -42,12 +42,56 @@ Vue.component('new-task-card', {
     handleTaskCreation : function(){
       this.hasValidFields = false;
       $('#new-task-form').submit();
-      if(this.hasValidFields){
-        // TODO : Submit.
-        console.log(this.newTaskDescription);
-        console.log(this.newTaskDeliverable);
-        this.resetInformation();
+      var select = document.querySelector('#new-task-priority-input');
+      var option = select.options[select.selectedIndex];
+      var value = parseInt(option.value);
+      if(value === 0){
+        WarningToast('Selecciona una prioridad.');
+        return;
       }
+      if(this.hasValidFields){
+        this.submitTask({
+          deliverable : this.newTaskDeliverable,
+          description : this.newTaskDescription,
+          priority : value
+        });
+      }
+    },
+    submitTask : function(task){
+      // Get the project id from the hidden input.
+      var projectIdInput = document.querySelector('input[name="project-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : projectIdInput.value,
+        descripcion : task.description,
+        evidencia : task.deliverable,
+        _token : authToken.value,
+        puntaje : task.priority
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send new task to the server.
+      fetch('/agregarTarea', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('task-created', response.tarea);
+          SuccessToast(response.result);
+          M.updateTextFields();
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+      this.resetInformation();
     },
     resetInformation : function(){
       this.newTaskDeliverable = '';
@@ -96,25 +140,14 @@ Vue.component('new-task-card', {
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <select name="new-task-priority-input"
-                  id="new-task-priority-input">
-                  <option value="" 
-                    disabled selected>Seleccione la prioridad de la tarea.</option>
-                  <option value="1">
-                    Muy baja
-                  </option>
-                  <option value="2">
-                    Baja
-                  </option>
-                  <option value="3">
-                    Media
-                  </option>
-                  <option value="4">
-                    Alta
-                  </option>
-                  <option value="5">
-                    Muy alta
-                  </option>
+                <select id="new-task-priority-input">
+                  <option value="0" disabled 
+                    selected>Seleccione la prioridad de la tarea.</option>
+                  <option value="1">Muy baja</option>
+                  <option value="2">Baja</option>
+                  <option value="3">Media</option>
+                  <option value="4">Alta</option>
+                  <option value="5">Muy alta</option>
                 </select>
               </div>
             </div>

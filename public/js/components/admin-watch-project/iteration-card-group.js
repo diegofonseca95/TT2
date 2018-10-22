@@ -24,7 +24,7 @@ Vue.component('iteration-card-group', {
 
     requestData.body = JSON.stringify(requestBody);
 
-    // Fetch the users list.
+    // Fetch the sprint list.
     fetch('/obtenerSprints', requestData)
     .then(response => response.json())
     .then(function(response){
