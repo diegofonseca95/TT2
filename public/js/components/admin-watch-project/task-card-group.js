@@ -7,13 +7,39 @@ Vue.component('task-card-group', {
     };
   },
   beforeCreate : function(){
-    // TODO : Fetch the set of tasks.
-    // TODO : Fetch the set of assigned tasks ids.
+    // Get the project id from the hidden input.
+    var projectIdInput = document.querySelector('input[name="project-id"]');
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idProyecto : projectIdInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Send new task to the server.
+    fetch('/obtenerTareas', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.tasks = response.result();
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   computed : {
     unassignedTasks : function(){
       return this.tasks.filter(
-        task => this.assignedTasksIds.includes(task.idTarea)
+        task => !this.assignedTasksIds.includes(task.idTarea)
       );
     }
   },

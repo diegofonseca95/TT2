@@ -85,6 +85,7 @@ Vue.component('new-task-card', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          console.log(response.tarea);
           this.$emit('task-created', response.tarea);
           SuccessToast(response.result);
           M.updateTextFields();
