@@ -7,6 +7,9 @@ Vue.component('new-task-card', {
     };
   },
   mounted : function(){
+    // Initialize select.
+    var select = document.getElementById('new-task-priority-input');
+    M.FormSelect.init(select);
     // TODO : No JQuery
     $('#new-task-form').validate({
       rules : {
@@ -89,6 +92,31 @@ Vue.component('new-task-card', {
                 <label for="new-task-deliverable-input">
                   Evidencia solicitada
                 </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <select name="new-task-priority-input"
+                  id="new-task-priority-input">
+                  <option value="" disabled selected>
+                    Seleccione la prioridad de la tarea.
+                  </option>
+                  <option value="1">
+                    Muy baja
+                  </option>
+                  <option value="2">
+                    Baja
+                  </option>
+                  <option value="3">
+                    Media
+                  </option>
+                  <option value="4">
+                    Alta
+                  </option>
+                  <option value="5">
+                    Muy alta
+                  </option>
+                </select>
               </div>
             </div>
           </form>
