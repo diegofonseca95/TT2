@@ -54,7 +54,6 @@ Vue.component('task-card-group', {
       // TODO : Remove the task.
     },
     handleTaskCreated : function(task){
-      console.log(task);
       this.tasks.push(task);
     }
   },
@@ -62,13 +61,13 @@ Vue.component('task-card-group', {
     <div>
       <tasks-card 
         @task-assigned="handleTaskAssigned($event)"
-        @task-created="handleTaskCreated($event)"
         @remove-task="handleRemoveTask($event)"
         :project-members="projectMembers"
         :tasks="unassignedTasks">
       </tasks-card>
 
-      <new-task-card>
+      <new-task-card
+        @task-created="handleTaskCreated($event)">
       </new-task-card>
     </div>
   `
