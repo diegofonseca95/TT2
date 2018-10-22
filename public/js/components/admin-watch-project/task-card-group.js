@@ -54,6 +54,7 @@ Vue.component('task-card-group', {
       // TODO : Remove the task.
     },
     handleTaskCreated : function(task){
+      console.log(task);
       this.tasks.push(task);
     }
   },
