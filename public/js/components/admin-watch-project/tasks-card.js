@@ -37,7 +37,7 @@ Vue.component('tasks-card', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          this.$emit('task-user-submitted', this.taskToAssign);
+          this.$emit('task-assigned', this.taskToAssign);
           SuccessToast(response.result);
           this.taskToAssign = null;
         }else{

@@ -82,15 +82,11 @@ Vue.component('task-card-group', {
     },
     handleTaskCreated : function(task){
       this.tasks.push(task);
-    },
-    handleTaskUserSubmitted : function(task){
-      this.assignedTasksIds.push(task.idTarea);
     }
   },
   template : `
     <div>
       <tasks-card 
-        @task-user-submitted="handleTaskUserSubmitted($event)"
         @task-assigned="handleTaskAssigned($event)"
         @remove-task="handleRemoveTask($event)"
         :project-members="projectMembers"
