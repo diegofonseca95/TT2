@@ -63,3 +63,7 @@ Route::post('/obtenerProyecto', 'ProyectosControlador@obtenerProyecto');
 Route::post('/editarProyecto', 'ProyectosControlador@editarProyecto');
 Route::post('/agregarSprint', 'SprintControlador@agregarSprint');
 Route::post('/obtenerSprints', 'SprintControlador@obtenerSprints');
+Route::post('/obtenerTareas', 'TareaControlador@obtenerTareas');
+Route::post('/agregarTarea', 'TareaControlador@agregarTarea');
+Route::post('/eliminarTarea', 'TareaControlador@eliminarTarea');
+Route::post('/asignarTarea', 'TareaControlador@asignarTarea');
