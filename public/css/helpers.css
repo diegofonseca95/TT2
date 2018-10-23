@@ -60,3 +60,8 @@
 
     flex-grow: 1 !important;
 }
+
+.justified-text{
+
+    text-align: justify !important;
+}
