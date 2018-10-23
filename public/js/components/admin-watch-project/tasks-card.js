@@ -33,7 +33,7 @@ Vue.component('tasks-card', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/asignarUsuarioTarea', requestData)
+      fetch('/asignarTarea', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
