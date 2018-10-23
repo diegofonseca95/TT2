@@ -73,7 +73,7 @@ Vue.component('task-card-group', {
       .then(function(response){
         if(response.status === 'OK'){
           this.tasks = this.tasks.filter(
-            task => task.idTarea !=== removeTask.idTarea
+            task => task.idTarea !== removeTask.idTarea
           );
           SuccessToast(response.result);
         }
