@@ -53,6 +53,7 @@
   <script src="/js/components/common/new-leader-list.js"></script>
   <script src="/js/components/common/user-info-modal.js"></script>
   <!-- Common Components End -->
+  <script src="/js/components/admin-watch-project/priority-span.js"></script>
   <!-- List Items Begin -->
   <script src="/js/components/admin-watch-project/project-member-list-item.js"></script>
   <script src="/js/components/admin-watch-project/new-member-list-item.js"></script>

@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SprintProyectoGrupo extends Model
+	class Tarea extends Model
 {
 	public $timestamps = false;
-    protected $table = 'sprintproyectogrupo';
+    protected $table = 'tarea';
     protected $primaryKey = 'idTarea';
-    
+
 }

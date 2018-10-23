@@ -30,7 +30,7 @@ Vue.component('project-info-card', {
 
     requestData.body = JSON.stringify(requestBody);
 
-    // Fetch the users list.
+    // Fetch the project information.
     fetch('/obtenerProyecto', requestData)
     .then(response => response.json())
     .then(function(response){
@@ -75,7 +75,7 @@ Vue.component('project-info-card', {
 
       requestData.body = JSON.stringify(requestBody);
 
-      // Fetch the users list.
+      // Send the new information to the server.
       fetch('/editarProyecto', requestData)
       .then(response => response.json())
       .then(function(response){
