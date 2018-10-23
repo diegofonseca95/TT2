@@ -7,6 +7,7 @@ Vue.component('choose-task-user-modal', {
   },
   methods : {
     handleTaskUserChosen : function(user){
+      console.log(user);
       this.chosenUser = user;
     },
     handleSubmitUser : function(){

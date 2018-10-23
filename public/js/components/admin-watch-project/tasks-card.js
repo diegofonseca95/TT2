@@ -13,7 +13,38 @@ Vue.component('tasks-card', {
       this.$emit('remove-task', task);
     },
     handleTaskUserSubmitted : function(user){
-      // TODO : Submit user-task.
+      console.log(user);
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idTarea : this.taskToAssign.idTarea,
+        idUsuario : user.idUsuario,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/asignarUsuarioTarea', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('task-user-submitted', this.taskToAssign);
+          SuccessToast(response.result);
+          this.taskToAssign = null;
+        }else{
+          WarningToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `
