@@ -13,8 +13,6 @@ Vue.component('tasks-card', {
       this.$emit('remove-task', task);
     },
     handleTaskUserSubmitted : function(user){
-      console.log(user);
-
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
