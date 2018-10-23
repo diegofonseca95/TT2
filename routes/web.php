@@ -67,3 +67,4 @@ Route::post('/obtenerTareas', 'TareaControlador@obtenerTareas');
 Route::post('/agregarTarea', 'TareaControlador@agregarTarea');
 Route::post('/eliminarTarea', 'TareaControlador@eliminarTarea');
 Route::post('/asignarTarea', 'TareaControlador@asignarTarea');
+Route::post('/obtenerTareasUsuario', 'TareaControlador@UsuarioTarea');
