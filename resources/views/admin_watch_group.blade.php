@@ -42,6 +42,7 @@
   <!-- Vue Components Begin -->
   <!-- Common Components Begin -->
   <script src="/js/components/common/user-full-name-span.js"></script>
+  <script src="/js/components/common/priority-span.js"></script>
   <script src="/js/components/common/user-info-project-list-item.js"></script>
   <script src="/js/components/common/user-info-group-list-item.js"></script>
   <script src="/js/components/common/user-info-task-list-item.js"></script>

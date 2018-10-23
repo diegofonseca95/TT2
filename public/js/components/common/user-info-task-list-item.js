@@ -11,10 +11,18 @@ Vue.component('user-info-task-list-item', {
           Para el proyecto: {{ taskInfo.project.nombreProyecto }}
         </span>
         <span class="title truncate col s12">
-          Tarea {{ taskInfo.task.numeroTarea }}
+          Número de tarea del proyecto: {{ taskInfo.task.numeroTarea }}
         </span>
         <span class="title truncate col s12">
-          {{ taskInfo.task.descripcion }}
+          Descripción : {{ taskInfo.task.descripcion }}
+        </span>
+        <span class="title truncate col s12">
+          Evidencia solicitada : {{ taskInfo.task.evidencia }}
+        </span>
+        <span class="title truncate col s12">
+          Prioridad: 
+          <priority-span :priority="taskInfo.task.puntaje">
+          </priority-span>
         </span>
         <span class="title truncate col s12">
           <a href="#!">
