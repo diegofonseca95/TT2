@@ -24,7 +24,7 @@ Vue.component('user-info-task-list', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/obtenerProyectosUsuario', requestData)
+      fetch('/obtenerTareasUsuario', requestData)
       .then(response => response.json())
       .then(function(response){
         console.log(response);
