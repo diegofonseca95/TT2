@@ -107,7 +107,7 @@ Vue.component('admin-watch-project-view', {
     }.bind(this));
   },
   template : `
-    <div class="row z-depth-3">
+    <div class="row">
       <project-info-card :project-members="memberList">
       </project-info-card>
 
