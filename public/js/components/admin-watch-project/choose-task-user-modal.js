@@ -72,6 +72,16 @@ Vue.component('choose-task-user-modal', {
       this.chosenIteration = parseInt(select.input.value);
     }.bind(this);
   },
+  updated : function(){
+    var modal = document.querySelector('#choose-task-user-modal');
+    M.Modal.init(modal);
+    var select = document.querySelector('#task-iteration-select');
+    select = M.FormSelect.init(select);
+    select.dropdown.onCloseEnd = function(){
+      console.log(select.input.value);
+      this.chosenIteration = parseInt(select.input.value);
+    }.bind(this);
+  },
   template : `
     <div id="choose-task-user-modal" 
       class="modal modal-fixed-footer">
