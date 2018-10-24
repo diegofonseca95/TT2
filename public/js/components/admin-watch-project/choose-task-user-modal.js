@@ -31,11 +31,9 @@ Vue.component('choose-task-user-modal', {
     fetch('/obtenerSprintsActivos', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.result);
       if(response.status === 'OK'){
         this.iterations = response.result;
       }
-      console.log(this.iterations);
       // TODO : Handle non 'OK' status.
     }.bind(this));
   },
@@ -48,6 +46,9 @@ Vue.component('choose-task-user-modal', {
         WarningToast('Selecciona un usuario.');
         return;
       }
+      var select = document.querySelector('#task-iteration-select');
+      var option = select.options[select.selectedIndex];
+      this.chosenIteration = parseInt(option.value);
       if(this.chosenIteration === 0){
         WarningToast('Selecciona una iteración.');
         return;
@@ -68,11 +69,7 @@ Vue.component('choose-task-user-modal', {
   },
   updated : function(){
     var select = document.querySelector('#task-iteration-select');
-    select = M.FormSelect.init(select);
-    select.dropdown.onCloseEnd = function(){
-      console.log(select.input.value);
-      this.chosenIteration = parseInt(select.input.value);
-    }.bind(this);
+    M.FormSelect.init(select);
   },
   template : `
     <div id="choose-task-user-modal" 
