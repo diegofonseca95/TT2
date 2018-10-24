@@ -25,7 +25,7 @@ class SprintControlador extends Controller
             ]);
         }
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
-        $val = SprintProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->count(); 
+        $val = SprintProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->count();
 
         $sprintProyectoGrupo = new SprintProyectoGrupo;
         $sprintProyectoGrupo->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
@@ -55,7 +55,7 @@ class SprintControlador extends Controller
         }
 
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
-        $respuesta = SprintProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->get(); 
+        $respuesta = SprintProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->get();
 
         $array = array();
 
@@ -69,5 +69,31 @@ class SprintControlador extends Controller
             'status' =>'OK',
             'result' => $result
         ]);
+    }
+
+    public function obtenerSprint(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+        $sprint = Sprint::where('idSprint', '=', request('idSprint'))->first();
+
+        $sprintProyectoGrupo = SprintProyectoGrupo::where('idSprint', '=', request('idSprint'))->first();
+        $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', '=', $sprintProyectoGrupo->idProyectoGrupo)->first();
+        $proyecto = Proyecto::where('idProyecto', '=', $proyectoGrupo->idProyecto)->first();
+
+        return response()->json([
+              'status' => 'OK',
+              'result' => array('sprint' => $sprint, 'proyecto' => $proyecto)
+        ]);
+    }
+    public function verSprint($idSprint){
+        if(!Auth::check()){
+            return view('index');
+        }
+
+        return view('user_watch_iteration', ['nombreVista'=> 'Iteracion', 'iconoVista' => 'update', 'idSprint' => $idSprint]);
     }
 }

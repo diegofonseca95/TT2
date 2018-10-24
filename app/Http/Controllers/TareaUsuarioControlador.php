@@ -18,10 +18,15 @@ use App\Tarea;
 use App\TareaUsuario;
 use Auth;
 
-class TareaControlador extends Controller
+class TareaUsuarioControlador extends Controller
 {
     public function UsuarioTarea(){
-
+          if(!Auth::check()){
+              return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion para continuar'
+              ]);
+          }
           $tareaUsuario = TareaUsuario::where('idUsuario', '=', request('idUsuario'))->get();
           $idTareaGrupo = array();
           foreach ($tareaUsuario as $value) {
@@ -32,7 +37,7 @@ class TareaControlador extends Controller
 
           $result = array();
           foreach($idTareas as $value){
-              array_push($result, obtenerInformacion($value));
+              array_push($result, $this->obtenerInformacion($value));
           }
 
 
@@ -43,8 +48,8 @@ class TareaControlador extends Controller
 
     }
 
-    public function obtenerInformacion($tareaProyectoGrupo){
-        $tareas = Tarea::whereIn('idTarea', $idTareas)->first();
+    private function obtenerInformacion($tareaProyectoGrupo){
+        $tareas = Tarea::where('idTarea', '=', $tareaProyectoGrupo->idTarea)->first();
         $proyectoGrupo = ProyectoGrupo::where
                             (
                               'idProyectoGrupo',
@@ -52,12 +57,12 @@ class TareaControlador extends Controller
                               $tareaProyectoGrupo->idProyectoGrupo
                             )->first();
         $proyecto = Proyecto::where('idProyecto', '=', $proyectoGrupo->idProyecto)->first();
-        $grupo = Proyecto::where('idProyecto', '=', $proyectoGrupo->idGrupo)->first();
+        $grupo = Grupo::where('idGrupo', '=', $proyectoGrupo->idGrupo)->first();
 
-        return response()->json([
-              'proyecto' => $proyecto,
-              'grupo' => $grupo,
-              'tarea' => $tarea
-          ]);
+        return array(
+                  'proyecto' => $proyecto,
+                  'grupo' => $grupo,
+                  'tarea' => $tareas
+              );
     }
 }
