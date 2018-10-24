@@ -84,6 +84,7 @@ Vue.component('choose-task-user-modal', {
                   <div class="input-field col s12">
                     <select id="task-iteration-select">
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
+                      <option value="1">Selecciona iteración de la tarea</option>
                       <option v-for="iteration in iterations" 
                         v-bind:value="iteration.idSprint">{{ iteration.numeroSprint }}</option>
                     </select>
