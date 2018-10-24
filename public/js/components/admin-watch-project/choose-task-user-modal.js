@@ -91,7 +91,7 @@ Vue.component('choose-task-user-modal', {
                       <option v-for="iteration in iterations" 
                         :value="iteration.idSprint">
                         Iteración {{ iteration.numeroSprint }} 
-                        [{{ iteration.fecha_inicio }}, {{ iteration.fecha_fin }}]
+                        [{{ iteration.fecha_inicio }} => {{ iteration.fecha_fin }}]
                       </option>
                     </select>
                   </div>
