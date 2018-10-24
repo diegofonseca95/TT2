@@ -84,9 +84,6 @@ Vue.component('iteration-info-card', {
         <div class="row">
           <div class="col s12 m8">
             <span class="title col s12" style="word-break: break-all;">
-              {{ iteration.descripcion }}
-            </span>
-            <span class="title col s12" style="word-break: break-all;">
               Fecha de inicio: {{ iteration.fecha_inicio }}
             </span>
             <span class="title col s12" style="word-break: break-all;">
