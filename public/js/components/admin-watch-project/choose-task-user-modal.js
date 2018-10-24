@@ -31,9 +31,11 @@ Vue.component('choose-task-user-modal', {
     fetch('/obtenerSprintsActivos', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response.result);
       if(response.status === 'OK'){
         this.iterations = response.result;
       }
+      console.log(this.iterations);
       // TODO : Handle non 'OK' status.
     }.bind(this));
   },
@@ -69,7 +71,6 @@ Vue.component('choose-task-user-modal', {
       console.log(select.input.value);
       this.chosenIteration = parseInt(select.input.value);
     }.bind(this);
-    console.log(this.iterations);
   },
   template : `
     <div id="choose-task-user-modal" 
@@ -86,7 +87,7 @@ Vue.component('choose-task-user-modal', {
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
                       <option value="1">Selecciona iteración de la tarea</option>
                       <option v-for="iteration in iterations" 
-                        v-bind:value="iteration.idSprint">{{ iteration.numeroSprint }}</option>
+                        :value="iteration.idSprint">Iteración {{ iteration.numeroSprint }}</option>
                     </select>
                   </div>
                 </div>
