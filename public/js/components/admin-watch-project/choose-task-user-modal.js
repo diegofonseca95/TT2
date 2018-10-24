@@ -31,6 +31,7 @@ Vue.component('choose-task-user-modal', {
     fetch('/obtenerSprintsActivos', requestData)
     .then(response => response.json())
     .then(function(response){
+        console.log(response.result);
       if(response.status === 'OK'){
         this.iterations = response.result;
       }
