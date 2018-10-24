@@ -55,7 +55,7 @@ Vue.component('choose-task-user-modal', {
       }
       if(this.chosenUser !== null && this.chosenIteration !== 0){
         this.$emit('task-user-submitted', {
-          iteration : this.chosenIteration,
+          iterationId : this.chosenIteration,
           user : this.chosenUser
         });
         this.chosenIteration = 0;
@@ -84,7 +84,6 @@ Vue.component('choose-task-user-modal', {
                   <div class="input-field col s12">
                     <select id="task-iteration-select">
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
-                      <option value="1">Selecciona iteración de la tarea</option>
                       <option v-for="iteration in iterations" 
                         :value="iteration.idSprint">Iteración {{ iteration.numeroSprint }} 
                         [{{ iteration.fecha_inicio }} &rarr; {{ iteration.fecha_fin }}]</option>

@@ -24,8 +24,8 @@ Vue.component('tasks-card', {
       // The body of our request.
       var requestBody = { 
         idTarea : this.taskToAssign.idTarea,
-        idSprint : pair.iteration.idSprint,
         idUsuario : pair.user.idUsuario,
+        idSprint : pair.iterationId,
         _token : authToken.value
       };
 
