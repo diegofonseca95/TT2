@@ -4,6 +4,8 @@ Vue.component('user-watch-iteration-view', {
   },
   template : `
     <div class="row">
+      <iteration-info-card>
+      </iteration-info-card>
     </div>
   `
 });
