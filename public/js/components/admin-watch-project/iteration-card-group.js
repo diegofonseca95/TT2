@@ -25,10 +25,9 @@ Vue.component('iteration-card-group', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the sprint list.
-    fetch('/obtenerSprintsActivos', requestData)
+    fetch('/obtenerSprints', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.result);
       if(response.status === 'OK'){
         this.iterations = response.result;
       }
