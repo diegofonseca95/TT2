@@ -772,6 +772,16 @@
               <div class="card">
                 <div class="card-content">
                   <div class="row">
+                    <div class="input-field col s12">
+                      <select id="iteration-select">
+                        <option value="" disabled selected>Selecciona iteración de la tarea</option>
+                        <option value="1">Iteración 1</option>
+                        <option value="2">Iteración 2</option>
+                        <option value="3">Iteración 3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class='input-field col s12'>
                       <i class='material-icons prefix third-text'>search</i>
                       <input placeholder='Ingresa palabras clave' type='text' class='validate'>
@@ -947,6 +957,12 @@
     //Priority Select
     document.addEventListener('DOMContentLoaded', function() {
       var elem = document.getElementById('priorityList');
+      var instance = M.FormSelect.init(elem, {});
+    });
+
+    //Iteration Select Initialization
+    document.addEventListener('DOMContentLoaded', function(){
+      var elem = document.getElementById('iteration-select');
       var instance = M.FormSelect.init(elem, {});
     });
   </script>
