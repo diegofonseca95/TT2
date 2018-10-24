@@ -2,16 +2,46 @@ Vue.component('user-info-task-list', {
   props : ['user'],
   data : function(){
     return {
-      userTasksInfo : [ 
-        { key : 0 },
-        { key : 1 },
-        { key : 2 }
-      ]
+      userTasksInfo : []
     };
   },
   watch : {
     user : function(){
-      // TODO : Fetch the tasks completed by the user.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idUsuario : this.user.idUsuario,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/obtenerTareasUsuario', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        console.log(response);
+        if(response.status === 'OK'){
+          // TODO : Toast if succeeded
+          var tasksInfo = [];
+          for(var i in response.result){
+            tasksInfo.push({
+              project : response.result[i].proyecto,
+              group : response.result[i].grupo,
+              task : response.result[i].tarea
+            });
+          }
+          this.userTasksInfo = tasksInfo;
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `

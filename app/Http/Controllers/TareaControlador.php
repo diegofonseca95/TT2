@@ -125,6 +125,8 @@ class TareaControlador extends Controller
         $tareaUsuario = new TareaUsuario;
         $tareaUsuario->idUsuario = request('idUsuario');
         $tareaUsuario->idTareaProyectoGrupo = $tareaProyectoGrupo->idTareaProyectoGrupo;
+        $tareaUsuario->save();
+        
         $tarea->estado = 3;
         $tarea->save();
 

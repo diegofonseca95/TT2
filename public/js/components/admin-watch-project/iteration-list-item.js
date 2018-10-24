@@ -2,7 +2,7 @@ Vue.component('iteration-list-item', {
   props : ['iteration'],
   methods : {
     handleWatchIteration : function(){
-      // TODO : Redirect to the actual page.
+      window.location.replace('/verSprint/' + this.iteration.idSprint);
     }
   },
   template : `
