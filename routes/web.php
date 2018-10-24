@@ -70,3 +70,4 @@ Route::post('/eliminarTarea', 'TareaControlador@eliminarTarea');
 Route::post('/asignarTarea', 'TareaControlador@asignarTarea');
 Route::post('/obtenerTareasUsuario', 'TareaUsuarioControlador@UsuarioTarea');
 Route::post('/obtenerSprint', 'SprintControlador@obtenerSprint');
+Route::post('/editarSprint', 'SprintControlador@editarSprint');

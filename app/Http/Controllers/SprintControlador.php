@@ -13,6 +13,8 @@ use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use App\Sprint;
 use App\SprintProyectoGrupo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Auth;
 
 class SprintControlador extends Controller
@@ -95,5 +97,35 @@ class SprintControlador extends Controller
         }
 
         return view('user_watch_iteration', ['nombreVista'=> 'Iteracion', 'iconoVista' => 'update', 'idSprint' => $idSprint]);
+    }
+    public function editarSprint(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+
+        try{
+            $sprint = Sprint::findOrFail(request('idSprint'));
+
+            if($sprint->fecha_inicio >= request('fecha_fin')){
+              return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'La fecha de fin debe ser mayor a la de inicio'
+                  ]);
+            }
+            $sprint->fecha_fin = request('fecha_fin');
+            $sprint->save();
+            return response()->json([
+                'status'=> 'OK',
+                'result'=> 'Se editó la fecha de fin'
+                ]);
+        }catch(ModelNotFoundException $e){
+          return response()->json([
+              'status'=> 'ERROR',
+              'result'=> 'Iteracion no existe'
+              ]);
+        }
     }
 }

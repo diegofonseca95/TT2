@@ -11,6 +11,7 @@ use App\Proyecto;
 use App\ProyectoGrupo;
 use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
 
 class ProyectosControlador extends Controller
@@ -212,7 +213,7 @@ class ProyectosControlador extends Controller
         }
 
         $proyecto = new Proyecto;
-        
+
         return $proyecto->where('estado', '!=', 3)->get();
     }
 }
