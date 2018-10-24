@@ -42,7 +42,6 @@ Vue.component('iteration-info-card', {
     fetch('/obtenerSprint', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.iteration = response.result.sprint;
         this.project = response.result.proyecto;
@@ -69,7 +68,40 @@ Vue.component('iteration-info-card', {
   },
   watch : {
     newIterationDate : function(){
-      console.log(this.newIterationDate);
+      // Get the project id from the hidden input.
+      var iterationIdInput = document.querySelector('input[name="iteration-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        fecha_fin : this.newIterationDate,
+        idSprint : iterationIdInput.value,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/editarSprint', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          SuccessToast(response.result);
+          var sprint = this.iteration;
+          sprint.fecha_fin = this.newIterationDate;
+          this.iteration = sprint;
+        }else{
+          WarningToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `
