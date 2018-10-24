@@ -31,7 +31,6 @@ Vue.component('choose-task-user-modal', {
     fetch('/obtenerSprintsActivos', requestData)
     .then(response => response.json())
     .then(function(response){
-        console.log(response.result);
       if(response.status === 'OK'){
         this.iterations = response.result;
       }
@@ -43,6 +42,14 @@ Vue.component('choose-task-user-modal', {
       this.chosenUser = user;
     },
     handleSubmitUser : function(){
+      if(this.chosenUser !== null){
+        WarningToast('Selecciona un usuario.');
+        return;
+      }
+      if(this.chosenIteration !== 0){
+        WarningToast('Selecciona una iteración.');
+        return;
+      }
       if(this.chosenUser !== null && this.chosenIteration !== 0){
         this.$emit('task-user-submitted', {
           iteration : this.chosenIteration,
@@ -62,6 +69,7 @@ Vue.component('choose-task-user-modal', {
       console.log(select.input.value);
       this.chosenIteration = parseInt(select.input.value);
     }.bind(this);
+    console.log(this.iterations);
   },
   template : `
     <div id="choose-task-user-modal" 
@@ -76,8 +84,8 @@ Vue.component('choose-task-user-modal', {
                   <div class="input-field col s12">
                     <select id="task-iteration-select">
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
-                      <option v-for="iteration in iterations"
-                        :value="iteration.idSprint">Iteración {{ iteration.numeroSprint }}</option>
+                      <option v-for="iteration in iterations" 
+                        v-bind:value="iteration.idSprint">{{ iteration.numeroSprint }}</option>
                     </select>
                   </div>
                 </div>
