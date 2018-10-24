@@ -128,4 +128,29 @@ class SprintControlador extends Controller
               ]);
         }
     }
+
+    public function obtenerSprintsActivos(){
+          if(!Auth::check()){
+              return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion para continuar'
+              ]);
+          }
+
+          $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
+          $respuesta = SprintProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->get();
+
+          $array = array();
+
+          foreach ($respuesta as $value) {
+              array_push($array, $value->idSprint);
+          }
+          $date = new \DateTime();
+          $result = Sprint::whereIn('idSprint', $array)->where('fecha_fin', '>=', $date->format('Y-m-d'))->get();
+
+          return response()->json([
+                'status' => 'OK',
+                'result' => $result
+          ]);
+    }
 }
