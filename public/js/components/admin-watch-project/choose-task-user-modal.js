@@ -44,11 +44,11 @@ Vue.component('choose-task-user-modal', {
       this.chosenUser = user;
     },
     handleSubmitUser : function(){
-      if(this.chosenUser !== null){
+      if(this.chosenUser === null){
         WarningToast('Selecciona un usuario.');
         return;
       }
-      if(this.chosenIteration !== 0){
+      if(this.chosenIteration === 0){
         WarningToast('Selecciona una iteración.');
         return;
       }
