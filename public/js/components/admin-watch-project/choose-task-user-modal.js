@@ -65,16 +65,8 @@ Vue.component('choose-task-user-modal', {
   mounted : function(){
     var modal = document.querySelector('#choose-task-user-modal');
     M.Modal.init(modal);
-    var select = document.querySelector('#task-iteration-select');
-    select = M.FormSelect.init(select);
-    select.dropdown.onCloseEnd = function(){
-      console.log(select.input.value);
-      this.chosenIteration = parseInt(select.input.value);
-    }.bind(this);
   },
   updated : function(){
-    var modal = document.querySelector('#choose-task-user-modal');
-    M.Modal.init(modal);
     var select = document.querySelector('#task-iteration-select');
     select = M.FormSelect.init(select);
     select.dropdown.onCloseEnd = function(){
@@ -97,7 +89,10 @@ Vue.component('choose-task-user-modal', {
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
                       <option value="1">Selecciona iteración de la tarea</option>
                       <option v-for="iteration in iterations" 
-                        :value="iteration.idSprint">Iteración {{ iteration.numeroSprint }}</option>
+                        :value="iteration.idSprint">
+                        Iteración {{ iteration.numeroSprint }} 
+                        [{{ iteration.fecha_inicio }} / {{ iteration.fecha_fin }}]
+                      </option>
                     </select>
                   </div>
                 </div>
