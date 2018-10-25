@@ -5,6 +5,11 @@ Vue.component('post-list-item', {
             deleted : false
         };
     },
+    computed : {
+      dropdownId : function(){
+        return 'dropdown' + this.post.id.toString();
+      }
+    },
     methods : {
         setEditable : function(){
             this.editFunction(this.post);
@@ -13,7 +18,7 @@ Vue.component('post-list-item', {
     template : 
 "<div class='card'>" +
 "<div class='card-content'>" +
-"<ul id='dropdown1' class='dropdown-content'>" +
+"<ul :id='dropdownId' class='dropdown-content'>" +
 "<li><a class='first-text modal-trigger' href='#post-modal' v-on:click='setEditable'>" +
 "<i class='material-icons'>edit</i>Editar" +
 "</a></li>" +
@@ -24,7 +29,7 @@ Vue.component('post-list-item', {
 "<span class='card-title grey-text text-darken-4'>" +
 "<b>{{ post.titulo }}</b>" +
 "<a href='#!' class='black-text'>" +
-"<i data-target='dropdown1' class='dropdown-trigger material-icons right tooltipped' data-position='left' data-tooltip='Opciones'>more_vert</i>" +
+"<i :data-target='dropdownId' class='dropdown-trigger material-icons right tooltipped' data-position='left' data-tooltip='Opciones'>more_vert</i>" +
 "</a>" +
 "</span>" +
 "<p>Publicado en : {{ post.fechaCreacion }}</p>" +

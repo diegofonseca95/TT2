@@ -12,7 +12,7 @@ Vue.component('tasks-card', {
     handleRemoveTask : function(task){
       this.$emit('remove-task', task);
     },
-    handleTaskUserSubmitted : function(user){
+    handleTaskUserSubmitted : function(pair){
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
@@ -24,7 +24,8 @@ Vue.component('tasks-card', {
       // The body of our request.
       var requestBody = { 
         idTarea : this.taskToAssign.idTarea,
-        idUsuario : user.idUsuario,
+        idUsuario : pair.user.idUsuario,
+        idSprint : pair.iterationId,
         _token : authToken.value
       };
 

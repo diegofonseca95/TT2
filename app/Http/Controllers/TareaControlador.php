@@ -16,6 +16,7 @@ use App\SprintProyectoGrupo;
 use App\TareaProyectoGrupo;
 use App\Tarea;
 use App\TareaUsuario;
+use App\TareaSprint;
 use Auth;
 
 class TareaControlador extends Controller
@@ -121,14 +122,30 @@ class TareaControlador extends Controller
              ]);
         }
 
+        $cont = TareaSprint::where([['idSprint', '=', request('idSprint')], ['idTarea', '=', request('idTarea')]])->count();
+        $sprint = Sprint::where(['idSprint', '=', request(idSprint)])->first();
+        $date = new \DateTime();
+
+        if($sprint->fecha_fin < $date->format('Y-m-d') || $cont > 0){
+              return response()->json([
+                    'status' => 'ERROR',
+                    'result' => ($cont>0 ? 'Esta tarea ya pertenece al sprint':'Sprint no activo')
+              ]);
+        }
+        
         $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', '=', request('idTarea'))->first();
         $tareaUsuario = new TareaUsuario;
         $tareaUsuario->idUsuario = request('idUsuario');
         $tareaUsuario->idTareaProyectoGrupo = $tareaProyectoGrupo->idTareaProyectoGrupo;
         $tareaUsuario->save();
-        
+
         $tarea->estado = 3;
         $tarea->save();
+
+        $tareasprint = new TareaSprint;
+        $tareasprint->idSprint = request('idSprint');
+        $tareasprint->idTarea = request('idTarea');
+        $tareasprint->save();
 
         return response()->json([
                 'status' => 'OK',
