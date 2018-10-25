@@ -1,17 +1,15 @@
-Vue.component('group-admin-create-project-view', {
+Vue.component('admin-create-group-view', {
   data : function(){
     return {
-      newProjectDescription : '',
+      newGroupDescription : '',
       hasValidFields : false,
-      newProjectName : '',
       newLeaderId : null,
       newMemberIds : [],
+      newGroupName : '',
       users : []
     };
   },
   created : function(){
-    var groupIdInput = document.querySelector('input[name="group-id"]');
-
     var authToken = document.querySelector('input[name="_token"]');
 
     // Request data for the 'fetch' function.
@@ -22,16 +20,16 @@ Vue.component('group-admin-create-project-view', {
 
     // The body of our request.
     var requestBody = { 
-      idGrupo : groupIdInput.value,
       _token : authToken.value
     };
 
     requestData.body = JSON.stringify(requestBody);
 
-    // Fetch the projects list.
-    fetch('/obtenerUsuariosGrupo', requestData)
+    // Fetch the user list.
+    fetch('/obtenerUsuariosActivos', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         this.users = response.result;
       }
@@ -59,32 +57,30 @@ Vue.component('group-admin-create-project-view', {
         this.newMemberIds.push(userId);
       }
     },
-    handleProjectSubmitted : function(){
+    handleGroupSubmitted : function(){
       if(this.newMemberIds.length === 0){
         WarningToast(
           'Agrega al menos un usuario' +
-          ' al proyecto.'
+          ' al grupo.'
         );
         return;
       }
       if(this.newLeaderId === null){
         WarningToast(
-          'Elige un líder de proyecto' +
+          'Elige un líder de grupo' +
           ' para continuar.'
         );
         return;
       }
       this.hasValidFields = false;
-      $('#new-project-info-form').submit();
+      $('#new-group-info-form').submit();
       if(!this.hasValidFields){
         WarningToast(
           'Revisa la información' +
-          ' del proyecto.'
+          ' del grupo.'
         );
         return;
       }
-
-      var groupIdInput = document.querySelector('input[name="group-id"]');
 
       var authToken = document.querySelector('input[name="_token"]');
 
@@ -96,24 +92,22 @@ Vue.component('group-admin-create-project-view', {
 
       // The body of our request.
       var requestBody = { 
-        descripcion : this.newProjectDescription,
-        nombreProyecto : this.newProjectName,
+        descripcion : this.newGroupDescription,
+        nombreGrupo : this.newGroupName,
         integrantes : this.newMemberIds,
-        idGrupo : groupIdInput.value,
         lider : this.newLeaderId,
         _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
 
-      // Fetch the projects list.
-      fetch('/agregarProyecto', requestData)
+      // Fetch the groups list.
+      fetch('/agregarGrupo', requestData)
       .then(response => response.json())
       .then(function(response){
+        console.log(response);
         if(response.status === 'OK'){
           SuccessToast(response.result);
-        }else{
-          WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -121,31 +115,31 @@ Vue.component('group-admin-create-project-view', {
       this.resetInformation();
     },
     resetInformation : function(){
-      this.newProjectDescription = '';
-      this.newProjectName = '';
+      this.newGroupDescription = '';
+      this.newGroupName = '';
       this.newLeaderId = null;
       this.newMemberIds = [];
-      document.querySelector('#new-project-info-form').reset();
+      document.querySelector('#new-group-info-form').reset();
       M.updateTextFields();
     }
   },
   mounted : function(){
     M.updateTextFields();
     // TODO : No JQuery.
-    $('#new-project-info-form').validate({
+    $('#new-group-info-form').validate({
       rules : {
-        'new-project-name-input' : {
+        'new-group-name-input' : {
           required: true
         },
-        'new-project-desc-input' : {
+        'new-group-desc-input' : {
           required: true
         }
       },
       messages : {
-        'new-project-name-input' : {
-          required : 'Ingresa un nombre de proyecto.'
+        'new-group-name-input' : {
+          required : 'Ingresa un nombre de grupo.'
         },
-        'new-project-desc-input' : {
+        'new-group-desc-input' : {
           required : 'Ingresa una descripción.'
         }
       },
@@ -164,28 +158,28 @@ Vue.component('group-admin-create-project-view', {
       <div class="card">
         <div class="card-content">
           <span class="card-title first-text">
-            <b>Información básica del proyecto</b>
+            <b>Información básica del grupo</b>
           </span>
           <div class="row">
-            <form class="col s12" id="new-project-info-form">
+            <form class="col s12" id="new-group-info-form">
               <div class="row">
                 <div class="input-field col s12">
                   <input class="validate" type="text" 
-                    placeholder="Nombre del Proyecto" 
-                    name="new-project-name-input"
-                    id="new-project-name-input" 
-                    v-model:value="newProjectName" />
-                  <label for="new-project-name-input">
-                    Nombre del Proyecto
+                    placeholder="Nombre del Grupo" 
+                    name="new-group-name-input"
+                    id="new-group-name-input" 
+                    v-model:value="newGroupName" />
+                  <label for="new-group-name-input">
+                    Nombre del Grupo
                   </label>
                 </div>
                 <div class="input-field col s12">
                   <textarea class="materialize-textarea"
-                    name="new-project-desc-input"
-                    id="new-project-desc-input"
-                    v-model:value="newProjectDescription"></textarea>
-                  <label for="new-project-desc-input">
-                    Descripción del Proyecto
+                    name="new-group-desc-input"
+                    id="new-group-desc-input"
+                    v-model:value="newGroupDescription"></textarea>
+                  <label for="new-group-desc-input">
+                    Descripción del Grupo
                   </label>
                 </div>
               </div>
@@ -201,7 +195,7 @@ Vue.component('group-admin-create-project-view', {
       </add-new-member-card>
       <new-leader-modal
         @new-leader-chosen="handleLeaderChosen($event)"
-        @project-submitted="handleProjectSubmitted"
+        @group-submitted="handleGroupSubmitted"
         :group-members="memberList"
         :leader-id="newLeaderId">
       </new-leader-modal>
