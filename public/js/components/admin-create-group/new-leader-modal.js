@@ -7,8 +7,8 @@ Vue.component('new-leader-modal', {
     handleNewLeader : function(userId){
       this.$emit('new-leader-chosen', userId);
     },
-    handleProjectSubmitted : function(){
-      this.$emit('project-submitted');
+    handleGroupSubmitted : function(){
+      this.$emit('group-submitted');
     }
   },
   template : `
@@ -28,7 +28,7 @@ Vue.component('new-leader-modal', {
           Cancelar
         </a>
         <a class="modal-close waves-effect waves-green btn-flat"
-          @click="handleProjectSubmitted"
+          @click="handleGroupSubmitted"
           href="#!" >
           Crear grupo
         </a>
