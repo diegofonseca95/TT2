@@ -59,7 +59,7 @@
   <script src="/js/components/admin-create-group/admin-create-group-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
-  <script src="/js/global/admin-create-group/admin-create-group.js"></script>
+  <script src="/js/global/admin/admin-create-group.js"></script>
   <!-- Scripts End -->
 </body>
 
