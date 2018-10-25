@@ -7,7 +7,7 @@ Vue.component('post-list-item', {
     },
     computed : {
       dropdownId : function(){
-        return 'dropdown' + str(this.post.id);
+        return 'dropdown' + this.post.id.toString();
       }
     },
     methods : {
