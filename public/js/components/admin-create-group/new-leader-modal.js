@@ -30,7 +30,7 @@ Vue.component('new-leader-modal', {
         <a class="modal-close waves-effect waves-green btn-flat"
           @click="handleProjectSubmitted"
           href="#!" >
-          Crear proyecto
+          Crear grupo
         </a>
       </div>
     </div>
