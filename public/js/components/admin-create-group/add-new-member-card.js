@@ -49,7 +49,7 @@ Vue.component('add-new-member-card', {
     <div class="card">
       <div class="card-content">
         <span class="card-title first-text">
-          <b>Agregar usuarios al proyecto</b>
+          <b>Agregar usuarios al grupo</b>
         </span>
         <new-member-list
           @remove-new-member="handleRemoveNewMember"
