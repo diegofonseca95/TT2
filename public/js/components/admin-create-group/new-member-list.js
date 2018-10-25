@@ -1,6 +1,6 @@
 /*
   This component represents the list of users 
-  available to add to a new project.
+  available to add to a new group.
 */
 Vue.component('new-member-list', {
   props : [
