@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Mail\RecuperarContrasena;
 use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class SesionControlador extends Controller
 {
     public function iniciarSesion(){
@@ -16,10 +18,10 @@ class SesionControlador extends Controller
 
         if($query->isNotEmpty() && $query[0]->estado == 1){
 
-            
+
             session(['usuario.nombre' => $query[0]->nombre]);
             session(['usuario.idUsuario' => $query[0]->idUsuario]);
-            
+
             Auth::login($query[0]);
 
             return response()->json([
@@ -51,11 +53,11 @@ class SesionControlador extends Controller
             ]);
         }
         try{
-            $usuario = User::find($query[0]->idUsuario);
+            $usuario = User::findOrFail($query[0]->idUsuario);
             $usuario->contrasena = substr(md5($usuario->nombre.$usuario->contrasena), 0, 10);
 
             \Mail::to(request('userId'))->send(new RecuperarContrasena($usuario));
-            
+
             $usuario->save();
 
             return response()->json([
@@ -63,13 +65,13 @@ class SesionControlador extends Controller
                 'result' => 'Se ha enviado un correo con los pasos a seguir para recuperar tu contraseña'
             ]);
 
-        }catch(Exception $ex){
+        }catch(ModelNotFoundException $ex){
             return response()->json([
                 'status' => 'ERROR',
                 'result' => 'Error desconocido'
             ]);
         }
-        
+
 
     }
 
@@ -81,7 +83,7 @@ class SesionControlador extends Controller
     }
 
     public function cerrarSesion(){
-        Auth::logout(); 
+        Auth::logout();
         return view('index');
     }
 }

@@ -123,7 +123,7 @@ class TareaControlador extends Controller
         }
 
         $cont = TareaSprint::where([['idSprint', '=', request('idSprint')], ['idTarea', '=', request('idTarea')]])->count();
-        $sprint = Sprint::where(['idSprint', '=', request(idSprint)])->first();
+        $sprint = Sprint::where('idSprint', '=', request('idSprint'))->first();
         $date = new \DateTime();
 
         if($sprint->fecha_fin < $date->format('Y-m-d') || $cont > 0){
@@ -132,7 +132,7 @@ class TareaControlador extends Controller
                     'result' => ($cont>0 ? 'Esta tarea ya pertenece al sprint':'Sprint no activo')
               ]);
         }
-        
+
         $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', '=', request('idTarea'))->first();
         $tareaUsuario = new TareaUsuario;
         $tareaUsuario->idUsuario = request('idUsuario');
