@@ -50,6 +50,11 @@
     margin: 0 !important;
 }
 
+.zero-margin-bottom{
+
+    margin-bottom: 0 !important;
+}
+
 .flex-container{
 
     display: flex !important;
