@@ -114,6 +114,8 @@ Vue.component('group-admin-create-project-view', {
         console.log(response);
         if(response.status === 'OK'){
           SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -143,7 +145,7 @@ Vue.component('group-admin-create-project-view', {
       },
       messages : {
         'new-project-name-input' : {
-          required : 'Ingresa un nombre de grupo.'
+          required : 'Ingresa un nombre de proyecto.'
         },
         'new-project-desc-input' : {
           required : 'Ingresa una descripción.'
