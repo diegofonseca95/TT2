@@ -73,6 +73,19 @@ class ProyectosControlador extends Controller
             ]);
         }
 
+        $filter = Proyecto::where('nombreProyecto', '=', request('nombreProyecto'))->get();
+        $idsFilter = array();
+        foreach ($filter as $value) {
+            array_push($idsFilter, $value->idProyecto);
+        }
+        $cont = ProyectoGrupo::whereIn('idProyecto', $idsFilter)->where('idGrupo', '=', request('idGrupo'))->count();
+
+        if($cont > 0){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Ya existe un proyecto con ese nombre dentro del grupo'
+            ]);
+        }
         $proyecto = new Proyecto;
         $proyecto->nombreProyecto = request("nombreProyecto");
         $proyecto->descripcion = request("descripcion");

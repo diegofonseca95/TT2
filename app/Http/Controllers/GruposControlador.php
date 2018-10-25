@@ -40,10 +40,7 @@ class GruposControlador extends Controller
             return view('index');
         }
 
-    	$usuario = new User;
-    	$query = $usuario->where('estado', '!=', 3)->get();
-
-    	return view('admin_create_groups', [ 'usuarios' => $query]);
+    	return view('admin_create_group', ['nombreVista'=> 'Nuevo Grupo', 'iconoVista' => 'group']);
     }
 
     public function obtenerLiderTabla(){
@@ -62,9 +59,17 @@ class GruposControlador extends Controller
             return view('index');
         }
 
+        $cont = Grupo::where('nombreGrupo', '=', request('nombreGrupo'))->count();
+
+        if($cont > 0){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Ya existe un grupo con el mismo nombre'
+            ]);
+        }
         $grupo = new Grupo;
-    	$grupo->nombreGrupo = request("nombreGrupo");
-    	$grupo->descripcion = request("descripcion");
+      	$grupo->nombreGrupo = request("nombreGrupo");
+      	$grupo->descripcion = request("descripcion");
         $grupo->save();
 
         $administrarGrupo = new AdministradorGrupo;
@@ -73,7 +78,7 @@ class GruposControlador extends Controller
 
         $administrarGrupo->save();
 
-    	$integrantes = request("integrantes");
+    	  $integrantes = request("integrantes");
 
         foreach ($integrantes as $value) {
             $usuarioGrupo = new UsuarioGrupo;
@@ -82,9 +87,12 @@ class GruposControlador extends Controller
             $usuarioGrupo->save();
         }
 
-    	
-    	
-    	return view("welcome");
+
+
+    	return response()->json([
+            'status' => 'OK',
+            'result' => 'Grupo creado correctamente'
+      ]);
     }
     public function agregarUsuario(){
         if(!Auth::check()){
@@ -95,7 +103,7 @@ class GruposControlador extends Controller
         }
 
         $idGrupo = request("idGrupo");
-   
+
 
     	$integrantes = request("integrantes");
 
@@ -103,7 +111,7 @@ class GruposControlador extends Controller
     		foreach ($integrantes as $value) {
 	            try{
                     UsuarioGrupo::where([['idGrupo', '=', $idGrupo],['idUsuario', '=', $value] ])->firstOrFail();
-                    
+
                     UsuarioGrupo::where([['idGrupo', '=', $idGrupo],['idUsuario', '=', $value] ])->update(['estado'=> 1]);
                 }catch(ModelNotFoundException $e){
                     $usuarioGrupo = new UsuarioGrupo;
@@ -111,21 +119,21 @@ class GruposControlador extends Controller
                     $usuarioGrupo->idGrupo = $idGrupo;
                     $usuarioGrupo->save();
                 }
-                
-                
+
+
         	}
 
 	    	return response()->json([
 	                'status'=> 'OK',
                     'result'=> 'Usuario(s) Agregado(s)'
 	                ]);
-    	}catch(Exception $e){
+    	}catch(ModelNotFoundException $e){
     		return response()->json([
     			'status'=> 'ERROR',
     			'result'=> $e
     		]);
     	}
-        
+
     }
     public function editarGrupo(){
         if(!Auth::check()){
@@ -149,7 +157,7 @@ class GruposControlador extends Controller
                 'result'=> 'Grupo no existe'
                 ]);
         }
-        
+
     }
 
     public function obtenerGrupo(){
@@ -253,7 +261,7 @@ class GruposControlador extends Controller
                 'status'=> 'OK',
                 'result'=> $arrays
                 ]);
-        
+
     }
     public function obtenerGrupos(){
         if(!Auth::check()){
@@ -261,7 +269,7 @@ class GruposControlador extends Controller
         }
 
         $grupo = new Grupo;
-        
+
         return $grupo->where('estado', '!=', 3)->get();
     }
     public function verGrupo($idGrupo){
@@ -284,7 +292,7 @@ class GruposControlador extends Controller
         $proyecto = new Proyecto;
         $query = $proyectoGrupo->where('idGrupo', '=', request('idGrupo'))->get();
         $arrays = array();
-        
+
         foreach ($query as $value) {
             array_push($arrays, $value->idProyecto);
         }
@@ -299,20 +307,20 @@ class GruposControlador extends Controller
 
         	$idLider =$adminProyecto->where('idProyecto', '=', $proyecto->idProyecto)->get();
         	$usuarioP = $usuario->where('idUsuario', '=', $idLider[0]->idUsuario)->get();
-            
+
             array_push($respuesta, ['proyecto'=>$proyecto, 'lider'=> $usuarioP[0]]);
         }
         return response()->json([
                 'status'=> 'OK',
                 'result'=> $respuesta
                 ]);
-        
+
     }
     public function agregarProyecto($idGrupo){
         if(!Auth::check()){
             return view('index');
         }
 
-        return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Proyectos', 'iconoVista' => 'assignment']);
+        return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Nuevo Proyecto', 'iconoVista' => 'assignment']);
     }
 }
