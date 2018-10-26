@@ -44,8 +44,14 @@
   <script src="/js/components/common/priority-span.js"></script>
   <!-- Common Components End -->
   <!-- List Items Begin -->
+  <script src="/js/components/user-watch-iteration/doing-task-list-item.js"></script>
+  <script src="/js/components/user-watch-iteration/done-task-list-item.js"></script>
+  <script src="/js/components/user-watch-iteration/todo-task-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
+  <script src="/js/components/user-watch-iteration/doing-task-list.js"></script>
+  <script src="/js/components/user-watch-iteration/done-task-list.js"></script>
+  <script src="/js/components/user-watch-iteration/todo-task-list.js"></script>
   <!-- Lists End -->
   <!-- Modals Begin -->
   <!-- Modals End -->
@@ -55,6 +61,7 @@
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
   <!-- Others Begin -->
+  <script src="/js/components/user-watch-iteration/task-board.js"></script>
   <script src="/js/components/user-watch-iteration/user-watch-iteration-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
