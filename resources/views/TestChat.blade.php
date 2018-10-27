@@ -55,8 +55,9 @@
       </div>
     </nav>
 
-
-    <input type="text" id="user" >
+    from: <input type="text" id="emisor" >
+    to: <input type="text" id="receptor">
+    mensaje: <input type="text" id="user" >
     <button onclick="nombre()"> mensaje </button>
 
     <div id="prueba" style="border:1px solid black;">
@@ -123,11 +124,17 @@
         notificationsCountElem.attr('data-count', notificationsCount);
         notificationsWrapper.find('.notif-count').text(notificationsCount);
         notificationsWrapper.show();
-        $('#prueba').append("<br>"+data.username + ": " + data.message);
+        $('#prueba').append("<br>"+data.user.nombre + ": " + data.message.contenido);
       });
 
       function nombre(){
-        $.get( "/test/diego/mensaje/"+$('#user').val(), function( data ) {
+        $.post( "/Chat",
+          {
+            emisor: $('#emisor').val(),
+            receptor: $('#receptor').val(),
+            mensaje: $('#user').val(),
+            _token: $('#token_').val()
+          }, function( data ) {
 
           });
       }

@@ -76,6 +76,9 @@ Route::get('TestChat', 'SesionControlador@testChat');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 
 	  /*App\Events\Chat::dispatch('Someone');*/
-    event(new App\Events\Chat($user, $message));
+    event(new App\Events\Chat(1,2, $message));
     return "Event has been sent!";
+});
+Route::post('/Chat', function(){
+			event(new App\Events\Chat(request('emisor'), request('receptor'), request('mensaje')));
 });

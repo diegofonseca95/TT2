@@ -9,6 +9,8 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\User;
+use App\Mensaje;
 
 class Chat implements ShouldBroadcast
 {
@@ -26,9 +28,17 @@ class Chat implements ShouldBroadcast
      */
     public function __construct($user, $user2, $message)
     {
-        $this->user = $user;
+        $this->user = User::findOrNew($user);
         $this->user2 = $user2;
-        $this->message = $message;
+
+        $temp = new Mensaje;
+        $temp->idEmisor = $user;
+        $temp->idReceptor = $user2;
+        $temp->contenido = $message;
+        $temp->save();
+
+        $this->message = $temp;
+
     }
 
     /**
@@ -38,8 +48,17 @@ class Chat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.'.$this->user.'.'.$this->user2);
+        $val = $this->user->idUsuario;
+        $val1 = $this->user2;
+        if($val > $val1) $this->swap($val, $val1);
+
+        return new PrivateChannel('chat.'.$val.'.'.$val1);
         //return ['chat'];
     }
+    function swap(&$x,&$y) {
+    $tmp=$x;
+    $x=$y;
+    $y=$tmp;
+}
 
 }
