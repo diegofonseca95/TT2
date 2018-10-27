@@ -91,7 +91,7 @@
       });
 
       // Subscribe to the channel we specified in our Laravel Event
-      var channel = pusher.subscribe('private-chat');
+      var channel = pusher.subscribe('private-chat.1.2');
 
       // Bind a function to a Event (the full Laravel class)
       channel.bind('App\\Events\\Chat', function(data) {
