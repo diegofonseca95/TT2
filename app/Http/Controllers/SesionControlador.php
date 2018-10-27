@@ -86,4 +86,8 @@ class SesionControlador extends Controller
         Auth::logout();
         return view('index');
     }
+
+    public function testChat(){
+        return view('TestChat');
+    }
 }
