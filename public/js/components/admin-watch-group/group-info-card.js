@@ -91,6 +91,9 @@ Vue.component('group-info-card', {
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
+    },
+    handleWatchBlog : function(){
+      // TODO : Redirect to group blog.
     }
   },
   template : `
@@ -108,6 +111,9 @@ Vue.component('group-info-card', {
             <user-full-name-span
               :user="this.groupInfo.leader">
             </user-full-name-span>
+          </span>
+          <span class="title truncate col s12">
+            <a href="#!" @click="handleWatchBlog">Ver Blog</a>
           </span>
           <div class="col s12">
             <button title="Editar" data-target="edit-group-info-modal" 

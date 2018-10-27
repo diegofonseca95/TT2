@@ -6,6 +6,8 @@ Vue.component('user-watch-iteration-view', {
     <div class="row">
       <iteration-info-card>
       </iteration-info-card>
+      <task-board>
+      </task-board>
     </div>
   `
 });

@@ -38,6 +38,10 @@
   <!-- Content begin -->
   <div class="container" id="admin-watch-iteration-box">
     <div class="section"></div>
+
+    <user-watch-iteration-view>
+    </user-watch-iteration-view>
+
     <div class="row">
 
       <!-- Iteration Info Begins -->
@@ -447,93 +451,42 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../../public/js/toasts.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="../../public/js/components/common/user-full-name-span.js"></script>
+  <script src="../../public/js/components/common/priority-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="../../public/js/components/user-watch-iteration/doing-task-list-item.js"></script>
+  <script src="../../public/js/components/user-watch-iteration/done-task-list-item.js"></script>
+  <script src="../../public/js/components/user-watch-iteration/todo-task-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="../../public/js/components/user-watch-iteration/doing-task-list.js"></script>
+  <script src="../../public/js/components/user-watch-iteration/done-task-list.js"></script>
+  <script src="../../public/js/components/user-watch-iteration/todo-task-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="../../public/js/components/user-watch-iteration/iteration-info-card.js"></script>
+  <!-- Cards End -->
+  <!-- Card Groups Begin -->
+  <!-- Card Groups End -->
+  <!-- Others Begin -->
+  <script src="../../public/js/components/user-watch-iteration/task-board.js"></script>
+  <script src="../../public/js/components/user-watch-iteration/user-watch-iteration-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="../../public/js/global/user/user-watch-iteration.js"></script>
   <script>
-    //M.AutoInit();
-    document.addEventListener('DOMContentLoaded', function () {
-      var options = {
-        format: "dd / mmm / yyyy",
-        i18n: {
-          cancel: "Cancelar",
-          clear: "Limpiar",
-          done: "Listo",
-          months: [
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Septiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"
-          ],
-          monthsShort: [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12"
-          ],
-          weekdays: [
-            "Domingo",
-            "Lunes",
-            "Martes",
-            "Miércoles",
-            "Jueves",
-            "Viernes",
-            "Sábado"
-          ],
-          weekdaysShort: [
-            "Dom",
-            "Lun",
-            "Mar",
-            "Mie",
-            "Jue",
-            "Vie",
-            "Sáb"
-          ],
-          weekdaysAbbrev: [
-            'D', 'L', 'M', 'M', 'J', 'V', 'S'
-          ]
-        }
-      };
-      var elems = document.querySelectorAll('.datepicker');
-      var instances = M.Datepicker.init(elems, options);
-    });
-
     //Modal initialization - modal_uploadDeliverable
     document.addEventListener('DOMContentLoaded', function () {
       var elems = document.getElementById('modal_uploadDeliverable');
       var options = {};
       var instances = M.Modal.init(elems, options);
-    });
-
-    //Open Datepicker
-    function openDatePicker() {
-      var elem = document.getElementById('newDate');
-      var instance = M.Datepicker.getInstance(elem);
-      instance.open();
-    }
-
-    //Initialize dropdowns
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.dropdown-trigger');
-      var options = {
-        alignment: 'right',
-        constrainWidth: false
-      }
-      var instances = M.Dropdown.init(elems, options);
     });
   </script>
   <!-- Scripts End -->
