@@ -88,6 +88,6 @@ class SesionControlador extends Controller
     }
 
     public function testChat(){
-        return view('TestChat');
+        return view('user_watch_dashboard');
     }
 }
