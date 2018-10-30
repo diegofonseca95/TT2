@@ -30,9 +30,11 @@ Vue.component('doing-task-list-item', {
                     title="Opciones">more_vert</i>
                 </a>
                 <i class="material-icons right" 
-                  title="Pendiente de validar">timer</i>
+                  title="Pendiente de validar"
+                  v-if="task.status.pendiente">timer</i>
                 <i class="material-icons right" 
-                  title="Evidencia rechazada">close</i>
+                  title="Evidencia rechazada"
+                  v-if="task.status.rechazada">close</i>
               </span>
             </div>
             <div class="row zero-margin">
