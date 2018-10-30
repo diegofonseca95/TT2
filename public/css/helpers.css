@@ -4,12 +4,31 @@
     max-height : 100 !important;
 }
 
+.no-overflow
+{
+
+    overflow: hidden !important;
+}
+
 .scrollable-collection
 {
 
-    max-height : 570px !important;
+    max-height : 325px !important;
     overflow : auto !important;
 
+}
+
+.scrollable-chat-messages
+{
+
+    overflow : auto !important;
+}
+
+.scrollable-chat
+{
+
+    max-height : 112px !important;
+    overflow : auto !important;
 }
 
 .scrollable-board
@@ -26,14 +45,6 @@
     height: 100% !important;
     max-height : 100% !important;
     overflow : scroll !important;
-}
-
-.scrollable-chat
-{
-
-    max-height : 112px !important;
-    overflow : auto !important;
-
 }
 
 .zero-padding
