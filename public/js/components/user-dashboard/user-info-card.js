@@ -1,4 +1,9 @@
 Vue.component('user-info-card', {
+  mounted : function(){
+    M.Collapsible.init(
+      document.getElementById('user-info-collapsible')
+    );
+  },
   template : `
     <ul class="collapsible" id="user-info-collapsible">
       <!-- User Groups Begin -->

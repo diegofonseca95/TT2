@@ -367,7 +367,6 @@
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
   <!-- Others Begin -->
-  <script src="/js/components/user-dashboard/task-board.js"></script>
   <script src="/js/components/user-dashboard/user-watch-dashboard-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
