@@ -24,6 +24,16 @@ Vue.component('todo-task-list', {
         :key="task.idTarea"
         :task="task">
       </todo-task-list-item>
+      <div class="row zero-margin-bottom"
+        v-if="tasks.length === 0">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              No hay tareas por hacer.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `
 });

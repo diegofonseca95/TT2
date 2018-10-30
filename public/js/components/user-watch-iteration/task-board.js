@@ -64,6 +64,7 @@ Vue.component('task-board', {
   },
   methods : {
     handleTaskBegun : function(){
+      
     }
   },
   template : `

@@ -18,6 +18,16 @@ Vue.component('done-task-list', {
         :key="task.idTarea"
         :task="task">
       </done-task-list-item>
+      <div class="row zero-margin-bottom"
+        v-if="tasks.length === 0">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              No hay tareas terminadas.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `
 });
