@@ -12,6 +12,7 @@ Vue.component('dashboard-group-list', {
     };
   },
   beforeCreate : function(){
+    var userInput = document.querySelector('input[name="user-id"]');
     var authToken = document.querySelector('input[name="_token"]');
 
     // Request data for the 'fetch' function.
@@ -22,7 +23,7 @@ Vue.component('dashboard-group-list', {
 
     // The body of our request.
     var requestBody = { 
-      idUsuario : this.user.idUsuario,
+      idUsuario : userInput.value,
       _token : authToken.value
     };
 
