@@ -9,10 +9,12 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
-    M.Dropdown.init(
-      document.querySelector('#' + this.triggerId),
-      { alignment: 'right', constrainWidth: false }
-    );
+    if(this.task.editable){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
   },
   template : `
     <div class="row zero-margin-bottom">
@@ -21,36 +23,43 @@ Vue.component('doing-task-list-item', {
           <div class="card-content">
             <div class="row">
               <span class="card-title">
-                Tarea 1
+                Tarea {{ task.tarea.numeroTarea }}
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
                     title="Opciones">more_vert</i>
                 </a>
                 <i class="material-icons right" 
-                  title="Pendiente de validar">timer</i>
+                  title="Pendiente de validar"
+                  v-if="task.status.pendiente">timer</i>
                 <i class="material-icons right" 
-                  title="Evidencia rechazada">close</i>
+                  title="Evidencia rechazada"
+                  v-if="task.status.rechazada">close</i>
               </span>
             </div>
             <div class="row zero-margin">
               <span class="col s12">
-                Descripción de la tarea 1
+                {{ task.tarea.descripcion }}
               </span>
               <span class="col s12">
-                Evidencia solicitada: Fotos del evento
+                Evidencia solicitada: {{ task.tarea.evidencia }}
               </span>
               <span class="col s12">
-                Encargado: Victor Noriega
+                Encargado: 
+                <user-full-name-span :user="task.encargado">
+                </user-full-name-span>
               </span>
               <span class="col s12">
-                Prioridad: alta
+                Prioridad: 
+                <priority-span :priority="task.tarea.puntaje">
+                </priority-span>
               </span>
             </div>
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content">
+      <ul :id="dropdownId" class="dropdown-content"
+        v-if="task.editable">
         <li>
           <a class="modal-trigger" href="#modal_uploadDeliverable">
             Subir evidencia

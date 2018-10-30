@@ -14,32 +14,23 @@
 </head>
 
 <body class="page-background">
-  <input type="text" hidden=true id="token_" value="{{ csrf_token() }}">
+
+  <input type="hidden" value="<?= $idUsuario ?>" name="user-id" />
+  <input type="hidden" value="{{ csrf_token() }}" name="token_" />
+
+  {{ csrf_field() }}
+
   <!-- Navbar Begin -->
-  <nav>
-    <div class="nav-wrapper second-background">
-      <ul class="left">
-        <li>
-          <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
-            <i class="material-icons left">view_module</i>
-          </a>
-        </li>
-      </ul>
-      <a href="#!" class="brand-logo center">
-        <i class="material-icons">computer</i>
-        <span class="hide-on-small-only">Mi Dashboard</span>
-      </a>
-      <ul class="right">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
-      </ul>
-    </div>
-  </nav>
+  @include('systemnavbar');
   <!-- Navbar End -->
+
   <input type="text" id="emisor" hidden=true value="1">
   <input type="text" id="receptor" hidden = true value="2">
   <!-- Content begin -->
   <div class="container" id="user-watch-dashboard-box">
     <div class="section"></div>
+    <user-watch-dashboard-view>
+    </user-watch-dashboard-view>
     <div class="row">
 
     <!-- Chat Begins -->
@@ -354,6 +345,33 @@
   <script src="js/toasts.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="/js/components/common/user-full-name-span.js"></script>
+  <script src="/js/components/common/priority-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="/js/components/user-dashboard/dashboard-project-list-item.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-group-list-item.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-task-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="/js/components/user-dashboard/dashboard-project-list.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-group-list.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-task-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="/js/components/user-dashboard/user-info-card.js"></script>
+  <!-- Cards End -->
+  <!-- Card Groups Begin -->
+  <!-- Card Groups End -->
+  <!-- Others Begin -->
+  <script src="/js/components/user-dashboard/user-watch-dashboard-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="/js/global/user/user-dashboard.js"></script>
 
   <script>
     //M.AutoInit();

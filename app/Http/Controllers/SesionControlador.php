@@ -88,6 +88,7 @@ class SesionControlador extends Controller
     }
 
     public function testChat(){
-        return view('user_watch_dashboard');
+        $user = Auth::id();
+        return view('user_watch_dashboard', ['idUsuario' => $user, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
 }

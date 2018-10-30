@@ -13,7 +13,7 @@ Vue.component('task-list-item', {
       <i class="material-icons circle third-background">call_made</i>
       <div class="row">
         <span class="title truncate col s12">
-          {{ task.nombreTarea }}
+          Tarea {{ task.numeroTarea }}
         </span>
         <span class="title truncate col s12">
           {{ task.descripcion }}

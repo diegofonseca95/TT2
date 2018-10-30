@@ -1,3 +1,3 @@
 var UserDashboardVue = new Vue({
-  el : '#user-dashboard-box'
+  el : '#user-watch-dashboard-box'
 });

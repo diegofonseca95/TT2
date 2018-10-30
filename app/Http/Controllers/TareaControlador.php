@@ -17,6 +17,7 @@ use App\TareaProyectoGrupo;
 use App\Tarea;
 use App\TareaUsuario;
 use App\TareaSprint;
+use App\Usuario;
 use Auth;
 
 class TareaControlador extends Controller
@@ -151,5 +152,53 @@ class TareaControlador extends Controller
                 'status' => 'OK',
                 'result' => 'La tarea ha sido asignada correctamente'
           ]);
+    }
+
+    public function iniciarTarea(){
+        if(!Auth::check()){
+          return response()->json([
+              'status' => 'ERROR',
+              'result' => 'Inicia sesion para continuar'
+          ]);
+        }
+
+        $idUser = Auth::id();
+
+        $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', request('idTarea'))->first();
+        $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
+        $encargado = Usuario::where('idUsuario', $tareaUsuario->idUsuario)->first();
+
+        if($idUser != $encargado->idUsuario){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'No tienes permiso para iniciar esta tarea'
+            ]);
+        }
+
+        try{
+            $tarea = Tarea::findOrFail(request('idTarea'));
+
+            if($tarea->estado != 3){
+                return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Esta tarea ya habia sido iniciada anteriormente'
+                ]);
+            }
+
+            $tarea->estado = 4;
+            $tarea->save();
+
+            return response()->json([
+                'status' => 'OK',
+                'result' => 'Tarea iniciada'
+            ]);
+        }catch(ModelNotFoundException $e){
+          return response()->json([
+              'status' => 'ERROR',
+              'result' => 'Tarea no existe'
+          ]);
+        }
+
+
     }
 }

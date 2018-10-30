@@ -1,5 +1,10 @@
 Vue.component('todo-task-list', {
   props : ['tasks'],
+  methods : {
+    handleTaskBegun : function(task){
+      this.$emit('task-begun', task);
+    }
+  },
   template : `
     <div class="col s12 m4 light-blue lighten-4 scrollable-board">
       <div class="row">
@@ -15,9 +20,20 @@ Vue.component('todo-task-list', {
       </div>
       <todo-task-list-item 
         v-for="task in tasks"
+        @task-begun="handleTaskBegun"
         :key="task.idTarea"
         :task="task">
       </todo-task-list-item>
+      <div class="row zero-margin-bottom"
+        v-if="tasks.length === 0">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              No hay tareas por iniciar.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `
 });

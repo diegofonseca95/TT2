@@ -72,6 +72,8 @@ Route::post('/obtenerTareasUsuario', 'TareaUsuarioControlador@UsuarioTarea');
 Route::post('/obtenerSprint', 'SprintControlador@obtenerSprint');
 Route::post('/editarSprint', 'SprintControlador@editarSprint');
 Route::post('/obtenerSprintsActivos', 'SprintControlador@obtenerSprintsActivos');
+Route::post('/obtenerTareasSprint', 'SprintControlador@obtenerTareasSprint');
+Route::post('/iniciarTarea', 'TareaControlador@iniciarTarea');
 Route::get('TestChat', 'SesionControlador@testChat');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 

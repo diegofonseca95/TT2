@@ -13,6 +13,11 @@ use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use App\Sprint;
 use App\SprintProyectoGrupo;
+use App\TareaSprint;
+use App\TareaProyectoGrupo;
+use App\Tarea;
+use App\TareaUsuario;
+use App\Usuario;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Auth;
@@ -152,5 +157,62 @@ class SprintControlador extends Controller
                 'status' => 'OK',
                 'result' => $result
           ]);
+    }
+
+    public function obtenerTareasSprint(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+
+
+        $tareaSprint = TareaSprint::where('idSprint', '=', request('idSprint'))->get();
+        $idTareas = array();
+        foreach ($tareaSprint as $value) {
+            array_push($idTareas, $value->idTarea);
+        }
+
+        $tareas = Tarea::whereIn('idTarea', $idTareas)->get();
+        $todo = array();
+        $doing = array();
+        $done = array();
+        $infoTarea = array();
+        foreach ($tareas as $value) {
+           array_push($infoTarea, $this->informacionTarea($value));
+           if($value->estado == 3) array_push($todo, $value->idTarea);
+           if($value->estado == 4) array_push($doing, $value->idTarea);
+           if($value->estado == 5) array_push($done,$value->idTarea);
+        }
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => $infoTarea,
+            'todo'=> $todo,
+            'doing'=> $doing,
+            'done'=> $done
+        ]);
+
+    }
+
+    public function informacionTarea($tarea){
+        $user = Auth::id();
+
+        $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', $tarea->idTarea)->first();
+        $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
+        $encargado = Usuario::where('idUsuario', $tareaUsuario->idUsuario)->first();
+
+
+        return array(
+            'tarea' => $tarea,
+            'encargado' => $encargado,
+            'editable' => ($user == $encargado->idUsuario),
+            'status' => array(
+                'workInProgress' => $tarea->estado == 4,
+                'pendiente' => $tarea->estado == 7,
+                'rechazada' => $tarea->estado == 6
+            )
+        );
     }
 }
