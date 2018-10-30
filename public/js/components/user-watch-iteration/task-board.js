@@ -31,7 +31,6 @@ Vue.component('task-board', {
     fetch('/obtenerTareasSprint', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         var taskInfo = [];
         for(var i in response.result){
@@ -63,8 +62,13 @@ Vue.component('task-board', {
     }
   },
   methods : {
-    handleTaskBegun : function(){
-      
+    handleTaskBegun : function(task){
+      this.todo = this.todo.filter(
+        taskId => taskId !== task.idTarea
+      );
+      if(!this.doing.includes(task.idTarea)){
+        this.doing.push(task.idTarea);
+      }
     }
   },
   template : `

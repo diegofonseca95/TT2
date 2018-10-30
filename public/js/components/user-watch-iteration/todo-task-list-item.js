@@ -18,7 +18,7 @@ Vue.component('todo-task-list-item', {
   },
   methods : {
     handleBeginTask : function(){
-      this.$emit('task-begun', this.task);
+      this.$emit('task-begun', this.task.tarea);
     }
   },
   template : `
