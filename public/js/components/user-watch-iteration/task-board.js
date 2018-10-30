@@ -1,13 +1,63 @@
 Vue.component('task-board', {
   data : function(){
     return {
-      tasks : [
-        { idTarea : 0 },
-        { idTarea : 1 },
-        { idTarea : 2 },
-        { idTarea : 3 }
-      ]
+      tasks : [],
+      todo : [],
+      doing : [],
+      done : []
     };
+  },
+  beforeCreate : function(){
+    // Get the iteration id from the hidden input.
+    var iterationIdInput = document.querySelector('input[name="iteration-id"]');
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idSprint : iterationIdInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the projects list.
+    fetch('/obtenerTareasSprint', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        console.log('OK');
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+  },
+  computed : {
+    doingTaskList : function(){
+      return this.tasks.filter(function(task){
+        return this.doing.includes(task.idTarea);
+      }.bind(this));
+    },
+    todoTaskList : function(){
+      return this.tasks.filter(function(task){
+        return this.todo.includes(task.idTarea);
+      }.bind(this));
+    },
+    doneTaskList : function(){
+      return this.tasks.filter(function(task){
+        return this.done.includes(task.idTarea);
+      }.bind(this));
+    }
+  },
+  methods : {
+    handleTaskBegun : function(){
+    }
   },
   template : `
     <div class="row">
@@ -20,11 +70,15 @@ Vue.component('task-board', {
           </div>
         </div>
       </div>
-      <todo-task-list :tasks="tasks">
+      <todo-task-list
+        @task-begun="handleTaskBegun"
+        :tasks="todoTaskList">
       </todo-task-list>
-      <doing-task-list :tasks="tasks">
+      <doing-task-list 
+        :tasks="doingTaskList">
       </doing-task-list>
-      <done-task-list :tasks="tasks">
+      <done-task-list
+        :tasks="doneTaskList">
       </done-task-list>
     </div>
   `

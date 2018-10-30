@@ -10,9 +10,14 @@ Vue.component('todo-task-list-item', {
   },
   mounted : function(){
     M.Dropdown.init(
-      document.querySelector('#' + this.triggerId),
+      document.getElementById(this.triggerId),
       { alignment: 'right', constrainWidth: false }
     );
+  },
+  methods : {
+    handleBeginTask : function(){
+      this.$emit('task-begun', this.task);
+    }
   },
   template : `
     <div class="row zero-margin-bottom">
@@ -21,7 +26,7 @@ Vue.component('todo-task-list-item', {
           <div class="card-content">
             <div class="row">
               <span class="card-title">
-                Tarea 1
+                Tarea {{ task.numeroTarea }}
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
@@ -31,16 +36,20 @@ Vue.component('todo-task-list-item', {
             </div>
             <div class="row zero-margin">
               <span class="col s12">
-                Descripción de la tarea 1
+                {{ task.descripcion }}
               </span>
               <span class="col s12">
-                Evidencia solicitada: Fotos del evento
+                Evidencia solicitada: {{ task.evidencia }}
               </span>
               <span class="col s12">
-                Encargado: Victor Noriega
+                Encargado: 
+                <user-full-name-span :user="{}">
+                </user-full-name-span>
               </span>
               <span class="col s12">
-                Prioridad: alta
+                Prioridad: 
+                <priority-span :priority="task.puntaje">
+                </priority-span>
               </span>
             </div>
           </div>
@@ -48,7 +57,8 @@ Vue.component('todo-task-list-item', {
       </div>
       <ul :id="dropdownId" class="dropdown-content">
         <li>
-          <a href="#!">
+          <a href="#!"
+            @click="handleBeginTask">
             Iniciar tarea
           </a>
         </li>
