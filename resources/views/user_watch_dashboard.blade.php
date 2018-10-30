@@ -429,7 +429,7 @@
       auth: {
         headers: {
 
-          'X-CSRF-TOKEN': $('#token_').val(),
+          'X-CSRF-TOKEN': $('#_token').val(),
 
         }
       }
@@ -461,7 +461,7 @@
           emisor: $('#emisor').val(),
           receptor: $('#receptor').val(),
           mensaje: $('#mensaje').val(),
-          _token: $('#token_').val()
+          _token: $('#_token').val()
         }, function( data ) {
 
         });
