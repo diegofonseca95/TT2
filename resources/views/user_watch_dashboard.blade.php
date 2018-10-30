@@ -14,7 +14,8 @@
 </head>
 
 <body class="page-background">
-  <input type="hidden" value="<?= $idSprint ?>" name="iteration-id" />
+
+  <input type="hidden" value="<?= $idUsuario ?>" name="user-id" />
 
   {{ csrf_field() }}
 
