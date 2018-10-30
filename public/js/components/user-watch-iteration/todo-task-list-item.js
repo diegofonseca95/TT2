@@ -9,10 +9,12 @@ Vue.component('todo-task-list-item', {
     }
   },
   mounted : function(){
-    M.Dropdown.init(
-      document.getElementById(this.triggerId),
-      { alignment: 'right', constrainWidth: false }
-    );
+    if(this.task.editable){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
   },
   methods : {
     handleBeginTask : function(){
@@ -26,7 +28,7 @@ Vue.component('todo-task-list-item', {
           <div class="card-content">
             <div class="row">
               <span class="card-title">
-                Tarea {{ task.numeroTarea }}
+                Tarea {{ task.tarea.numeroTarea }}
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
@@ -36,26 +38,27 @@ Vue.component('todo-task-list-item', {
             </div>
             <div class="row zero-margin">
               <span class="col s12">
-                {{ task.descripcion }}
+                {{ task.tarea.descripcion }}
               </span>
               <span class="col s12">
-                Evidencia solicitada: {{ task.evidencia }}
+                Evidencia solicitada: {{ task.tarea.evidencia }}
               </span>
               <span class="col s12">
                 Encargado: 
-                <user-full-name-span :user="{}">
+                <user-full-name-span :user="task.encargado">
                 </user-full-name-span>
               </span>
               <span class="col s12">
                 Prioridad: 
-                <priority-span :priority="task.puntaje">
+                <priority-span :priority="task.tarea.puntaje">
                 </priority-span>
               </span>
             </div>
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content">
+      <ul :id="dropdownId" class="dropdown-content"
+        v-if="task.editable">
         <li>
           <a href="#!"
             @click="handleBeginTask">

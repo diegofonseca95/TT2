@@ -1,9 +1,9 @@
 Vue.component('task-board', {
   data : function(){
     return {
+      doing : [],
       tasks : [],
       todo : [],
-      doing : [],
       done : []
     };
   },
@@ -31,9 +31,15 @@ Vue.component('task-board', {
     fetch('/obtenerTareasSprint', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
-        console.log('OK');
+        var taskInfo = [];
+        for(var i in response.result){
+          taskInfo.push(response.result[i]);
+        }
+        this.doing = response.result.doing;
+        this.done = response.result.done;
+        this.todo = response.result.todo;
+        this.tasks = taskInfo;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -41,17 +47,17 @@ Vue.component('task-board', {
   computed : {
     doingTaskList : function(){
       return this.tasks.filter(function(task){
-        return this.doing.includes(task.idTarea);
+        return this.doing.includes(task.tarea.idTarea);
       }.bind(this));
     },
     todoTaskList : function(){
       return this.tasks.filter(function(task){
-        return this.todo.includes(task.idTarea);
+        return this.todo.includes(task.tarea.idTarea);
       }.bind(this));
     },
     doneTaskList : function(){
       return this.tasks.filter(function(task){
-        return this.done.includes(task.idTarea);
+        return this.done.includes(task.tarea.idTarea);
       }.bind(this));
     }
   },
