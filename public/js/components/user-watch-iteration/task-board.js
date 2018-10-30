@@ -31,6 +31,7 @@ Vue.component('task-board', {
     fetch('/obtenerTareasSprint', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response);
       if(response.status === 'OK'){
         var taskInfo = [];
         for(var i in response.result){
