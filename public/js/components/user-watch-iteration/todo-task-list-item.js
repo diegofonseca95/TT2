@@ -29,7 +29,8 @@ Vue.component('todo-task-list-item', {
             <div class="row">
               <span class="card-title">
                 Tarea {{ task.tarea.numeroTarea }}
-                <a href='#!' class="right">
+                <a href='#!' class="right"
+                  v-if="task.editable">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
                     title="Opciones">more_vert</i>
