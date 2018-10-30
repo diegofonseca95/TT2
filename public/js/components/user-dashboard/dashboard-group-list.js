@@ -41,7 +41,7 @@ Vue.component('dashboard-group-list', {
             group : response.result[i].grupo
           });
         }
-        this.userGroupsInfo = groupsInfo;
+        this.groupsInfo = groupsInfo;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -54,7 +54,7 @@ Vue.component('dashboard-group-list', {
         </span>
       </li>
       <dashboard-group-list-item
-        v-for="groupInfo in userGroupsInfo"
+        v-for="groupInfo in groupsInfo"
         :group-leader="groupInfo.groupLeader"
         :key="groupInfo.group.idGrupo"
         :group="groupInfo.group">
