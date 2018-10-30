@@ -37,9 +37,9 @@ Vue.component('task-board', {
         for(var i in response.result){
           taskInfo.push(response.result[i]);
         }
-        this.doing = response.result.doing;
-        this.done = response.result.done;
-        this.todo = response.result.todo;
+        this.doing = response.doing;
+        this.done = response.done;
+        this.todo = response.todo;
         this.tasks = taskInfo;
       }
       // TODO : Handle non 'OK' status.
