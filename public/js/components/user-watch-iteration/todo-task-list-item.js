@@ -18,7 +18,34 @@ Vue.component('todo-task-list-item', {
   },
   methods : {
     handleBeginTask : function(){
-      this.$emit('task-begun', this.task.tarea);
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idTarea : this.task.idTarea,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/iniciarTarea', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        console.log(response);
+        if(response.status === 'OK'){
+          this.$emit('task-begun', this.task.tarea);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this)); 
     }
   },
   template : `

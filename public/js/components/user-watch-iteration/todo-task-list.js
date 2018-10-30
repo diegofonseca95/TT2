@@ -2,34 +2,7 @@ Vue.component('todo-task-list', {
   props : ['tasks'],
   methods : {
     handleTaskBegun : function(task){
-      var authToken = document.querySelector('input[name="_token"]');
-
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
-
-      // The body of our request.
-      var requestBody = { 
-        _token : authToken.value,
-        idTarea : task.idTarea
-      };
-
-      requestData.body = JSON.stringify(requestBody);
-
-      // Fetch the projects list.
-      fetch('/iniciarTarea', requestData)
-      .then(response => response.json())
-      .then(function(response){
-        console.log(response);
-        if(response.status === 'OK'){
-          this.$emit('task-begun', task);
-          SuccessToast(response.result);
-        }else{
-          WarningToast(response.result);
-        }
-      }.bind(this)); 
+      this.$emit('task-begun', task);
     }
   },
   template : `
@@ -56,7 +29,7 @@ Vue.component('todo-task-list', {
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              No hay tareas por hacer.
+              No hay tareas por iniciar.
             </div>
           </div>
         </div>
