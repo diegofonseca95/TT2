@@ -17,7 +17,7 @@ Vue.component('blog-info-card', {
           console.log(e.target.result);
         }
       })(file);
-      reader.readAsText(file);
+      reader.readAsDataURL(file);
     }
   },
   template : `
