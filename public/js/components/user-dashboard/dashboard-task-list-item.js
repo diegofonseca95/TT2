@@ -4,23 +4,19 @@
 */
 Vue.component('dashboard-task-list-item', {
   props : [
-    'task' // The task associated to this item.
+    'taskInfo' // The task associated to this item.
   ],
   template : `
     <li class="collection-item grey-color">
       <div class="row">
         <span class="title truncate col s12">
-          {{ task.nombreTarea }}
-        </span>
-        <span class="title truncate col s12"></span>
-        <span class="title truncate col s12">
-          Para el grupo: Nombre del grupo
+          Para el grupo: {{ taskInfo.group.nombreGrupo }}
         </span>
         <span class="title truncate col s12">
-          Para el proyecto: Nombre del proyecto
+          Para el proyecto: {{ taskInfo.project.nombreProyecto }}
         </span>
         <span class="title truncate col s12">
-          {{ task.descripcion }}
+          Descripción : {{ taskInfo.task.descripcion }}
         </span>
         <span class="title truncate col s12">
           <a href="#!">
