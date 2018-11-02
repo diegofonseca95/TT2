@@ -16,7 +16,7 @@
 <body class="page-background">
 
   <input type="hidden" value="<?= $idUsuario ?>" name="user-id" />
-  <input type="hidden" value="{{ csrf_token() }}" name="token_" />
+  <input type="hidden" value="{{ csrf_token() }}" id="token_" />
 
   {{ csrf_field() }}
 
