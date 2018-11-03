@@ -38,7 +38,6 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="/js/toasts.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
   <!-- Vue Components Begin -->
   <!-- Common Components Begin -->
@@ -50,9 +49,11 @@
   <!-- Lists Begin -->
   <!-- Lists End -->
   <!-- Modals Begin -->
+  <script src="/js/components/group-blog/edit-group-post-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
   <script src="/js/components/group-blog/blog-info-card.js"></script>
+  <script src="/js/components/group-blog/new-post-card.js"></script>
   <!-- Cards End -->
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
@@ -61,35 +62,7 @@
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/group/group-blog.js"></script>
+  <!-- Scripts End -->
+</body>
 
-  <script>
-    //M.AutoInit();
-
-    //Modal initialization - modal_updatePhoto
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_updatePhoto');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Modal initialization - modal_updatePost
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_updatePost');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Initialize dropdowns
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.dropdown-trigger');
-      var options = {
-        alignment: 'right',
-        constrainWidth: false
-      }
-      var instances = M.Dropdown.init(elems, options);
-    });
-    </script>
-    <!-- Scripts End -->
-  </body>
-
-  </html>
+</html>

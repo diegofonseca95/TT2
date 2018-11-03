@@ -1,6 +1,13 @@
+/*
+  This component represents a group post
+  in the group blog view.
+*/
 Vue.component('group-post', {
-  props : ['post'],
+  props : [
+    'post'  // The post represented by the component.
+  ],
   mounted : function(){
+    // Initialize the options dropdown.
     M.Dropdown.init(
       document.getElementById(this.triggerId),
       { alignment : 'right', constrainWidth : false }
@@ -8,10 +15,29 @@ Vue.component('group-post', {
   },
   computed : {
     dropdownId : function(){
+      // The dropdown id.
       return 'group-post-dropdown-' + this.post.idPublicacion;
     },
     triggerId : function(){
+      // The trigger id.
       return 'group-post-trigger-' + this.post.idPublicacion;
+    }
+  },
+  methods : {
+    handlePostAccepted : function(){
+      // TODO : Accept post in server.
+      this.$emit('post-accepted', this.post);
+    },
+    handlePostRejected : function(){
+      // TODO : Reject post in server.
+      this.$emit('post-rejected', this.post);
+    },
+    handlePostSelected : function(){
+      this.$emit('post-selected', this.post);
+    },
+    handlePostDeleted : function(){
+      // TODO : Delete post in server.
+      this.$emit('post-deleted', this.post);
     }
   },
   template : `
@@ -58,22 +84,22 @@ Vue.component('group-post', {
       </div>
       <ul :id="dropdownId" class="dropdown-content">
         <li>
-          <a href="#!">
+          <a href="#!" @click="handlePostAccepted">
             <i class="material-icons">check</i>Validar publicación
           </a>
         </li>
         <li>
-          <a href="#!">
+          <a href="#!" @click="handlePostRejected">
             <i class="material-icons">close</i>Rechazar publicación
           </a>
         </li>
         <li>
-          <a class="modal-trigger" href="#modal_updatePost">
+          <a href="#!" @click="handlePostSelected">
             <i class="material-icons">edit</i>Editar publicación
           </a>
         </li>
         <li>
-          <a href="#!">
+          <a href="#!" @click="handlePostDeleted">
             <i class="material-icons">close</i>Eliminar publicación
           </a>
         </li>
