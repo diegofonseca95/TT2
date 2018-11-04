@@ -30,7 +30,7 @@
   <div class="container" id="user-watch-dashboard-box">
     <div class="section"></div>
     <user-watch-dashboard-view>
-  </user-watch-dashboard-view>
+    </user-watch-dashboard-view>
   <div class="row">
 
     <!-- Chat Begins -->
