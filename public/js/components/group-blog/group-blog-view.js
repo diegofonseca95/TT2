@@ -78,6 +78,8 @@ Vue.component('group-blog-view', {
         @post-updated="handlePostUpdated"
         :post="selectedPost">
       </edit-group-post-modal>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

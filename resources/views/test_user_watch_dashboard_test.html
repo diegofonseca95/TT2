@@ -56,7 +56,14 @@
         <li class="zero-margin">
           <ul class="collection scrollable-chat-messages zero-margin remove-border" id="chat-list">
             <!-- Message Begins -->
-            <li class="collection-item"><a href="#!" class="low-padding">Luis: Que pasión</a></li>
+            <li class="collection-item zero-padding">
+              <a href="#!" class="zero-margin">
+                <div class="chip black-text">
+                  Luis
+                </div>
+                Que pasión
+              </a>
+            </li>
             <!-- Message Ends -->
             <!-- Message Begins -->
             <li class="collection-item"><a href="#!" class="low-padding">Luis: Que pasión</a></li>
@@ -106,13 +113,15 @@
           </ul>
         </li>
         <!-- Chat Footer Begins -->
-        <li id="slide-out-right-footer" onkeypress="resizeChat();">
+        <li id="slide-out-right-footer" >
           <div class="divider"></div>
           <div class="row zero-margin">
             <div class="col s10 zero-margin zero-padding">
               <div class="input-field low-padding zero-margin">
                 <textarea id="mensaje" class="materialize-textarea zero-margin zero-padding scrollable-chat"
-                  placeholder="Nuevo Mensaje"></textarea>
+                  placeholder="Nuevo Mensaje"
+                  onkeypress="resizeChat();"
+                  onresize="console.log('AHO CORASICK');"></textarea>
               </div>
             </div>
             <div class="col s2">
@@ -134,17 +143,13 @@
         </li>
         <!-- Contact Begins -->
         <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Diego
-            Fonseca</a></li>
-        <li>
+            Fonseca</a>
           <div class="divider"></div>
         </li>
         <!-- Contact Ends -->
         <!-- Contact Begins -->
         <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Víctor
-            Noriega</a></li>
-        <li>
-          <div class="divider"></div>
-        </li>
+            Noriega</a><div class="divider"></div></li>
         <!-- Contact Ends -->
       </ul>
       <!-- Chat Left Sidenav Ends -->
@@ -469,7 +474,9 @@
     //Sidenav initialization - slide-out
     document.addEventListener('DOMContentLoaded', function () {
       var elems = document.getElementById('slide-out');
-      var options = {};
+      var options = {
+        edge: "right"
+      };
       var instances = M.Sidenav.init(elems, options);
     });
     //Sidenav initialization - slide-out-right
@@ -483,13 +490,13 @@
     });
     //Function to resize chat
     function resizeChat() {
-      console.log("Begin");
-      console.log("Before: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
+      //console.log("Begin");
+      //console.log("Before: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
       var rectSidenavHeader1 = document.getElementById("slide-out-right-header1").getBoundingClientRect();
       var rectSidenavHeader2 = document.getElementById("slide-out-right-header2").getBoundingClientRect();
       var rectSidenavFooter = document.getElementById("slide-out-right-footer").getBoundingClientRect();
       var heightSidenav = window.innerHeight;
-      console.log("Window height: " + heightSidenav);
+      //console.log("Window height: " + heightSidenav);
       var heightSidenavHeader1 = rectSidenavHeader1.height;
       var heightSidenavHeader2 = rectSidenavHeader2.height;
       var heightSidenavFooter = rectSidenavFooter.height;
@@ -497,8 +504,8 @@
       var heightSidenavChatList = heightSidenav - heightSidenavHeader - heightSidenavFooter;
       document.getElementById("chat-list").style.height = heightSidenavChatList + "px";
       document.getElementById("chat-list").style.maxHeight = heightSidenavChatList + "px";
-      console.log("After: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
-      console.log("End");
+      //console.log("After: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
+      //console.log("End");
     }
 
     window.addEventListener('load', function () {
