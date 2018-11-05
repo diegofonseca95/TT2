@@ -13,7 +13,7 @@ Vue.component('conversations-list-item', {
   },
   template : `
     <li>
-      <a class="sidenav-trigger waves-effect" href="#!"
+      <a class="waves-effect" href="#!"
         @click="handleConversationSelected">
         Nikola Tesla
       </a>

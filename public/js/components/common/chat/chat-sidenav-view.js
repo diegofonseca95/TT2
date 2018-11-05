@@ -11,12 +11,12 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     handleConversationSelected : function(conversation){
+      // TODO : Do something with 'conversation'
       M.Sidenav.getInstance(
         document.querySelector(
           '#conversations-list-sidenav'
         )
       ).close();
-      // TODO : Do something with 'conversation'
       M.Sidenav.getInstance(
         document.querySelector(
           '#conversation-sidenav'
