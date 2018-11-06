@@ -91,4 +91,12 @@ class SesionControlador extends Controller
         $user = Auth::id();
         return view('user_watch_dashboard', ['idUsuario' => $user, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
+    public function test(){
+       return view('TestChat');
+    }
+    public function testFile(){
+        request('fila')->storeAs('archivos', request('fila')->extension());
+        return view('TestChat');
+
+    }
 }

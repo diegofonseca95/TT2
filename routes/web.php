@@ -74,7 +74,9 @@ Route::post('/editarSprint', 'SprintControlador@editarSprint');
 Route::post('/obtenerSprintsActivos', 'SprintControlador@obtenerSprintsActivos');
 Route::post('/obtenerTareasSprint', 'SprintControlador@obtenerTareasSprint');
 Route::post('/iniciarTarea', 'TareaControlador@iniciarTarea');
-Route::get('TestChat', 'SesionControlador@testChat');
+Route::get('/TestChat', 'SesionControlador@testChat');
+Route::post('/testFile', 'SesionControlador@testFile');
+Route::get('/test', 'SesionControlador@test');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 
 	  /*App\Events\Chat::dispatch('Someone');*/

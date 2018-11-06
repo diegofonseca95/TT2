@@ -53,7 +53,7 @@ class Chat implements ShouldBroadcast
         if($val > $val1) $this->swap($val, $val1);
 
         return new PrivateChannel('chat.'.$val.'.'.$val1);
-        //return ['chat'];
+        //return ['chat.'.$val.'.'.$val1];
     }
     function swap(&$x,&$y) {
     $tmp=$x;

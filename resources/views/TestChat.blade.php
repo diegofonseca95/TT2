@@ -60,6 +60,11 @@
     mensaje: <input type="text" id="user" >
     <button onclick="nombre()"> mensaje </button>
 
+    <form method="post" action="/testFile" enctype="multipart/form-data">
+      {{csrf_field()}}
+      <input type="file" id="fila" name="fila"> <button type="submit" > da click perro</button>
+    </form>
+
     <div id="prueba" style="border:1px solid black;">
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
