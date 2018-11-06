@@ -85,7 +85,7 @@ Vue.component('new-post-card', {
           var newPost = response.posti;
           newPost.author = response.autor;
           this.$emit('post-submitted', newPost);
-          SuccesToast(response.result);
+          SuccessToast(response.result);
         }else{
           WarningToast(response.result);
         }
