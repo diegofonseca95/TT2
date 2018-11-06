@@ -14,6 +14,7 @@ Vue.component('group-post', {
         { alignment : 'right', constrainWidth : false }
       );
     }
+    console.log({this.post.idPublicacion : this.post.permissions});
   },
   computed : {
     dropdownId : function(){
