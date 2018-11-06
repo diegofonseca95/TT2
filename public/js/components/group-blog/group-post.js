@@ -8,10 +8,12 @@ Vue.component('group-post', {
   ],
   mounted : function(){
     // Initialize the options dropdown.
-    M.Dropdown.init(
-      document.getElementById(this.triggerId),
-      { alignment : 'right', constrainWidth : false }
-    );
+    if(this.hasOptions){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment : 'right', constrainWidth : false }
+      );
+    }
   },
   computed : {
     dropdownId : function(){
@@ -21,6 +23,12 @@ Vue.component('group-post', {
     triggerId : function(){
       // The trigger id.
       return 'group-post-trigger-' + this.post.idPublicacion;
+    },
+    hasOptions : function(){
+      return this.post.permissions.eliminar 
+        || this.post.permissions.editar
+        || this.post.permissions.aprobar
+        || this.post.permissions.rechazar;
     }
   },
   methods : {
@@ -51,13 +59,16 @@ Vue.component('group-post', {
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons" 
                     :data-target="dropdownId" 
+                    v-if="hasOptions"
                     title="Opciones"
                     :id="triggerId">more_vert</i>
                 </a>
                 <i class="material-icons right" 
-                  title="Pendiente de validar">timer</i>
+                  title="Pendiente de validar"
+                  v-if="post.estadoPublicacion === 2">timer</i>
                 <i class="material-icons right" 
-                  title="Publicación rechazada">close</i>
+                  title="Publicación rechazada"
+                  v-if="post.estadoPublicacion === 3">close</i>
               </span>
               <span class="col s12">
                 Autor: 
@@ -76,23 +87,24 @@ Vue.component('group-post', {
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content">
-        <li>
+      <ul :id="dropdownId" class="dropdown-content" 
+        v-if="hasOptions">
+        <li v-if="post.permissions.aprobar">
           <a href="#!" @click="handlePostAccepted">
             <i class="material-icons">check</i>Validar publicación
           </a>
         </li>
-        <li>
+        <li v-if="post.permissions.rechazar">
           <a href="#!" @click="handlePostRejected">
             <i class="material-icons">close</i>Rechazar publicación
           </a>
         </li>
-        <li>
+        <li v-if="post.permissions.editar">
           <a href="#!" @click="handlePostSelected">
             <i class="material-icons">edit</i>Editar publicación
           </a>
         </li>
-        <li>
+        <li v-if="post.permissions.eliminar">
           <a href="#!" @click="handlePostDeleted">
             <i class="material-icons">close</i>Eliminar publicación
           </a>

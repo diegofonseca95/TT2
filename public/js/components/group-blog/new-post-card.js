@@ -83,6 +83,7 @@ Vue.component('new-post-card', {
       .then(function(response){
         if(response.status === 'OK'){
           var newPost = response.posti;
+          newPost.permissions = response.permisos;
           newPost.author = response.autor;
           this.$emit('post-submitted', newPost);
           SuccessToast(response.result);
