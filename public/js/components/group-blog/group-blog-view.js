@@ -33,7 +33,7 @@ Vue.component('group-blog-view', {
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
-        var postsList = {};
+        var postsList = [];
         for(var i in response.result){
           var post = response.result[i];
           post.author = response.usuarios[post.idUsuario];
