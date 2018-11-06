@@ -93,7 +93,12 @@ Vue.component('group-info-card', {
       }.bind(this));
     },
     handleWatchBlog : function(){
-      // TODO : Redirect to group blog.
+      window.location.replace(
+        '/publicacionesGrupo/' + 
+        document.querySelector(
+          'input[name="group-id"]'
+        )
+      );
     }
   },
   template : `
