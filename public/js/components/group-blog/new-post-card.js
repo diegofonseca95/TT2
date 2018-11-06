@@ -56,12 +56,39 @@ Vue.component('new-post-card', {
       }
     },
     submitNewPost : function(){
-      // TODO : Submit.
-      console.log({
+      // Get the group id from the hidden input.
+      var groupIdInput = document.querySelector('input[name="group-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
         content : this.newPostContent,
-        title : this.newPostTitle
-      });
-      // this.$emit('post-submitted', POST_FROM_SERVER);
+        idGrupo : groupIdInput.value,
+        title : this.newPostTitle,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/agregarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('post-submitted', response.post);
+          SuccesToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
       this.resetFormFields();
     },
     resetFormFields : function(){

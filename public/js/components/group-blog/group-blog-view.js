@@ -5,10 +5,7 @@ Vue.component('group-blog-view', {
   data : function(){
     return {
       selectedPost : {},  // The post selected for editing.
-      posts : [
-        { idPublicacion : 0 }, 
-        { idPublicacion : 1 } 
-      ] // The group posts.
+      posts : []          // The group posts.
     };
   },
   methods : {
