@@ -4,7 +4,7 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
-  media="screen,projection">
+    media="screen,projection">
   <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
   <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
   <title>Mi Dashboard</title>
@@ -36,24 +36,34 @@
   </nav>
   <!-- Navbar End -->
   <input type="text" id="emisor" hidden=true value="1">
-  <input type="text" id="receptor" hidden = true value="2">
+  <input type="text" id="receptor" hidden=true value="2">
   <!-- Content begin -->
   <div class="container" id="user-watch-dashboard-box">
     <div class="section"></div>
     <div class="row">
-
-    <!-- Chat Begins -->
+      <user-watch-dashboard-view>
+      </user-watch-dashboard-view>
+      <!-- Chat Begins -->
 
       <!-- Chat Right Sidenav Begins -->
       <ul id="slide-out-right" class="sidenav no-overflow">
         <!-- Chat Header Begins -->
         <li id="slide-out-right-header1"><a href="#!"><i class="material-icons">message</i>Víctor Noriega</a></li>
-        <li id="slide-out-right-header2"><div class="divider"></div></li>
+        <li id="slide-out-right-header2">
+          <div class="divider"></div>
+        </li>
         <!-- Chat Header Ends -->
         <li class="zero-margin">
           <ul class="collection scrollable-chat-messages zero-margin remove-border" id="chat-list">
             <!-- Message Begins -->
-            <li class="collection-item"><a href="#!" class="low-padding">Luis: Que pasión</a></li>
+            <li class="collection-item zero-padding">
+              <a href="#!" class="zero-margin">
+                <div class="chip black-text">
+                  Luis
+                </div>
+                Que pasión
+              </a>
+            </li>
             <!-- Message Ends -->
             <!-- Message Begins -->
             <li class="collection-item"><a href="#!" class="low-padding">Luis: Que pasión</a></li>
@@ -103,12 +113,15 @@
           </ul>
         </li>
         <!-- Chat Footer Begins -->
-        <li id="slide-out-right-footer" onkeypress="resizeChat();">
+        <li id="slide-out-right-footer" >
           <div class="divider"></div>
           <div class="row zero-margin">
             <div class="col s10 zero-margin zero-padding">
               <div class="input-field low-padding zero-margin">
-                <textarea id="mensaje" class="materialize-textarea zero-margin zero-padding scrollable-chat" placeholder="Nuevo Mensaje"></textarea>
+                <textarea id="mensaje" class="materialize-textarea zero-margin zero-padding scrollable-chat"
+                  placeholder="Nuevo Mensaje"
+                  onkeypress="resizeChat();"
+                  onresize="console.log('AHO CORASICK');"></textarea>
               </div>
             </div>
             <div class="col s2">
@@ -125,14 +138,18 @@
       <!-- Chat Left Sidenav Begins -->
       <ul id="slide-out" class="sidenav">
         <li><a href="#!"><i class="material-icons">message</i>Mis grupos de chat</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+          <div class="divider"></div>
+        </li>
         <!-- Contact Begins -->
-        <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Diego Fonseca</a></li>
-        <li><div class="divider"></div></li>
+        <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Diego
+            Fonseca</a>
+          <div class="divider"></div>
+        </li>
         <!-- Contact Ends -->
         <!-- Contact Begins -->
-        <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Víctor Noriega</a></li>
-        <li><div class="divider"></div></li>
+        <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Víctor
+            Noriega</a><div class="divider"></div></li>
         <!-- Contact Ends -->
       </ul>
       <!-- Chat Left Sidenav Ends -->
@@ -142,7 +159,7 @@
           <i class="large material-icons">message</i>
         </a>
       </div>
-    <!-- Chat Ends -->
+      <!-- Chat Ends -->
 
       <!-- User Card Begins -->
       <div class="card">
@@ -340,22 +357,22 @@
               </div>
               <div class="input-field col s12 m4">
                 <input placeholder="Apellido paterno" value="Apellido paterno" id="user_firstLastName" type="text"
-                class="validate">
+                  class="validate">
                 <label for="user_firstLastName">Apellido paterno</label>
               </div>
               <div class="input-field col s12 m4">
                 <input placeholder="Apellido materno" value="Apellido materno" id="user_secondLastName" type="text"
-                class="validate">
+                  class="validate">
                 <label for="user_secondLastName">Apellido materno</label>
               </div>
               <div class="input-field col s12">
                 <input placeholder="Correo electrónico" value="correoUsuario@gmail.com" id="user_email" type="text"
-                class="validate">
+                  class="validate">
                 <label for="user_email">Correo electrónico</label>
               </div>
               <div class="input-field col s12">
                 <input placeholder="Número telefónico" value="+51 1 55 1234 5678" id="user_phoneNumber" type="text"
-                class="validate">
+                  class="validate">
                 <label for="user_phoneNumber">Número telefónico</label>
               </div>
               <!-- User Basic Info Ends -->
@@ -370,7 +387,7 @@
               </div>
               <div class="input-field col s12 m4">
                 <input placeholder="Repetir nueva contraseña" value="" id="user_newPasswordConfirmation" type="password"
-                class="validate">
+                  class="validate">
                 <label for="user_newPasswordConfirmation">Repetir nueva contraseña</label>
               </div>
               <!-- User Password Info Ends -->
@@ -397,18 +414,47 @@
   <script src="../../public/js/toasts.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="../../public/js/components/common/user-full-name-span.js"></script>
+  <script src="../../public/js/components/common/priority-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="../../public/js/components/user-dashboard/dashboard-project-list-item.js"></script>
+  <script src="../../public/js/components/user-dashboard/dashboard-group-list-item.js"></script>
+  <script src="../../public/js/components/user-dashboard/dashboard-task-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="../../public/js/components/user-dashboard/dashboard-project-list.js"></script>
+  <script src="../../public/js/components/user-dashboard/dashboard-group-list.js"></script>
+  <script src="../../public/js/components/user-dashboard/dashboard-task-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <script src="../../public/js/components/user-dashboard/edit-user-info-modal.js"></script>
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="../../public/js/components/user-dashboard/user-personal-info-card.js"></script>
+  <script src="../../public/js/components/user-dashboard/user-info-card.js"></script>
+  <!-- Cards End -->
+  <!-- Card Groups Begin -->
+  <!-- Card Groups End -->
+  <!-- Others Begin -->
+  <script src="../../public/js/components/user-dashboard/user-watch-dashboard-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="../../public/js/global/user/user-dashboard.js"></script>
 
   <script>
     //M.AutoInit();
 
     //Function for closing chat sidenav
-    function closeSidenav(){
+    function closeSidenav() {
       var elem = document.getElementById('slide-out');
       var instance = M.Sidenav.getInstance(elem);
       instance.close();
     }
     //Function that opens the left sidenav
-    function openSlideOut(){
+    function openSlideOut() {
       var elem = document.getElementById('slide-out');
       var instance = M.Sidenav.getInstance(elem);
       instance.open();
@@ -426,46 +472,48 @@
       var instances = M.Collapsible.init(elems, options);
     });
     //Sidenav initialization - slide-out
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var elems = document.getElementById('slide-out');
-      var options = {};
+      var options = {
+        edge: "right"
+      };
       var instances = M.Sidenav.init(elems, options);
     });
     //Sidenav initialization - slide-out-right
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var elems = document.getElementById('slide-out-right');
       var options = {
-        edge : "right",
-        onCloseStart : openSlideOut
+        edge: "right",
+        onCloseStart: openSlideOut
       };
       var instances = M.Sidenav.init(elems, options);
     });
     //Function to resize chat
-    function resizeChat(){
-        console.log("Begin");
-        console.log("Before: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
-        var rectSidenavHeader1 = document.getElementById("slide-out-right-header1").getBoundingClientRect();
-        var rectSidenavHeader2 = document.getElementById("slide-out-right-header2").getBoundingClientRect();
-        var rectSidenavFooter = document.getElementById("slide-out-right-footer").getBoundingClientRect();
-        var heightSidenav = window.innerHeight;
-        console.log("Window height: " + heightSidenav);
-        var heightSidenavHeader1 = rectSidenavHeader1.height;
-        var heightSidenavHeader2 = rectSidenavHeader2.height;
-        var heightSidenavFooter = rectSidenavFooter.height;
-        var heightSidenavHeader = heightSidenavHeader1 + heightSidenavHeader2;
-        var heightSidenavChatList = heightSidenav - heightSidenavHeader - heightSidenavFooter;
-        document.getElementById("chat-list").style.height = heightSidenavChatList + "px";
-        document.getElementById("chat-list").style.maxHeight = heightSidenavChatList + "px";
-        console.log("After: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
-        console.log("End");
+    function resizeChat() {
+      //console.log("Begin");
+      //console.log("Before: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
+      var rectSidenavHeader1 = document.getElementById("slide-out-right-header1").getBoundingClientRect();
+      var rectSidenavHeader2 = document.getElementById("slide-out-right-header2").getBoundingClientRect();
+      var rectSidenavFooter = document.getElementById("slide-out-right-footer").getBoundingClientRect();
+      var heightSidenav = window.innerHeight;
+      //console.log("Window height: " + heightSidenav);
+      var heightSidenavHeader1 = rectSidenavHeader1.height;
+      var heightSidenavHeader2 = rectSidenavHeader2.height;
+      var heightSidenavFooter = rectSidenavFooter.height;
+      var heightSidenavHeader = heightSidenavHeader1 + heightSidenavHeader2;
+      var heightSidenavChatList = heightSidenav - heightSidenavHeader - heightSidenavFooter;
+      document.getElementById("chat-list").style.height = heightSidenavChatList + "px";
+      document.getElementById("chat-list").style.maxHeight = heightSidenavChatList + "px";
+      //console.log("After: " + document.getElementById("slide-out-right").getBoundingClientRect().height);
+      //console.log("End");
     }
 
-    window.addEventListener('load', function(){
-        console.log("Resize when load");
-        resizeChat();
+    window.addEventListener('load', function () {
+      console.log("Resize when load");
+      resizeChat();
     });
 
-    window.addEventListener('resize', function(){
+    window.addEventListener('resize', function () {
       console.log("Resize when resize :v");
       resizeChat();
     });
@@ -508,7 +556,7 @@
     //    });
     //}
   </script>
-    <!-- Scripts End -->
-  </body>
+  <!-- Scripts End -->
+</body>
 
-  </html>
+</html>
