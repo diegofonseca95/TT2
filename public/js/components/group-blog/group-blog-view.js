@@ -47,7 +47,7 @@ Vue.component('group-blog-view', {
   },
   computed : {
     orderedList : function(){
-      return posts.reverse();
+      return this.posts.reverse();
     }
   },
   methods : {
