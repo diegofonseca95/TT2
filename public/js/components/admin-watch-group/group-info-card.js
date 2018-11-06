@@ -97,7 +97,7 @@ Vue.component('group-info-card', {
         '/publicacionesGrupo/' + 
         document.querySelector(
           'input[name="group-id"]'
-        )
+        ).value
       );
     }
   },
