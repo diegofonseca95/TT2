@@ -16,7 +16,7 @@ Vue.component('group-post', {
     }
     console.log(
       this.post.idPublicacion + ' ' + 
-      this.post.permissions
+      JSON.stringify(this.post.permissions)
     );
   },
   computed : {
