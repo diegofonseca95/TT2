@@ -69,15 +69,15 @@ Vue.component('new-post-card', {
 
       // The body of our request.
       var requestBody = { 
-        content : this.newPostContent,
+        contenido : this.newPostContent,
         idGrupo : groupIdInput.value,
-        title : this.newPostTitle,
+        titulo : this.newPostTitle,
         _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
 
-      // Fetch the projects list.
+      // Send the new post to the server.
       fetch('/agregarPublicacion', requestData)
       .then(response => response.json())
       .then(function(response){
@@ -87,7 +87,6 @@ Vue.component('new-post-card', {
         }else{
           WarningToast(response.result);
         }
-        // TODO : Handle non 'OK' status.
       }.bind(this));
       this.resetFormFields();
     },
