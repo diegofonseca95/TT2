@@ -8,6 +8,11 @@ Vue.component('group-blog-view', {
       posts : []          // The group posts.
     };
   },
+  computed : {
+    postsList : function(){
+      return posts.reverse();
+    }
+  },
   methods : {
     handlePostDeleted : function(delPost){
       // Filter the post out of the list.
@@ -63,7 +68,7 @@ Vue.component('group-blog-view', {
         @post-submitted="handlePostSubmitted">
       </new-post-card>
       <group-post
-        v-for="post in posts"
+        v-for="post in postsList"
         @post-accepted="handlePostAccepted"
         @post-rejected="handlePostRejected"
         @post-selected="handlePostSelected"
