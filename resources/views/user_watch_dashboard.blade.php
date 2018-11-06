@@ -16,7 +16,7 @@
 <body class="page-background">
 
   <input type="hidden" value="<?= $idUsuario ?>" name="user-id" />
-  <input type="hidden" value="{{ csrf_token() }}" name="token_" />
+  <input type="hidden" value="{{ csrf_token() }}" name="token_" id="token_"/>
 
   {{ csrf_field() }}
 
@@ -434,9 +434,9 @@
         }
       }
     });
-
+    
     // Subscribe to the channel we specified in our Laravel Event
-    var channel = pusher.subscribe('private-chat.1.2');
+    var channel = pusher.subscribe('chat.1.2');
 
     // Bind a function to a Event (the full Laravel class)
     channel.bind('App\\Events\\Chat', function(data) {
