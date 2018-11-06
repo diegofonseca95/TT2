@@ -96,7 +96,6 @@ Vue.component('edit-group-post-modal', {
         '#edit-group-post-modal-form'
       );
       // Reset the form.
-      form.reset();
       form.querySelectorAll('textarea')
       .forEach(area => {
         M.textareaAutoResize(area);
