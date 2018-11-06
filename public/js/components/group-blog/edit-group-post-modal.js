@@ -91,6 +91,17 @@ Vue.component('edit-group-post-modal', {
       // Update the values accordingly.
       this.newPostContent = this.post.contenido;
       this.newPostTitle = this.post.titulo;
+      // Recompute the size of the text areas.
+      var form = document.querySelector(
+        '#edit-group-post-modal-form'
+      );
+      // Reset the form.
+      form.reset();
+      form.querySelectorAll('textarea')
+      .forEach(area => {
+        M.textareaAutoResize(area);
+      });
+      M.updateTextFields();
     }
   },
   template : `
