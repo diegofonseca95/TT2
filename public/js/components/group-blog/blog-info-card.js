@@ -54,7 +54,6 @@ Vue.component('blog-info-card', {
       var fileInput = document.querySelector(
         '#blog-info-card-file-input'
       );
-      console.log(fileInput.value);
       if(fileInput.value !== ''){
         var authToken = document.querySelector(
           'input[name="_token"]'
@@ -65,23 +64,22 @@ Vue.component('blog-info-card', {
         data.append('idGrupo', this.groupInfo.idGrupo);
         data.append('_token', authToken.value);
         data.append('fila', file);
-
         fetch('/testFile', {
           method : 'POST',
           body : data
-        });
+        })
+        .then(response => response.json())
+        .then(function(response){
+          if(response.status === 'OK'){
+            SuccessToast(response.result);
+            document.querySelector(
+              '#blog-info-card-picture'
+            ).src = response.ruta;
+          }else{
+            WarningToast(response.result);
+          }
+        }.bind(this));
       }
-    },
-    blabla : function(){
-      var file = document.getElementById('blog-info-card-file-input').files[0]; 
-      console.log(file);
-      var reader = new FileReader();
-      reader.onload = (function(theFile){
-        return function(e){
-          console.log(e.target.result);
-        }
-      })(file);
-      reader.readAsDataURL(file);
     }
   },
   template : `
@@ -89,7 +87,8 @@ Vue.component('blog-info-card', {
       <div class="col s12">
         <div class="card">
           <div class="card-image">
-            <img src="../../public/img/dummies/test.jpg">
+            <img src="/img/dummies/test.jpg"
+              id="blog-info-card-picture">
             <span class="card-title">
               {{ groupInfo.name }}
             </span>
