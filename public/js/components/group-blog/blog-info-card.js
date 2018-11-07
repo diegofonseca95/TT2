@@ -44,7 +44,22 @@ Vue.component('blog-info-card', {
   methods : {
     triggerFileInput : function(){
       // Open the file picker from the hidden file input.
-      document.getElementById('blog-info-card-file-input').click();
+      var fileInput = document.querySelector(
+        '#blog-info-card-file-input'
+      );
+      fileInput.value = '';
+      fileInput.click();
+      if(fileInput.value !== ''){
+        var file = fileInput.files[0];
+        var data = new FormData();
+        data.append('idGrupo', this.groupInfo.idGrupo);
+        data.append('fila', file);
+
+        fetch('/testFile', {
+          method : 'POST',
+          body : data
+        });
+      }
     }
     ,blabla : function(){
       var file = document.getElementById('blog-info-card-file-input').files[0]; 
