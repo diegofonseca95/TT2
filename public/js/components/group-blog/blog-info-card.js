@@ -65,10 +65,13 @@ Vue.component('blog-info-card', {
         data.append('idGrupo', this.groupInfo.idGrupo);
         data.append('_token', authToken.value);
         data.append('fila', file);
-        fetch('/testFile', {
+        // Request data for the 'fetch' function.
+        var requestData = {
+          headers: { 'Content-Type' : 'multipart/form-data' },
           method : 'POST',
           body : data
-        })
+        };
+        fetch('/testFile', requestData)
         .then(response => response.json())
         .then(function(response){
           if(response.status === 'OK'){
