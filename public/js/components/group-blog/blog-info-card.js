@@ -49,6 +49,7 @@ Vue.component('blog-info-card', {
       );
       fileInput.value = '';
       fileInput.click();
+      console.log(fileInput.value);
       if(fileInput.value !== ''){
         var file = fileInput.files[0];
         var data = new FormData();
