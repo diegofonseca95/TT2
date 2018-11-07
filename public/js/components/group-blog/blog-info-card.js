@@ -79,8 +79,7 @@ Vue.component('blog-info-card', {
           }else{
             WarningToast(response.result);
           }
-        }.bind(this))
-        .catch(error => console.log(error));
+        }.bind(this));
       }
     }
   },
