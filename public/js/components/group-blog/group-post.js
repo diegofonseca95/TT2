@@ -14,6 +14,12 @@ Vue.component('group-post', {
         { alignment : 'right', constrainWidth : false }
       );
     }
+    this.post.permissions = {
+      eliminar : true,
+      editar : true,
+      aprobar : true,
+      rechazar : true
+    };
     console.log(
       this.post.idPublicacion + ' ' + 
       JSON.stringify(this.post.permissions)
