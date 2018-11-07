@@ -87,9 +87,9 @@ Vue.component('edit-group-post-modal', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          var newPost = response.posti;
+          var newPost = response.publicacion;
           newPost.permissions = response.permisos;
-          newPost.author = response.autor;
+          newPost.author = this.post.author;
           this.$emit('post-updated', newPost);
           SuccessToast(response.result);
         }else{
