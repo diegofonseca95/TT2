@@ -49,6 +49,8 @@ Vue.component('blog-info-card', {
       );
       fileInput.value = '';
       fileInput.click();
+    },
+    sendFile : function(){
       console.log(fileInput.value);
       if(fileInput.value !== ''){
         var authToken = document.querySelector(
@@ -66,8 +68,8 @@ Vue.component('blog-info-card', {
           body : data
         });
       }
-    }
-    ,blabla : function(){
+    },
+    blabla : function(){
       var file = document.getElementById('blog-info-card-file-input').files[0]; 
       console.log(file);
       var reader = new FileReader();
@@ -109,7 +111,8 @@ Vue.component('blog-info-card', {
         </div>
       </div>
       <input id="blog-info-card-file-input"
-        type="file" class="hide" />
+        type="file" class="hide" 
+        @change="sendFile"/>
     </div>
   `
 });
