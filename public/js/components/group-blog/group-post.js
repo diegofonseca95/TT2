@@ -37,19 +37,97 @@ Vue.component('group-post', {
   },
   methods : {
     handlePostAccepted : function(){
-      // TODO : Accept post in server.
-      this.$emit('post-accepted', this.post);
+      // Get the group id from the hidden input.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idPublicacion : this.post.idPublicacion,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new post to the server.
+      fetch('/aprobarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('post-accepted', this.post);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
     },
     handlePostRejected : function(){
-      // TODO : Reject post in server.
-      this.$emit('post-rejected', this.post);
+      // Get the group id from the hidden input.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idPublicacion : this.post.idPublicacion,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new post to the server.
+      fetch('/rechazarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('post-rejected', this.post);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
     },
     handlePostSelected : function(){
       this.$emit('post-selected', this.post);
     },
     handlePostDeleted : function(){
-      // TODO : Delete post in server.
-      this.$emit('post-deleted', this.post);
+      // Get the group id from the hidden input.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idPublicacion : this.post.idPublicacion,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new post to the server.
+      fetch('/eliminarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('post-deleted', this.post);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
     }
   },
   template : `
