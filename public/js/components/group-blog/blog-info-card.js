@@ -51,6 +51,9 @@ Vue.component('blog-info-card', {
       fileInput.click();
     },
     sendFile : function(){
+      var fileInput = document.querySelector(
+        '#blog-info-card-file-input'
+      );
       console.log(fileInput.value);
       if(fileInput.value !== ''){
         var authToken = document.querySelector(
