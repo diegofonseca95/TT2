@@ -65,6 +65,8 @@ Vue.component('group-post', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          var serverPost = response.publicacion;
+          this.post.estadoPublicacion = serverPost.estadoPublicacion;
           this.$emit('post-accepted', this.post);
           SuccessToast(response.result);
         }else{
@@ -95,6 +97,8 @@ Vue.component('group-post', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          var serverPost = response.publicacion;
+          this.post.estadoPublicacion = serverPost.estadoPublicacion;
           this.$emit('post-rejected', this.post);
           SuccessToast(response.result);
         }else{

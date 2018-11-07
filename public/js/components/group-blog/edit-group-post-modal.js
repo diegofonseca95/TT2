@@ -63,12 +63,39 @@ Vue.component('edit-group-post-modal', {
       }
     },
     updatePost : function(){
-      // TODO : Submit the update.
-      console.log({
-        content : this.newPostContent,
-        title : this.newPostTitle
-      });
-      // this.$emit('post-updated', POST_FROM_SERVER);
+      // Get the group id from the hidden input.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idPublicacion : this.post.idPublicacion,
+        contenido : this.newPostContent,
+        titulo : this.newPostTitle,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new post to the server.
+      fetch('/editarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          var newPost = response.posti;
+          newPost.permissions = response.permisos;
+          newPost.author = response.autor;
+          this.$emit('post-updated', newPost);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
       this.resetFormFields();
     },
     resetFormFields : function(){
