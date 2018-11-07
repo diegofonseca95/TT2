@@ -111,6 +111,9 @@ Vue.component('edit-group-post-modal', {
         M.textareaAutoResize(area);
       });
       M.updateTextFields();
+      M.Modal.getInstance(
+        document.querySelector('#edit-group-post-modal')
+      ).close();
     }
   },
   watch : {
