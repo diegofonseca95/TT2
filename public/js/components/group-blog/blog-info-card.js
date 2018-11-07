@@ -35,7 +35,8 @@ Vue.component('blog-info-card', {
         var group = response.result.grupo;
         this.groupInfo = {
           description : group.descripcion,
-          name : group.nombreGrupo
+          name : group.nombreGrupo,
+          idGrupo : group.idGrupo
         };
       }
       // TODO : Handle non 'OK' status.
