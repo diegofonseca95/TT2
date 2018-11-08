@@ -45,12 +45,16 @@
                         <div class="card-content">
                             <span class="card-title">
                                 <b>Grupos</b>
+                            </span>
+                            <div class="row">
+                              <div class="col s12">
                                 <button class="btn-floating btn-large remove-button-background right"
                                   onclick="window.location.replace('/agregarGrupo');"
                                   title="Editar">
                                   <i class="material-icons">add</i>
                                 </button>
-                            </span>
+                              </div>
+                            </div>
                             <admin-group-list 
                                 v-bind:component-id="'group-list'"
                                 v-bind:groups="groups">
