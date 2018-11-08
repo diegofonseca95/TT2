@@ -33,7 +33,6 @@ Vue.component('dashboard-task-list', {
     fetch('/obtenerTareasUsuario', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         // TODO : Toast if succeeded
         var tasks = [];

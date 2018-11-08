@@ -36,7 +36,6 @@ Vue.component('dashboard-group-list', {
       if(response.status === 'OK'){
         var groupsInfo = [];
         for(var i in response.result){
-          console.log(response.result[i]);
           groupsInfo.push({
             groupLeader : response.result[i].lider,
             group : response.result[i].grupo

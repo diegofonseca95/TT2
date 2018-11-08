@@ -82,6 +82,18 @@ Vue.component('edit-user-info-modal', {
       $('#edit-user-info-form').submit();
     }
   },
+  watch : {
+    user : function(){
+      this.newFathersLastname = this.user.apellidoPaterno;
+      this.newMothersLastname = this.user.apellidoMaterno;
+      this.newPhone = this.user.telefono;
+      this.newMail = this.user.correo;
+      this.newName = this.user.nombre;
+      this.newPasswordMatch = '';
+      this.currentPassword = '';
+      this.newPassword = '';
+    }
+  },
   template : `
     <div class="modal modal-fixed-footer" id="edit-user-info-modal">
       <div class="modal-content">
