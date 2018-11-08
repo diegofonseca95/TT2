@@ -9,7 +9,8 @@ Vue.component('edit-user-info-modal', {
       newName : this.user.nombre,
       newPasswordMatch : '',
       currentPassword : '',
-      newPassword : ''
+      newPassword : '',
+      hasValidFields : false
     };
   },
   mounted : function(){
@@ -78,8 +79,52 @@ Vue.component('edit-user-info-modal', {
   },
   methods : {
     handleEditInfo : function(){
-      // TODO : Submit form.
+      this.hasValidFields = false;
       $('#edit-user-info-form').submit();
+      if(this.hasValidFields){
+        this.submitNewInfo();
+      }
+    },
+    submitNewInfo : function(){
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        apellidoPaterno : this.newFathersLastname,
+        apellidoMaterno : this.newMothersLastname,
+        nuevacontrasenar : this.newPasswordMatch,
+        nuevacontrasena : this.newPassword,
+        contrasena : this.currentPassword,
+        idUsuario : this.user.idUsuario,
+        telefono : this.newPhone,
+        correo : this.newMail,
+        nombre : this.newName,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the user personal info.
+      fetch('/editarUsuario', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          M.Modal.getInstance(
+            document.querySelector(
+              '#edit-user-info-modal'
+            )
+          ).close();
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
     }
   },
   watch : {

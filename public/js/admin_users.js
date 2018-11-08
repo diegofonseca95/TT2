@@ -14,7 +14,7 @@ $(document).ready(function(){
         this.displayedUser = selectedUser;
         M.Modal.getInstance(
           document.querySelector('#user-info-modal')
-          ).open();
+        ).open();
       }
     },
     mounted : function(){
