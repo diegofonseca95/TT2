@@ -27,7 +27,7 @@ Vue.component('user-personal-info-card', {
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
-        console.log(response);
+        this.user = response.result;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
