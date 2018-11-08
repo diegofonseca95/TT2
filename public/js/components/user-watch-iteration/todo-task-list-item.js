@@ -31,6 +31,7 @@ Vue.component('todo-task-list-item', {
         idTarea : this.task.idTarea,
         _token : authToken.value
       };
+      console.log(requestBody);
 
       requestData.body = JSON.stringify(requestBody);
 
