@@ -2,13 +2,13 @@ Vue.component('doing-task-list-item', {
   props : ['task'],
   computed : {
     fileInputId : function(){
-      return 'doing-task-file-input-' + this.task.idTarea;
+      return 'doing-task-file-input-' + this.task.tarea.idTarea;
     },
     dropdownId : function(){
-      return 'doing-task-dropdown-' + this.task.idTarea;
+      return 'doing-task-dropdown-' + this.task.tarea.idTarea;
     },
     triggerId : function(){
-      return 'doing-task-trigger-' + this.task.idTarea;
+      return 'doing-task-trigger-' + this.task.tarea.idTarea;
     }
   },
   mounted : function(){
@@ -35,7 +35,7 @@ Vue.component('doing-task-list-item', {
         var file = fileInput.files[0];
         var data = new FormData();
         console.log(this.task);
-        data.append('idTarea', this.task.idTarea);
+        data.append('idTarea', this.task.tarea.idTarea);
         data.append('_token', authToken.value);
         data.append('fila', file);
         fetch('/subirEvidencia', {

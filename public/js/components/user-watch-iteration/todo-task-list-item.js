@@ -2,10 +2,10 @@ Vue.component('todo-task-list-item', {
   props : ['task'],
   computed : {
     dropdownId : function(){
-      return 'todo-task-dropdown-' + this.task.idTarea;
+      return 'todo-task-dropdown-' + this.task.tarea.idTarea;
     },
     triggerId : function(){
-      return 'todo-task-trigger-' + this.task.idTarea;
+      return 'todo-task-trigger-' + this.task.tarea.idTarea;
     }
   },
   mounted : function(){
