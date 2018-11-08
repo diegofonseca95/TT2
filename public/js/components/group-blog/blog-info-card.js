@@ -41,6 +41,18 @@ Vue.component('blog-info-card', {
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
+
+    // Fetch the group picture path.
+    fetch('/nombrePortada', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        document.querySelector(
+          '#blog-info-card-picture'
+        ).src = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   methods : {
     triggerFileInput : function(){
@@ -65,7 +77,7 @@ Vue.component('blog-info-card', {
         data.append('idGrupo', this.groupInfo.idGrupo);
         data.append('_token', authToken.value);
         data.append('fila', file);
-        fetch('/testFile', {
+        fetch('/subirPortada', {
           method : 'POST',
           body : data
         })
@@ -74,7 +86,7 @@ Vue.component('blog-info-card', {
           if(response.status === 'OK'){
             SuccessToast(response.result);
             var reader = new FileReader();
-            reader.onload = function () {
+            reader.onload = function(){
               document.querySelector(
                 '#blog-info-card-picture'
               ).src = reader.result;
