@@ -170,7 +170,7 @@ Vue.component('edit-user-info-modal', {
               <input placeholder="Repetir Nueva Contraseña"  type="password" class="validate" 
                 name="edit-user-info-modal-confirm-input" 
                 id="edit-user-info-modal-confirm-input" 
-                v-model:value="newName" />
+                v-model:value="newPasswordMatch" />
               <label for="edit-user-info-modal-confirm-input">
                 Repetir Nueva Contraseña
               </label>
