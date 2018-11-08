@@ -40,9 +40,8 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="/js/toasts.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+  <script src="/js/toasts.js"></script>
   <!-- Vue Components Begin -->
   <!-- Common Components Begin -->
   <script src="/js/components/common/user-full-name-span.js"></script>
