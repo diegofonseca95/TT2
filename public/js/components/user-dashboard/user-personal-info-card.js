@@ -32,6 +32,11 @@ Vue.component('user-personal-info-card', {
       // TODO : Handle non 'OK' status.
     }.bind(this));
   },
+  methods : {
+    handleUserUpdated : function(updatedUser){
+      this.user = updatedUser;
+    }
+  },
   template : `
     <div class="card">
       <div class="card-content">
@@ -61,7 +66,9 @@ Vue.component('user-personal-info-card', {
           </li>
         </ul>
       </div>
-      <edit-user-info-modal :user="user">
+      <edit-user-info-modal 
+        @user-updated="handleUserUpdated"
+        :user="user">
       </edit-user-info-modal>
     </div>
   `

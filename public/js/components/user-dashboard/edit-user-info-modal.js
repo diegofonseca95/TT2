@@ -115,6 +115,7 @@ Vue.component('edit-user-info-modal', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          this.$emit('user-updated', response.usuario);
           M.Modal.getInstance(
             document.querySelector(
               '#edit-user-info-modal'
