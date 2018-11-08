@@ -47,9 +47,11 @@ Vue.component('blog-info-card', {
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
-        document.querySelector(
-          '#blog-info-card-picture'
-        ).src = response.result;
+        if(response.result !== ''){
+          document.querySelector(
+            '#blog-info-card-picture'
+          ).src = response.result;
+        }
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
