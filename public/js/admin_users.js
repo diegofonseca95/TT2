@@ -5,7 +5,16 @@ $(document).ready(function(){
     var app = new Vue({
         el : "#admin-users-box",
         data : {
+            displayedUser : {},
             users : []
+        },
+        methods : {
+          handleMemberSelected : function(selectedUser){
+            this.displayedUser = selectedUser;
+            M.Modal.getInstance(
+              document.querySelector('#user-info-modal')
+            ).open();
+          }
         },
         mounted : function(){
             $.ajax({

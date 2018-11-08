@@ -47,6 +47,7 @@
                                 <b>Usuarios Aprobados</b>
                             </span>
                             <admin-user-list 
+                                @member-selected="handleMemberSelected"
                                 v-bind:component-id="'approved-list'"
                                 v-bind:filter="true" 
                                 v-bind:users="users">
@@ -71,6 +72,8 @@
                     </div>
                 </div>
                 <!-- End Pending User List -->
+                <user-info-modal :user="displayedUser">
+                </user-info-modal>
             </div>
         </div>
         <!-- Content End -->
@@ -80,10 +83,25 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-        <script src="../js/toasts.js"></script>  
-        <script src="../js/components/admin-user-list-item.js"></script>
-        <script src="../js/components/admin-user-list.js"></script>
-        <script src="../js/admin_users.js"></script>
+        <script src="/js/toasts.js"></script>  
+        <script src="/js/components/admin-user-list-item.js"></script>
+        <script src="/js/components/admin-user-list.js"></script>
+        <script src="/js/admin_users.js"></script>
+        <!-- Vue Components Begin -->
+        <!-- Common Components Begin -->
+        <script src="/js/components/common/user-full-name-span.js"></script>
+        <script src="/js/components/common/priority-span.js"></script>
+        <script src="/js/components/common/user-info-project-list-item.js"></script>
+        <script src="/js/components/common/user-info-group-list-item.js"></script>
+        <script src="/js/components/common/user-info-task-list-item.js"></script>
+        <script src="/js/components/common/user-info-project-list.js"></script>
+        <script src="/js/components/common/new-leader-list-item.js"></script>
+        <script src="/js/components/common/user-info-group-list.js"></script>
+        <script src="/js/components/common/user-info-task-list.js"></script>
+        <script src="/js/components/common/new-leader-list.js"></script>
+        <script src="/js/components/common/user-info-modal.js"></script>
+        <!-- Common Components End -->
+        <!-- Vue Components End -->
         <!-- Scripts End -->
     </body>
 </html>
