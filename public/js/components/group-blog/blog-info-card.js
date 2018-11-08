@@ -73,9 +73,13 @@ Vue.component('blog-info-card', {
         .then(function(response){
           if(response.status === 'OK'){
             SuccessToast(response.result);
-            document.querySelector(
-              '#blog-info-card-picture'
-            ).src = response.ruta;
+            var reader = new FileReader();
+            reader.onload = function () {
+              document.querySelector(
+                '#blog-info-card-picture'
+              ).src = reader.result;
+            };
+            reader.readAsDataURL(file);
           }else{
             WarningToast(response.result);
           }
