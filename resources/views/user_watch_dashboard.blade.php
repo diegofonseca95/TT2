@@ -31,107 +31,49 @@
     <div class="section"></div>
     <user-watch-dashboard-view>
     </user-watch-dashboard-view>
-  <div class="row">
+  </div>
 
-    <!-- Chat Begins -->
 
-    <!-- Chat Right Sidenav Begins -->
-    <ul id="slide-out-right" class="sidenav ">
-      <!-- Chat Header Begins -->
-      <li><a href="#!"><i class="material-icons">message</i>Víctor Noriega</a></li>
-      <li><div class="divider"></div></li>
-      <!-- Chat Header Ends -->
-      <li class="flex-element-expand">
-        <ul class="collection scrollable-collection" id="chat-list">
+  <!-- Scripts Begin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="/js/toasts.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+  <!-- Vue Components Begin -->
+  <!-- Common Components Begin -->
+  <script src="/js/components/common/user-full-name-span.js"></script>
+  <script src="/js/components/common/priority-span.js"></script>
+  <!-- Common Components End -->
+  <!-- List Items Begin -->
+  <script src="/js/components/user-dashboard/dashboard-project-list-item.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-group-list-item.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-task-list-item.js"></script>
+  <!-- List Items End -->
+  <!-- Lists Begin -->
+  <script src="/js/components/user-dashboard/dashboard-project-list.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-group-list.js"></script>
+  <script src="/js/components/user-dashboard/dashboard-task-list.js"></script>
+  <!-- Lists End -->
+  <!-- Modals Begin -->
+  <script src="/js/components/user-dashboard/edit-user-info-modal.js"></script>
+  <!-- Modals End -->
+  <!-- Cards Begin -->
+  <script src="/js/components/user-dashboard/user-personal-info-card.js"></script>
+  <script src="/js/components/user-dashboard/user-info-card.js"></script>
+  <!-- Cards End -->
+  <!-- Card Groups Begin -->
+  <!-- Card Groups End -->
+  <!-- Others Begin -->
+  <script src="/js/components/user-dashboard/user-watch-dashboard-view.js"></script>
+  <!-- Others End -->
+  <!-- Vue Components End -->
+  <script src="/js/global/user/user-dashboard.js"></script>
 
-          <!-- Message Begins -->
-          <li class="collection-item"><a href="#!" class="low-padding">Luis: Que pasión</a></li>
-          <li><div class="divider"></div></li>
-          <!-- Message Ends -->
-        </ul>
-      </li>
-      <!-- Chat Footer Begins -->
-      <li class="">
-        <div class="divider"></div>
-        <div class="row zero-margin">
-          <div class="col s10 zero-margin zero-padding scrollable-chat">
-            <div class="input-field low-padding zero-margin">
-              <textarea id="mensaje" class="materialize-textarea zero-margin zero-padding" placeholder="Nuevo Mensaje"></textarea>
-            </div>
-          </div>
-          <div class="col s2">
-            <a href="#!">
-              <i title="Enviar mensaje" class="material-icons" onclick="enviarMensaje()">send</i>
-            </a>
-          </div>
-        </div>
-      </li>
-      <!-- Chat Footer Ends -->
-    </ul>
-    <!-- Chat Right Sidenav Ends -->
-
-    <!-- Chat Left Sidenav Begins -->
-    <ul id="slide-out" class="sidenav">
-      <li><a href="#!"><i class="material-icons">message</i>Mis grupos de chat</a></li>
-      <li><div class="divider"></div></li>
-      <!-- Contact Begins -->
-      <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Diego Fonseca</a></li>
-      <li><div class="divider"></div></li>
-      <!-- Contact Ends -->
-      <!-- Contact Begins -->
-      <li><a data-target="slide-out-right" class="sidenav-trigger waves-effect" href="#!" onclick="closeSidenav();">Víctor Noriega</a></li>
-      <li><div class="divider"></div></li>
-      <!-- Contact Ends -->
-    </ul>
-    <!-- Chat Left Sidenav Ends -->
-
-    <div class="fixed-action-btn">
-      <a data-target="slide-out" class="sidenav-trigger btn-floating btn-large remove-button-background">
-        <i class="large material-icons">message</i>
-      </a>
-    </div>
-    <!-- Chat Ends -->
-
-    <!-- Scripts Begin -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/js/toasts.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
-    <!-- Vue Components Begin -->
-    <!-- Common Components Begin -->
-    <script src="/js/components/common/user-full-name-span.js"></script>
-    <script src="/js/components/common/priority-span.js"></script>
-    <!-- Common Components End -->
-    <!-- List Items Begin -->
-    <script src="/js/components/user-dashboard/dashboard-project-list-item.js"></script>
-    <script src="/js/components/user-dashboard/dashboard-group-list-item.js"></script>
-    <script src="/js/components/user-dashboard/dashboard-task-list-item.js"></script>
-    <!-- List Items End -->
-    <!-- Lists Begin -->
-    <script src="/js/components/user-dashboard/dashboard-project-list.js"></script>
-    <script src="/js/components/user-dashboard/dashboard-group-list.js"></script>
-    <script src="/js/components/user-dashboard/dashboard-task-list.js"></script>
-    <!-- Lists End -->
-    <!-- Modals Begin -->
-    <script src="/js/components/user-dashboard/edit-user-info-modal.js"></script>
-    <!-- Modals End -->
-    <!-- Cards Begin -->
-    <script src="/js/components/user-dashboard/user-personal-info-card.js"></script>
-    <script src="/js/components/user-dashboard/user-info-card.js"></script>
-    <!-- Cards End -->
-    <!-- Card Groups Begin -->
-    <!-- Card Groups End -->
-    <!-- Others Begin -->
-    <script src="/js/components/user-dashboard/user-watch-dashboard-view.js"></script>
-    <!-- Others End -->
-    <!-- Vue Components End -->
-    <script src="/js/global/user/user-dashboard.js"></script>
-
-    <script>
+  <script>
     //M.AutoInit();
 
     //Function for closing chat sidenav
@@ -226,6 +168,6 @@
     }
     </script>
     <!-- Scripts End -->
-  </body>
+</body>
 
-  </html>
+</html>
