@@ -36,7 +36,7 @@ Vue.component('group-blog-view', {
         var postsList = [];
         for(var i in response.result){
           var post = response.result[i];
-          post.permissions = response.permisos[post.idUsuario];
+          post.permissions = response.permisos[post.idPublicacion];
           post.author = response.usuarios[post.idUsuario];
           postsList.push(post);
         }
