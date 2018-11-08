@@ -99,7 +99,7 @@ Vue.component('doing-task-list-item', {
       <ul :id="dropdownId" class="dropdown-content"
         v-if="task.editable">
         <li>
-          <a class="modal-trigger" href="#modal_uploadDeliverable">
+          <a href="#!" @click="triggerFileInput">
             Subir evidencia
           </a>
         </li>
