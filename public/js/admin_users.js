@@ -10,6 +10,7 @@ $(document).ready(function(){
         },
         methods : {
           handleMemberSelected : function(selectedUser){
+            console.log(selectedUser);
             this.displayedUser = selectedUser;
             M.Modal.getInstance(
               document.querySelector('#user-info-modal')
