@@ -32,7 +32,6 @@ Vue.component('group-blog-view', {
     fetch('/obtenerPublicaciones', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.permisos);
       if(response.status === 'OK'){
         var postsList = [];
         for(var i in response.result){

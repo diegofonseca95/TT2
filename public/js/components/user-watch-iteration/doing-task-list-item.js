@@ -12,7 +12,8 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
-    if(this.task.editable){
+    console.log(this.task);
+    if(this.task.tarea.editable){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
         { alignment: 'right', constrainWidth: false }
