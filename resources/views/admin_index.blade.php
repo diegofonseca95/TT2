@@ -48,7 +48,7 @@
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Usuarios<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Ir a Usuarios</a></p>
+            <p><a href="/administrarUsuarios">Ir a Usuarios</a></p>
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Usuarios<i class="material-icons right">close</i></span>
@@ -69,7 +69,7 @@
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Grupos<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Ir a Grupos</a></p>
+            <p><a href="/administrarGrupos">Ir a Grupos</a></p>
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Grupos<i class="material-icons right">close</i></span>
