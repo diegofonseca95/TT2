@@ -99,6 +99,11 @@ Vue.component('blog-info-card', {
           }
         }.bind(this));
       }
+    },
+    handleWatchGroup : function(){
+      window.location.replace(
+        '/verGrupo/' + this.groupInfo.idGrupo
+      );
     }
   },
   template : `
@@ -124,6 +129,7 @@ Vue.component('blog-info-card', {
                 <i class="material-icons">photo_camera</i>
               </button>
               <button class="btn remove-button-background"
+                @click="handleWatchGroup"
                 title="Ver grupo">
                 <i class="material-icons">remove_red_eye</i>
               </button>
