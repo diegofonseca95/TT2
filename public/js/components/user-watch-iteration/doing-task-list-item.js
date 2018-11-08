@@ -1,6 +1,9 @@
 Vue.component('doing-task-list-item', {
   props : ['task'],
   computed : {
+    fileInputId : function(){
+      return 'doing-task-file-input-' + this.task.idTarea;
+    },
     dropdownId : function(){
       return 'doing-task-dropdown-' + this.task.idTarea;
     },
@@ -14,6 +17,41 @@ Vue.component('doing-task-list-item', {
         document.getElementById(this.triggerId),
         { alignment: 'right', constrainWidth: false }
       );
+    }
+  },
+  methods : {
+    triggerFileInput : function(){
+      // Open the file picker from the hidden file input.
+      var fileInput = document.getElementById(this.fileInputId);
+      fileInput.value = '';
+      fileInput.click();
+    },
+    sendFile : function(){
+      var fileInput = document.getElementById(this.fileInputId);
+      if(fileInput.value !== ''){
+        var authToken = document.querySelector(
+          'input[name="_token"]'
+        );
+        var file = fileInput.files[0];
+        console.log(file);
+        var data = new FormData();
+        data.append('idTarea', this.task.idTarea);
+        data.append('_token', authToken.value);
+        data.append('fila', file);
+        fetch('/subirEvidencia', {
+          method : 'POST',
+          body : data
+        })
+        .then(response => response.json())
+        .then(function(response){
+          if(response.status === 'OK'){
+            this.task.status.pendiente = true;
+            SuccessToast(response.result);
+          }else{
+            WarningToast(response.result);
+          }
+        }.bind(this));
+      }
     }
   },
   template : `
@@ -81,6 +119,9 @@ Vue.component('doing-task-list-item', {
           </a>
         </li>
       </ul>
+      <input type="file" class="hide"
+        :id="fileInputId" 
+        @change="sendFile"/>
     </div>
   `
 });
