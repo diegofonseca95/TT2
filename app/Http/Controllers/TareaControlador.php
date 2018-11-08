@@ -19,6 +19,8 @@ use App\TareaUsuario;
 use App\TareaSprint;
 use App\Usuario;
 use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 class TareaControlador extends Controller
 {
@@ -200,5 +202,54 @@ class TareaControlador extends Controller
         }
 
 
+    }
+    public function subirEvidencia(){
+      try{
+        $tarea = Tarea::findOrFail(request('idTarea'));
+
+        Storage::deleteDirectory('public/evidencias/'.request('idTarea'));
+        Storage::put('public/evidencias/'.request('idTarea'), request('fila'));
+
+        $tarea->estado = 7;
+        $tarea->save();
+        //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => 'Imagen subida correctamente',
+        ]);
+      }catch(FileNotFoundException $e){
+        return response()->json([
+            'status' => 'ERROR',
+            'result' => 'Error al subir el archivo',
+        ]);
+      }catch(ModelNotFoundException $e){
+        return response()->json([
+            'status' => 'ERROR',
+            'result' => 'Tarea no existe',
+        ]);
+      }
+
+
+    }
+
+    public function descargarEvidencia(){
+      try{
+        $tarea = Tarea::findOrFail(request('idTarea'));
+        $files = Storage::files('public/evidencias/'.request('idTarea'));
+        //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
+        if(empty($files)){
+          return response()->json([
+              'status' => 'ERROR',
+              'result' => 'No hay evidencia',
+          ]);
+        }
+        return Storage::download($files[0], "evidenciaTarea".request('idTarea'), []);
+      }catch(ModelNotFoundException $e){
+        return response()->json([
+            'status' => 'ERROR',
+            'result' => 'Tarea no existe',
+        ]);
+      }
     }
 }

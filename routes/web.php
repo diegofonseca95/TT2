@@ -42,7 +42,7 @@ Route::post('/obtenerUsuariosGrupo', 'GruposControlador@obtenerUsuariosGrupo');
 Route::post('/editarGrupo', 'GruposControlador@editarGrupo');
 Route::get('/verGrupo/{idGrupo}', 'GruposControlador@verGrupo');
 //Route::get('/publicacionesGrupo/{idGrupo}', 'PublicacionControlador@publicacionesGrupo');
-Route::get('/publicacionesGrupo', 'PublicacionControlador@publicacionesGrupo');
+Route::get('/publicacionesGrupo/{idGrupo}', 'PublicacionControlador@publicacionesGrupo');
 Route::post('/recuperarContrasena', 'SesionControlador@recuperarContrasena');
 Route::get('/iniciarSesionAdmin', 'SesionControlador@iniciarSesionAdmin');
 Route::post('/obtenerIdUsuariosGrupo','GruposControlador@obtenerIdUsuariosGrupo');
@@ -75,8 +75,20 @@ Route::post('/obtenerSprintsActivos', 'SprintControlador@obtenerSprintsActivos')
 Route::post('/obtenerTareasSprint', 'SprintControlador@obtenerTareasSprint');
 Route::post('/iniciarTarea', 'TareaControlador@iniciarTarea');
 Route::get('/TestChat', 'SesionControlador@testChat');
-Route::post('/testFile', 'SesionControlador@testFile');
+Route::post('/subirPortada', 'PublicacionControlador@subirPortada');
+Route::post('/nombrePortada', 'PublicacionControlador@nombrePortada');
 Route::get('/test', 'SesionControlador@test');
+Route::post('/agregarPublicacion', 'PublicacionControlador@agregarPublicacion');
+Route::post('/obtenerPublicaciones', 'PublicacionControlador@obtenerPublicaciones');
+Route::post('/eliminarPublicacion', 'PublicacionControlador@eliminarPublicacion');
+Route::post('/aprobarPublicacion', 'PublicacionControlador@aprobarPublicacion');
+Route::post('/rechazarPublicacion', 'PublicacionControlador@rechazarPublicacion');
+Route::post('/permisosDashboard', 'UsuariosControlador@permisosDashboard');
+Route::post('/editarPublicacion', 'PublicacionControlador@editarPublicacion');
+Route::post('/editarUsuario', 'UsuariosControlador@editarUsuario');
+Route::post('/subirEvidencia', 'TareaControlador@subirEvidencia');
+Route::post('/descargarEvidencia', 'TareaControlador@descargarEvidencia');
+Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 
 	  /*App\Events\Chat::dispatch('Someone');*/

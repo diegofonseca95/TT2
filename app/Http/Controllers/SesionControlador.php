@@ -77,7 +77,7 @@ class SesionControlador extends Controller
 
     public function iniciarSesionAdmin(){
         if(Auth::check())
-        return view('index_admin');
+        return view('admin_index');
 
         return view('index');
     }
@@ -94,9 +94,5 @@ class SesionControlador extends Controller
     public function test(){
        return view('TestChat');
     }
-    public function testFile(){
-        request('fila')->storeAs('archivos', request('fila')->extension());
-        return view('TestChat');
 
-    }
 }

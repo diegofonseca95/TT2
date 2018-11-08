@@ -182,7 +182,7 @@ class SprintControlador extends Controller
         foreach ($tareas as $value) {
            array_push($infoTarea, $this->informacionTarea($value));
            if($value->estado == 3) array_push($todo, $value->idTarea);
-           if($value->estado == 4) array_push($doing, $value->idTarea);
+           if($value->estado == 4 || $value->estado == 7 || $value->estado == 6) array_push($doing, $value->idTarea);
            if($value->estado == 5) array_push($done,$value->idTarea);
         }
 
