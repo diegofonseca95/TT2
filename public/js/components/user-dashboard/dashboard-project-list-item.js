@@ -21,7 +21,7 @@ Vue.component('dashboard-project-list-item', {
           </span>
           <span class="title truncate col s12">
             Líder del proyecto: 
-            <user-full-name-span :user="groupLeader">
+            <user-full-name-span :user="projectLeader">
             </user-full-name-span>
           </span>
         </div>
