@@ -7,6 +7,9 @@ Vue.component('doing-task-list-item', {
     dropdownId : function(){
       return 'doing-task-dropdown-' + this.task.tarea.idTarea;
     },
+    downloadLink : function(){
+      return '/descargarEvidencia/' + this.task.tarea.idTarea;
+    },
     triggerId : function(){
       return 'doing-task-trigger-' + this.task.tarea.idTarea;
     }
@@ -52,7 +55,8 @@ Vue.component('doing-task-list-item', {
           }
         }.bind(this));
       }
-    },
+    }
+    /*,
     handleDeliverableDownload : function(){
       var authToken = document.querySelector('input[name="_token"]');
 
@@ -77,7 +81,7 @@ Vue.component('doing-task-list-item', {
         console.log(response);
         // TODO : Handle non 'OK' status.
       }.bind(this));
-    }
+    }*/
   },
   template : `
     <div class="row zero-margin-bottom">
@@ -130,8 +134,7 @@ Vue.component('doing-task-list-item', {
           </a>
         </li>
         <li>
-          <a href="#!"
-            @click="handleDeliverableDownload"
+          <a :href="downloadLink" target="_blank"
             v-if="task.status.pendiente">
             Descargar evidencia
           </a>
