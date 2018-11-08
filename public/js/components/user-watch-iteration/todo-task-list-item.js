@@ -28,10 +28,9 @@ Vue.component('todo-task-list-item', {
 
       // The body of our request.
       var requestBody = { 
-        idTarea : this.task.idTarea,
+        idTarea : this.task.tarea.idTarea,
         _token : authToken.value
       };
-      console.log(requestBody);
 
       requestData.body = JSON.stringify(requestBody);
 
@@ -39,7 +38,6 @@ Vue.component('todo-task-list-item', {
       fetch('/iniciarTarea', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
         if(response.status === 'OK'){
           this.$emit('task-begun', this.task.tarea);
           SuccessToast(response.result);
