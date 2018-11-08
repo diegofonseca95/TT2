@@ -52,6 +52,31 @@ Vue.component('doing-task-list-item', {
           }
         }.bind(this));
       }
+    },
+    handleDeliverableDownload : function(){
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idTarea : this.task.tarea.idTarea,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the projects list.
+      fetch('/descargarEvidencia', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        console.log(response);
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `
@@ -104,8 +129,10 @@ Vue.component('doing-task-list-item', {
           </a>
         </li>
         <li>
-          <a href="#!">
-            Ver evidencia
+          <a href="#!"
+            @click="handleDeliverableDownload"
+            v-if="task.status.pendiente">
+            Descargar evidencia
           </a>
         </li>
         <li>
