@@ -5,7 +5,32 @@ Vue.component('user-personal-info-card', {
     };
   },
   beforeCreate : function(){
-    // TODO : Fetch the user info.
+    var userInput = document.querySelector('input[name="user-id"]');
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idUsuario : userInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the user personal info.
+    fetch('/obtenerUsuario', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        console.log(response);
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   template : `
     <div class="card">
