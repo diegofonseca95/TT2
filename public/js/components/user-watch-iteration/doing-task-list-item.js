@@ -14,14 +14,14 @@ Vue.component('doing-task-list-item', {
       return 'doing-task-trigger-' + this.task.tarea.idTarea;
     },
     canManipulate : function(){
-      return this.task.tarea.evaluable
-        || this.task.tarea.editable;
+      return this.task.evaluable
+        || this.task.editable;
     }
   },
   mounted : function(){
     console.log(this.canManipulate);
-    console.log(this.editable);
-    console.log(this.evaluable);
+    console.log(this.task.editable);
+    console.log(this.task.evaluable);
     if(this.canManipulate){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
@@ -138,7 +138,7 @@ Vue.component('doing-task-list-item', {
       </div>
       <ul :id="dropdownId" class="dropdown-content"
         v-if="canManipulate">
-        <li v-if="task.tarea.editable">
+        <li v-if="task.editable">
           <a href="#!" @click="triggerFileInput">
             Subir evidencia
           </a>
@@ -148,13 +148,13 @@ Vue.component('doing-task-list-item', {
             Descargar evidencia
           </a>
         </li>
-        <li v-if="task.tarea.evaluable"> 
+        <li v-if="task.evaluable"> 
           <a href="#!"
             @click="handleApprovedDeliverable">
             Validar evidencia
           </a>
         </li>
-        <li v-if="task.tarea.evaluable">
+        <li v-if="task.evaluable">
           <a href="#!">
             Rechazar evidencia
           </a>
