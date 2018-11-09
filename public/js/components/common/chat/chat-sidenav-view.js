@@ -34,7 +34,7 @@ Vue.component('chat-sidenav-view', {
         this.validUsers = response.validos;
         this.users = response.result;
         var uMap = {};
-        for(var i in users){
+        for(var i in response.result){
           console.log(i);
         }
       }
