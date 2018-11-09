@@ -12,13 +12,19 @@ Vue.component('doing-task-list-item', {
     },
     triggerId : function(){
       return 'doing-task-trigger-' + this.task.tarea.idTarea;
+    },
+    canManipulate : function(){
+      return this.task.tarea.evaluable
+        || this.task.tarea.editable;
     }
   },
   mounted : function(){
-    M.Dropdown.init(
-      document.getElementById(this.triggerId),
-      { alignment: 'right', constrainWidth: false }
-    );
+    if(this.canManipulate){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
   },
   methods : {
     triggerFileInput : function(){
@@ -95,6 +101,7 @@ Vue.component('doing-task-list-item', {
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
+                    v-if="canManipulate"
                     title="Opciones">more_vert</i>
                 </a>
                 <i class="material-icons right" 
@@ -126,24 +133,25 @@ Vue.component('doing-task-list-item', {
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content">
-        <li v-if="task.status.pendiente"> 
+      <ul :id="dropdownId" class="dropdown-content"
+        v-if="canManipulate">
+        <li v-if="task.tarea.editable">
           <a href="#!" @click="triggerFileInput">
             Subir evidencia
           </a>
         </li>
-        <li v-if="task.status.pendiente"> 
+        <li> 
           <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
         </li>
-        <li v-if="task.status.pendiente"> 
+        <li v-if="task.tarea.evaluable"> 
           <a href="#!"
             @click="handleApprovedDeliverable">
             Validar evidencia
           </a>
         </li>
-        <li v-if="task.status.pendiente">
+        <li v-if="task.tarea.evaluable">
           <a href="#!">
             Rechazar evidencia
           </a>
