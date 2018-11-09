@@ -1,4 +1,4 @@
-Vue.component('new-member-list', {
+Vue.component('new-chat-member-list', {
   props : ['users','selectedBucket'],
   data : function(){
     return {
@@ -51,9 +51,12 @@ Vue.component('new-member-list', {
               <div class='input-field col s12'>
                 <i class='material-icons prefix third-text'>search</i>
                 <input placeholder='Ingresa palabras clave.' 
+                  id="new-chat-member-list-search-input"
                   type='text' class='validate'
                   v-model:value="searchInput" />
-                <label>Búsqueda de Usuarios</label>
+                <label for="new-chat-member-list-search-input">
+                  Búsqueda de Usuarios
+                </label>
               </div>
             </div>
             <ul class="collection scrollable-collection">
