@@ -131,24 +131,23 @@ Vue.component('doing-task-list-item', {
       </div>
       <ul :id="dropdownId" class="dropdown-content"
         v-if="task.editable">
-        <li>
+        <li v-if="task.status.pendiente"> 
           <a href="#!" @click="triggerFileInput">
             Subir evidencia
           </a>
         </li>
-        <li>
-          <a :href="downloadLink" target="_blank"
-            v-if="task.status.pendiente">
+        <li v-if="task.status.pendiente"> 
+          <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
         </li>
-        <li>
+        <li v-if="task.status.pendiente"> 
           <a href="#!"
             @click="handleApprovedDeliverable">
             Validar evidencia
           </a>
         </li>
-        <li>
+        <li v-if="task.status.pendiente">
           <a href="#!">
             Rechazar evidencia
           </a>

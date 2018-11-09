@@ -55,10 +55,9 @@ Vue.component('done-task-list-item', {
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content"
-        v-if="task.editable">
+      <ul :id="dropdownId" class="dropdown-content">
         <li>
-          <a :href="downloadLink" target="_blank"
+          <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
         </li>
