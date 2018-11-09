@@ -74,7 +74,7 @@ Vue.component('doing-task-list-item', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/validarTarea', requestData)
+      fetch('/validarEvidencia', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
