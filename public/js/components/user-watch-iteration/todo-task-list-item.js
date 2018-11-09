@@ -39,7 +39,7 @@ Vue.component('todo-task-list-item', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          this.$emit('task-begun', this.task.tarea);
+          this.$emit('task-begun', response.tarea);
           SuccessToast(response.result);
         }else{
           WarningToast(response.result);
@@ -59,6 +59,7 @@ Vue.component('todo-task-list-item', {
                   v-if="task.editable">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
+                    v-if="task.editable"
                     title="Opciones">more_vert</i>
                 </a>
               </span>
