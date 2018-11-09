@@ -67,7 +67,7 @@ Vue.component('task-board', {
         taskId => taskId !== begTask.tarea.idTarea
       );
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== begTask.tarea.idTarea){
+        if(task.tarea.idTarea !== begTask.tarea.idTarea){
           return task;
         } 
         return begTask;
