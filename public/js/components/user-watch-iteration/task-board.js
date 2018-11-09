@@ -64,30 +64,30 @@ Vue.component('task-board', {
   methods : {
     handleTaskBegun : function(begTask){
       this.todo = this.todo.filter(
-        taskId => taskId !== begTask.idTarea
+        taskId => taskId !== begTask.tarea.idTarea
       );
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== begTask.idTarea){
+        if(task.idTarea !== begTask.tarea.idTarea){
           return task;
         } 
         return begTask;
       });
-      if(!this.doing.includes(begTask.idTarea)){
-        this.doing.push(begTask.idTarea);
+      if(!this.doing.includes(begTask.tarea.idTarea)){
+        this.doing.push(begTask.tarea.idTarea);
       }
     },
     handleDeliverableApproved : function(apTask){
       this.doing = this.doing.filter(
-        taskId => taskId !== apTask.idTarea
+        taskId => taskId !== apTask.tarea.idTarea
       );
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== apTask.idTarea){
+        if(task.idTarea !== apTask.tarea.idTarea){
           return task;
         } 
         return apTask;
       });
-      if(!this.done.includes(apTask.idTarea)){
-        this.done.push(apTask.idTarea);
+      if(!this.done.includes(apTask.tarea.idTarea)){
+        this.done.push(apTask.tarea.idTarea);
       }
     }
   },
