@@ -74,6 +74,11 @@ Vue.component('new-chat-modal', {
           this.$emit('new-members-added', this.newMemberList);
           SuccessToast(response.result);
           this.newMemberList = [];
+          M.Modal.getInstance(
+            document.querySelector(
+              '#new-chat-modal'
+            )
+          ).close();
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -85,12 +90,12 @@ Vue.component('new-chat-modal', {
       <div class="modal-content">
         <h4>Crear una nueva conversación</h4>
         <h6>Selecciona los usuarios para la nueva conversación:</h6>
-        <new-member-list
+        <new-chat-member-list
           @remove-new-member="handleRemoveNewMember"
           @add-new-member="handleAddNewMember"
           :selected-bucket="selectedBucket"
           :users="users">
-        </new-member-list>
+        </new-chat-member-list>
       </div>
       <div class="modal-footer">
         <a class="waves-effect waves-green btn-flat"

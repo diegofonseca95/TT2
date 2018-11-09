@@ -60,14 +60,14 @@ Vue.component('new-chat-member-list', {
               </div>
             </div>
             <ul class="collection scrollable-collection">
-              <new-member-list-item
+              <new-chat-member-list-item
                 v-for="user in filteredList"
                 :selected="selectedBucket[user.idUsuario]"
                 @remove-new-member="handleRemoveNewMember"
                 @add-new-member="handleAddNewMember"
                 :key="user.idUsuario"
                 :user="user">
-              </new-member-list-item>
+              </new-chat-member-list-item>
               <li class="collection-item"
                 v-if="users.length === 0">
                 No hay usuarios disponibles para seleccionar.

@@ -50,6 +50,9 @@
   <script src="/js/components/common/chat/conversation-sidenav.js"></script>
   <script src="/js/components/common/chat/conversations-list-item.js"></script>
   <script src="/js/components/common/chat/conversations-list-sidenav.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list-item.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list.js"></script>
+  <script src="/js/components/common/chat/new-chat-modal.js"></script>
   <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
   <!-- Chat Ends -->
   <!-- List Items Begin -->
