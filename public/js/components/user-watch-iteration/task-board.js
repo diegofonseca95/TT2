@@ -81,7 +81,7 @@ Vue.component('task-board', {
         taskId => taskId !== apTask.tarea.idTarea
       );
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== apTask.tarea.idTarea){
+        if(task.tarea.idTarea !== apTask.tarea.idTarea){
           return task;
         } 
         return apTask;
@@ -92,7 +92,7 @@ Vue.component('task-board', {
     },
     handleTaskUpdated : function(updTask){
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== updTask.tarea.idTarea){
+        if(task.tarea.idTarea !== updTask.tarea.idTarea){
           return task;
         } 
         return updTask;
