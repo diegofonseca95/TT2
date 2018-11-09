@@ -15,13 +15,10 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
-    console.log(this.task.editable);
-    if(this.task.editable){
-      M.Dropdown.init(
-        document.getElementById(this.triggerId),
-        { alignment: 'right', constrainWidth: false }
-      );
-    }
+    M.Dropdown.init(
+      document.getElementById(this.triggerId),
+      { alignment: 'right', constrainWidth: false }
+    );
   },
   methods : {
     triggerFileInput : function(){
