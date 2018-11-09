@@ -31,7 +31,6 @@ Vue.component('task-board', {
     fetch('/obtenerTareasSprint', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         var taskInfo = [];
         for(var i in response.result){
@@ -70,6 +69,20 @@ Vue.component('task-board', {
       if(!this.doing.includes(task.idTarea)){
         this.doing.push(task.idTarea);
       }
+    },
+    handleDeliverableApproved : function(apTask){
+      this.doing = this.doing.filter(
+        taskId => taskId !== apTask.idTarea
+      );
+      this.tasks = this.tasks.filter(task => {
+        if(task.idTarea !== apTask.idTarea){
+          return task;
+        } 
+        return apTask;
+      });
+      if(!this.done.includes(apTask.idTarea)){
+        this.done.push(apTask.idTarea);
+      }
     }
   },
   template : `
@@ -88,6 +101,7 @@ Vue.component('task-board', {
         :tasks="todoTaskList">
       </todo-task-list>
       <doing-task-list 
+        @deliverable-approved="handleDeliverableApproved"
         :tasks="doingTaskList">
       </doing-task-list>
       <done-task-list

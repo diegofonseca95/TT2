@@ -55,9 +55,8 @@ Vue.component('doing-task-list-item', {
           }
         }.bind(this));
       }
-    }
-    /*,
-    handleDeliverableDownload : function(){
+    },
+    handleApprovedDeliverable : function(){
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
@@ -75,13 +74,17 @@ Vue.component('doing-task-list-item', {
       requestData.body = JSON.stringify(requestBody);
 
       // Fetch the projects list.
-      fetch('/descargarEvidencia', requestData)
+      fetch('/validarTarea', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
-        // TODO : Handle non 'OK' status.
+        if(response.status === 'OK'){
+          this.$emit('deliverable-approved', response.tarea);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
       }.bind(this));
-    }*/
+    }
   },
   template : `
     <div class="row zero-margin-bottom">
@@ -140,7 +143,8 @@ Vue.component('doing-task-list-item', {
           </a>
         </li>
         <li>
-          <a href="#!">
+          <a href="#!"
+            @click="handleApproveDeliverable">
             Validar evidencia
           </a>
         </li>

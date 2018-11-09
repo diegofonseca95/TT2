@@ -1,5 +1,10 @@
 Vue.component('doing-task-list', {
   props : ['tasks'],
+  methods : {
+    handleDeliverableApproved : function(apTask){
+      this.$emit('deliverable-approved', apTask);
+    }
+  },
   template : `
     <div class="col s12 m4 amber lighten-4 scrollable-board">
       <div class="row">
@@ -15,6 +20,7 @@ Vue.component('doing-task-list', {
       </div>
       <doing-task-list-item 
         v-for="task in tasks"
+        @deliverable-approved="handleDeliverableApproved"
         :key="task.idTarea"
         :task="task">
       </doing-task-list-item>

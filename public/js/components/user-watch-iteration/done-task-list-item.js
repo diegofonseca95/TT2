@@ -1,6 +1,9 @@
 Vue.component('done-task-list-item', {
   props : ['task'],
   computed : {
+    downloadLink : function(){
+      return '/descargarEvidencia/' + this.task.tarea.idTarea;
+    },
     dropdownId : function(){
       return 'done-task-dropdown-' + this.task.tarea.idTarea;
     },
@@ -55,8 +58,8 @@ Vue.component('done-task-list-item', {
       <ul :id="dropdownId" class="dropdown-content"
         v-if="task.editable">
         <li>
-          <a href="#!">
-            Ver evidencia
+          <a :href="downloadLink" target="_blank"
+            Descargar evidencia
           </a>
         </li>
       </ul>
