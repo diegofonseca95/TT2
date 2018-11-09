@@ -4,6 +4,7 @@
 Vue.component('chat-sidenav-view', {
   data : function(){
     return {
+      conversations : [],
       validUsers : [],
       userMap : {},
       users : []
@@ -29,14 +30,15 @@ Vue.component('chat-sidenav-view', {
     fetch('/obtenerTodosUsuarios', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         this.validUsers = response.validos;
         this.users = response.result;
         var uMap = {};
         for(var i in response.result){
-          console.log(i);
+          var user = response.result[i];
+          uMap[user.idUsuario] = user;
         }
+        this.userMap = uMap;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -75,6 +77,9 @@ Vue.component('chat-sidenav-view', {
           '#new-chat-modal'
         )
       ).open();
+    },
+    handleChatCreated : function(newChat){
+      this.conversations.push(newChat);
     }
   },
   computed : {
@@ -87,12 +92,14 @@ Vue.component('chat-sidenav-view', {
   template : `
     <div>
       <conversations-list-sidenav
-        @conversation-selected="handleConversationSelected">
+        @conversation-selected="handleConversationSelected"
+        :conversations="conversations">
       </conversations-list-sidenav>
       <conversation-sidenav
         @conversation-closed="handleConversationClosed">
       </conversation-sidenav>
       <new-chat-modal
+        @chat-created="handleChatCreated"
         :users="validUsersList">
       </new-chat-modal>
       <div class="fixed-action-btn" id="chat-sidenav-view-trigger">

@@ -15,7 +15,7 @@ Vue.component('conversations-list-item', {
     <li>
       <a class="waves-effect" href="#!"
         @click="handleConversationSelected">
-        Nikola Tesla
+        {{ JSON.stringify(conversation) }}
       </a>
       <div class="divider zero-margin"></div>
     </li>

@@ -59,28 +59,28 @@ Vue.component('new-chat-modal', {
 
       // The body of our request.
       var requestBody = { 
-        integrantes : this.newMemberList,
+        usuarios : this.newMemberList,
         _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
-      /*
-      // Fetch the projects list.
-      fetch('/agregarUsuariosGrupo', requestData)
+
+      // Create new chat.
+      fetch('/nuevaConversacion', requestData)
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          // TODO : Toast if succeeded
-          this.$emit('new-members-added', this.newMemberList);
           SuccessToast(response.result);
+          this.$emit('chat-created', response.result);
           this.newMemberList = [];
           M.Modal.getInstance(
             document.querySelector(
               '#new-chat-modal'
             )
           ).close();
+        }else{
+          WarningToast(response.result);
         }
-        // TODO : Handle non 'OK' status.
       }.bind(this));
       */
     }
