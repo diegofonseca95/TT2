@@ -66,7 +66,7 @@ Vue.component('task-board', {
       this.todo = this.todo.filter(
         taskId => taskId !== begTask.tarea.idTarea
       );
-      this.tasks = this.tasks.filter(task => {
+      this.tasks = this.tasks.map(task => {
         if(task.tarea.idTarea !== begTask.tarea.idTarea){
           return task;
         } 
@@ -80,7 +80,7 @@ Vue.component('task-board', {
       this.doing = this.doing.filter(
         taskId => taskId !== apTask.tarea.idTarea
       );
-      this.tasks = this.tasks.filter(task => {
+      this.tasks = this.tasks.map(task => {
         if(task.tarea.idTarea !== apTask.tarea.idTarea){
           return task;
         } 
@@ -91,7 +91,7 @@ Vue.component('task-board', {
       }
     },
     handleTaskUpdated : function(updTask){
-      this.tasks = this.tasks.filter(task => {
+      this.tasks = this.tasks.map(task => {
         if(task.tarea.idTarea !== updTask.tarea.idTarea){
           return task;
         } 
