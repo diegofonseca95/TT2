@@ -19,6 +19,9 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
+    console.log(this.canManipulate);
+    console.log(this.editable);
+    console.log(this.evaluable);
     if(this.canManipulate){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
