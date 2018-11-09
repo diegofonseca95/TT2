@@ -95,7 +95,6 @@ Vue.component('doing-task-list-item', {
                 <a href='#!' class="right">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
-                    v-if="task.editable"
                     title="Opciones">more_vert</i>
                 </a>
                 <i class="material-icons right" 
