@@ -19,9 +19,6 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
-    console.log(this.canManipulate);
-    console.log(this.task.editable);
-    console.log(this.task.evaluable);
     if(this.canManipulate){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
@@ -55,7 +52,8 @@ Vue.component('doing-task-list-item', {
         .then(response => response.json())
         .then(function(response){
           if(response.status === 'OK'){
-            this.task.status.pendiente = true;
+            console.log(response.tarea);
+            this.$emit('task-updated', response.tarea);
             SuccessToast(response.result);
           }else{
             WarningToast(response.result);
@@ -85,6 +83,7 @@ Vue.component('doing-task-list-item', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          console.log(response.tarea);
           this.$emit('deliverable-approved', response.tarea);
           SuccessToast(response.result);
         }else{
@@ -114,7 +113,8 @@ Vue.component('doing-task-list-item', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          this.$emit('deliverable-rejected', response.tarea);
+          console.log(response.tarea);
+          this.$emit('task-updated', response.tarea);
           SuccessToast(response.result);
         }else{
           WarningToast(response.result);

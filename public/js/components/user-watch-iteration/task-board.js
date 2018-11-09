@@ -90,19 +90,13 @@ Vue.component('task-board', {
         this.done.push(apTask.tarea.idTarea);
       }
     },
-    handleDeliverableRejected : function(rejTask){
-      this.doing = this.doing.filter(
-        taskId => taskId !== rejTask.tarea.idTarea
-      );
+    handleTaskUpdated : function(updTask){
       this.tasks = this.tasks.filter(task => {
-        if(task.idTarea !== rejTask.tarea.idTarea){
+        if(task.idTarea !== updTask.tarea.idTarea){
           return task;
         } 
-        return rejTask;
+        return updTask;
       });
-      if(!this.done.includes(rejTask.tarea.idTarea)){
-        this.done.push(rejTask.tarea.idTarea);
-      }
     }
   },
   template : `
@@ -122,7 +116,7 @@ Vue.component('task-board', {
       </todo-task-list>
       <doing-task-list 
         @deliverable-approved="handleDeliverableApproved"
-        @deliverable-rejected="handleDeliverableRejected"
+        @task-updated="handleTaskUpdated"
         :tasks="doingTaskList">
       </doing-task-list>
       <done-task-list
