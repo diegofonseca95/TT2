@@ -3,6 +3,9 @@ Vue.component('doing-task-list', {
   methods : {
     handleDeliverableApproved : function(apTask){
       this.$emit('deliverable-approved', apTask);
+    },
+    handleDeliverableRejected : function(apTask){
+      this.$emit('deliverable-rejected', apTask);
     }
   },
   template : `
@@ -21,6 +24,7 @@ Vue.component('doing-task-list', {
       <doing-task-list-item 
         v-for="task in tasks"
         @deliverable-approved="handleDeliverableApproved"
+        @deliverable-rejected="handleDeliverableRejected"
         :key="task.idTarea"
         :task="task">
       </doing-task-list-item>
