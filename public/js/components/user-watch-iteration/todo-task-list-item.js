@@ -39,6 +39,7 @@ Vue.component('todo-task-list-item', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
+          console.log(response.tarea);
           this.$emit('task-begun', response.tarea);
           SuccessToast(response.result);
         }else{

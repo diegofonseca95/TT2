@@ -66,29 +66,31 @@ Vue.component('task-board', {
       this.todo = this.todo.filter(
         taskId => taskId !== begTask.tarea.idTarea
       );
+      if(!this.doing.includes(begTask.tarea.idTarea)){
+        this.doing.push(begTask.tarea.idTarea);
+      }
       this.tasks = this.tasks.map(task => {
         if(task.tarea.idTarea !== begTask.tarea.idTarea){
           return task;
         } 
         return begTask;
       });
-      if(!this.doing.includes(begTask.tarea.idTarea)){
-        this.doing.push(begTask.tarea.idTarea);
-      }
+      console.log(begTask);
     },
     handleDeliverableApproved : function(apTask){
       this.doing = this.doing.filter(
         taskId => taskId !== apTask.tarea.idTarea
       );
+      if(!this.done.includes(apTask.tarea.idTarea)){
+        this.done.push(apTask.tarea.idTarea);
+      }
       this.tasks = this.tasks.map(task => {
         if(task.tarea.idTarea !== apTask.tarea.idTarea){
           return task;
         } 
         return apTask;
       });
-      if(!this.done.includes(apTask.tarea.idTarea)){
-        this.done.push(apTask.tarea.idTarea);
-      }
+      console.log(apTask);
     },
     handleTaskUpdated : function(updTask){
       this.tasks = this.tasks.map(task => {
@@ -97,6 +99,7 @@ Vue.component('task-board', {
         } 
         return updTask;
       });
+      console.log(updTask);
     }
   },
   template : `
