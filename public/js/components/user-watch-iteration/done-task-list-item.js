@@ -17,6 +17,12 @@ Vue.component('done-task-list-item', {
       { alignment: 'right', constrainWidth: false }
     );
   },
+  updated : function(){
+    M.Dropdown.init(
+      document.getElementById(this.triggerId),
+      { alignment: 'right', constrainWidth: false }
+    );
+  },
   template : `
     <div class="row zero-margin-bottom">
       <div class="col s12">
