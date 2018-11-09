@@ -144,7 +144,7 @@ Vue.component('doing-task-list-item', {
         </li>
         <li>
           <a href="#!"
-            @click="handleApproveDeliverable">
+            @click="handleApprovedDeliverable">
             Validar evidencia
           </a>
         </li>
