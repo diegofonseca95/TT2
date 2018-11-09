@@ -19,6 +19,16 @@ Vue.component('doing-task-list-item', {
     }
   },
   mounted : function(){
+    console.log(this.task);
+    if(this.canManipulate){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
+  },
+  updated : function(){
+    console.log(this.task);
     if(this.canManipulate){
       M.Dropdown.init(
         document.getElementById(this.triggerId),

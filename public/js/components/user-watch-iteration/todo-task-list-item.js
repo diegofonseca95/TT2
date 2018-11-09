@@ -9,6 +9,16 @@ Vue.component('todo-task-list-item', {
     }
   },
   mounted : function(){
+    console.log(this.task);
+    if(this.task.editable){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
+  },
+  updated : function(){
+    console.log(this.task);
     if(this.task.editable){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
