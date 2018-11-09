@@ -130,8 +130,7 @@ Vue.component('doing-task-list-item', {
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content"
-        v-if="task.editable">
+      <ul :id="dropdownId" class="dropdown-content">
         <li v-if="task.status.pendiente"> 
           <a href="#!" @click="triggerFileInput">
             Subir evidencia

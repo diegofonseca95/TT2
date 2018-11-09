@@ -12,12 +12,10 @@ Vue.component('done-task-list-item', {
     }
   },
   mounted : function(){
-    if(this.task.editable){
-      M.Dropdown.init(
-        document.getElementById(this.triggerId),
-        { alignment: 'right', constrainWidth: false }
-      );
-    }
+    M.Dropdown.init(
+      document.getElementById(this.triggerId),
+      { alignment: 'right', constrainWidth: false }
+    );
   },
   template : `
     <div class="row zero-margin-bottom">
