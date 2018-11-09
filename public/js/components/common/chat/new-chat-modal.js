@@ -82,7 +82,6 @@ Vue.component('new-chat-modal', {
           WarningToast(response.result);
         }
       }.bind(this));
-      */
     }
   },
   template : `
