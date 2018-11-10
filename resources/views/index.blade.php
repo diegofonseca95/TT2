@@ -3,8 +3,8 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="./css/system_colors.css">
-        
+        <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
         <title>Inicia Sesi&oacute;n</title>
 
         <meta charset="utf-8">
@@ -98,9 +98,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-        <script src="./js/toasts.js"></script>  
-        <script src="./js/forgot.js"></script>  
-        <script src="./js/index.js"></script>  
-        <script src="./js/login.js"></script>  
+        <script src="./js/toasts.js"></script>
+        <script src="./js/forgot.js"></script>
+        <script src="./js/index.js"></script>
+        <script src="./js/login.js"></script>
     </body>
 </html>

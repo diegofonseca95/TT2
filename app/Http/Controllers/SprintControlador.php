@@ -202,12 +202,14 @@ class SprintControlador extends Controller
         $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', $tarea->idTarea)->first();
         $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
         $encargado = Usuario::where('idUsuario', $tareaUsuario->idUsuario)->first();
-
+        $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+        $liderProyecto = AdministradorProyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
 
         return array(
             'tarea' => $tarea,
             'encargado' => $encargado,
             'editable' => ($user == $encargado->idUsuario),
+            'evaluable' => ($user == $liderProyecto->idUsuario && $tarea->estado == 7),
             'status' => array(
                 'workInProgress' => $tarea->estado == 4,
                 'pendiente' => $tarea->estado == 7,

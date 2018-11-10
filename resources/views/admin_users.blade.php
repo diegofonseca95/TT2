@@ -3,15 +3,16 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="../css/system_colors.css">
-        
+        <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
+
         <title>Administrar Usuarios</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body class="page-background">
-        {{csrf_field()}} 
+        {{csrf_field()}}
         <!-- Navbar Begin -->
         <nav>
             <div class="nav-wrapper second-background">
@@ -46,10 +47,10 @@
                             <span class="card-title">
                                 <b>Usuarios Aprobados</b>
                             </span>
-                            <admin-user-list 
+                            <admin-user-list
                                 @member-selected="handleMemberSelected"
                                 v-bind:component-id="'approved-list'"
-                                v-bind:filter="true" 
+                                v-bind:filter="true"
                                 v-bind:users="users">
                             </admin-user-list>
                         </div>
@@ -63,9 +64,9 @@
                             <span class="card-title">
                                 <b>Usuarios Pendientes</b>
                             </span>
-                            <admin-user-list 
+                            <admin-user-list
                                 v-bind:component-id="'pending-list'"
-                                v-bind:filter="false" 
+                                v-bind:filter="false"
                                 v-bind:users="users">
                             </admin-user-list>
                         </div>
@@ -83,7 +84,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-        <script src="/js/toasts.js"></script>  
+        <script src="/js/toasts.js"></script>
         <script src="/js/components/admin-user-list-item.js"></script>
         <script src="/js/components/admin-user-list.js"></script>
         <script src="/js/admin_users.js"></script>

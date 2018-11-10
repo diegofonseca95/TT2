@@ -3,15 +3,16 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="../css/system_colors.css">
-        
+        <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
+
         <title>Blog</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body class="page-background">
-        {{csrf_field()}} 
+        {{csrf_field()}}
         <!-- Navbar Begin -->
         <nav>
             <div class="nav-wrapper second-background">
@@ -42,10 +43,10 @@
                 <!-- Begin Post List -->
                 <div class="col s12">
                     <!-- Post Begin -->
-                    <post-list-item 
-                        v-for="post in posts" 
+                    <post-list-item
+                        v-for="post in posts"
                         v-bind:edit-function="enableEdit"
-                        v-bind:key="post.id" 
+                        v-bind:key="post.id"
                         v-bind:post="post">
                     </post-list-item>
                     <!-- Post End -->
@@ -105,8 +106,8 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
         <script src="/js/validate/custom-methods.js"></script>
-        <script src="../js/toasts.js"></script>  
-        <script src="../js/components/post-list-item.js"></script>  
+        <script src="../js/toasts.js"></script>
+        <script src="../js/components/post-list-item.js"></script>
         <script src="../js/publicaciones_grupo.js"></script>
         <!-- Scripts End -->
     </body>

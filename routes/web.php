@@ -11,15 +11,11 @@
 |
 */
 
-Route::get('/', function () {
 
-	$tasks = App\Usuario::all();
-	return $tasks;
-
-    //return view('welcome');
-});
 
 Route::get('/', 'UsuariosControlador@index');
+Route::post('/obtenerTodosUsuarios', 'UsuariosControlador@obtenerTodosUsuarios');
+Route::post('/nuevaConversacion', 'ChatControlador@nuevaConversacion');
 Route::get('/agregarUsuario', 'UsuariosControlador@agregarUsuario');
 Route::post('/agregarUsuario', 'UsuariosControlador@agregarUsuarioBD');
 Route::post('/obtenerUsuario', 'UsuariosControlador@obtenerUsuario');
@@ -87,7 +83,9 @@ Route::post('/permisosDashboard', 'UsuariosControlador@permisosDashboard');
 Route::post('/editarPublicacion', 'PublicacionControlador@editarPublicacion');
 Route::post('/editarUsuario', 'UsuariosControlador@editarUsuario');
 Route::post('/subirEvidencia', 'TareaControlador@subirEvidencia');
-Route::post('/descargarEvidencia', 'TareaControlador@descargarEvidencia');
+Route::post('/validarEvidencia', 'TareaControlador@validarEvidencia');
+Route::post('/rechazarEvidencia', 'TareaControlador@rechazarEvidencia');
+Route::get('/descargarEvidencia/{idTarea}', 'TareaControlador@descargarEvidencia');
 Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 

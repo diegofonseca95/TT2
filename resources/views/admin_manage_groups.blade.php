@@ -3,8 +3,9 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="../css/system_colors.css">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> 
+        <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
         <title>Administrar Grupos</title>
 
         <meta charset="utf-8">
@@ -46,7 +47,7 @@
                                 <label for="descripcion">Descripción del Grupo</label>
                             </div>
                             <div id="divUsuarios">
-                                
+
                             </div>
                             <div class="row">
                                 <div class="col s0 m6"></div>
@@ -82,7 +83,7 @@
 
             </div>
         </div>
-        
+
         <!-- Sidenav Begin -->
         <ul id="slide-out" class="sidenav">
             <li><a class="subheader">
@@ -118,7 +119,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-        <script src="/js/toasts.js"></script>  
+        <script src="/js/toasts.js"></script>
         <script src="/js/admin_manage_groups.js"></script>
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">

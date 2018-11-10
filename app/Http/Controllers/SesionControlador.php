@@ -7,6 +7,7 @@ use App\User;
 use App\Mail\RecuperarContrasena;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Superadministrador;
 
 class SesionControlador extends Controller
 {
@@ -44,7 +45,7 @@ class SesionControlador extends Controller
     public function recuperarContrasena(){
 
         $usuario = new User;
-        $query = $usuario->where([['correo', '=', request('userId')],['estado', '!=', 0]])->get();
+        $query = $usuario->where([['correo', '=', request('userId')],['estado', '!=', 3]])->get();
 
         if(!$query->isNotEmpty()){
             return response()->json([
@@ -68,7 +69,7 @@ class SesionControlador extends Controller
         }catch(ModelNotFoundException $ex){
             return response()->json([
                 'status' => 'ERROR',
-                'result' => 'Error desconocido'
+                'result' => 'Usuario no existe'
             ]);
         }
 
@@ -76,8 +77,13 @@ class SesionControlador extends Controller
     }
 
     public function iniciarSesionAdmin(){
-        if(Auth::check())
-        return view('admin_index');
+        if(Auth::check() ){
+            if(Superadministrador::where('idAdministrador', Auth::id())->count() == 0){
+                return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+            }
+            return view('admin_index');
+        }
+
 
         return view('index');
     }

@@ -3,8 +3,8 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
-        <link rel="stylesheet" type="text/css" href="../css/system_colors.css">
-        
+        <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
         <title>Bienvenido</title>
 
         <meta charset="utf-8">

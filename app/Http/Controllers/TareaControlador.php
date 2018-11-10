@@ -19,6 +19,7 @@ use App\TareaUsuario;
 use App\TareaSprint;
 use App\Usuario;
 use Auth;
+use App\Http\Controllers\SprintControlador;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 
@@ -186,13 +187,14 @@ class TareaControlador extends Controller
                     'result' => 'Esta tarea ya habia sido iniciada anteriormente'
                 ]);
             }
-
+            $s = new SprintControlador;
             $tarea->estado = 4;
             $tarea->save();
 
             return response()->json([
                 'status' => 'OK',
-                'result' => 'Tarea iniciada'
+                'result' => 'Tarea iniciada',
+                'tarea' => $s->informacionTarea($tarea)
             ]);
         }catch(ModelNotFoundException $e){
           return response()->json([
@@ -213,10 +215,11 @@ class TareaControlador extends Controller
         $tarea->estado = 7;
         $tarea->save();
         //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
-
+        $s = new SprintControlador;
         return response()->json([
             'status' => 'OK',
-            'result' => 'Imagen subida correctamente',
+            'result' => 'Archivo subido correctamente',
+            'tarea' => $s->informacionTarea($tarea)
         ]);
       }catch(FileNotFoundException $e){
         return response()->json([
@@ -233,10 +236,10 @@ class TareaControlador extends Controller
 
     }
 
-    public function descargarEvidencia(){
+    public function descargarEvidencia($idTarea){
       try{
-        $tarea = Tarea::findOrFail(request('idTarea'));
-        $files = Storage::files('public/evidencias/'.request('idTarea'));
+        $tarea = Tarea::findOrFail($idTarea);
+        $files = Storage::files('public/evidencias/'.$idTarea);
         //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
         if(empty($files)){
           return response()->json([
@@ -244,12 +247,76 @@ class TareaControlador extends Controller
               'result' => 'No hay evidencia',
           ]);
         }
-        return Storage::download($files[0], "evidenciaTarea".request('idTarea'), []);
+        $ext = pathinfo($files[0], PATHINFO_EXTENSION);
+        //return response('Acceso denegado', 401);
+        return Storage::download($files[0], "evidenciaTarea".$idTarea.'.'.$ext, []);
       }catch(ModelNotFoundException $e){
         return response()->json([
             'status' => 'ERROR',
             'result' => 'Tarea no existe',
         ]);
       }
+    }
+
+    public function validarEvidencia(){
+        $id = 0;
+        if(Auth::check()) $id = Auth::id();
+        try{
+            $tarea = Tarea::findOrFail(request('idTarea'));
+            $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', request('idTarea'))->first();
+            $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+            $proyectoliderId = AdministradorProyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
+            if($proyectoliderId->idUsuario != $id){
+              return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'No tienes permiso para validar esta tarea'
+              ]);
+            }
+            $tarea->estado = 5;
+            $tarea->save();
+            $s = new SprintControlador;
+            return response()->json([
+                'status' => 'OK',
+                'result' => 'Tarea validada',
+                'tarea' => $s->informacionTarea($tarea)
+            ]);
+        }catch(ModelNotFoundException $e){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Tarea no disponible'
+            ]);
+        }
+
+    }
+    public function rechazarEvidencia(){
+        $id = 0;
+        if(Auth::check()) $id = Auth::id();
+        try{
+            $tarea = Tarea::findOrFail(request('idTarea'));
+            $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', request('idTarea'))->first();
+            $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+            $proyectoliderId = AdministradorProyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
+            if($proyectoliderId->idUsuario != $id){
+              return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'No tienes permiso para rechazar esta tarea'
+              ]);
+            }
+            $tarea->estado = 6;
+            $tarea->save();
+            $s = new SprintControlador;
+
+            return response()->json([
+                'status' => 'OK',
+                'result' => 'Tarea rechazada',
+                'tarea' => $s->informacionTarea($tarea)
+            ]);
+        }catch(ModelNotFoundException $e){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Tarea no disponible'
+            ]);
+        }
+
     }
 }

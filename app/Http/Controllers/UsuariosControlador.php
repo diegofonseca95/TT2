@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use App\Superadministrador;
 
 class UsuariosControlador extends Controller
 {
@@ -15,11 +16,27 @@ class UsuariosControlador extends Controller
     }
 
     public function index(){
-        if(Auth::check()) return view('index_admin');
+        if(Auth::check()){
+           if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
+              return view('user_watch_dashboard', ['idUsuario' => $id, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+
+          return view('index_admin');
+        }
     	return view('index');
     }
 
     public function administrarUsuarios(){
+
+        if(!Auth::check()){
+            return view('index');
+        }
+        $id = Auth::id();
+        User::where('idUsuario', $id)->first();
+
+        if(Superadministrador::where('idUsuario', $id)->count() == 0){
+            return view('user_watch_dashboard', ['idUsuario' => $id, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
+
         return view('admin_users');
     }
     public function agregarUsuarioBD(){
@@ -34,7 +51,14 @@ class UsuariosControlador extends Controller
                 ]);
         }
 
+        if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", request('correo'))){
 
+              return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'Correo invalido'
+                  ]);
+
+        }
     	$usuario->nombre = request('nombre');
     	$usuario->apellidoPaterno = request('apellidoPaterno');
     	$usuario->apellidoMaterno = request('apellidoMaterno');
@@ -80,6 +104,26 @@ class UsuariosControlador extends Controller
 
         return $usuario->where('estado', '!=', 3)->get();
     }
+    public function obtenerTodosUsuarios(){
+        if(!Auth::check()){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia sesion para continuar'
+                ]);
+        }
+
+        $validos = User::where('estado', 1)->get();
+        $idvalidos = array();
+        foreach ($validos as $value) {
+           array_push($idvalidos, $value->idUsuario);
+        }
+
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> User::all(),
+            'validos' => $idvalidos
+            ]);
+    }
     public function obtenerUsuariosActivos(){
         if(!Auth::check()){
             return response()->json([
@@ -96,6 +140,18 @@ class UsuariosControlador extends Controller
                 ]);
     }
     public function validarUsuario(){
+        if(!Auth::check()){
+          return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'Inicia sesion para continuar'
+                  ]);
+        }
+        if(Superadministrador::where('idUsuario', Auth::id())-> count() == 0){
+          return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'Inicia sesion como superadministrador para continuar'
+                  ]);
+        }
         $usuario = User::find(request('idUsuario'));
 
         if($usuario->estado == 2){
@@ -120,6 +176,18 @@ class UsuariosControlador extends Controller
     }
 
     public function eliminarUsuario(){
+        if(!Auth::check()){
+            return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'Inicia sesion para continuar'
+                  ]);
+        }
+        if(Superadministrador::where('idUsuario', Auth::id())->count()== 0){
+          return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'Inicia sesion como superadministrador para continuar'
+                  ]);
+        }
         try{
             $usuario = User::findOrFail(request('idUsuario'));
             $usuario->estado = 3;

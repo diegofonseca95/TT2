@@ -62,7 +62,6 @@ class PublicacionControlador extends Controller
 
     public function obtenerPublicaciones(){
         $publicaciones = Publicaciones::where('idGrupo', request('idGrupo'))->get();
-        $publi = Publicaciones::where('idGrupo', request('idGrupo'))->get();
         $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo'))->first();
         $id = 0;
 
@@ -85,20 +84,16 @@ class PublicacionControlador extends Controller
 
 
         }
-        foreach ($publi as $value) {
-            
-            if($value->estadoPublicacion== 4 ) continue;
-            if($liderGrupo->idUsuario == $id || $value->idUsuario == $id || $estado == 1){
-                array_push($permisos, array(
-                    'eliminar' => ($id== $liderGrupo->idUsuario || ($value->estadoPublicacion==2 && $id == $value->idUsuario)),
-                    'editar' => ($id == $value->idUsuario),
-                    'aprobar' => ($id == $liderGrupo->idUsuario && $estado == 2),
-                    'rechazar' => ($id == $liderGrupo->idUsuario && $estado == 2)
-                ));
 
+        foreach ($validas as $value) {
 
-               continue;
-            }
+            $permisos[$value->idPublicacion]= array(
+                'eliminar' => ($id== $liderGrupo->idUsuario || ($value->estadoPublicacion==2 && $id == $value->idUsuario)),
+                'editar' => $id == $value->idUsuario,
+                'aprobar' => ($id == $liderGrupo->idUsuario && $estado == 2),
+                'rechazar' => ($id == $liderGrupo->idUsuario && $estado == 2)
+            );
+
         }
         $publi = array();
 
@@ -109,9 +104,7 @@ class PublicacionControlador extends Controller
 
 
 
-        foreach ($validas as $value) {
 
-        }
         return response()->json([
             'status' => 'OK',
             'result' => $validas,
