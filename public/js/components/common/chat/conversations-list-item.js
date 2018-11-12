@@ -12,6 +12,15 @@ Vue.component('conversations-list-item', {
     }
   },
   template : `
+    <div class="col s12 zero-margin low-vertical-padding low-line-height">
+      <div class="chip black-text">
+        {{ JSON.stringify(conversation) }}
+      </div>
+      <div class="divider zero-margin"></div>
+    </div>
+  `
+});
+/*
     <li>
       <a class="waves-effect" href="#!"
         @click="handleConversationSelected">
@@ -19,5 +28,4 @@ Vue.component('conversations-list-item', {
       </a>
       <div class="divider zero-margin"></div>
     </li>
-  `
-});
+*/
