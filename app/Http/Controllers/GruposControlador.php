@@ -83,6 +83,20 @@ class GruposControlador extends Controller
                 'result' => 'Ya existe un grupo con el mismo nombre'
             ]);
         }
+        $integrantes = request("integrantes");
+        $flag = false;
+        foreach ($integrantes as $value) {
+            if($value == request('lider')){
+                $flag = true;
+                break;
+            }
+        }
+        if($flag == false){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'El nuevo lider debe pertenecer al grupo'
+            ]);
+        }
         $grupo = new Grupo;
       	$grupo->nombreGrupo = request("nombreGrupo");
       	$grupo->descripcion = request("descripcion");
@@ -94,7 +108,7 @@ class GruposControlador extends Controller
 
         $administrarGrupo->save();
 
-    	  $integrantes = request("integrantes");
+
 
         foreach ($integrantes as $value) {
             $usuarioGrupo = new UsuarioGrupo;
@@ -171,6 +185,21 @@ class GruposControlador extends Controller
                     'result' => 'No tienes permiso para editar'
               ]);
           }
+          $integrantes = UsuarioGrupo::where([['idGrupo', '=', request('idGrupo')], ['estado', '=', 1]])->get();
+          $flag = false;
+          foreach ($integrantes as $value) {
+              if($value->idUsuario == request('idUsuario')){
+                  $flag = true;
+                  break;
+              }
+          }
+          if($flag == false){
+              return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'El nuevo lider debe pertenecer al grupo'
+              ]);
+          }
+
        	 	$grupo->descripcion = request('descripcion');
         	$grupo->nombreGrupo = request('nombre');
           $grupo->save();
