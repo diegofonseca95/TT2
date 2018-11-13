@@ -4,7 +4,13 @@
 Vue.component('chat-sidenav-view', {
   data : function(){
     return {
-      conversations : [],
+      conversations : [
+        {idConversacion : 0},
+        {idConversacion : 1},
+        {idConversacion : 2},
+        {idConversacion : 3},
+        {idConversacion : 4}
+      ],
       validUsers : [],
       userMap : {},
       users : []

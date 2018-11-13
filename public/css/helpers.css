@@ -99,3 +99,12 @@
 {
   line-height: normal !important;
 }
+
+.zero-horizontal-padding{
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.low-top-padding{
+  padding-top : 5px !important;
+}

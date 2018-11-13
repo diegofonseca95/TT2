@@ -28,14 +28,12 @@ Vue.component('conversations-list-sidenav', {
         <div class="divider"></div>
       </li>
       <li>
-        <div class="row">
-          <conversations-list-item
-            v-for="conversation in conversations"
-            @conversation-selected="handleConversationSelected"
-            :key="conversation.idConversacion"
-            :conversation="conversation">
-          </conversations-list-item>
-        </div>
+        <conversations-list-item
+          v-for="conversation in conversations"
+          @conversation-selected="handleConversationSelected"
+          :key="conversation.idConversacion"
+          :conversation="conversation">
+        </conversations-list-item>
       </li>
     </ul>
   `

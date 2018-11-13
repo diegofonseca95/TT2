@@ -12,11 +12,16 @@ Vue.component('conversations-list-item', {
     }
   },
   template : `
-    <div class="col s12 zero-margin low-vertical-padding low-line-height">
-      <div class="chip black-text">
-        {{ JSON.stringify(conversation) }}
+    <div class="row zero-horizontal-padding zero-margin">
+      <div class="col s12 low-top-padding low-line-height"
+        @click="handleConversationSelected">
+        <div class="chip black-text">
+          {{ JSON.stringify(conversation) }}
+        </div>
       </div>
-      <div class="divider zero-margin"></div>
+      <div class="col s12 zero-padding">
+        <div class="divider zero-margin"></div>
+      </div>
     </div>
   `
 });
