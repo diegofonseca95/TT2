@@ -58,7 +58,31 @@ Vue.component('conversation-sidenav', {
   },
   methods : {
     handleMessageSubmitted : function(message){
-      console.log(message);
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = {
+        idConversacion : this.conversation.idConversacion,
+        _token : authToken.value,
+        mensaje : message
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the message list.
+      fetch('/enviarMensaje', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'ERROR'){
+          WarningToast(response.result);
+        }
+      }.bind(this));
     },
     resizeConversation : function(){
       ResizeConversationList();
