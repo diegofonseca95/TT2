@@ -90,6 +90,7 @@ Vue.component('conversation-sidenav', {
   },
   watch : {
     conversation : function(){
+      console.log("SWITCHED");
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
