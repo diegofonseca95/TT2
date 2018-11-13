@@ -125,29 +125,29 @@ Vue.component('conversation-sidenav', {
             Messages.push(message);
           }
           this.messages = Messages;
-          // Subscribe to the conversation.
-          Pusher.logToConsole = true;
-          this.pusher = new Pusher('5527fdb0d65f00f390d4', {
-            authEndpoint : '/broadcasting/auth',
-            cluster : 'us2',
-            auth: {
-              headers: {
-                'X-CSRF-TOKEN' : authToken.value
-              }
-            }
-          });
-          this.channel = this.pusher.subscribe(
-            'private-chat.' + this.conversation.idConversacion
-          );
-          this.channel.bind('App\\Events\\Chat', function(data) {
-            var NewMessage = data.message;
-            NewMessage.idUsuario = data.user;
-            //this.messages.push(NewMessage);
-            console.log(NewMessage);
-          });
         }else{
           WarningToast(response.result);
         }
+      }.bind(this));
+      // Subscribe to the conversation.
+      Pusher.logToConsole = true;
+      this.pusher = new Pusher('5527fdb0d65f00f390d4', {
+        authEndpoint : '/broadcasting/auth',
+        cluster : 'us2',
+        auth: {
+          headers: {
+            'X-CSRF-TOKEN' : authToken.value
+          }
+        }
+      });
+      this.channel = this.pusher.subscribe(
+        'private-chat.' + this.conversation.idConversacion
+      );
+      this.channel.bind('App\\Events\\Chat', function(data) {
+        var NewMessage = data.message;
+        NewMessage.idUsuario = data.user;
+        //this.messages.push(NewMessage);
+        console.log(NewMessage);
       }.bind(this));
     }
   },
@@ -166,7 +166,7 @@ Vue.component('conversation-sidenav', {
         class="zero-margin">
         <conversation-message-list
           :messages="messages"
-          :user="users">
+          :users="users">
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
