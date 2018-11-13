@@ -48,6 +48,22 @@ Vue.component('chat-sidenav-view', {
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
+
+    // Fetch the conversations list.
+    fetch('/obtenerConversaciones', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        var chats = [];
+        for(var i in response.result){
+          var chat = response.result[i].conversacion;
+          chat.users = response.result[i].users;
+          chats.push(chat);
+        }
+        this.conversations = chats;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   mounted : function(){
     M.FloatingActionButton.init(
@@ -99,7 +115,8 @@ Vue.component('chat-sidenav-view', {
     <div>
       <conversations-list-sidenav
         @conversation-selected="handleConversationSelected"
-        :conversations="conversations">
+        :conversations="conversations"
+        :users="userMap">
       </conversations-list-sidenav>
       <conversation-sidenav
         @conversation-closed="handleConversationClosed">

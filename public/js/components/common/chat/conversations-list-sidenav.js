@@ -3,7 +3,10 @@
   sidenav in the chat.
 */
 Vue.component('conversations-list-sidenav', {
-  props : ['conversations'],
+  props : [
+    'conversations',  // The conversations list.
+    'users'           // The user map.
+  ],
   mounted : function(){
     // Get the sidenav element.
     var sidenav = document.querySelector(
@@ -32,7 +35,8 @@ Vue.component('conversations-list-sidenav', {
           v-for="conversation in conversations"
           @conversation-selected="handleConversationSelected"
           :key="conversation.idConversacion"
-          :conversation="conversation">
+          :conversation="conversation"
+          :users="users">
         </conversations-list-item>
       </li>
     </ul>
