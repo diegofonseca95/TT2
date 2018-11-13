@@ -31,8 +31,8 @@ Vue.component('conversation-sidenav', {
   ],
   data : function(){
     return {
-      messages : [],  // The message list from this conversation.
-      socket : null   // The chat connection.
+      channel : null, // The chat connection.
+      messages : []   // The message list from this conversation.
     };
   },
   mounted : function(){
@@ -44,6 +44,12 @@ Vue.component('conversation-sidenav', {
     var options = {
       onCloseStart : function(){
         this.$emit('conversation-closed');
+        if(this.channel !== null){
+          this.channel.unsubscribe(
+            this.conversation.canal
+          );
+          this.channel = null;
+        }
       }.bind(this), 
       edge : "right"
     };
@@ -90,7 +96,6 @@ Vue.component('conversation-sidenav', {
   },
   watch : {
     conversation : function(){
-      console.log("SWITCHED");
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
@@ -119,8 +124,29 @@ Vue.component('conversation-sidenav', {
             Messages.push(message);
           }
           this.messages = Messages;
+          // Subscribe to the conversation.
+          Pusher.logToConsole = true;
+          var pusher = new Pusher('5527fdb0d65f00f390d4', {
+            authEndpoint : '/broadcasting/auth',
+            cluster : 'us2',
+            auth: {
+              headers: {
+                'X-CSRF-TOKEN': authToken.value
+              }
+            }
+          });
+          this.channel = pusher.subscribe(
+            this.conversation.canal
+          );
+          this.channel.bind('App\\Events\\Chat', function(data) {
+            var Message = data.message;
+            Message.idUsuario = data.user;
+            this.messages.push(Message);
+            console.log(Message);
+          }.bind(this));
+        }else{
+          WarningToast(response.result);
         }
-        // TODO : Handle non 'OK' status.
       }.bind(this));
     }
   },
