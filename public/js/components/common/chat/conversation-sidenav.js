@@ -142,9 +142,9 @@ Vue.component('conversation-sidenav', {
           this.channel.bind('App\\Events\\Chat', function(data) {
             var NewMessage = data.message;
             NewMessage.idUsuario = data.user;
-            this.messages.push(NewMessage);
+            //this.messages.push(NewMessage);
             console.log(NewMessage);
-          }.bind(this));
+          });
         }else{
           WarningToast(response.result);
         }
