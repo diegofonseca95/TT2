@@ -26,19 +26,13 @@ function ResizeConversationList(){
 */
 Vue.component('conversation-sidenav', {
   props : [
-    'recipientList' // The users with whom the current user chats.
+    'conversation', // The current selected conversation.
+    'users'         // The user map.
   ],
   data : function(){
     return {
-      messages : [
-        { idMensaje : 0 },
-        { idMensaje : 1 },
-        { idMensaje : 2 },
-        { idMensaje : 3 },
-        { idMensaje : 4 },
-        { idMensaje : 5 },
-        { idMensaje : 6 }
-      ] // The message list from this conversation.
+      messages : [],  // The message list from this conversation.
+      socket : null   // The chat connection.
     };
   },
   mounted : function(){
@@ -70,12 +64,47 @@ Vue.component('conversation-sidenav', {
       ResizeConversationList();
     }
   },
+  watch : {
+    conversation : function(){
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = {
+        idConversacion : this.conversation.idConversacion,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the message list.
+      fetch('/obtenerConversacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          var Messages = {};
+          for(var i in response.result){
+            var message = response.result[i].mensaje;
+            message.idUsuario = response.result[i].user;
+            Messages.push(message);
+          }
+          this.messages = Messages;
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    }
+  },
   template : `
     <ul id="conversation-sidenav" class="sidenav no-overflow">
       <li id="conversation-sidenav-header">
         <a href="#!">
           <i class="material-icons">message</i>
-          Víctor Noriega
+          Conversacion
         </a>
       </li>
       <li id="conversation-sidenav-divider">
@@ -84,7 +113,8 @@ Vue.component('conversation-sidenav', {
       <li id="conversation-message-list-container"
         class="zero-margin">
         <conversation-message-list
-          :messages="messages">
+          :messages="messages"
+          :user="users">
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"

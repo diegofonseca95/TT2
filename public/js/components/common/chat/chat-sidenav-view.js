@@ -4,6 +4,7 @@
 Vue.component('chat-sidenav-view', {
   data : function(){
     return {
+      selectedConversation : {},
       conversations : [],
       validUsers : [],
       userMap : {},
@@ -39,22 +40,21 @@ Vue.component('chat-sidenav-view', {
           uMap[user.idUsuario] = user;
         }
         this.userMap = uMap;
-      }
-      // TODO : Handle non 'OK' status.
-    }.bind(this));
-
-    // Fetch the conversations list.
-    fetch('/obtenerConversaciones', requestData)
-    .then(response => response.json())
-    .then(function(response){
-      if(response.status === 'OK'){
-        var chats = [];
-        for(var i in response.result){
-          var chat = response.result[i].conversacion;
-          chat.users = response.result[i].users;
-          chats.push(chat);
-        }
-        this.conversations = chats;
+        // Fetch the conversations list.
+        fetch('/obtenerConversaciones', requestData)
+        .then(response => response.json())
+        .then(function(response){
+          if(response.status === 'OK'){
+            var chats = [];
+            for(var i in response.result){
+              var chat = response.result[i].conversacion;
+              chat.users = response.result[i].users;
+              chats.push(chat);
+            }
+            this.conversations = chats;
+          }
+          // TODO : Handle non 'OK' status.
+        }.bind(this));
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -75,7 +75,7 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     handleConversationSelected : function(conversation){
-      // TODO : Do something with 'conversation'
+      this.selectedConversation = conversation;
       M.Sidenav.getInstance(
         document.querySelector(
           '#conversations-list-sidenav'
@@ -113,7 +113,9 @@ Vue.component('chat-sidenav-view', {
         :users="userMap">
       </conversations-list-sidenav>
       <conversation-sidenav
-        @conversation-closed="handleConversationClosed">
+        @conversation-closed="handleConversationClosed"
+        :conversation="selectedConversation"
+        :users="userMap">
       </conversation-sidenav>
       <new-chat-modal
         @chat-created="handleChatCreated"

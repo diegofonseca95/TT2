@@ -18,8 +18,8 @@ Vue.component('conversations-list-sidenav', {
     M.Sidenav.init(sidenav, options);
   },
   methods : {
-    handleConversationSelected : function(){
-      this.$emit('conversation-selected');
+    handleConversationSelected : function(conversation){
+      this.$emit('conversation-selected', conversation);
     }
   },
   template : `

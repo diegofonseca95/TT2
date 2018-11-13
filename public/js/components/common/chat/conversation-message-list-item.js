@@ -4,19 +4,18 @@
 */
 Vue.component('conversation-message-list-item', {
   props : [
-    'message' // The message displayed.
+    'message',  // The message displayed.
+    'user'      // The user who wrote the message.
   ],
   template : `
     <div class="col s12 zero-margin low-vertical-padding low-line-height">
       <div class="chip black-text">
-        Nikola Tesla
+        <user-full-name-span :user="user">
+        </user-full-name-span>
       </div>
       <br/>
       <span>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut nibh ultricies, pellentesque diam
-        nec, vehicula ipsum. Integer id vulputate tortor. Nullam eget mi in est pellentesque cursus.
-        Curabitur pharetra nisi sit amet fermentum consectetur. Curabitur egestas dapibus velit a
-        consequat.
+        {{ message.contenido }}
       </span>
     </div>
   `
