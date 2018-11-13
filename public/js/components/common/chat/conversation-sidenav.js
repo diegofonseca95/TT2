@@ -137,7 +137,7 @@ Vue.component('conversation-sidenav', {
             }
           });
           this.channel = this.pusher.subscribe(
-            this.conversation.canal
+            'private-chat.' + this.conversation.canal
           );
           this.channel.bind('App\\Events\\Chat', function(data) {
             var NewMessage = data.message;
