@@ -118,7 +118,7 @@ Vue.component('conversation-sidenav', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          var Messages = {};
+          var Messages = [];
           for(var i in response.result){
             var message = response.result[i].mensaje;
             message.idUsuario = response.result[i].user;
