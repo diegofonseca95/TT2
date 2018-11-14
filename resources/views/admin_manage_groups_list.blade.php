@@ -74,6 +74,7 @@
   <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
   <script src="/js/toasts.js"></script>
   <!-- Common Components Begin -->
+  <script src="/js/components/common/user-full-name-span.js"></script>
   <!-- Common Components End -->
   <!-- Chat Begins -->
   <script src="/js/components/common/chat/conversation-message-list-item.js"></script>
