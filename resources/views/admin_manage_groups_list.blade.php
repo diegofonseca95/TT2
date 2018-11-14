@@ -38,8 +38,6 @@
   <!-- Navbar End -->
   <!-- Content Begin -->
   <div class="container" id="admin-groups-box">
-    <chat-sidenav-view>
-    </chat-sidenav-view>
     <div class="section"></div>
     <div class="row">
       <!-- Begin Group List -->
@@ -57,14 +55,16 @@
               </div>
             </div>
             <admin-group-list
-                v-bind:component-id="'group-list'"
-                v-bind:groups="groups">
+              v-bind:component-id="'group-list'"
+              v-bind:groups="groups">
             </admin-group-list>
           </div>
         </div>
       </div>
       <!-- End Group List -->
     </div>
+    <chat-sidenav-view>
+    </chat-sidenav-view>
   </div>
   <!-- Content End -->
   <!-- Scripts Begin -->
