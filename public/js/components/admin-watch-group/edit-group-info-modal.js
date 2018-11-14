@@ -2,9 +2,9 @@ Vue.component('edit-group-info-modal', {
   props : ['groupInfo','groupMembers'],
   data : function(){
     return {
-      newGroupDescription : '',
-      newLeaderId : null,
-      newGroupName : '',
+      newGroupDescription : this.groupInfo.description,
+      newLeaderId : this.groupInfo.leader.idUsuario,
+      newGroupName : this.groupInfo.name,
       hasValidFields : false
     };
   },

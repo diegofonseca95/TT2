@@ -40,11 +40,6 @@ Vue.component('group-member-list-item', {
             @click="observeMember">
             <i class="material-icons">remove_red_eye</i>
           </button>
-          <a class="btn remove-button-background"
-            href="#!" title="Contactar"
-            @click="messageMember">
-            <i class="material-icons">send</i>
-          </a>
         </div>
       </div>
     </li>
