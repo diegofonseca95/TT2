@@ -122,7 +122,7 @@ Vue.component('group-info-card', {
           <span class="title truncate col s12">
             <a href="#!" @click="handleWatchBlog">Ver Blog</a>
           </span>
-          <div class="col s12">
+          <div class="col s12" v-if="editPermission">
             <button title="Editar" data-target="edit-group-info-modal" 
               class="btn-floating btn-large modal-trigger remove-button-background right">
               <i class="material-icons">mode_edit</i>
