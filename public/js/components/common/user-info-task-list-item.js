@@ -1,5 +1,10 @@
 Vue.component('user-info-task-list-item', {
   props : ['taskInfo'],
+  computed : {
+    downloadLink : function(){
+      return '/descargarEvidencia/' + this.taskInfo.tarea.idTarea;
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">create</i>
