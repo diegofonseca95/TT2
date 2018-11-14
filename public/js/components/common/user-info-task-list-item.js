@@ -2,7 +2,7 @@ Vue.component('user-info-task-list-item', {
   props : ['taskInfo'],
   computed : {
     downloadLink : function(){
-      return '/descargarEvidencia/' + this.taskInfo.tarea.idTarea;
+      return '/descargarEvidencia/' + this.taskInfo.task.idTarea;
     }
   },
   template : `
