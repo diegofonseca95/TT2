@@ -11,14 +11,14 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\User;
 use App\Mensaje;
+use App\UsuarioConversacion;
 
 class Chat implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $idChat;
     public $user;
-    public $user2;
-
     public $message;
 
     /**
@@ -26,18 +26,21 @@ class Chat implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user, $user2, $message)
+    public function __construct($idChat, $user, $message)
     {
-        $this->user = User::findOrNew($user);
-        $this->user2 = $user2;
-
+        $this->idChat = $idChat;
+        $this->user = $user;
+        $usuarioConversacion = UsuarioConversacion::where([['idConversacion', $idChat],['idUsuario', $user]])->first();
         $temp = new Mensaje;
-        $temp->idEmisor = $user;
-        $temp->idReceptor = $user2;
+        $temp->idUsuarioConversacion = $usuarioConversacion->idUsuarioConversacion;
         $temp->contenido = $message;
         $temp->save();
 
         $this->message = $temp;
+
+
+
+
 
     }
 
@@ -48,17 +51,9 @@ class Chat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $val = $this->user->idUsuario;
-        $val1 = $this->user2;
-        if($val > $val1) $this->swap($val, $val1);
 
-        return new PrivateChannel('chat.'.$val.'.'.$val1);
-        //return ['chat'];
+        return new PrivateChannel('chat.'.$this->idChat);
+        //return ['chat.'.$val.'.'.$val1];
     }
-    function swap(&$x,&$y) {
-    $tmp=$x;
-    $x=$y;
-    $y=$tmp;
-}
 
 }

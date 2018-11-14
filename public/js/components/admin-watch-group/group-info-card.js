@@ -6,7 +6,8 @@ Vue.component('group-info-card', {
         description : '',
         leader : {},
         name : ''
-      }
+      },
+      editPermission : false
     };
   },
   beforeCreate : function(){
@@ -45,6 +46,7 @@ Vue.component('group-info-card', {
             break;
           }
         }
+        this.editPermission = result.permiso;
         this.groupInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
@@ -93,7 +95,12 @@ Vue.component('group-info-card', {
       }.bind(this));
     },
     handleWatchBlog : function(){
-      // TODO : Redirect to group blog.
+      window.location.replace(
+        '/publicacionesGrupo/' + 
+        document.querySelector(
+          'input[name="group-id"]'
+        ).value
+      );
     }
   },
   template : `
@@ -115,7 +122,7 @@ Vue.component('group-info-card', {
           <span class="title truncate col s12">
             <a href="#!" @click="handleWatchBlog">Ver Blog</a>
           </span>
-          <div class="col s12">
+          <div class="col s12" v-if="editPermission">
             <button title="Editar" data-target="edit-group-info-modal" 
               class="btn-floating btn-large modal-trigger remove-button-background right">
               <i class="material-icons">mode_edit</i>
@@ -126,7 +133,8 @@ Vue.component('group-info-card', {
       <edit-group-info-modal
         @group-info-updated='handleUpdatedInfo'
         :group-members="groupMembers"
-        :group-info="groupInfo">
+        :group-info="groupInfo"
+        v-if="editPermission">
       </edit-group-info-modal>
     </div>
   `

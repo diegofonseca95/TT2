@@ -11,15 +11,11 @@
 |
 */
 
-Route::get('/', function () {
 
-	$tasks = App\Usuario::all();
-	return $tasks;
-
-    //return view('welcome');
-});
 
 Route::get('/', 'UsuariosControlador@index');
+Route::post('/obtenerTodosUsuarios', 'UsuariosControlador@obtenerTodosUsuarios');
+Route::post('/nuevaConversacion', 'ChatControlador@nuevaConversacion');
 Route::get('/agregarUsuario', 'UsuariosControlador@agregarUsuario');
 Route::post('/agregarUsuario', 'UsuariosControlador@agregarUsuarioBD');
 Route::post('/obtenerUsuario', 'UsuariosControlador@obtenerUsuario');
@@ -42,7 +38,7 @@ Route::post('/obtenerUsuariosGrupo', 'GruposControlador@obtenerUsuariosGrupo');
 Route::post('/editarGrupo', 'GruposControlador@editarGrupo');
 Route::get('/verGrupo/{idGrupo}', 'GruposControlador@verGrupo');
 //Route::get('/publicacionesGrupo/{idGrupo}', 'PublicacionControlador@publicacionesGrupo');
-Route::get('/publicacionesGrupo', 'PublicacionControlador@publicacionesGrupo');
+Route::get('/publicacionesGrupo/{idGrupo}', 'PublicacionControlador@publicacionesGrupo');
 Route::post('/recuperarContrasena', 'SesionControlador@recuperarContrasena');
 Route::get('/iniciarSesionAdmin', 'SesionControlador@iniciarSesionAdmin');
 Route::post('/obtenerIdUsuariosGrupo','GruposControlador@obtenerIdUsuariosGrupo');
@@ -74,7 +70,38 @@ Route::post('/editarSprint', 'SprintControlador@editarSprint');
 Route::post('/obtenerSprintsActivos', 'SprintControlador@obtenerSprintsActivos');
 Route::post('/obtenerTareasSprint', 'SprintControlador@obtenerTareasSprint');
 Route::post('/iniciarTarea', 'TareaControlador@iniciarTarea');
-Route::get('TestChat', 'SesionControlador@testChat');
+Route::get('/TestChat', 'SesionControlador@testChat');
+Route::post('/subirPortada', 'PublicacionControlador@subirPortada');
+Route::post('/nombrePortada', 'PublicacionControlador@nombrePortada');
+Route::get('/test', 'SesionControlador@test');
+Route::post('/agregarPublicacion', 'PublicacionControlador@agregarPublicacion');
+Route::post('/obtenerPublicaciones', 'PublicacionControlador@obtenerPublicaciones');
+Route::post('/eliminarPublicacion', 'PublicacionControlador@eliminarPublicacion');
+Route::post('/aprobarPublicacion', 'PublicacionControlador@aprobarPublicacion');
+Route::post('/rechazarPublicacion', 'PublicacionControlador@rechazarPublicacion');
+Route::post('/permisosDashboard', 'UsuariosControlador@permisosDashboard');
+Route::post('/editarPublicacion', 'PublicacionControlador@editarPublicacion');
+Route::post('/editarUsuario', 'UsuariosControlador@editarUsuario');
+Route::post('/subirEvidencia', 'TareaControlador@subirEvidencia');
+Route::post('/validarEvidencia', 'TareaControlador@validarEvidencia');
+Route::post('/rechazarEvidencia', 'TareaControlador@rechazarEvidencia');
+Route::post('/obtenerConversaciones', 'ChatControlador@obtenerConversaciones');
+Route::post('/obtenerConversacion', 'ChatControlador@obtenerConversacion');
+Route::post('/enviarMensaje', function(){
+  if(!Auth::check()){
+      return response()->json([
+            'status' => 'ERROR',
+            'result' => 'Inicia sesion para continuar'
+      ]);
+  }
+  event(new App\Events\Chat(request('idConversacion'), Auth::id(), request('mensaje')));
+
+  return response()->json([
+        'status' => 'OK'
+  ]);
+});
+Route::get('/descargarEvidencia/{idTarea}', 'TareaControlador@descargarEvidencia');
+Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 
 	  /*App\Events\Chat::dispatch('Someone');*/

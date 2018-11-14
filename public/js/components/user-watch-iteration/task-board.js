@@ -31,7 +31,6 @@ Vue.component('task-board', {
     fetch('/obtenerTareasSprint', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.result);
       if(response.status === 'OK'){
         var taskInfo = [];
         for(var i in response.result){
@@ -63,13 +62,44 @@ Vue.component('task-board', {
     }
   },
   methods : {
-    handleTaskBegun : function(task){
+    handleTaskBegun : function(begTask){
       this.todo = this.todo.filter(
-        taskId => taskId !== task.idTarea
+        taskId => taskId !== begTask.tarea.idTarea
       );
-      if(!this.doing.includes(task.idTarea)){
-        this.doing.push(task.idTarea);
+      if(!this.doing.includes(begTask.tarea.idTarea)){
+        this.doing.push(begTask.tarea.idTarea);
       }
+      this.tasks = this.tasks.map(task => {
+        if(task.tarea.idTarea !== begTask.tarea.idTarea){
+          return task;
+        } 
+        return begTask;
+      });
+      console.log(begTask);
+    },
+    handleDeliverableApproved : function(apTask){
+      this.doing = this.doing.filter(
+        taskId => taskId !== apTask.tarea.idTarea
+      );
+      if(!this.done.includes(apTask.tarea.idTarea)){
+        this.done.push(apTask.tarea.idTarea);
+      }
+      this.tasks = this.tasks.map(task => {
+        if(task.tarea.idTarea !== apTask.tarea.idTarea){
+          return task;
+        } 
+        return apTask;
+      });
+      console.log(apTask);
+    },
+    handleTaskUpdated : function(updTask){
+      this.tasks = this.tasks.map(task => {
+        if(task.tarea.idTarea !== updTask.tarea.idTarea){
+          return task;
+        } 
+        return updTask;
+      });
+      console.log(updTask);
     }
   },
   template : `
@@ -88,6 +118,8 @@ Vue.component('task-board', {
         :tasks="todoTaskList">
       </todo-task-list>
       <doing-task-list 
+        @deliverable-approved="handleDeliverableApproved"
+        @task-updated="handleTaskUpdated"
         :tasks="doingTaskList">
       </doing-task-list>
       <done-task-list

@@ -5,8 +5,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
     media="screen,projection">
-  <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
-  <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
+    <link href="{{ asset('css/system_colors.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/helpers.css') }}" rel="stylesheet">
   <title>Bienvenido</title>
 
   <meta charset="utf-8">
@@ -15,24 +15,7 @@
 
 <body class="page-background">
   <!-- Navbar Begin -->
-  <nav>
-    <div class="nav-wrapper second-background">
-      <ul class="left">
-        <li>
-          <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
-            <i class="material-icons left">view_module</i>
-          </a>
-        </li>
-      </ul>
-      <a href="#!" class="brand-logo center">
-        <i class="material-icons">computer</i>
-        <span class="hide-on-small-only">Administrador</span>
-      </a>
-      <ul class="right">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
-      </ul>
-    </div>
-  </nav>
+  @include('systemnavbar');
   <!-- Navbar End -->
 
   <!-- Content begin -->
@@ -44,11 +27,11 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/users.jpg">
+            <img class="activator" src="./img/users.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Usuarios<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Ir a Usuarios</a></p>
+            <p><a href="/administrarUsuarios">Ir a Usuarios</a></p>
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Usuarios<i class="material-icons right">close</i></span>
@@ -65,11 +48,11 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/groups.jpg">
+            <img class="activator" src="./img/groups.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Grupos<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Ir a Grupos</a></p>
+            <p><a href="/administrarGrupos">Ir a Grupos</a></p>
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Grupos<i class="material-icons right">close</i></span>
@@ -85,7 +68,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/projects.jpg">
+            <img class="activator" src="./img/projects.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Proyectos<i class="material-icons right">more_vert</i></span>
@@ -107,7 +90,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/blog.JPG">
+            <img class="activator" src="./img/blog.JPG">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Blogs<i class="material-icons right">more_vert</i></span>
@@ -127,7 +110,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/statistics.jpg">
+            <img class="activator" src="./img/statistics.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Estadísticas<i class="material-icons right">more_vert</i></span>
@@ -147,7 +130,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../public/img/files.jpg">
+            <img class="activator" src="./img/files.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Archivos<i class="material-icons right">more_vert</i></span>
@@ -173,7 +156,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="../../public/js/toasts.js"></script>
+  <script src="./js/toasts.js"></script>
   <script>
     //M.AutoInit();
   </script>

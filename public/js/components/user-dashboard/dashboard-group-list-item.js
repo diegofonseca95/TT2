@@ -4,8 +4,8 @@
 */
 Vue.component('dashboard-group-list-item', {
   props : [
-    'groupLeader', // The group's leader information.
-    'group' // The group information.
+    'groupLeader',  // The group's leader information.
+    'group'         // The group information.
   ],
   methods : {
     handleWatchGroup : function(){

@@ -2,9 +2,9 @@ Vue.component('edit-group-info-modal', {
   props : ['groupInfo','groupMembers'],
   data : function(){
     return {
-      newGroupDescription : '',
-      newLeaderId : null,
-      newGroupName : '',
+      newGroupDescription : this.groupInfo.description,
+      newLeaderId : this.groupInfo.leader.idUsuario,
+      newGroupName : this.groupInfo.name,
       hasValidFields : false
     };
   },
@@ -37,9 +37,16 @@ Vue.component('edit-group-info-modal', {
       this.newGroupDescription = this.groupInfo.description;
       this.newLeaderId = this.groupInfo.leader.idUsuario;
       this.newGroupName = this.groupInfo.name;
+      M.updateTextFields();
     }
   },
   mounted : function(){
+    M.Modal.init(
+      document.querySelector(
+        '#edit-group-info-modal'
+      )
+    );
+    M.updateTextFields();
     // TODO : No JQuery.
     $('#edit-group-info-form').validate({
       rules : {

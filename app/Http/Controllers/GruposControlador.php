@@ -13,13 +13,17 @@ use App\Proyecto;
 use Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Superadministrador;
+
 class GruposControlador extends Controller
 {
     public function administrarGrupos(){
         if(!Auth::check()){
             return view('index');
         }
-
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
         $grupo = new Grupo;
 
         $query = $grupo->get();
@@ -31,16 +35,20 @@ class GruposControlador extends Controller
         if(!Auth::check()){
             return view('index');
         }
-
-    	return view('admin_manage_groups_list', ['nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
+    	   return view('admin_manage_groups_list', ['nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
     }
 
     public function agregarGrupo(){
         if(!Auth::check()){
             return view('index');
         }
-
-    	return view('admin_create_group', ['nombreVista'=> 'Nuevo Grupo', 'iconoVista' => 'group']);
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
+    	   return view('admin_create_group', ['nombreVista'=> 'Nuevo Grupo', 'iconoVista' => 'group']);
     }
 
     public function obtenerLiderTabla(){
@@ -56,15 +64,37 @@ class GruposControlador extends Controller
 
     public function agregarGrupoBD(){
         if(!Auth::check()){
-            return view('index');
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inica sesion para continuar'
+            ]);
         }
-
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion como administrador para continuar'
+            ]);
+        }
         $cont = Grupo::where('nombreGrupo', '=', request('nombreGrupo'))->count();
 
         if($cont > 0){
             return response()->json([
                 'status' => 'ERROR',
                 'result' => 'Ya existe un grupo con el mismo nombre'
+            ]);
+        }
+        $integrantes = request("integrantes");
+        $flag = false;
+        foreach ($integrantes as $value) {
+            if($value == request('lider')){
+                $flag = true;
+                break;
+            }
+        }
+        if($flag == false){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'El nuevo lider debe pertenecer al grupo'
             ]);
         }
         $grupo = new Grupo;
@@ -78,7 +108,7 @@ class GruposControlador extends Controller
 
         $administrarGrupo->save();
 
-    	  $integrantes = request("integrantes");
+
 
         foreach ($integrantes as $value) {
             $usuarioGrupo = new UsuarioGrupo;
@@ -104,6 +134,13 @@ class GruposControlador extends Controller
 
         $idGrupo = request("idGrupo");
 
+        $liderGrupo = AdministradorGrupo::where('idGrupo', $idGrupo )->first();
+        if(Auth::id() != $liderGrupo->idUsuario){
+          return response()->json([
+              'status'=> 'ERROR',
+              'result'=> 'Inicia sesion como administrador de grupo para continuar'
+              ]);
+        }
 
     	$integrantes = request("integrantes");
 
@@ -140,10 +177,32 @@ class GruposControlador extends Controller
             return view('index');
         }
         try{
+          $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo') )->first();
         	$grupo = Grupo::findOrFail(request('idGrupo'));
+          if($liderGrupo->idUsuario != Auth::id() && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+              return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'No tienes permiso para editar'
+              ]);
+          }
+          $integrantes = UsuarioGrupo::where([['idGrupo', '=', request('idGrupo')], ['estado', '=', 1]])->get();
+          $flag = false;
+          foreach ($integrantes as $value) {
+              if($value->idUsuario == request('idUsuario')){
+                  $flag = true;
+                  break;
+              }
+          }
+          if($flag == false){
+              return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'El nuevo lider debe pertenecer al grupo'
+              ]);
+          }
+
        	 	$grupo->descripcion = request('descripcion');
         	$grupo->nombreGrupo = request('nombre');
-            $grupo->save();
+          $grupo->save();
         	$adminGrupo = AdministradorGrupo::where('idGrupo', '=', $grupo->idGrupo)->update(['idUsuario' => request('idUsuario')]);
 
 
@@ -164,7 +223,13 @@ class GruposControlador extends Controller
         if(!Auth::check()){
             return view('index');
         }
-
+        $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', request('idGrupo')]])->where('estado', 1)->count();
+        if($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' =>'ERROR',
+                  'result' => 'No tienes permiso para ver este grupo'
+            ]);
+        }
         $grupo = new Grupo;
         $lider = new AdministradorGrupo;
 
@@ -186,6 +251,12 @@ class GruposControlador extends Controller
             return view('index');
         }
 
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion como administrador para continuar'
+            ]);
+        }
         try{
             $grupo = Grupo::findOrFail(request('idGrupo'));
             $grupo->estado = 3;
@@ -226,6 +297,13 @@ class GruposControlador extends Controller
             'result'=> 'Inicia Sesion'
              ]);
         }
+        $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', request('idGrupo')]])->where('estado', 1)->count();
+        if($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' =>'ERROR',
+                  'result' => 'No tienes permiso para ver este grupo'
+            ]);
+        }
 
         $usuarioGrupo = new UsuarioGrupo;
         $usuario = new User;
@@ -245,10 +323,16 @@ class GruposControlador extends Controller
         if(!Auth::check()){
             return response()->json([
                 'status'=> 'ERROR',
-                'result'=> 'No tienes acceso a esta vista :('
+                'result'=> 'Inicia sesion para continuar'
                 ]);
         }
-
+        $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=',request('idGrupo')]])->where('estado', 1)->count();
+        if($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' =>'ERROR',
+                  'result' => 'No tienes permiso para ver este grupo'
+            ]);
+        }
         $usuarioGrupo = new UsuarioGrupo;
         $usuario = new User;
         $query = $usuarioGrupo->where([['idGrupo', '=', request('idGrupo')], ['estado', '=', 1]])->get();
@@ -276,17 +360,26 @@ class GruposControlador extends Controller
     	if(!Auth::check()){
             return view('index');
         }
+        $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', $idGrupo]])->where('estado', 1)->count();
+        if($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0)
+          return view('admin_watch_group', ['idGrupo' => $idGrupo,'nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
 
-        return view('admin_watch_group', ['idGrupo' => $idGrupo,'nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
+        return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
     public function obtenerProyectosGrupo(){
         if(!Auth::check()){
             return response()->json([
                 'status'=> 'ERROR',
-                'result'=> 'No tienes acceso a esta vista :('
+                'result'=> 'Inicia sesion para continuar'
                 ]);;
         }
-
+        $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', request('idGrupo')]])->where('estado', 1)->count();
+        if($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+            return response()->json([
+                  'status' =>'ERROR',
+                  'result' => 'No tienes permiso para ver este grupo'
+            ]);
+        }
         $proyectoGrupo = new ProyectoGrupo;
         $usuario = new User;
         $proyecto = new Proyecto;
@@ -320,7 +413,10 @@ class GruposControlador extends Controller
         if(!Auth::check()){
             return view('index');
         }
-
+          $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo') )->first();
+        if($liderGrupo != Auth::id()){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
         return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Nuevo Proyecto', 'iconoVista' => 'assignment']);
     }
 }

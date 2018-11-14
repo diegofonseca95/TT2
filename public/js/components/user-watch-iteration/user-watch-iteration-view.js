@@ -8,6 +8,8 @@ Vue.component('user-watch-iteration-view', {
       </iteration-info-card>
       <task-board>
       </task-board>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

@@ -205,6 +205,8 @@ Vue.component('admin-create-group-view', {
           Seleccionar Líder
         </button>
       </div>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

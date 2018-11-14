@@ -2,13 +2,23 @@ Vue.component('todo-task-list-item', {
   props : ['task'],
   computed : {
     dropdownId : function(){
-      return 'todo-task-dropdown-' + this.task.idTarea;
+      return 'todo-task-dropdown-' + this.task.tarea.idTarea;
     },
     triggerId : function(){
-      return 'todo-task-trigger-' + this.task.idTarea;
+      return 'todo-task-trigger-' + this.task.tarea.idTarea;
     }
   },
   mounted : function(){
+    console.log(this.task);
+    if(this.task.editable){
+      M.Dropdown.init(
+        document.getElementById(this.triggerId),
+        { alignment: 'right', constrainWidth: false }
+      );
+    }
+  },
+  updated : function(){
+    console.log(this.task);
     if(this.task.editable){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
@@ -28,7 +38,7 @@ Vue.component('todo-task-list-item', {
 
       // The body of our request.
       var requestBody = { 
-        idTarea : this.task.idTarea,
+        idTarea : this.task.tarea.idTarea,
         _token : authToken.value
       };
 
@@ -38,9 +48,9 @@ Vue.component('todo-task-list-item', {
       fetch('/iniciarTarea', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
         if(response.status === 'OK'){
-          this.$emit('task-begun', this.task.tarea);
+          console.log(response.tarea);
+          this.$emit('task-begun', response.tarea);
           SuccessToast(response.result);
         }else{
           WarningToast(response.result);
@@ -60,6 +70,7 @@ Vue.component('todo-task-list-item', {
                   v-if="task.editable">
                   <i class="dropdown-trigger material-icons right"
                     :id="triggerId" :data-target="dropdownId"
+                    v-if="task.editable"
                     title="Opciones">more_vert</i>
                 </a>
               </span>

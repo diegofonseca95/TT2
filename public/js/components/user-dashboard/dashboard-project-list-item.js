@@ -8,7 +8,7 @@ Vue.component('dashboard-project-list-item', {
     'project' // The project information.
   ],
   methods : {
-    handleWatchGroup : function(){
+    handleWatchProject : function(){
       window.location.replace('/verProyecto/' + this.project.idProyecto);
     }
   },
@@ -21,13 +21,14 @@ Vue.component('dashboard-project-list-item', {
           </span>
           <span class="title truncate col s12">
             Líder del proyecto: 
-            <user-full-name-span :user="groupLeader">
+            <user-full-name-span :user="projectLeader">
             </user-full-name-span>
           </span>
         </div>
         <div class="right">
           <a class="btn remove-button-background"
-            href="#!" title="Ver">
+            href="#!" title="Ver"
+            @click="handleWatchProject">
             <i class="material-icons">remove_red_eye</i>
           </a>
         </div>

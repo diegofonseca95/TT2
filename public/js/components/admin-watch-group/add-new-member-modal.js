@@ -13,6 +13,13 @@ Vue.component('add-new-member-modal', {
     }   
     this.selectedBucket = bucket;
   },
+  mounted : function(){
+    M.Modal.init(
+      document.querySelector(
+        '#add-new-member-modal'
+      )
+    );
+  },
   watch : {
     users : function(){
       var bucket = {};

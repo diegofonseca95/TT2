@@ -1,5 +1,10 @@
 Vue.component('user-info-task-list-item', {
   props : ['taskInfo'],
+  computed : {
+    downloadLink : function(){
+      return '/descargarEvidencia/' + this.taskInfo.task.idTarea;
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">create</i>
@@ -13,8 +18,9 @@ Vue.component('user-info-task-list-item', {
         <span class="title truncate col s12">
           Descripción : {{ taskInfo.task.descripcion }}
         </span>
-        <span class="title truncate col s12">
-          <a href="#!">
+        <span class="title truncate col s12"
+          v-if="this.taskInfo.permission">
+          <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
         </span>

@@ -1,20 +1,27 @@
 Vue.component('done-task-list-item', {
   props : ['task'],
   computed : {
+    downloadLink : function(){
+      return '/descargarEvidencia/' + this.task.tarea.idTarea;
+    },
     dropdownId : function(){
-      return 'done-task-dropdown-' + this.task.idTarea;
+      return 'done-task-dropdown-' + this.task.tarea.idTarea;
     },
     triggerId : function(){
-      return 'done-task-trigger-' + this.task.idTarea;
+      return 'done-task-trigger-' + this.task.tarea.idTarea;
     }
   },
   mounted : function(){
-    if(this.task.editable){
-      M.Dropdown.init(
-        document.getElementById(this.triggerId),
-        { alignment: 'right', constrainWidth: false }
-      );
-    }
+    M.Dropdown.init(
+      document.getElementById(this.triggerId),
+      { alignment: 'right', constrainWidth: false }
+    );
+  },
+  updated : function(){
+    M.Dropdown.init(
+      document.getElementById(this.triggerId),
+      { alignment: 'right', constrainWidth: false }
+    );
   },
   template : `
     <div class="row zero-margin-bottom">
@@ -52,11 +59,10 @@ Vue.component('done-task-list-item', {
           </div>
         </div>
       </div>
-      <ul :id="dropdownId" class="dropdown-content"
-        v-if="task.editable">
+      <ul :id="dropdownId" class="dropdown-content">
         <li>
-          <a href="#!">
-            Ver evidencia
+          <a :href="downloadLink" target="_blank">
+            Descargar evidencia
           </a>
         </li>
       </ul>

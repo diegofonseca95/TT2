@@ -182,7 +182,7 @@ class SprintControlador extends Controller
         foreach ($tareas as $value) {
            array_push($infoTarea, $this->informacionTarea($value));
            if($value->estado == 3) array_push($todo, $value->idTarea);
-           if($value->estado == 4) array_push($doing, $value->idTarea);
+           if($value->estado == 4 || $value->estado == 7 || $value->estado == 6) array_push($doing, $value->idTarea);
            if($value->estado == 5) array_push($done,$value->idTarea);
         }
 
@@ -202,12 +202,14 @@ class SprintControlador extends Controller
         $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', $tarea->idTarea)->first();
         $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
         $encargado = Usuario::where('idUsuario', $tareaUsuario->idUsuario)->first();
-
+        $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+        $liderProyecto = AdministradorProyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
 
         return array(
             'tarea' => $tarea,
             'encargado' => $encargado,
             'editable' => ($user == $encargado->idUsuario),
+            'evaluable' => ($user == $liderProyecto->idUsuario && $tarea->estado == 7),
             'status' => array(
                 'workInProgress' => $tarea->estado == 4,
                 'pendiente' => $tarea->estado == 7,

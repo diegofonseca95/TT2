@@ -123,6 +123,9 @@ Vue.component('admin-watch-project-view', {
 
       <task-card-group :project-members="memberList">
       </task-card-group>
+      
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

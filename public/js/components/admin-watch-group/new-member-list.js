@@ -26,13 +26,6 @@ Vue.component('new-member-list', {
           }
         }
         return false;
-      }.bind(this))
-      .sort(function(a, b){
-        if(this.selectedBucket[a.idUsuario] === true)
-          return -1; // Place 'a' before 'b'
-        if(this.selectedBucket[b.idUsuario] === true)
-          return +1; // Place 'b' before 'a'
-        return 0;
       }.bind(this));
     },
     anyUserMatches : function(){
