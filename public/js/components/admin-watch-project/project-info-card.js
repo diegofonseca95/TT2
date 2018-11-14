@@ -7,7 +7,8 @@ Vue.component('project-info-card', {
         startDate : '',
         leader : {},
         name : ''
-      }
+      },
+      editPermission : false
     };
   },
   beforeCreate : function(){
@@ -46,6 +47,7 @@ Vue.component('project-info-card', {
             break;
           }
         }
+        this.editPermission = result.permiso;
         this.projectInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
@@ -112,7 +114,7 @@ Vue.component('project-info-card', {
           <span class="title col s12" style="word-break: break-all;">
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
-          <div class="col s12">
+          <div class="col s12" v-if="editPermission">
             <button title="Editar" data-target="edit-project-info-modal" 
               class="btn-floating btn-large modal-trigger remove-button-background right">
               <i class="material-icons">mode_edit</i>
@@ -123,7 +125,8 @@ Vue.component('project-info-card', {
       <edit-project-info-modal
         @project-info-updated='handleUpdatedInfo'
         :project-members="projectMembers"
-        :project-info="projectInfo">
+        :project-info="projectInfo"
+        v-if="editPermission">
       </edit-project-info-modal>
     </div>
   `
