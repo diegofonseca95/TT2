@@ -1,5 +1,8 @@
 Vue.component('group-member-list', {
-  props : ['groupMembers'],
+  props : [
+    'groupMembers',
+    'permissions'
+  ],
   data : function(){
     return {};
   },
@@ -17,6 +20,7 @@ Vue.component('group-member-list', {
         v-for="member in groupMembers" 
         @member-selected="handleMemberSelected($event)"
         @member-removed="handleMemberRemoved($event)"
+        :permissions="permissions"
         :key="member.idUsuario"
         :member="member">
       </group-member-list-item>

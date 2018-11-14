@@ -1,5 +1,9 @@
 Vue.component('group-members-card', {
-  props : ['groupMembers','users'],
+  props : [
+    'groupMembers',
+    'permissions',
+    'users'
+  ],
   data : function(){
     return {
       displayedUser : {}
@@ -25,9 +29,10 @@ Vue.component('group-members-card', {
         <group-member-list
           @member-selected="handleMemberSelected($event)"
           @member-removed="handleMemberRemoved($event)"
-          :group-members="groupMembers">
+          :group-members="groupMembers"
+          :permissions="permissions">
         </group-member-list>
-        <div class="row">
+        <div class="row" v-if="permissions.eliminar">
           <div class="col s12">
             <button class="btn-floating btn-large modal-trigger remove-button-background right"
               data-target="add-new-member-modal" title="Agregar usuarios">
@@ -38,6 +43,7 @@ Vue.component('group-members-card', {
       </div>
       <add-new-member-modal
         @new-members-added="handleNewMembersAdded"
+        v-if="permissions.eliminar"
         :users="users">
       </add-new-member-modal>
       <user-info-modal :user="displayedUser">

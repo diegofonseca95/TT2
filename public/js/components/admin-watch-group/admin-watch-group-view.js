@@ -1,6 +1,7 @@
 Vue.component('admin-watch-group-view', {
   data : function(){
     return {
+      permissions : {},
       memberIds : [],
       groupId : null,
       users : []
@@ -100,6 +101,15 @@ Vue.component('admin-watch-group-view', {
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
+
+    fetch('/permisosGrupo', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.permissions = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   template : `
     <div class="row">
@@ -110,10 +120,13 @@ Vue.component('admin-watch-group-view', {
         @member-removed="handleMemberRemoved($event)"
         @new-members-added="handleNewMembersAdded"
         :group-members="memberList"
+        :permissions="permissions"
         :users="nonMemberList">
       </group-members-card>
 
-      <group-projects-card :group-id="groupId">
+      <group-projects-card 
+        :permissions="permissions"
+        :group-id="groupId">
       </group-projects-card>
 
       <chat-sidenav-view>

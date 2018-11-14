@@ -1,5 +1,8 @@
 Vue.component('group-projects-card', {
-  props : ['groupId'],
+  props : [
+    'permissions',
+    'groupId'
+  ],
   data : function(){
     return {};
   },
@@ -16,6 +19,7 @@ Vue.component('group-projects-card', {
           <b>Proyectos</b>
         </span>
         <project-list
+          :permissions="permissions"
           :group-id="groupId">
         </project-list>
         <div class="row">

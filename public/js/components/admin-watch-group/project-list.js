@@ -1,5 +1,8 @@
 Vue.component('project-list', {
-  props : ['groupId'],
+  props : [
+    'permissions',
+    'groupId'
+  ],
   data : function(){
     return {
       projects : []
@@ -56,7 +59,8 @@ Vue.component('project-list', {
         :project-leader="projectInfo.projectLeader"
         @project-deleted="handleProjectDeleted"
         :key="projectInfo.project.idProyecto"
-        :project="projectInfo.project">
+        :project="projectInfo.project"
+        :permissions="permissions">
       </project-list-item>
       <li class="collection-item"
         v-if="projects.length === 0">

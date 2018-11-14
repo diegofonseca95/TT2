@@ -1,5 +1,9 @@
 Vue.component('project-list-item', {
-  props : ['project', 'projectLeader'],
+  props : [
+    'projectLeader',
+    'permissions',
+    'project'
+  ],
   data : function(){
     return {};
   },
@@ -53,7 +57,8 @@ Vue.component('project-list-item', {
         <div class="right">
           <a class="btn remove-button-background"
             href="#!" title="Eliminar"
-            @click="handleDeleteProject">
+            @click="handleDeleteProject"
+            v-if="permissions.eliminar">
             <i class="material-icons">remove</i>
           </a>
           <a class="btn remove-button-background"
