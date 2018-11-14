@@ -2,9 +2,9 @@ Vue.component('edit-project-info-modal', {
   props : ['projectInfo','projectMembers'],
   data : function(){
     return {
-      newProjectDescription : '',
-      newProjectName : '',
-      newLeaderId : null,
+      newProjectDescription : this.projectInfo.description,
+      newLeaderId : this.projectInfo.leader.idUsuario,
+      newProjectName : this.projectInfo.name,
       hasValidFields : false
     };
   },
@@ -37,11 +37,13 @@ Vue.component('edit-project-info-modal', {
       this.newProjectDescription = this.projectInfo.description;
       this.newLeaderId = this.projectInfo.leader.idUsuario;
       this.newProjectName = this.projectInfo.name;
+      M.updateTextFields();
     }
   },
   mounted : function(){
     var elems = document.querySelector('#edit-project-info-modal');
     var instances = M.Modal.init(elems);
+    M.updateTextFields();
     // TODO : No JQuery.
     $('#edit-project-info-form').validate({
       rules : {
