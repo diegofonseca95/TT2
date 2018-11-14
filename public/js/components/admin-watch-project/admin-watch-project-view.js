@@ -107,7 +107,7 @@ Vue.component('admin-watch-project-view', {
       // TODO : Handle non 'OK' status.
     }.bind(this));
 
-    fetch('/permisosProyectos', requestData)
+    fetch('/permisosProyecto', requestData)
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
