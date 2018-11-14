@@ -54,9 +54,7 @@
                 </button>
               </div>
             </div>
-            <admin-group-list
-              v-bind:component-id="'group-list'"
-              v-bind:groups="groups">
+            <admin-group-list v-bind:component-id="'group-list'" v-bind:groups="groups">
             </admin-group-list>
           </div>
         </div>
