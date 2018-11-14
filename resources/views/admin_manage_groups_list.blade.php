@@ -37,11 +37,11 @@
   </nav>
   <!-- Navbar End -->
   <!-- Content Begin -->
-  <div class="container">
+  <div class="container" id="admin-groups-box">
+    <chat-sidenav-view>
+    </chat-sidenav-view>
     <div class="section"></div>
-    <div class="row" id="admin-groups-box">
-      <chat-sidenav-view>
-      </chat-sidenav-view>
+    <div class="row">
       <!-- Begin Group List -->
       <div class="col s12">
         <div class="card">
