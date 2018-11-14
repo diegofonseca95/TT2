@@ -103,6 +103,9 @@ Vue.component('admin-watch-group-view', {
   },
   template : `
     <div class="row">
+      <chat-sidenav-view>
+      </chat-sidenav-view>
+      
       <group-info-card :group-members="memberList">
       </group-info-card>
       
@@ -115,9 +118,6 @@ Vue.component('admin-watch-group-view', {
 
       <group-projects-card :group-id="groupId">
       </group-projects-card>
-      
-      <chat-sidenav-view>
-      </chat-sidenav-view>
     </div>
   `
 });
