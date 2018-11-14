@@ -51,7 +51,7 @@ Vue.component('conversation-sidenav', {
           );
           this.pusher = null;
         }
-      }.bind(this), 
+      }.bind(this),
       edge : "right"
     };
     // Initialize the sidenav.
@@ -146,8 +146,8 @@ Vue.component('conversation-sidenav', {
       this.channel.bind('App\\Events\\Chat', function(data) {
         var NewMessage = data.message;
         NewMessage.idUsuario = data.user;
-        //this.messages.push(NewMessage);
-        console.log(NewMessage);
+        this.messages.push(NewMessage);
+        //console.log(NewMessage);
       }.bind(this));
     }
   },

@@ -18,7 +18,7 @@ class UsuariosControlador extends Controller
     public function index(){
         if(Auth::check()){
            if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
-              return view('user_watch_dashboard', ['idUsuario' => $id, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+              return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
 
           return view('index_admin');
         }

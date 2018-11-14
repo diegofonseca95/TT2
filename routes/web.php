@@ -85,6 +85,21 @@ Route::post('/editarUsuario', 'UsuariosControlador@editarUsuario');
 Route::post('/subirEvidencia', 'TareaControlador@subirEvidencia');
 Route::post('/validarEvidencia', 'TareaControlador@validarEvidencia');
 Route::post('/rechazarEvidencia', 'TareaControlador@rechazarEvidencia');
+Route::post('/obtenerConversaciones', 'ChatControlador@obtenerConversaciones');
+Route::post('/obtenerConversacion', 'ChatControlador@obtenerConversacion');
+Route::post('/enviarMensaje', function(){
+  if(!Auth::check()){
+      return response()->json([
+            'status' => 'ERROR',
+            'result' => 'Inicia sesion para continuar'
+      ]);
+  }
+  event(new App\Events\Chat(request('idConversacion'), Auth::id(), request('mensaje')));
+
+  return response()->json([
+        'status' => 'OK'
+  ]);
+});
 Route::get('/descargarEvidencia/{idTarea}', 'TareaControlador@descargarEvidencia');
 Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
