@@ -1,6 +1,7 @@
 Vue.component('admin-watch-project-view', {
   data : function(){
     return {
+      permissions : {},
       memberIds : [],
       users : []
     };
@@ -105,6 +106,15 @@ Vue.component('admin-watch-project-view', {
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
+
+    fetch('/permisosProyectos', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.permissions = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   template : `
     <div class="row">
@@ -115,13 +125,17 @@ Vue.component('admin-watch-project-view', {
         @member-removed="handleMemberRemoved($event)"
         @new-members-added="handleNewMembersAdded"
         :project-members="memberList"
+        :permissions="permissions"
         :users="nonMemberList">
       </project-members-card>
 
-      <iteration-card-group>
+      <iteration-card-group
+        :permissions="permissions">
       </iteration-card-group>
 
-      <task-card-group :project-members="memberList">
+      <task-card-group 
+        :project-members="memberList"
+        :permissions="permissions">
       </task-card-group>
       
       <chat-sidenav-view>

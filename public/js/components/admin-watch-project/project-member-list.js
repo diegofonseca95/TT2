@@ -1,5 +1,8 @@
 Vue.component('project-member-list', {
-  props : ['projectMembers'],
+  props : [
+    'projectMembers',
+    'permissions'
+  ],
   data : function(){
     return {};
   },
@@ -17,6 +20,7 @@ Vue.component('project-member-list', {
         v-for="member in projectMembers" 
         @member-selected="handleMemberSelected($event)"
         @member-removed="handleMemberRemoved($event)"
+        :permissions="permissions"
         :key="member.idUsuario"
         :member="member">
       </project-member-list-item>

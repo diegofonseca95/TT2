@@ -1,5 +1,8 @@
 Vue.component('task-list-item', {
-  props : ['task'],
+  props : [
+    'permissions',
+    'task'
+  ],
   methods : {
     handleAssignTask : function(){
       this.$emit('assign-task', this.task);
@@ -29,6 +32,7 @@ Vue.component('task-list-item', {
         <div class="right">
           <a class="btn remove-button-background"
             href="#!" title="Eliminar tarea" 
+            v-if="permissions.eliminar"
             @click="handleRemoveTask">
             <i class="material-icons">remove</i>
           </a>

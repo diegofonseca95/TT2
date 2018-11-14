@@ -1,5 +1,8 @@
 Vue.component('task-card-group', {
-  props : ['projectMembers'],
+  props : [
+    'projectMembers',
+    'permissions'
+  ],
   data : function(){
     return {
       assignedTasksIds : [],
@@ -90,11 +93,13 @@ Vue.component('task-card-group', {
         @task-assigned="handleTaskAssigned($event)"
         @remove-task="handleRemoveTask($event)"
         :project-members="projectMembers"
+        :permissions="permissions"
         :tasks="unassignedTasks">
       </tasks-card>
 
       <new-task-card
-        @task-created="handleTaskCreated($event)">
+        @task-created="handleTaskCreated($event)"
+        v-if="permissions.editar">
       </new-task-card>
     </div>
   `

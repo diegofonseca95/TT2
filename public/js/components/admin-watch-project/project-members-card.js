@@ -1,5 +1,9 @@
 Vue.component('project-members-card', {
-  props : ['projectMembers','users'],
+  props : [
+    'projectMembers',
+    'permissions',
+    'users'
+  ],
   data : function(){
     return {
       displayedUser : {}
@@ -25,9 +29,10 @@ Vue.component('project-members-card', {
         <project-member-list
           @member-selected="handleMemberSelected($event)"
           @member-removed="handleMemberRemoved($event)"
-          :project-members="projectMembers">
+          :project-members="projectMembers"
+          :permissions="permissions">
         </project-member-list>
-        <div class="row">
+        <div class="row" v-if="permissions.editar">
           <div class="col s12">
             <button class="btn-floating btn-large modal-trigger remove-button-background right"
               data-target="add-new-member-modal" title="Agregar usuarios">
@@ -38,6 +43,7 @@ Vue.component('project-members-card', {
       </div>
       <add-new-member-modal
         @new-members-added="handleNewMembersAdded"
+        v-if="permissions.editar"
         :users="users">
       </add-new-member-modal>
       <user-info-modal :user="displayedUser">

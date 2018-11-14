@@ -1,4 +1,7 @@
 Vue.component('iteration-card-group', {
+  props : [
+    'permissions'
+  ],
   data : function(){
     return {
       iterations : []
@@ -45,7 +48,8 @@ Vue.component('iteration-card-group', {
       </iterations-card>
 
       <new-iteration-card
-        @iteration-created="handleIterationCreated($event)">
+        @iteration-created="handleIterationCreated($event)"
+        v-if="permissions.editar">
       </new-iteration-card>
     </div>
   `

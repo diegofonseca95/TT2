@@ -1,5 +1,8 @@
 Vue.component('task-list', {
-  props : ['tasks'],
+  props : [
+    'permissions',
+    'tasks'
+  ],
   methods : {
     handleAssignTask : function(task){
       this.$emit('assign-task', task);
@@ -20,6 +23,7 @@ Vue.component('task-list', {
         v-for="task in tasks"
         @assign-task="handleAssignTask($event)"
         @remove-task="handleRemoveTask($event)"
+        :permissions="permissions"
         :key="task.idTarea"
         :task="task">
       </task-list-item>

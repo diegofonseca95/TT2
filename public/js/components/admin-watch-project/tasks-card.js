@@ -1,5 +1,9 @@
 Vue.component('tasks-card', {
-  props : ['tasks', 'projectMembers'],
+  props : [
+    'projectMembers',
+    'permissions',
+    'tasks'
+  ],
   data : function(){
     return {
       taskToAssign : null
@@ -55,11 +59,13 @@ Vue.component('tasks-card', {
         <task-list
           @assign-task="handleAssignTask($event)"
           @remove-task="handleRemoveTask($event)"
+          :permissions="permissions"
           :tasks="tasks">
         </task-list>
         <choose-task-user-modal 
           @task-user-submitted="handleTaskUserSubmitted($event)"
-          :project-members="projectMembers">
+          :project-members="projectMembers"
+          v-if="permissions.editar">
         </choose-task-user-modal>
       </div>
     </div>
