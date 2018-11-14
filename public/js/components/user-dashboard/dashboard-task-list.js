@@ -38,6 +38,7 @@ Vue.component('dashboard-task-list', {
         var tasks = [];
         for(var i in response.result){
           tasks.push({
+            permission : response.result[i].permiso,
             project : response.result[i].proyecto,
             group : response.result[i].grupo,
             task : response.result[i].tarea
