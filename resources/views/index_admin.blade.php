@@ -13,13 +13,7 @@
     </head>
     <body class="page-background">
         <!-- Navbar Begin -->
-        <nav>
-            <div class="nav-wrapper second-background">
-                <a href="#!" class="brand-logo center">
-                    <i class="material-icons hide-on-small-only">computer</i>Administrador <?=strtoupper(Session::get('usuario.nombre'))?>
-                </a>
-            </div>
-        </nav>
+        @include('systemnavbar');
         <!-- Navbar End -->
         <!-- Content Begin -->
         <div class="container">

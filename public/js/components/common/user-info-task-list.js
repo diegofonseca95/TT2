@@ -33,6 +33,7 @@ Vue.component('user-info-task-list', {
           var tasksInfo = [];
           for(var i in response.result){
             tasksInfo.push({
+              permission : response.result[i].permiso,
               project : response.result[i].proyecto,
               group : response.result[i].grupo,
               task : response.result[i].tarea

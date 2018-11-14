@@ -18,7 +18,8 @@ Vue.component('user-info-task-list-item', {
         <span class="title truncate col s12">
           Descripción : {{ taskInfo.task.descripcion }}
         </span>
-        <span class="title truncate col s12">
+        <span class="title truncate col s12"
+          v-if="this.taskInfo.permission">
           <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
