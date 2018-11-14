@@ -211,6 +211,8 @@ Vue.component('group-admin-create-project-view', {
           Seleccionar Líder
         </button>
       </div>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

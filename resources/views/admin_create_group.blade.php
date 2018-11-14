@@ -36,11 +36,24 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+  <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
   <script src="/js/toasts.js"></script>
   <!-- Vue Components Begin -->
   <!-- Common Components Begin -->
   <script src="/js/components/common/user-full-name-span.js"></script>
   <!-- Common Components End -->
+  <!-- Chat Begins -->
+  <script src="/js/components/common/chat/conversation-message-list-item.js"></script>
+  <script src="/js/components/common/chat/conversation-new-message-box.js"></script>
+  <script src="/js/components/common/chat/conversation-message-list.js"></script>
+  <script src="/js/components/common/chat/conversation-sidenav.js"></script>
+  <script src="/js/components/common/chat/conversations-list-item.js"></script>
+  <script src="/js/components/common/chat/conversations-list-sidenav.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list-item.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list.js"></script>
+  <script src="/js/components/common/chat/new-chat-modal.js"></script>
+  <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
+  <!-- Chat Ends -->
   <!-- List Items Begin -->
   <script src="/js/components/admin-create-group/new-leader-list-item.js"></script>
   <script src="/js/components/admin-create-group/new-member-list-item.js"></script>

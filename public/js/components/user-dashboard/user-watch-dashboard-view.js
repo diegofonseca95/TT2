@@ -5,6 +5,8 @@ Vue.component('user-watch-dashboard-view', {
       </user-personal-info-card>
       <user-info-card>
       </user-info-card>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

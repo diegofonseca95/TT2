@@ -64,6 +64,8 @@
                     </div>
                 </div>
                 <!-- End Group List -->
+                <chat-sidenav-view>
+                </chat-sidenav-view>
             </div>
         </div>
         <!-- Content End -->
@@ -74,6 +76,19 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
         <script src="/js/toasts.js"></script>
+        <!-- Chat Begins -->
+        <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+        <script src="/js/components/common/chat/conversation-message-list-item.js"></script>
+        <script src="/js/components/common/chat/conversation-new-message-box.js"></script>
+        <script src="/js/components/common/chat/conversation-message-list.js"></script>
+        <script src="/js/components/common/chat/conversation-sidenav.js"></script>
+        <script src="/js/components/common/chat/conversations-list-item.js"></script>
+        <script src="/js/components/common/chat/conversations-list-sidenav.js"></script>
+        <script src="/js/components/common/chat/new-chat-member-list-item.js"></script>
+        <script src="/js/components/common/chat/new-chat-member-list.js"></script>
+        <script src="/js/components/common/chat/new-chat-modal.js"></script>
+        <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
+        <!-- Chat Ends -->
         <script src="/js/components/admin-group-list-item.js"></script>
         <script src="/js/components/admin-group-list.js"></script>
         <script src="/js/admin_groups.js"></script>

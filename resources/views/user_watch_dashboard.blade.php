@@ -47,6 +47,19 @@
   <script src="/js/components/common/user-full-name-span.js"></script>
   <script src="/js/components/common/priority-span.js"></script>
   <!-- Common Components End -->
+  <!-- Chat Begins -->
+  <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+  <script src="/js/components/common/chat/conversation-message-list-item.js"></script>
+  <script src="/js/components/common/chat/conversation-new-message-box.js"></script>
+  <script src="/js/components/common/chat/conversation-message-list.js"></script>
+  <script src="/js/components/common/chat/conversation-sidenav.js"></script>
+  <script src="/js/components/common/chat/conversations-list-item.js"></script>
+  <script src="/js/components/common/chat/conversations-list-sidenav.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list-item.js"></script>
+  <script src="/js/components/common/chat/new-chat-member-list.js"></script>
+  <script src="/js/components/common/chat/new-chat-modal.js"></script>
+  <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
+  <!-- Chat Ends -->
   <!-- List Items Begin -->
   <script src="/js/components/user-dashboard/dashboard-project-list-item.js"></script>
   <script src="/js/components/user-dashboard/dashboard-group-list-item.js"></script>
@@ -71,102 +84,7 @@
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/user/user-dashboard.js"></script>
-
-  <script>
-    //M.AutoInit();
-
-    //Function for closing chat sidenav
-    function closeSidenav(){
-      var elem = document.getElementById('slide-out');
-      var instance = M.Sidenav.getInstance(elem);
-      instance.close();
-    }
-
-    //Function that opens the left sidenav
-    function openSlideOut(){
-      var elem = document.getElementById('slide-out');
-      var instance = M.Sidenav.getInstance(elem);
-      instance.open();
-    }
-
-    //Modal initialization - modal_userSettings
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('modal_userSettings');
-      var options = {};
-      var instances = M.Modal.init(elems, options);
-    });
-
-    //Collapsible initialization - collapsible_userQuickAccess
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.getElementById('collapsible_userQuickAccess');
-      var options = {};
-      var instances = M.Collapsible.init(elems, options);
-    });
-
-    //Sidenav initialization - slide-out
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.getElementById('slide-out');
-      var options = {};
-      var instances = M.Sidenav.init(elems, options);
-    });
-
-    //Sidenav initialization - slide-out-right
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.getElementById('slide-out-right');
-      var options = {
-        edge : "right",
-        onCloseStart : openSlideOut
-      };
-      var instances = M.Sidenav.init(elems, options);
-    });
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-    var pusher = new Pusher('5527fdb0d65f00f390d4', {
-      authEndpoint: '/broadcasting/auth',
-      cluster:'us2',
-      auth: {
-        headers: {
-
-          'X-CSRF-TOKEN': $('#token_').val(),
-
-        }
-      }
-    });
-
-    // Subscribe to the channel we specified in our Laravel Event
-    var channel = pusher.subscribe('chat.1.2');
-
-    // Bind a function to a Event (the full Laravel class)
-    channel.bind('App\\Events\\Chat', function(data) {
-
-      $('#chat-list').append("\
-        <li class='collection-item'>\
-        <a href=''#!'' class='low-padding'>"
-        + data.user.nombre + ": "+ data.message.contenido + "\
-        </a>\
-        </li>\
-        <li>\
-        <div class='divider'>\
-        </div>\
-        </li>");
-      $('#mensaje').val("");
-    });
-
-    function enviarMensaje(){
-      if($('#mensaje').val() == "") return;
-      $.post( "/Chat",
-      {
-        emisor: $('#emisor').val(),
-        receptor: $('#receptor').val(),
-        mensaje: $('#mensaje').val(),
-        _token: $('#token_').val()
-      }, function( data ) {
-
-      });
-    }
-    </script>
-    <!-- Scripts End -->
+  <!-- Scripts End -->
 </body>
 
 </html>

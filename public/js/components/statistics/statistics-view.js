@@ -57,6 +57,8 @@ Vue.component('statistics-view', {
           </li>
         </ul>
       </div>
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });

@@ -115,6 +115,9 @@ Vue.component('admin-watch-group-view', {
 
       <group-projects-card :group-id="groupId">
       </group-projects-card>
+      
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 });
