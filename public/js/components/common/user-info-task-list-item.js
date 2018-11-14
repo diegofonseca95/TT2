@@ -19,7 +19,7 @@ Vue.component('user-info-task-list-item', {
           Descripción : {{ taskInfo.task.descripcion }}
         </span>
         <span class="title truncate col s12">
-          <a :href="downloadLink">
+          <a :href="downloadLink" target="_blank">
             Descargar evidencia
           </a>
         </span>
