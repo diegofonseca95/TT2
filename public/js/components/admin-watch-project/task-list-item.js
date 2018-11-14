@@ -39,6 +39,7 @@ Vue.component('task-list-item', {
           <button class="btn modal-trigger remove-button-background"
             data-target="choose-task-user-modal" 
             title="Asignar tarea" 
+            v-if="permissions.editar"
             @click="handleAssignTask">
             Asignar
           </button>
