@@ -6,7 +6,8 @@ Vue.component('group-info-card', {
         description : '',
         leader : {},
         name : ''
-      }
+      },
+      editPermission : false
     };
   },
   beforeCreate : function(){
@@ -45,6 +46,7 @@ Vue.component('group-info-card', {
             break;
           }
         }
+        this.editPermission = result.permiso;
         this.groupInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
@@ -131,7 +133,8 @@ Vue.component('group-info-card', {
       <edit-group-info-modal
         @group-info-updated='handleUpdatedInfo'
         :group-members="groupMembers"
-        :group-info="groupInfo">
+        :group-info="groupInfo"
+        v-if="editPermission">
       </edit-group-info-modal>
     </div>
   `
