@@ -147,7 +147,10 @@ Vue.component('conversation-sidenav', {
         var NewMessage = data.message;
         NewMessage.idUsuario = data.user;
         this.messages.push(NewMessage);
-        //console.log(NewMessage);
+        var List = document.querySelector(
+          '#conversation-message-list'
+        );
+        List.scrollTop = List.scrollHeight;
       }.bind(this));
     }
   },
