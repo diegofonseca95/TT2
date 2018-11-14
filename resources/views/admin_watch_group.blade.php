@@ -25,11 +25,11 @@
 
   <!-- Content begin -->
   <div class="container" id="admin-watch-group-box">
+    <chat-sidenav-view>
+    </chat-sidenav-view>
     <div class="section"></div>
     <admin-watch-group-view>
     </admin-watch-group-view>
-    <chat-sidenav-view>
-    </chat-sidenav-view>
     <!-- TODO : Add file tree when available. -->
   </div>
   <!-- Content End -->
