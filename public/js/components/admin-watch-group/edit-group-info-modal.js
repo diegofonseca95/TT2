@@ -40,6 +40,11 @@ Vue.component('edit-group-info-modal', {
     }
   },
   mounted : function(){
+    M.Modal.init(
+      document.querySelector(
+        '#edit-group-info-modal'
+      )
+    );
     // TODO : No JQuery.
     $('#edit-group-info-form').validate({
       rules : {

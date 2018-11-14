@@ -33,5 +33,4 @@ $(document).ready(function(){
       }.bind(this));
     }
   });
-  M.AutoInit();
 });
