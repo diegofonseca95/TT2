@@ -22,7 +22,7 @@ Vue.component('group-projects-card', {
           :permissions="permissions"
           :group-id="groupId">
         </project-list>
-        <div class="row">
+        <div class="row" v-if="permissions.editar">
           <div class="col s12">
             <a class="btn-floating btn-large remove-button-background right"
               href="#!" title="Agregar proyecto" 
