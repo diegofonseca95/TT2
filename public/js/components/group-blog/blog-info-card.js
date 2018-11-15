@@ -31,7 +31,7 @@ Vue.component('blog-info-card', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the group information.
-    fetch('/obtenerGrupo', requestData)
+    fetch('/obtenerBlog', requestData)
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
