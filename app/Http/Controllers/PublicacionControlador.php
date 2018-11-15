@@ -10,6 +10,7 @@ use App\AdministradorGrupo;
 use App\Usuario;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use App\UsuarioGrupo;
 
 class PublicacionControlador extends Controller
 {
@@ -291,5 +292,55 @@ class PublicacionControlador extends Controller
             'status' => 'OK',
             'result' => (empty($files)? "":Storage::url($files[0]))
         ]);
+    }
+    public function permisosBlog(){
+      $id = 0;
+      if(Auth::check()) $id = Auth::id();
+      $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo'))->first();
+      $pertenece = UsuarioGrupo::where([['idUsuario', $id],['idGrupo', request('idGrupo')]])->count();
+      return response()->json([
+          'status' => 'OK',
+          'result' => array('crear' => ($pertenece==1),
+          'editar' => $liderGrupo->idUsuario == $id,
+          'ver' => ($pertenece == 1),
+          'chat' =>($id != 0)
+          )
+      ]);
+    }
+    public function obtenerBlog(){
+
+        $grupo = new Grupo;
+        $lider = new AdministradorGrupo;
+
+        $info = $grupo->where([['idGrupo', '=', request('idGrupo')]])->first();
+        //$info->tesla = $query[0]->idUsuario;
+        //$nueva->tesla = $query[0]->idUsuario;;
+        return response()->json([
+                'status'=> 'OK',
+                'result'=> array(
+                	'grupo'=>$info
+                )
+                ]);
+    }
+    public function obtenerBlogs(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
+        $grupo = Grupo::where('estado', '!=', 3)->get();
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => $grupo
+        ]);
+    }
+    public function administrarBlogs(){
+        if(!Auth::check()){
+            return view('index');
+        }
+
+
+
+        return view('superadmin_watch_blogs',  ['nombreVista'=> 'Blogs', 'iconoVista' => 'assignment']);
     }
 }

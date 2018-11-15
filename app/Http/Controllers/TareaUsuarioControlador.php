@@ -17,6 +17,7 @@ use App\TareaProyectoGrupo;
 use App\Tarea;
 use App\TareaUsuario;
 use Auth;
+use App\Superadministrador;
 
 class TareaUsuarioControlador extends Controller
 {
@@ -36,6 +37,7 @@ class TareaUsuarioControlador extends Controller
           $idTareas = TareaProyectoGrupo::whereIn('idTareaProyectoGrupo', $idTareaGrupo)->get();
 
           $result = array();
+
           foreach($idTareas as $value){
               array_push($result, $this->obtenerInformacion($value));
           }
@@ -58,11 +60,14 @@ class TareaUsuarioControlador extends Controller
                             )->first();
         $proyecto = Proyecto::where('idProyecto', '=', $proyectoGrupo->idProyecto)->first();
         $grupo = Grupo::where('idGrupo', '=', $proyectoGrupo->idGrupo)->first();
-
+        $liderProyecto = AdministradorProyecto::where('idProyecto', $proyecto->idProyecto)->first();
+        $isSuper = Superadministrador::where('idUsuario', Auth::id())->count();
+        $pertenece = UsuarioProyectoGrupo::where([['idUsuario', Auth::id()],['idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo]])->count();
         return array(
                   'proyecto' => $proyecto,
                   'grupo' => $grupo,
-                  'tarea' => $tareas
+                  'tarea' => $tareas,
+                  'permiso' => ($tareas->estado > 4) && ((request('idUsuario') == Auth::id()) || $liderProyecto->idUsuario == Auth::id() || $isSuper || ($tareas->estado == 5 && $pertenece))
               );
     }
 }

@@ -13,6 +13,7 @@ use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
+use App\Superadministrador;
 
 class ProyectosControlador extends Controller
 {
@@ -21,11 +22,9 @@ class ProyectosControlador extends Controller
             return view('index');
         }
 
-        $proyecto = new Proyecto;
 
-        $query = $proyecto->get();
 
-        return view('admin_manage_projects', ['proyectos'=> $query]);
+        return view('superadmin_watch_projects',  ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment']);
     }
 
     public function verProyectos(){
@@ -155,11 +154,14 @@ class ProyectosControlador extends Controller
         $query = $lider->where([['idProyecto', '=', request('idProyecto')]])->get();
         //$info->tesla = $query[0]->idUsuario;
         //$nueva->tesla = $query[0]->idUsuario;;
+        $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
+        $liderGrupo = AdministradorGrupo::where('idGrupo', $proyectoGrupo->idGrupo)->first();
         return response()->json([
                 'status'=> 'OK',
                 'result'=> array(
                     'proyecto'=>$info[0],
-                    'lider'=>$query[0]->idUsuario
+                    'lider'=>$query[0]->idUsuario,
+                    'permiso' => ($query[0]->idUsuario == Auth::id() || $liderGrupo->idUsuario == Auth::id())
                 )
                 ]);
     }
@@ -227,6 +229,24 @@ class ProyectosControlador extends Controller
 
         $proyecto = new Proyecto;
 
-        return $proyecto->where('estado', '!=', 3)->get();
+        return response()->json([
+          'status' => 'OK',
+          'result' => $proyecto->where('estado', '!=', 3)->get()
+        ]);
+    }
+    public function permisosProyecto(){
+            if(!Auth::check()){
+                return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Inicia sesion para continuar'
+                ]);
+            }
+            $liderProyecto = AdministradorProyecto::where('idProyecto', request('idProyecto') )->first();
+            return response()->json([
+                'status' => 'OK',
+                'result' => array('eliminar' => $liderProyecto->idUsuario == Auth::id(),
+                'editar' => $liderProyecto->idUsuario == Auth::id()
+              )
+            ]);
     }
 }

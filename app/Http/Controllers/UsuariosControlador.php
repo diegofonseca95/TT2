@@ -7,6 +7,8 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
 use App\Superadministrador;
+use App\AdministradorGrupo;
+use App\AdministradorProyecto;
 
 class UsuariosControlador extends Controller
 {
@@ -189,6 +191,18 @@ class UsuariosControlador extends Controller
                   ]);
         }
         try{
+            if(AdministradorGrupo::where('idUsuario', request('idUsuario'))->count()){
+              return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'No puedes eliminar este usuario porque es lider de grupo'
+                  ]);
+            }
+            if(AdministradorProyecto::where('idUsuario', request('idUsuario'))->count()){
+              return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'No puedes eliminar este usuario porque es lider de proyecto'
+                  ]);
+            }
             $usuario = User::findOrFail(request('idUsuario'));
             $usuario->estado = 3;
             $usuario->save();

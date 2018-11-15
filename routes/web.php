@@ -21,7 +21,9 @@ Route::post('/agregarUsuario', 'UsuariosControlador@agregarUsuarioBD');
 Route::post('/obtenerUsuario', 'UsuariosControlador@obtenerUsuario');
 Route::post('/iniciarSesion', 'SesionControlador@iniciarSesion');
 Route::get('/administrarUsuarios','UsuariosControlador@administrarUsuarios');
+Route::get('/administrarProyectos','ProyectosControlador@administrarProyectos');
 Route::get('/administrarGrupos', 'GruposControlador@verGrupos');
+Route::get('/administrarBlogs', 'PublicacionControlador@administrarBlogs');
 Route::get('/verGrupos', 'GruposControlador@verGrupos');
 Route::get('/agregarGrupo', 'GruposControlador@agregarGrupo');
 Route::post('/obtenerLiderTabla', 'GruposControlador@obtenerLiderTabla');
@@ -87,6 +89,12 @@ Route::post('/validarEvidencia', 'TareaControlador@validarEvidencia');
 Route::post('/rechazarEvidencia', 'TareaControlador@rechazarEvidencia');
 Route::post('/obtenerConversaciones', 'ChatControlador@obtenerConversaciones');
 Route::post('/obtenerConversacion', 'ChatControlador@obtenerConversacion');
+Route::post('/permisosGrupo', 'GruposControlador@permisosGrupo');
+Route::post('/permisosBlog', 'PublicacionControlador@permisosBlog');
+Route::post('/permisosProyecto', 'ProyectosControlador@permisosProyecto');
+Route::post('/obtenerBlog', 'PublicacionControlador@obtenerBlog');
+Route::post('/obtenerProyectos', 'ProyectosControlador@obtenerProyectos');
+Route::post('/obtenerBlogs', 'PublicacionControlador@obtenerBlogs');
 Route::post('/enviarMensaje', function(){
   if(!Auth::check()){
       return response()->json([

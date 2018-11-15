@@ -241,7 +241,8 @@ class GruposControlador extends Controller
                 'status'=> 'OK',
                 'result'=> array(
                 	'grupo'=>$info[0],
-                	'lider'=>$query[0]->idUsuario
+                	'lider'=>$query[0]->idUsuario,
+                  'permiso' => $query[0]->idUsuario == Auth::id() || Superadministrador::where('idUsuario', Auth::id())->count() == 1
                 )
                 ]);
     }
@@ -414,9 +415,24 @@ class GruposControlador extends Controller
             return view('index');
         }
           $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo') )->first();
-        if($liderGrupo != Auth::id()){
+        if($liderGrupo->idUsuario != Auth::id()){
             return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
         }
         return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Nuevo Proyecto', 'iconoVista' => 'assignment']);
+    }
+    public function permisosGrupo(){
+            if(!Auth::check()){
+                return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Inicia sesion para continuar'
+                ]);
+            }
+            $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo') )->first();
+            return response()->json([
+                'status' => 'OK',
+                'result' => array('eliminar' => $liderGrupo->idUsuario == Auth::id(),
+                'editar' => $liderGrupo->idUsuario == Auth::id()
+              )
+            ]);
     }
 }

@@ -81,7 +81,7 @@ class SesionControlador extends Controller
             if(Superadministrador::where('idAdministrador', Auth::id())->count() == 0){
                 return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
             }
-            return view('admin_index');
+            return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
         }
 
 
