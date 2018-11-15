@@ -19,7 +19,7 @@ Vue.component('superadmin-watch-blogs-list-item', {
         </span>
         <div class="right">
           <a class="btn remove-button-background" 
-            title="Ver proyecto"
+            title="Ver blog"
             :href="blogLink">
             <i class="material-icons">remove_red_eye</i>
           </a>
