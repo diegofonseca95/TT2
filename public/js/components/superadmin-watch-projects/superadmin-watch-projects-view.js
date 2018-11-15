@@ -86,7 +86,7 @@ Vue.component('superadmin-watch-projects-view', {
           </div>
           <ul class="collection">
             <li class="collection-item"
-              v-if="filteredList.length === 0">
+              v-if="projects.length === 0">
               <span>
                 No hay proyectos que mostrar.
               </span>

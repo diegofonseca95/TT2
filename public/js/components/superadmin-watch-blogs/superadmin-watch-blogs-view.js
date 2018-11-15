@@ -86,7 +86,7 @@ Vue.component('superadmin-watch-blogs-view', {
           </div>
           <ul class="collection">
             <li class="collection-item"
-              v-if="filteredList.length === 0">
+              v-if="blogs.length === 0">
               <span>
                 No hay blogs que mostrar.
               </span>
