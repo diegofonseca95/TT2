@@ -5,8 +5,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
   media="screen,projection">
-  <link rel="stylesheet" type="text/css" href="../../public/css/system_colors.css">
-  <link rel="stylesheet" type="text/css" href="../../public/css/helpers.css">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/system_colors.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/helpers.css') }}">
   <title>Proyectos</title>
 
   <meta charset="utf-8">
