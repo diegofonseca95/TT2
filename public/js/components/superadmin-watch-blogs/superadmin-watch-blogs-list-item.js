@@ -1,26 +1,26 @@
-Vue.component('superadmin-watch-projects-list-item', {
+Vue.component('superadmin-watch-blogs-list-item', {
   props : [
-    'project'
+    'blog'
   ],
   computed : {
-    projectLink : function(){
-      return '/verProyecto/' + this.project.idProyecto;
+    blogLink : function(){
+      return '/verBlog/' + this.blog.idGrupo;
     }
   },
   template : `
     <li class="collection-item avatar">
-      <i class="material-icons circle third-background">folder</i>
+      <i class="material-icons circle third-background">library_books</i>
       <div class="row">
         <span class="title truncate col s12 hide-on-small-only">
-          {{ project.nombreProyecto }}
+          {{ blog.nombreGrupo }}
         </span>
         <span class="truncate col s12 hide-on-small-only">
-          {{ project.descripcion }}
+          {{ blog.descripcion }}
         </span>
         <div class="right">
           <a class="btn remove-button-background" 
             title="Ver proyecto"
-            :href="projectLink">
+            :href="blogLink">
             <i class="material-icons">remove_red_eye</i>
           </a>
         </div>

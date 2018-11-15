@@ -1,8 +1,8 @@
-Vue.component('superadmin-watch-projects-view', {
+Vue.component('superadmin-watch-blogs-view', {
   data : function(){
     return {
       searchInput : '',
-      projects : []
+      blogs : []
     };
   },
   beforeCreate : function(){
@@ -21,13 +21,13 @@ Vue.component('superadmin-watch-projects-view', {
 
     requestData.body = JSON.stringify(requestBody);
 
-    // Fetch the project list.
-    fetch('/obtenerProyectos', requestData)
+    // Fetch the blog list.
+    fetch('/obtenerBlogs', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
       if(response.status === 'OK'){
-        this.projects = response.result;
+        this.blogs = response.result;
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
@@ -36,31 +36,31 @@ Vue.component('superadmin-watch-projects-view', {
     filteredList : function(){
       // Split the search pattern into tokens.
       const tokens = this.searchInput.split(' ').filter(Boolean);
-      // Filter the projects that match.
-      return this.projects.filter(function(project){
-        // If there is no search pattern, include the project.
+      // Filter the blogs that match.
+      return this.blogs.filter(function(blog){
+        // If there is no search pattern, include the blog.
         if(tokens.length == 0){
           return true;
         }
-        // Check for all string fields in the project info for a match.
+        // Check for all string fields in the blog info for a match.
         for(var i in tokens){
           const token = tokens[i];
-          for(var key in project){
-            if(typeof project[key] === 'string'){
-              if(project[key].includes(token)){
+          for(var key in blog){
+            if(typeof blog[key] === 'string'){
+              if(blog[key].includes(token)){
                 return true;
               }
             }
           }
         }
-        // The project didn´t match any token in the pattern.
+        // The blog didn´t match any token in the pattern.
         return false;
       });  
     },
-    noProjectMatches : function(){
+    noBlogMatches : function(){
       return this.filteredList.length === 0 
-        && this.projects.length > 0
-        && this.searchInput !== '';
+        && this.searchInput !== ''
+        && this.blogs.length > 0;
     }
   },
   template : `
@@ -68,18 +68,18 @@ Vue.component('superadmin-watch-projects-view', {
       <div class="card">
         <div class="card-content">
           <span class="card-title first-text">
-            <b>Proyectos</b>
+            <b>Blogs</b>
           </span>
           <div class="row">
             <div class="col s12">
               <div class="input-field">
                 <i class="material-icons prefix third-text">search</i>
-                <input id="superadmin-watch-projects-search-input"
+                <input id="superadmin-watch-blogs-search-input"
                   placeholder="Ingresa palabras clave"
                   type="text" class="validate"
                   v-model:value="searchInput"/>
-                <label for="superadmin-watch-projects-search-input">
-                  Búsqueda de Proyectos
+                <label for="superadmin-watch-blogs-search-input">
+                  Búsqueda de Blogs
                 </label>
               </div>
             </div>
@@ -88,20 +88,20 @@ Vue.component('superadmin-watch-projects-view', {
             <li class="collection-item"
               v-if="filteredList.length === 0">
               <span>
-                No hay proyectos que mostrar.
+                No hay blogs que mostrar.
               </span>
             </li>
             <li class="collection-item"
-              v-if="noProjectMatches">
+              v-if="noBlogMatches">
               <span>
-                No hay proyectos que coincidan con el patrón de búsqueda.
+                No hay blogs que coincidan con el patrón de búsqueda.
               </span>
             </li>
-            <superadmin-watch-projects-list-item
-              v-for="project in filteredList"
-              :key="project.idProyecto"
-              :project="project">
-            </superadmin-watch-projects-list-item>
+            <superadmin-watch-blogs-list-item
+              v-for="blog in filteredList"
+              :key="blog.idProyecto"
+              :blog="blog">
+            </superadmin-watch-blogs-list-item>
           </ul>
         </div>
       </div>

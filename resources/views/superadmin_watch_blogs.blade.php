@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/system_colors.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/helpers.css') }}">
-  <title>Proyectos</title>
+  <title>Blogs</title>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,10 +21,10 @@
   <!-- Navbar End -->
 
   <!-- Content begin -->
-  <div class="container" id="superadmin-watch-projects-box">
+  <div class="container" id="superadmin-watch-blogs-box">
     <div class="section"></div>
-    <superadmin-watch-projects-view>
-    </superadmin-watch-projects-view>
+    <superadmin-watch-blogs-view>
+    </superadmin-watch-blogs-view>
   </div>
   <!-- Content End -->
 
@@ -52,7 +52,7 @@
   <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
   <!-- Chat Ends -->
   <!-- List Items Begin -->
-  <script src="/js/components/superadmin-watch-projects/superadmin-watch-projects-list-item.js"></script>
+  <script src="/js/components/superadmin-watch-blogs/superadmin-watch-blogs-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
   <!-- Lists End -->
@@ -63,11 +63,11 @@
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
   <!-- Others Begin -->
-  <script src="/js/components/superadmin-watch-projects/superadmin-watch-projects-view.js"></script>
+  <script src="/js/components/superadmin-watch-blogs/superadmin-watch-blogs-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
-  <script src="/js/global/admin/superadmin-watch-projects.js"></script>
+  <script src="/js/global/admin/superadmin-watch-blogs.js"></script>
   <!-- Scripts End -->
-</body>
+  </body>
 
-</html>
+  </html>
