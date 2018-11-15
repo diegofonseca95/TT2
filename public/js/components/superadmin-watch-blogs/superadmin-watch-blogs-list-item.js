@@ -4,7 +4,7 @@ Vue.component('superadmin-watch-blogs-list-item', {
   ],
   computed : {
     blogLink : function(){
-      return '/verBlog/' + this.blog.idGrupo;
+      return '/publicacionesGrupo/' + this.blog.idGrupo;
     }
   },
   template : `
