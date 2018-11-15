@@ -131,7 +131,8 @@ Vue.component('group-blog-view', {
         @post-updated="handlePostUpdated"
         :post="selectedPost">
       </edit-group-post-modal>
-      <chat-sidenav-view>
+      <chat-sidenav-view
+        v-if="permissions.chat">
       </chat-sidenav-view>
     </div>
   `
