@@ -99,7 +99,7 @@ Vue.component('superadmin-watch-blogs-view', {
             </li>
             <superadmin-watch-blogs-list-item
               v-for="blog in filteredList"
-              :key="blog.idProyecto"
+              :key="blog.idGrupo"
               :blog="blog">
             </superadmin-watch-blogs-list-item>
           </ul>
