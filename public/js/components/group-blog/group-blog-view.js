@@ -5,6 +5,7 @@ Vue.component('group-blog-view', {
   data : function(){
     return {
       selectedPost : {},  // The post selected for editing.
+      permissions : {},   // The view permissions.
       posts : []          // The group posts.
     };
   },
@@ -44,6 +45,16 @@ Vue.component('group-blog-view', {
       }else{
         WarningToast(response.result);
       }
+    }.bind(this));
+
+    // Fetch the group permissions.
+    fetch('/permisosBlog', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.permissions = response.result;
+      }
+      // TODO : Handle non 'OK' status.
     }.bind(this));
   },
   computed : {
@@ -100,10 +111,12 @@ Vue.component('group-blog-view', {
   },
   template : `
     <div class="row">
-      <blog-info-card>
+      <blog-info-card 
+        :permissions="permissions">
       </blog-info-card>
       <new-post-card
-        @post-submitted="handlePostSubmitted">
+        @post-submitted="handlePostSubmitted"
+        v-if="permissions.crear">
       </new-post-card>
       <group-post
         v-for="post in orderedList"

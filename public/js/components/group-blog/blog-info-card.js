@@ -3,9 +3,12 @@
   in the group blog view.
 */
 Vue.component('blog-info-card', {
+  props : [
+    'permissions' // The view permissions.
+  ],
   data : function(){
     return {
-      groupInfo : {}  // The group information.
+      groupInfo : {}    // The group information.
     };
   },
   beforeCreate : function(){
@@ -125,11 +128,13 @@ Vue.component('blog-info-card', {
             <div class="right">
               <button class="btn remove-button-background"
                 @click="triggerFileInput"
+                v-if="permissions.editar"
                 title="Cambiar foto">
                 <i class="material-icons">photo_camera</i>
               </button>
               <button class="btn remove-button-background"
                 @click="handleWatchGroup"
+                v-if="permissions.ver"
                 title="Ver grupo">
                 <i class="material-icons">remove_red_eye</i>
               </button>
