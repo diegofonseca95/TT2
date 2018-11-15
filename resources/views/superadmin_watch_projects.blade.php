@@ -64,7 +64,7 @@
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
   <!-- Others Begin -->
-  <script src="/js/components/superadmin-watch-projects/superadmin-watch-projects.js"></script>
+  <script src="/js/components/superadmin-watch-projects/superadmin-watch-projects-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
   <script src="/js/global/admin/superadmin-watch-projects.js"></script>
