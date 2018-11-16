@@ -8,18 +8,20 @@ $(document).ready(function(){
             },
             contrasena : {
                 required: true,
-                minlength: 8
+                minlength: 8,
+                maxlength: 20
             }
         },
         messages : {
             correo : {
-                required : 'Ingresa tu usuario.',
+                required : 'Ingresa tu correo electrónico.',
                 maxlength: 'Máximo 256 caractéres.',
-                email : 'Ingresa un usuario válido.',
+                email : 'Ingresa un correo electrónico válido.',
             },
             contrasena : {
                 required : 'Ingresa tu contraseña',
-                minlength : 'La contraseña es muy corta.'
+                minlength : 'La contraseña debe tener al menos 8 caracteres.',
+                maxlength: 'La contraseña debe tener a lo más 20 caracteres.'
             }
         },
         errorElement : 'div',
