@@ -1,3 +1,27 @@
+const GroupAdminCreateProjectViewValidateSettings = {
+  rules : {
+    'new-project-name-input' : {
+      required: true
+    },
+    'new-project-desc-input' : {
+      required: true
+    }
+  },
+  messages : {
+    'new-project-name-input' : {
+      required : 'Ingresa un nombre de proyecto.'
+    },
+    'new-project-desc-input' : {
+      required : 'Ingresa una descripción.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('group-admin-create-project-view', {
   data : function(){
     return {
@@ -132,32 +156,11 @@ Vue.component('group-admin-create-project-view', {
   mounted : function(){
     M.updateTextFields();
     // TODO : No JQuery.
-    $('#new-project-info-form').validate({
-      rules : {
-        'new-project-name-input' : {
-          required: true
-        },
-        'new-project-desc-input' : {
-          required: true
-        }
-      },
-      messages : {
-        'new-project-name-input' : {
-          required : 'Ingresa un nombre de proyecto.'
-        },
-        'new-project-desc-input' : {
-          required : 'Ingresa una descripción.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = GroupAdminCreateProjectViewValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#new-project-info-form').validate(formSettings);
   },
   template : `
     <div class="row">
