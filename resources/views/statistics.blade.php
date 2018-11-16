@@ -43,7 +43,6 @@
   <script src="/js/components/common/user-full-name-span.js"></script>
   <!-- Common Components End -->
   <!-- Chat Begins -->
-  <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
   <script src="/js/components/common/chat/conversation-message-list-item.js"></script>
   <script src="/js/components/common/chat/conversation-new-message-box.js"></script>
   <script src="/js/components/common/chat/conversation-message-list.js"></script>
@@ -56,18 +55,15 @@
   <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
   <!-- Chat Ends -->
   <!-- List Items Begin -->
-  <script src="/js/components/statistics/statistics-project-list-item.js"></script>
-  <script src="/js/components/statistics/statistics-group-list-item.js"></script>
   <script src="/js/components/statistics/statistics-user-list-item.js"></script>
   <!-- List Items End -->
   <!-- Lists Begin -->
-  <script src="/js/components/statistics/statistics-project-list.js"></script>
-  <script src="/js/components/statistics/statistics-group-list.js"></script>
   <script src="/js/components/statistics/statistics-user-list.js"></script>
   <!-- Lists End -->
   <!-- Modals Begin -->
   <!-- Modals End -->
   <!-- Cards Begin -->
+  <script src="/js/components/statistics/group-users-statistics-chart.js"></script>
   <!-- Cards End -->
   <!-- Card Groups Begin -->
   <!-- Card Groups End -->
