@@ -4,7 +4,6 @@ const GroupAdminCreateProjectViewValidateSettings = {
       required: true
     },
     'new-project-desc-input' : {
-      required: true
     }
   },
   messages : {
@@ -12,7 +11,6 @@ const GroupAdminCreateProjectViewValidateSettings = {
       required : 'Ingresa un nombre de proyecto.'
     },
     'new-project-desc-input' : {
-      required : 'Ingresa una descripción.'
     }
   },
   errorElement : 'div',
