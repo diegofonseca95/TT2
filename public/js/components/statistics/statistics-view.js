@@ -35,6 +35,14 @@ Vue.component('statistics-view', {
         <!-- Group Statistics View -->
       </div>
       <div class="col s12" id="projects-view">
+        <div class="row">
+          <div class="col s12">
+            <project-tasks-statistics-chart>
+            </project-tasks-statistics-chart>
+          </div>
+          <div class="col s12">
+          </div>
+        </div>
         <!-- Project Statistics View -->
       </div>
       <div class="col s12" id="users-view">

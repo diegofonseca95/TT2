@@ -1,4 +1,4 @@
-Vue.component('group-users-statistics-chart', {
+Vue.component('project-tasks-statistics-chart', {
   mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -16,18 +16,18 @@ Vue.component('group-users-statistics-chart', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the blog list.
-    fetch('/estadisticaUsuarioGrupo', requestData)
+    fetch('/estadisticaTareaProyecto', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
       if(response.status === 'OK'){
         var result = response.result;
         var points = [];
-        for(var i in result.grupos){
-          var grupo = result.grupos[i];
+        for(var i in result.proyectos){
+          var project = result.proyectos[i];
           points.push({
-            y : result.cantidad[grupo.idGrupo],
-            x : grupo.nombreGrupo
+            y : result.cantidad[project.idProyecto],
+            x : project.nombreProyecto
           });
         }
         // Draw the chart.
@@ -39,12 +39,12 @@ Vue.component('group-users-statistics-chart', {
           });
           var table = new google.visualization.arrayToDataTable(data);
           var options = {
-            title : 'Usuarios por Grupo',
+            title : 'Tareas por Proyecto',
             bars : 'horizontal'
           };
           var chart = new google.charts.Bar(
             document.querySelector(
-              '#group-users-statistics-chart'
+              '#project-tasks-statistics-chart'
             )
           );
           chart.draw(table, options);
@@ -56,7 +56,7 @@ Vue.component('group-users-statistics-chart', {
   template : `
     <div class="card">
       <div class="card-content">
-        <div id="group-users-statistics-chart">
+        <div id="project-tasks-statistics-chart">
         </div>
       </div>
     </div>

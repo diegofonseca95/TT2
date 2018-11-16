@@ -64,6 +64,7 @@
   <!-- Modals End -->
   <!-- Cards Begin -->
   <script src="/js/components/statistics/group-projects-statistics-chart.js"></script>
+  <script src="/js/components/statistics/project-tasks-statistics-chart.js"></script>
   <script src="/js/components/statistics/group-users-statistics-chart.js"></script>
   <!-- Cards End -->
   <!-- Card Groups Begin -->
