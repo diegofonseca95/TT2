@@ -238,6 +238,7 @@ class TareaControlador extends Controller
 
     public function descargarEvidencia($idTarea){
       try{
+
         $tarea = Tarea::findOrFail($idTarea);
         $files = Storage::files('public/evidencias/'.$idTarea);
         //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
