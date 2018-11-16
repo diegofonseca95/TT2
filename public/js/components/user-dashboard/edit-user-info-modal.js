@@ -1,50 +1,68 @@
 const EditUserInfoModalValidateSettings = {
   rules : {
     'edit-user-info-modal-password-input' : {
-      required: true
+      required: true,
+      minlength: 8,
+      maxlength: 20
     },
     'edit-user-info-modal-newpass-input' : {
     },
     'edit-user-info-modal-confirm-input' : {
+      equalTo: "#edit-user-info-modal-newpass-input"
     },
     'edit-user-info-modal-flast-input' : {
-      required: true
+      required: true,
+      maxlength: 100
     },
     'edit-user-info-modal-mlast-input' : {
-      required: true
+      required: true,
+      maxlength: 100
     },
     'edit-user-info-modal-email-input' : {
-      required: true
+      required: true,
+      maxlength: 256,
+      email: true
     },
     'edit-user-info-modal-name-input' : {
-      required: true
+      required: true,
+      maxlength: 100
     },
     'edit-user-info-modal-phone' : {
-      required: true
+      required: true,
+      maxlength: 45
     }
   },
   messages : {
     'edit-user-info-modal-password-input' : {
-      required: 'Ingresa tu contraseña actual.'
+      required: 'Ingresa tu contraseña actual.',
+      minlength: 'La contraseña debe tener al menos 8 caracteres.',
+      maxlength: 'La contraseña debe tener a lo más 20 caracteres.'
     },
     'edit-user-info-modal-newpass-input' : {
     },
     'edit-user-info-modal-confirm-input' : {
+      equalTo: 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.'
     },
     'edit-user-info-modal-flast-input' : {
-      required: 'Ingresa tu Apellido Paterno.'
+      required: 'Ingresa tu Apellido Paterno.',
+      maxlength: 'La longitud máxima posible es de 100 caracteres.'
     },
     'edit-user-info-modal-mlast-input' : {
-      required: 'Ingresa tu Apellido Materno.'
+      required: 'Ingresa tu Apellido Materno.',
+      maxlength: 'La longitud máxima posible es de 100 caracteres.'
     },
     'edit-user-info-modal-email-input' : {
-      required: 'Ingresa tu Correo.'
+      required: 'Ingresa tu Correo.',
+      maxlength: 'La longitud máxima posible es de 256 caracteres.',
+      email: 'Favor de ingresar texto con formato de correo válido'
     },
     'edit-user-info-modal-name-input' : {
-      required: 'Ingresa tu Nombre.'
+      required: 'Ingresa tu Nombre.',
+      maxlength: 'La longitud máxima posible es de 100 caracteres.'
     },
     'edit-user-info-modal-phone' : {
-      required: 'Ingresa tu Teléfono.'
+      required: 'Ingresa tu Teléfono.',
+      maxlength: 'La longitud máxima posible es de 45 caracteres.'
     }
   },
   errorElement : 'div',
