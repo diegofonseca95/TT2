@@ -21,13 +21,14 @@ Vue.component('statistics-view', {
       <div class="col s12" id="groups-view">
         <div class="row">
           <div class="col s12">
-            
+            <group-users-statistics-chart>
+            </group-users-statistics-chart>
           </div>
           <div class="col s12">
             
           </div>
           <div class="col s12">
-            
+
           </div>
         </div>
         <!-- Group Statistics View -->
