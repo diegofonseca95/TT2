@@ -1,3 +1,59 @@
+const EditUserInfoModalValidateSettings = {
+  rules : {
+    'edit-user-info-modal-password-input' : {
+      required: true
+    },
+    'edit-user-info-modal-newpass-input' : {
+    },
+    'edit-user-info-modal-confirm-input' : {
+    },
+    'edit-user-info-modal-flast-input' : {
+      required: true
+    },
+    'edit-user-info-modal-mlast-input' : {
+      required: true
+    },
+    'edit-user-info-modal-email-input' : {
+      required: true
+    },
+    'edit-user-info-modal-name-input' : {
+      required: true
+    },
+    'edit-user-info-modal-phone' : {
+      required: true
+    }
+  },
+  messages : {
+    'edit-user-info-modal-password-input' : {
+      required: 'Ingresa tu contraseña actual.'
+    },
+    'edit-user-info-modal-newpass-input' : {
+    },
+    'edit-user-info-modal-confirm-input' : {
+    },
+    'edit-user-info-modal-flast-input' : {
+      required: 'Ingresa tu Apellido Paterno.'
+    },
+    'edit-user-info-modal-mlast-input' : {
+      required: 'Ingresa tu Apellido Materno.'
+    },
+    'edit-user-info-modal-email-input' : {
+      required: 'Ingresa tu Correo.'
+    },
+    'edit-user-info-modal-name-input' : {
+      required: 'Ingresa tu Nombre.'
+    },
+    'edit-user-info-modal-phone' : {
+      required: 'Ingresa tu Teléfono.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('edit-user-info-modal', {
   props : ['user'],
   data : function(){
@@ -18,64 +74,11 @@ Vue.component('edit-user-info-modal', {
       document.querySelector('#edit-user-info-modal')
     );
     // TODO : No JQuery.
-    $('#edit-user-info-form').validate({
-      rules : {
-        'edit-user-info-modal-password-input' : {
-          required: true
-        },
-        'edit-user-info-modal-newpass-input' : {
-        },
-        'edit-user-info-modal-confirm-input' : {
-        },
-        'edit-user-info-modal-flast-input' : {
-          required: true
-        },
-        'edit-user-info-modal-mlast-input' : {
-          required: true
-        },
-        'edit-user-info-modal-email-input' : {
-          required: true
-        },
-        'edit-user-info-modal-name-input' : {
-          required: true
-        },
-        'edit-user-info-modal-phone' : {
-          required: true
-        }
-      },
-      messages : {
-        'edit-user-info-modal-password-input' : {
-          required: 'Ingresa tu contraseña actual.'
-        },
-        'edit-user-info-modal-newpass-input' : {
-        },
-        'edit-user-info-modal-confirm-input' : {
-        },
-        'edit-user-info-modal-flast-input' : {
-          required: 'Ingresa tu Apellido Paterno.'
-        },
-        'edit-user-info-modal-mlast-input' : {
-          required: 'Ingresa tu Apellido Materno.'
-        },
-        'edit-user-info-modal-email-input' : {
-          required: 'Ingresa tu Correo.'
-        },
-        'edit-user-info-modal-name-input' : {
-          required: 'Ingresa tu Nombre.'
-        },
-        'edit-user-info-modal-phone' : {
-          required: 'Ingresa tu Teléfono.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = EditUserInfoModalValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#edit-user-info-form').validate(formSettings);
   },
   methods : {
     handleEditInfo : function(){
