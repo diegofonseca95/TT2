@@ -3,20 +3,26 @@ const EditUserInfoModalValidateSettings = {
     'edit-user-info-modal-password-input' : {
       required: true,
       minlength: 8,
-      maxlength: 20
+      maxlength: 20,
     },
     'edit-user-info-modal-newpass-input' : {
+      minlength: 8,
+      maxlength: 20
     },
     'edit-user-info-modal-confirm-input' : {
-      equalTo: "#edit-user-info-modal-newpass-input"
+      equalTo: "#edit-user-info-modal-newpass-input",
+      minlength: 8,
+      maxlength: 20
     },
     'edit-user-info-modal-flast-input' : {
       required: true,
-      maxlength: 100
+      maxlength: 100,
+      pattern: "[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜ']+"
     },
     'edit-user-info-modal-mlast-input' : {
       required: true,
-      maxlength: 100
+      maxlength: 100,
+      pattern: "[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜ']+"
     },
     'edit-user-info-modal-email-input' : {
       required: true,
@@ -25,11 +31,13 @@ const EditUserInfoModalValidateSettings = {
     },
     'edit-user-info-modal-name-input' : {
       required: true,
-      maxlength: 100
+      maxlength: 100,
+      pattern: "[a-zA-ZáéíóúÁÉÍÓÚäëïöüÄËÏÖÜ']+"
     },
     'edit-user-info-modal-phone' : {
       required: true,
-      maxlength: 45
+      maxlength: 20,
+      pattern: "[0-9]+"
     }
   },
   messages : {
@@ -39,17 +47,23 @@ const EditUserInfoModalValidateSettings = {
       maxlength: 'La contraseña debe tener a lo más 20 caracteres.'
     },
     'edit-user-info-modal-newpass-input' : {
+      minlength: 'La contraseña debe tener al menos 8 caracteres.',
+      maxlength: 'La contraseña debe tener a lo más 20 caracteres.'
     },
     'edit-user-info-modal-confirm-input' : {
-      equalTo: 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.'
+      equalTo: 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.',
+      minlength: 'La contraseña debe tener al menos 8 caracteres.',
+      maxlength: 'La contraseña debe tener a lo más 20 caracteres.'
     },
     'edit-user-info-modal-flast-input' : {
       required: 'Ingresa tu Apellido Paterno.',
-      maxlength: 'La longitud máxima posible es de 100 caracteres.'
+      maxlength: 'La longitud máxima posible es de 100 caracteres.',
+      pattern: 'Solo se admiten letras del alfabeto y sus acentuaciones (á, é, í, ...) ó (ä, ë, ï, ...) y el uso de comilla simple.'
     },
     'edit-user-info-modal-mlast-input' : {
       required: 'Ingresa tu Apellido Materno.',
-      maxlength: 'La longitud máxima posible es de 100 caracteres.'
+      maxlength: 'La longitud máxima posible es de 100 caracteres.',
+      pattern: 'Solo se admiten letras del alfabeto y sus acentuaciones (á, é, í, ...) ó (ä, ë, ï, ...) y el uso de comilla simple.'
     },
     'edit-user-info-modal-email-input' : {
       required: 'Ingresa tu Correo.',
@@ -58,11 +72,13 @@ const EditUserInfoModalValidateSettings = {
     },
     'edit-user-info-modal-name-input' : {
       required: 'Ingresa tu Nombre.',
-      maxlength: 'La longitud máxima posible es de 100 caracteres.'
+      maxlength: 'La longitud máxima posible es de 100 caracteres.',
+      pattern: 'Solo se admiten letras del alfabeto y sus acentuaciones (á, é, í, ...) ó (ä, ë, ï, ...) y el uso de comilla simple.'
     },
     'edit-user-info-modal-phone' : {
       required: 'Ingresa tu Teléfono.',
-      maxlength: 'La longitud máxima posible es de 45 caracteres.'
+      maxlength: 'La longitud máxima posible es de 45 caracteres.',
+      pattern: 'Ingrese solamente los dígitos de su número telefónico.'
     }
   },
   errorElement : 'div',
