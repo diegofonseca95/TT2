@@ -48,7 +48,8 @@ Vue.component('group-users-statistics-chart', {
       });
       var table = new google.visualization.arrayToDataTable(data);
       var options = {
-        title : 'Usuarios por Grupo'
+        title : 'Usuarios por Grupo',
+        bars : 'horizontal'
       };
       var chart = new google.charts.Bar(
         document.querySelector(
