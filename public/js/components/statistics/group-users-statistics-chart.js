@@ -21,7 +21,7 @@ Vue.component('group-users-statistics-chart', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the blog list.
-    fetch('/estadisticasUsuarioGrupo', requestData)
+    fetch('/estadisticaUsuarioGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
