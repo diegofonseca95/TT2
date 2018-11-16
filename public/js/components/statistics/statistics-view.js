@@ -2,6 +2,15 @@
   This component represents the statistics view.
 */
 Vue.component('statistics-view', {
+  data : function(){
+    return {
+      selected : {
+        projects : false,
+        groups : true,
+        users : false
+      }
+    };
+  },
   mounted : function(){
     M.Tabs.init(
       document.querySelector(
@@ -14,12 +23,18 @@ Vue.component('statistics-view', {
       )
     );
   },
+  methods : {
+    handleStripSelected : function(strips){
+      this.selected = strips;
+    }
+  },
   template : `
     <div class="row">
-      <statistics-category-tab-strip>
+      <statistics-category-tab-strip
+        @strip-selected="handleStripSelected">
       </statistics-category-tab-strip>
       <div class="col s12" id="groups-view">
-        <div class="row">
+        <div class="row" v-if="selected.groups">
           <div class="col s12">
             <group-users-statistics-chart>
             </group-users-statistics-chart>
@@ -35,7 +50,7 @@ Vue.component('statistics-view', {
         <!-- Group Statistics View -->
       </div>
       <div class="col s12" id="projects-view">
-        <div class="row">
+        <div class="row" v-if="selected.projects">
           <div class="col s12">
             <project-tasks-statistics-chart>
             </project-tasks-statistics-chart>
