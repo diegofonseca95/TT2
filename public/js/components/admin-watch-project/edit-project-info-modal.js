@@ -4,7 +4,6 @@ const EditProjectInfoModalValidateSettings = {
       required: true
     },
     'edit-project-info-modal-desc-input' : {
-      required: true
     }
   },
   messages : {
@@ -12,7 +11,6 @@ const EditProjectInfoModalValidateSettings = {
       required : 'Ingresa un nombre de proyecto.'
     },
     'edit-project-info-modal-desc-input' : {
-      required : 'Ingresa una descripción.'
     }
   },
   errorElement : 'div',
