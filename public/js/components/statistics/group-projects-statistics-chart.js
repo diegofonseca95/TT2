@@ -42,6 +42,14 @@ Vue.component('group-projects-statistics-chart', {
   },
   methods : {
     drawChart : function(){
+    }
+  },
+  mounted : function(){
+    google.charts.load('current', { 'packages' : ['bar'] });
+    //google.charts.setOnLoadCallback(this.drawChart);
+  },
+  watch : {
+    chartInfo : function(){
       var data = [['Grupos', 'Proyectos']];
       this.chartInfo.map(point => {
         data.push([point.x, point.y]);
@@ -58,10 +66,6 @@ Vue.component('group-projects-statistics-chart', {
       );
       chart.draw(table, options);
     }
-  },
-  mounted : function(){
-    google.charts.load('current', { 'packages' : ['bar'] });
-    google.charts.setOnLoadCallback(this.drawChart);
   },
   template : `
     <div class="card">
