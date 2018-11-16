@@ -8,8 +8,8 @@ $(document).ready(function(){
         },
         messages : {
             userId : {
-                required : 'Ingresa tu usuario.',
-                email : 'Ingresa un usuario válido.'
+                required : 'Ingresa tu usuario / correo electrónico.',
+                email : 'Ingresa un usuario / correo electrónico válido.'
             }
         },
         errorElement : 'div',
