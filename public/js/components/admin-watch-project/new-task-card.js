@@ -1,3 +1,27 @@
+const NewTaskCardValidateSettings = {
+  rules : {
+    'new-task-deliverable-input' : {
+      required : true
+    },
+    'new-task-description-input' : {
+      required : true
+    }
+  },
+  messages : {
+    'new-task-deliverable-input' : {
+      required : 'Ingresa los detalles de la evidencia.'
+    },
+    'new-task-description-input' : {
+      required : 'Ingresa la descripción de la tarea.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('new-task-card', {
   data : function(){
     return {
@@ -11,32 +35,11 @@ Vue.component('new-task-card', {
     var select = document.getElementById('new-task-priority-input');
     M.FormSelect.init(select);
     // TODO : No JQuery
-    $('#new-task-form').validate({
-      rules : {
-        'new-task-deliverable-input' : {
-          required : true
-        },
-        'new-task-description-input' : {
-          required : true
-        }
-      },
-      messages : {
-        'new-task-deliverable-input' : {
-          required : 'Ingresa los detalles de la evidencia.'
-        },
-        'new-task-description-input' : {
-          required : 'Ingresa la descripción de la tarea.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = NewTaskCardValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#new-task-form').validate(formSettings);
   },
   methods : {
     handleTaskCreation : function(){
