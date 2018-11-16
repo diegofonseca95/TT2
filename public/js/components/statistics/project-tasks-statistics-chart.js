@@ -33,7 +33,7 @@ Vue.component('project-tasks-statistics-chart', {
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = [['Grupos', 'Usuarios']];
+          var data = [['Proyectos', 'Tareas']];
           points.map(point => {
             data.push([point.x, point.y]);
           });
