@@ -1,3 +1,27 @@
+const AdminCreateGroupViewFormValidateSettings = {
+  rules : {
+    'new-group-name-input' : {
+      required: true
+    },
+    'new-group-desc-input' : {
+      required: true
+    }
+  },
+  messages : {
+    'new-group-name-input' : {
+      required : 'Ingresa un nombre de grupo.'
+    },
+    'new-group-desc-input' : {
+      required : 'Ingresa una descripción.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('admin-create-group-view', {
   data : function(){
     return {
@@ -126,32 +150,11 @@ Vue.component('admin-create-group-view', {
   mounted : function(){
     M.updateTextFields();
     // TODO : No JQuery.
-    $('#new-group-info-form').validate({
-      rules : {
-        'new-group-name-input' : {
-          required: true
-        },
-        'new-group-desc-input' : {
-          required: true
-        }
-      },
-      messages : {
-        'new-group-name-input' : {
-          required : 'Ingresa un nombre de grupo.'
-        },
-        'new-group-desc-input' : {
-          required : 'Ingresa una descripción.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = AdminCreateGroupViewFormValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#new-group-info-form').validate(formSettings);
   },
   template : `
     <div class="row">

@@ -1,3 +1,27 @@
+const EditGroupInfoModalValidateSettings = {
+  rules : {
+    'edit-group-info-modal-name-input' : {
+      required: true
+    },
+    'edit-group-info-modal-desc-input' : {
+      required: true
+    }
+  },
+  messages : {
+    'edit-group-info-modal-name-input' : {
+      required : 'Ingresa un nombre de grupo.'
+    },
+    'edit-group-info-modal-desc-input' : {
+      required : 'Ingresa una descripción.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('edit-group-info-modal', {
   props : ['groupInfo','groupMembers'],
   data : function(){
@@ -48,32 +72,11 @@ Vue.component('edit-group-info-modal', {
     );
     M.updateTextFields();
     // TODO : No JQuery.
-    $('#edit-group-info-form').validate({
-      rules : {
-        'edit-group-info-modal-name-input' : {
-          required: true
-        },
-        'edit-group-info-modal-desc-input' : {
-          required: true
-        }
-      },
-      messages : {
-        'edit-group-info-modal-name-input' : {
-          required : 'Ingresa un nombre de grupo.'
-        },
-        'edit-group-info-modal-desc-input' : {
-          required : 'Ingresa una descripción.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = EditGroupInfoModalValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#edit-group-info-form').validate(formSettings);
   },
   template : `
     <div id="edit-group-info-modal" class="modal modal-fixed-footer">

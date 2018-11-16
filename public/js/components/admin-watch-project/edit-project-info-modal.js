@@ -1,3 +1,27 @@
+const EditProjectInfoModalValidateSettings = {
+  rules : {
+    'edit-project-info-modal-name-input' : {
+      required: true
+    },
+    'edit-project-info-modal-desc-input' : {
+      required: true
+    }
+  },
+  messages : {
+    'edit-project-info-modal-name-input' : {
+      required : 'Ingresa un nombre de proyecto.'
+    },
+    'edit-project-info-modal-desc-input' : {
+      required : 'Ingresa una descripción.'
+    }
+  },
+  errorElement : 'div',
+  errorPlacement : function(error, element){
+    $(error).addClass('error-text');
+    error.insertAfter(element);
+  }
+};
+
 Vue.component('edit-project-info-modal', {
   props : ['projectInfo','projectMembers'],
   data : function(){
@@ -45,32 +69,11 @@ Vue.component('edit-project-info-modal', {
     var instances = M.Modal.init(elems);
     M.updateTextFields();
     // TODO : No JQuery.
-    $('#edit-project-info-form').validate({
-      rules : {
-        'edit-project-info-modal-name-input' : {
-          required: true
-        },
-        'edit-project-info-modal-desc-input' : {
-          required: true
-        }
-      },
-      messages : {
-        'edit-project-info-modal-name-input' : {
-          required : 'Ingresa un nombre de proyecto.'
-        },
-        'edit-project-info-modal-desc-input' : {
-          required : 'Ingresa una descripción.'
-        }
-      },
-      errorElement : 'div',
-      errorPlacement : function(error, element){
-        $(error).addClass('error-text');
-        error.insertAfter(element);
-      },
-      submitHandler : function(form){
-        this.hasValidFields = true;
-      }.bind(this)
-    });
+    var formSettings = EditProjectInfoModalValidateSettings;
+    formSettings.submitHandler = function(form){
+      this.hasValidFields = true;
+    }.bind(this);
+    $('#edit-project-info-form').validate(formSettings);
   },
   template : `
     <div id="edit-project-info-modal" class="modal modal-fixed-footer">

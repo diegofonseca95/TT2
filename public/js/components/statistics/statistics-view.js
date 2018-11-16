@@ -19,30 +19,21 @@ Vue.component('statistics-view', {
       <statistics-category-tab-strip>
       </statistics-category-tab-strip>
       <div class="col s12" id="groups-view">
-        <ul class="collapsible">
-          <li>
-            <div class="collapsible-header">
-              <i class="material-icons">group</i>Grupos
-            </div>
-            <div class="collapsible-body zero-padding">
-              <statistics-group-list>
-              </statistics-group-list>
-            </div>
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col s12">
+            
+          </div>
+          <div class="col s12">
+            
+          </div>
+          <div class="col s12">
+            
+          </div>
+        </div>
+        <!-- Group Statistics View -->
       </div>
       <div class="col s12" id="projects-view">
-        <ul class="collapsible">
-          <li>
-            <div class="collapsible-header">
-              <i class="material-icons">folder</i>Proyectos
-            </div>
-            <div class="collapsible-body zero-padding">
-              <statistics-project-list>
-              </statistics-project-list>
-            </div>
-          </li>
-        </ul>
+        <!-- Project Statistics View -->
       </div>
       <div class="col s12" id="users-view">
         <ul class="collapsible">
