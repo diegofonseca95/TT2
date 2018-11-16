@@ -1,4 +1,4 @@
-Vue.component('group-users-statistics-chart', {
+Vue.component('group-projects-statistics-chart', {
   data : function(){
     return {
       chartInfo : []
@@ -21,7 +21,7 @@ Vue.component('group-users-statistics-chart', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the blog list.
-    fetch('/estadisticaUsuarioGrupo', requestData)
+    fetch('/estadisticaProyectoGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
@@ -42,18 +42,18 @@ Vue.component('group-users-statistics-chart', {
   },
   methods : {
     drawChart : function(){
-      var data = [['Grupos', 'Usuarios']];
+      var data = [['Grupos', 'Proyectos']];
       this.chartInfo.map(point => {
         data.push([point.x, point.y]);
       });
       var table = new google.visualization.arrayToDataTable(data);
       var options = {
-        title : 'Usuarios por Grupo',
+        title : 'Proyectos por Grupo',
         bars : 'horizontal'
       };
       var chart = new google.charts.Bar(
         document.querySelector(
-          '#group-users-statistics-chart'
+          '#group-projects-statistics-chart'
         )
       );
       chart.draw(table, options);
@@ -66,7 +66,7 @@ Vue.component('group-users-statistics-chart', {
   template : `
     <div class="card">
       <div class="card-content">
-        <div id="group-users-statistics-chart">
+        <div id="group-projects-statistics-chart">
         </div>
       </div>
     </div>

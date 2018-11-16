@@ -25,7 +25,8 @@ Vue.component('statistics-view', {
             </group-users-statistics-chart>
           </div>
           <div class="col s12">
-            
+            <group-projects-statistics-chart>
+            </group-projects-statistics-chart>
           </div>
           <div class="col s12">
 
