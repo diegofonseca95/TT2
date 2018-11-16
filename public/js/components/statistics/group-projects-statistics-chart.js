@@ -1,10 +1,5 @@
 Vue.component('group-projects-statistics-chart', {
-  data : function(){
-    return {
-      chartInfo : []
-    };
-  },
-  beforeCreate : function(){
+  mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
     // Request data for the 'fetch' function.
@@ -35,33 +30,28 @@ Vue.component('group-projects-statistics-chart', {
             x : grupo.nombreGrupo
           });
         }
-        this.chartInfo = points;
+        // Draw the chart.
+        google.charts.load('current', { 'packages' : ['bar'] });
+        google.charts.setOnLoadCallback(function(){
+          var data = [['Grupos', 'Proyectos']];
+          points.map(point => {
+            data.push([point.x, point.y]);
+          });
+          var table = new google.visualization.arrayToDataTable(data);
+          var options = {
+            title : 'Proyectos por Grupo',
+            bars : 'horizontal'
+          };
+          var chart = new google.charts.Bar(
+            document.querySelector(
+              '#group-projects-statistics-chart'
+            )
+          );
+          chart.draw(table, options);
+        });
       }
       // TODO : Handle non 'OK' status.
     }.bind(this));
-  },
-  methods : {
-    drawChart : function(){
-      var data = [['Grupos', 'Proyectos']];
-      this.chartInfo.map(point => {
-        data.push([point.x, point.y]);
-      });
-      var table = new google.visualization.arrayToDataTable(data);
-      var options = {
-        title : 'Proyectos por Grupo',
-        bars : 'horizontal'
-      };
-      var chart = new google.charts.Bar(
-        document.querySelector(
-          '#group-projects-statistics-chart'
-        )
-      );
-      chart.draw(table, options);
-    }
-  },
-  mounted : function(){
-    google.charts.load('current', { 'packages' : ['bar'] });
-    google.charts.setOnLoadCallback(this.drawChart);
   },
   template : `
     <div class="card">
