@@ -43,9 +43,6 @@ Vue.component('statistics-view', {
             <group-projects-statistics-chart>
             </group-projects-statistics-chart>
           </div>
-          <div class="col s12">
-
-          </div>
         </div>
         <!-- Group Statistics View -->
       </div>
@@ -58,9 +55,6 @@ Vue.component('statistics-view', {
           <div class="col s12">
             <project-iterations-statistics-chart>
             </project-iterations-statistics-chart>
-          </div>
-          <div class="col s12">
-
           </div>
         </div>
         <!-- Project Statistics View -->
@@ -77,6 +71,12 @@ Vue.component('statistics-view', {
             </div>
           </li>
         </ul>
+        <div class="row">
+          <div class="col s12">
+            <user-tasks-statistics-chart>
+            </user-tasks-statistics-chart>
+          </div>
+        </div>
       </div>
       <chat-sidenav-view>
       </chat-sidenav-view>

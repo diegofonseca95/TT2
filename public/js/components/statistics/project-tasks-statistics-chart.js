@@ -1,4 +1,9 @@
 Vue.component('project-tasks-statistics-chart', {
+  data : function(){
+    return {
+      loading : true
+    };
+  },
   mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -26,21 +31,29 @@ Vue.component('project-tasks-statistics-chart', {
         for(var i in result.proyectos){
           var project = result.proyectos[i];
           points.push({
-            y : result.cantidad[project.idProyecto],
-            x : project.nombreProyecto
+            done : result.terminadas[project.idProyecto],
+            total : result.cantidad[project.idProyecto],
+            name : project.nombreProyecto
           });
         }
+        this.loading = false;
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = [['Proyectos', 'Tareas']];
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Proyectos');
+          data.addColumn('number', 'Total de Tareas');
+          data.addColumn('number', 'Tareas Terminadas');
           points.map(point => {
-            data.push([point.x, point.y]);
+            data.AddRow([name, total, done]);
           });
           var table = new google.visualization.arrayToDataTable(data);
           var options = {
             title : 'Tareas por Proyecto',
-            bars : 'horizontal'
+            bars : 'horizontal',
+            animation:{
+              "startup" : true
+            }
           };
           var chart = new google.charts.Bar(
             document.querySelector(
@@ -56,7 +69,9 @@ Vue.component('project-tasks-statistics-chart', {
   template : `
     <div class="card">
       <div class="card-content">
-        <div id="project-tasks-statistics-chart">
+        <preloader v-if="loading">
+        </preloader>
+        <div id="project-tasks-statistics-chart" v-if="!loading">
         </div>
       </div>
     </div>
