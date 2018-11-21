@@ -17,6 +17,8 @@ Vue.component('user-tasks-statistics-chart', {
     user : function(){
       var authToken = document.querySelector('input[name="_token"]');
 
+
+
       // Request data for the 'fetch' function.
       var requestData = {
         headers: { 'Content-Type' : 'application/json' },
@@ -35,6 +37,7 @@ Vue.component('user-tasks-statistics-chart', {
       fetch('/estadisticaUsuarioTarea', requestData)
       .then(response => response.json())
       .then(function(response){
+        console.log(response);
         if(response.status === 'OK'){
           var nameRow = ['Fecha'];
           var matrix = [];
@@ -53,7 +56,7 @@ Vue.component('user-tasks-statistics-chart', {
           this.display = (response.nombres.length > 0);
           this.loading = false;
           if(!this.displayChart){
-            WarningToast('El usuario no ha realizado tareas');
+            WarningToast('El usuario no pertenece a ningún proyecto.');
             return;
           }
           // Draw the chart.
