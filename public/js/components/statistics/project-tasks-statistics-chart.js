@@ -40,16 +40,15 @@ Vue.component('project-tasks-statistics-chart', {
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Proyectos');
-          data.addColumn('number', 'Total de Tareas');
-          data.addColumn('number', 'Tareas Terminadas');
+          var table = new google.visualization.DataTable();
+          table.addColumn('string', 'Proyectos');
+          table.addColumn('number', 'Total de Tareas');
+          table.addColumn('number', 'Tareas Terminadas');
           projectsInfo.map(info => {
-            data.addRow(
+            table.addRow(
               [info.name, info.total, info.done]
             );
           });
-          var table = new google.visualization.arrayToDataTable(data);
           var options = {
             title : 'Tareas por Proyecto',
             bars : 'horizontal',
