@@ -75,6 +75,9 @@ Vue.component('statistics-user-list', {
       this.$emit('user-selected', user);
     }
   },
+  mounted : function(){
+    M.updateTextFields();
+  },
   template : `
     <ul class="collection scrollable-collection">
       <li class="collection-item">
@@ -99,6 +102,11 @@ Vue.component('statistics-user-list', {
         v-if="noMatch">
         Ningún usuario coincide con los criterios de búsqueda.
       </li>
+      <statistics-user-list-item
+        v-for="user in filteredList"
+        :key="user.idUsuario"
+        :user="user">
+      </statistics-user-list-item>
     </ul>
   `
 });
