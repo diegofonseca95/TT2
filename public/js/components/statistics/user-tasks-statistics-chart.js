@@ -78,10 +78,11 @@ Vue.component('user-tasks-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content center-align">
+      <div class="card-content center-align"
+        v-if="display">
         <preloader v-if="loading">
         </preloader>
-        <div id="user-tasks-statistics-chart" 
+        <div id="user-tasks-statistics-chart"
           v-if="displayChart">
         </div>
       </div>
