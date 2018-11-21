@@ -52,8 +52,10 @@ Vue.component('project-tasks-statistics-chart', {
           var options = {
             title : 'Tareas por Proyecto',
             bars : 'horizontal',
-            animation:{
-              "startup" : true
+            animation : {
+              'startup' : true,
+              duration : 1000,
+              easing : 'out'
             }
           };
           var chart = new google.charts.Bar(
