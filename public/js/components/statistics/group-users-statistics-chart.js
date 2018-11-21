@@ -1,4 +1,9 @@
 Vue.component('group-users-statistics-chart', {
+  data : function(){
+    return {
+      loading : true
+    };
+  },
   mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -26,18 +31,24 @@ Vue.component('group-users-statistics-chart', {
         for(var i in result.grupos){
           var grupo = result.grupos[i];
           points.push({
-            y : result.cantidad[grupo.idGrupo],
-            x : grupo.nombreGrupo
+            deleted : result.eliminados[grupo.idGrupo],
+            users : result.cantidad[grupo.idGrupo],
+            name : grupo.nombreGrupo
           });
         }
+        this.loading = false;
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = [['Grupos', 'Usuarios']];
+          var table = new google.visualization.DataTable();
+          table.addColumn('string', 'Grupo');
+          table.addColumn('number', 'Usuarios Activos');
+          table.addColumn('number', 'Usuarios Eliminados');
           points.map(point => {
-            data.push([point.x, point.y]);
+            table.addRow(
+              [point.name, point.users, point.deleted]
+            );
           });
-          var table = new google.visualization.arrayToDataTable(data);
           var options = {
             title : 'Usuarios por Grupo',
             bars : 'horizontal'
@@ -55,8 +66,10 @@ Vue.component('group-users-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content">
-        <div id="group-users-statistics-chart">
+      <div class="card-content center-align">
+        <preloader v-if="loading">
+        </preloader>
+        <div id="group-users-statistics-chart" v-if="!loading">
         </div>
       </div>
     </div>
