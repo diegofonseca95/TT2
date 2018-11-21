@@ -45,7 +45,7 @@ Vue.component('project-tasks-statistics-chart', {
           data.addColumn('number', 'Total de Tareas');
           data.addColumn('number', 'Tareas Terminadas');
           projectsInfo.map(info => {
-            data.AddRow(
+            data.addRow(
               [info.name, info.total, info.done]
             );
           });
