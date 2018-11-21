@@ -8,7 +8,8 @@ Vue.component('statistics-view', {
         projects : false,
         groups : true,
         users : false
-      }
+      },
+      selectedUser : {}
     };
   },
   mounted : function(){
@@ -26,6 +27,9 @@ Vue.component('statistics-view', {
   methods : {
     handleStripSelected : function(strips){
       this.selected = strips;
+    },
+    handleUserSelected : function(user){
+      this.selectedUser = user;
     }
   },
   template : `
@@ -60,7 +64,7 @@ Vue.component('statistics-view', {
         <!-- Project Statistics View -->
       </div>
       <div class="col s12" id="users-view">
-        <ul class="collapsible">
+        <ul class="collapsible" v-if="selected.users">
           <li>
             <div class="collapsible-header">
               <i class="material-icons">person</i>Usuarios
@@ -71,9 +75,10 @@ Vue.component('statistics-view', {
             </div>
           </li>
         </ul>
-        <div class="row">
+        <div class="row" v-if="selected.users">
           <div class="col s12">
-            <user-tasks-statistics-chart>
+            <user-tasks-statistics-chart
+              :user="selectedUser">
             </user-tasks-statistics-chart>
           </div>
         </div>

@@ -10,7 +10,30 @@ Vue.component('statistics-user-list', {
     };
   },
   beforeCreate : function(){
-    // TODO : Fetch the list.
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the user list.
+    fetch('/obtenerTodosUsuarios', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.users = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   computed : {
     // The list of users that match the search pattern, if any.
