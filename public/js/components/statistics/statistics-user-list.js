@@ -104,6 +104,7 @@ Vue.component('statistics-user-list', {
       </li>
       <statistics-user-list-item
         v-for="user in filteredList"
+        @user-selected="handleUserSelected"
         :key="user.idUsuario"
         :user="user">
       </statistics-user-list-item>
