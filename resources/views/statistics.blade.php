@@ -53,7 +53,7 @@
   <script src="/js/components/common/chat/new-chat-member-list.js"></script>
   <script src="/js/components/common/chat/new-chat-modal.js"></script>
   <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
-  <script src="/js/components/common/chat/preloader.js"></script>
+  <script src="/js/components/common/preloader.js"></script>
   <!-- Chat Ends -->
   <!-- List Items Begin -->
   <script src="/js/components/statistics/statistics-user-list-item.js"></script>
