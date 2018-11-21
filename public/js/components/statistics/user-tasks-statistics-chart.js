@@ -2,6 +2,17 @@ Vue.component('user-tasks-statistics-chart', {
   props : [
     'user'
   ],
+  data : function(){
+    return {
+      display : true,
+      loading : true
+    };
+  },
+  computed : {
+    displayChart : function(){
+      return !this.loading && this.display;
+    }
+  },
   watch : {
     user : function(){
       var authToken = document.querySelector('input[name="_token"]');
@@ -24,8 +35,6 @@ Vue.component('user-tasks-statistics-chart', {
       fetch('/estadisticaUsuarioTarea', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response.prueba);
-        console.log(response.result);
         if(response.status === 'OK'){
           var nameRow = ['Fecha'];
           var matrix = [];
@@ -40,6 +49,12 @@ Vue.component('user-tasks-statistics-chart', {
               row.push(response.result[i][j]);
             }
             matrix.push(row);
+          }
+          this.display = (response.nombres.length > 0);
+          this.loading = false;
+          if(!this.displayChart){
+            WarningToast('El usuario no ha realizado tareas');
+            return;
           }
           // Draw the chart.
           google.charts.load('current', { 'packages' : ['line'] });
@@ -63,8 +78,11 @@ Vue.component('user-tasks-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content">
-        <div id="user-tasks-statistics-chart">
+      <div class="card-content center-align">
+        <preloader v-if="loading">
+        </preloader>
+        <div id="user-tasks-statistics-chart" 
+          v-if="displayChart">
         </div>
       </div>
     </div>
