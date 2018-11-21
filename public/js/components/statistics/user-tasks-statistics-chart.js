@@ -1,4 +1,4 @@
-Vue.component('user-tasks-statistics-chart', {,
+Vue.component('user-tasks-statistics-chart', {
   props : [
     'user'
   ],
