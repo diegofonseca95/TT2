@@ -1,4 +1,9 @@
 Vue.component('group-projects-statistics-chart', {
+  data : function(){
+    return {
+      loading : true
+    };
+  },
   mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -26,18 +31,24 @@ Vue.component('group-projects-statistics-chart', {
         for(var i in result.grupos){
           var grupo = result.grupos[i];
           points.push({
-            y : result.cantidad[grupo.idGrupo],
-            x : grupo.nombreGrupo
+            deleted : result.eliminados[grupo.idGrupo],
+            projects : result.cantidad[grupo.idGrupo],
+            name : grupo.nombreGrupo
           });
         }
+        this.loading = false;
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = [['Grupos', 'Proyectos']];
+          var table = new google.visualization.DataTable();
+          table.addColumn('string', 'Grupo');
+          table.addColumn('number', 'Proyectos Activos');
+          table.addColumn('number', 'Proyectos Eliminados');
           points.map(point => {
-            data.push([point.x, point.y]);
+            table.addRow(
+              [point.name, point.projects, point.deleted]
+            );
           });
-          var table = new google.visualization.arrayToDataTable(data);
           var options = {
             title : 'Proyectos por Grupo',
             bars : 'horizontal'
@@ -55,8 +66,10 @@ Vue.component('group-projects-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content">
-        <div id="group-projects-statistics-chart">
+      <div class="card-content center-align">
+        <preloader v-if="loading">
+        </preloader>
+        <div id="group-projects-statistics-chart" v-if="!loading">
         </div>
       </div>
     </div>
