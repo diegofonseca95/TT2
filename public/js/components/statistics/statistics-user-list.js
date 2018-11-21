@@ -29,7 +29,6 @@ Vue.component('statistics-user-list', {
     fetch('/obtenerTodosUsuarios', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response.result);
       if(response.status === 'OK'){
         this.users = response.result;
       }

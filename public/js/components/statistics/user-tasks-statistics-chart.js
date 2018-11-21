@@ -24,7 +24,7 @@ Vue.component('user-tasks-statistics-chart', {
       fetch('/estadisticaUsuarioTarea', requestData)
       .then(response => response.json())
       .then(function(response){
-        console.log(response);
+        console.log(response.result);
         if(response.status === 'OK'){
           var matrix = [];
           for(var i in response.result){
