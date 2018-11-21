@@ -4,6 +4,7 @@ Vue.component('user-tasks-statistics-chart', {
   ],
   data : function(){
     return {
+      display : true,
       loading : true
     };
   },
@@ -11,6 +12,7 @@ Vue.component('user-tasks-statistics-chart', {
     user : function(){
       var authToken = document.querySelector('input[name="_token"]');
 
+      this.display = true;
       this.loading = true;
 
       // Request data for the 'fetch' function.
@@ -50,6 +52,7 @@ Vue.component('user-tasks-statistics-chart', {
           this.loading = false;
           if(response.result.length === 0){
             WarningToast('No hay información para mostrar.');
+            this.display = false;
             return;
           }
           // Draw the chart.
@@ -73,7 +76,7 @@ Vue.component('user-tasks-statistics-chart', {
     }
   },
   template : `
-    <div class="card">
+    <div class="card" v-if="display">
       <div class="card-content center-align">
         <preloader v-if="loading">
         </preloader>
