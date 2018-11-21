@@ -17,7 +17,8 @@ Vue.component('user-tasks-statistics-chart', {
     user : function(){
       var authToken = document.querySelector('input[name="_token"]');
 
-
+      this.display = true;
+      this.loading = true;
 
       // Request data for the 'fetch' function.
       var requestData = {
@@ -53,10 +54,10 @@ Vue.component('user-tasks-statistics-chart', {
             }
             matrix.push(row);
           }
-          this.display = (response.nombres.length > 0);
+          this.display = (response.result.length > 0);
           this.loading = false;
           if(!this.displayChart){
-            WarningToast('El usuario no pertenece a ningún proyecto.');
+            WarningToast('No hay información para mostrar.');
             return;
           }
           // Draw the chart.
