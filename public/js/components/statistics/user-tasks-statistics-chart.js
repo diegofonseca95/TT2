@@ -10,13 +10,14 @@ Vue.component('user-tasks-statistics-chart', {
 
     // The body of our request.
     var requestBody = { 
+      idUsuario : 1,
       _token : authToken.value
     };
 
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the blog list.
-    fetch('/estadisticaUsuarioTareas', requestData)
+    fetch('/estadisticaUsuarioTarea', requestData)
     .then(response => response.json())
     .then(function(response){
       console.log(response);
@@ -31,7 +32,7 @@ Vue.component('user-tasks-statistics-chart', {
           matrix.push(row);
         }
         // Draw the chart.
-        google.charts.load('current', { 'packages' : ['bar'] });
+        google.charts.load('current', { 'packages' : ['line'] });
         google.charts.setOnLoadCallback(function(){
           var table = new google.visualization.arrayToDataTable(matrix);
           var options = {
