@@ -1,4 +1,9 @@
 Vue.component('project-iterations-statistics-chart', {
+  data : function(){
+    return {
+      loading : true
+    };
+  },
   mounted : function(){
     var authToken = document.querySelector('input[name="_token"]');
 
@@ -26,18 +31,19 @@ Vue.component('project-iterations-statistics-chart', {
         for(var i in result.proyectos){
           var project = result.proyectos[i];
           points.push({
-            y : result.cantidad[project.idProyecto],
-            x : project.nombreProyecto
+            iterations : result.cantidad[project.idProyecto],
+            name : project.nombreProyecto
           });
         }
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
-          var data = [['Proyectos', 'Iteraciones']];
+          var table = new google.visualization.DataTable();
+          table.addColumn('string', 'Proyectos');
+          table.addColumn('number', 'Iteraciones');
           points.map(point => {
-            data.push([point.x, point.y]);
+            table.addRow([point.name, point.iterations]);
           });
-          var table = new google.visualization.arrayToDataTable(data);
           var options = {
             title : 'Iteraciones por Proyecto',
             bars : 'horizontal'
@@ -56,7 +62,10 @@ Vue.component('project-iterations-statistics-chart', {
   template : `
     <div class="card">
       <div class="card-content">
-        <div id="project-iterations-statistics-chart">
+        <preloader v-if="loading">
+        </preloader>
+        <div id="project-iterations-statistics-chart"
+          v-if="!loading">
         </div>
       </div>
     </div>
