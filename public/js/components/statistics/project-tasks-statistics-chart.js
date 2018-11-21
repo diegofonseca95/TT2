@@ -27,10 +27,10 @@ Vue.component('project-tasks-statistics-chart', {
       console.log(response);
       if(response.status === 'OK'){
         var result = response.result;
-        var points = [];
+        var projectsInfo = [];
         for(var i in result.proyectos){
           var project = result.proyectos[i];
-          points.push({
+          projectsInfo.push({
             done : result.terminadas[project.idProyecto],
             total : result.cantidad[project.idProyecto],
             name : project.nombreProyecto
@@ -44,8 +44,10 @@ Vue.component('project-tasks-statistics-chart', {
           data.addColumn('string', 'Proyectos');
           data.addColumn('number', 'Total de Tareas');
           data.addColumn('number', 'Tareas Terminadas');
-          points.map(point => {
-            data.AddRow([name, total, done]);
+          projectsInfo.map(info => {
+            data.AddRow(
+              [info.name, info.total, info.done]
+            );
           });
           var table = new google.visualization.arrayToDataTable(data);
           var options = {
