@@ -33,7 +33,7 @@ Vue.component('statistics-user-list-item', {
             <button class="btn remove-button-background" 
               title="Ver estadísticas"
               @click="handleUserSelected">
-              <i class="material-icons">remove_red_eye</i>
+              <i class="material-icons">show_chart</i>
             </button>
           </label>
         </div>

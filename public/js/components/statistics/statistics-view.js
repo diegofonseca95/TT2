@@ -77,7 +77,8 @@ Vue.component('statistics-view', {
               <i class="material-icons">person</i>Usuarios
             </div>
             <div class="collapsible-body zero-padding">
-              <statistics-user-list>
+              <statistics-user-list
+                @user-selected="handleUserSelected">
               </statistics-user-list>
             </div>
           </li>
