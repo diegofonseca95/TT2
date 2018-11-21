@@ -24,7 +24,6 @@ Vue.component('group-projects-statistics-chart', {
     fetch('/estadisticaProyectoGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
-      console.log(response);
       if(response.status === 'OK'){
         var result = response.result;
         var points = [];
