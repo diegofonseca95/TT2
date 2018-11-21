@@ -299,16 +299,16 @@
                 </div>
               </div>
               <div class="row">
-                  <div class="input-field col s12">
-                      <select id="priorityList">
-                        <option value="" disabled selected>Seleccione la prioridad de la tarea</option>
-                        <option value="1">Muy baja</option>
-                        <option value="2">Baja</option>
-                        <option value="3">Media</option>
-                        <option value="4">Alta</option>
-                        <option value="5">Muy alta</option>
-                      </select>
-                    </div>
+                <div class="input-field col s12">
+                  <select id="priorityList">
+                    <option value="" disabled selected>Seleccione la prioridad de la tarea</option>
+                    <option value="1">Muy baja</option>
+                    <option value="2">Baja</option>
+                    <option value="3">Media</option>
+                    <option value="4">Alta</option>
+                    <option value="5">Muy alta</option>
+                  </select>
+                </div>
               </div>
             </form>
           </div>
@@ -397,6 +397,70 @@
         </div>
       </div>
       <!-- DropBox Ends-->
+
+      <!-- Logs Collapsible Begins -->
+      <ul class="collapsible" id="collapsible-logs">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">autorenew</i>Logs</div>
+          <div class="collapsible-body zero-padding">
+            <!-- Logs List Begins-->
+            <ul class="collection scrollable-collection">
+              <!-- No Logs to show item begins-->
+              <li class="collection-item">
+                No hay registros en el log hasta el momento.
+              </li>
+              <!-- No Logs to show item ends-->
+              <!-- Log Begins -->
+              <li class="collection-item avatar">
+                <i class="material-icons circle third-background">autorenew</i>
+                <div class="row">
+                  <div class="col s12 m9">
+                    <span class="title truncate col s12">
+                      Fecha: 21/11/2018 16:27:32
+                    </span>
+                    <span class="truncate col s12">
+                      Acción: El administrador creó una nueva tarea
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <!-- Log Ends -->
+              <!-- Log Begins -->
+              <li class="collection-item avatar">
+                <i class="material-icons circle third-background">autorenew</i>
+                <div class="row">
+                  <div class="col s12 m9">
+                    <span class="title truncate col s12">
+                      Fecha: 21/10/2018 16:27:32
+                    </span>
+                    <span class="truncate col s12">
+                      Acción: Víctor Noriega movió la tarea 2 de la iteración 4 de TODO a DOING
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <!-- Log Ends -->
+              <!-- Log Begins -->
+              <li class="collection-item avatar">
+                <i class="material-icons circle third-background">autorenew</i>
+                <div class="row">
+                  <div class="col s12 m9">
+                    <span class="title truncate col s12">
+                      Fecha: 21/09/2018 16:27:32
+                    </span>
+                    <span class="truncate col s12">
+                      Acción: El administrador validó la evidencia de la tarea 3 de la iteración 5
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <!-- Log Ends -->
+            </ul>
+            <!-- Logs List Ends-->
+          </div>
+        </li>
+      </ul>
+      <!-- Logs Collapsible Ends -->
 
       <!-- Project Modal Definition Begins -->
       <div id="modal_projectInfo" class="modal modal-fixed-footer">
@@ -955,15 +1019,22 @@
     });
 
     //Priority Select
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var elem = document.getElementById('priorityList');
       var instance = M.FormSelect.init(elem, {});
     });
 
     //Iteration Select Initialization
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function () {
       var elem = document.getElementById('iteration-select');
       var instance = M.FormSelect.init(elem, {});
+    });
+
+    //Init Logs collapsible collapsible-logs
+    document.addEventListener('DOMContentLoaded', function () {
+      var elem = document.getElementById('collapsible-logs');
+      var options = {};
+      var instance = M.Collapsible.init(elem, options);
     });
   </script>
   <!-- Scripts End -->
