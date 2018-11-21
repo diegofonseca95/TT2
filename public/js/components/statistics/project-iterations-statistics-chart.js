@@ -35,6 +35,7 @@ Vue.component('project-iterations-statistics-chart', {
             name : project.nombreProyecto
           });
         }
+        this.loading = false;
         // Draw the chart.
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
@@ -61,7 +62,7 @@ Vue.component('project-iterations-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content">
+      <div class="card-content center-align">
         <preloader v-if="loading">
         </preloader>
         <div id="project-iterations-statistics-chart"
