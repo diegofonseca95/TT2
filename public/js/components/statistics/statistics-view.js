@@ -18,21 +18,26 @@ Vue.component('statistics-view', {
         '#statistics-category-tab-strip'
       )
     );
+    M.Collapsible.init(
+      document.querySelectorAll(
+        '.collapsible'
+      )
+    );
   },
   methods : {
     handleStripSelected : function(strips){
       this.selected = strips;
-      if(strips.user){
-        M.Collapsible.init(
-          document.querySelectorAll(
-            '.collapsible'
-          )
-        );
-      }
     },
     handleUserSelected : function(user){
       this.selectedUser = user;
     }
+  },
+  updated : function(){
+    M.Collapsible.init(
+      document.querySelectorAll(
+        '.collapsible'
+      )
+    );
   },
   template : `
     <div class="row">
