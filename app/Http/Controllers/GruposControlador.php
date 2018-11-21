@@ -167,7 +167,7 @@ class GruposControlador extends Controller
     	}catch(ModelNotFoundException $e){
     		return response()->json([
     			'status'=> 'ERROR',
-    			'result'=> $e
+    			'result'=> 'Error al agregar usuario(s)'
     		]);
     	}
 
@@ -362,10 +362,14 @@ class GruposControlador extends Controller
             return view('index');
         }
         $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', $idGrupo]])->where('estado', 1)->count();
-        if($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0)
+        $existe = Grupo::where([['idGrupo', $idGrupo],['estado', 1]])->count();
+        if($existe && ($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0))
           return view('admin_watch_group', ['idGrupo' => $idGrupo,'nombreVista'=> 'Grupos', 'iconoVista' => 'computer']);
 
-        return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
+          return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+
+        return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
     public function obtenerProyectosGrupo(){
         if(!Auth::check()){
@@ -375,7 +379,8 @@ class GruposControlador extends Controller
                 ]);;
         }
         $pertenece = UsuarioGrupo::where([['idUsuario', '=', Auth::id()],['idGrupo', '=', request('idGrupo')]])->where('estado', 1)->count();
-        if($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0){
+        $existe = Grupo::where([['idGrupo', request('idGrupo')],['estado', 1]])->count();
+        if($existe == 0 || ($pertenece == 0 && Superadministrador::where('idUsuario', Auth::id())->count() == 0)){
             return response()->json([
                   'status' =>'ERROR',
                   'result' => 'No tienes permiso para ver este grupo'
@@ -415,10 +420,15 @@ class GruposControlador extends Controller
             return view('index');
         }
           $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo') )->first();
-        if($liderGrupo->idUsuario != Auth::id()){
-            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+          $super = Superadministrador::where('idUsuario', Auth::id())->count();
+          $existe = Grupo::where([['idGrupo', $idGrupo],['estado', 1]])->count();
+        if($existe && ($liderGrupo->idUsuario == Auth::id() || $super)){
+            return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Nuevo Proyecto', 'iconoVista' => 'assignment']);
+
         }
-        return view('groupAdmin_create_project',['idGrupo' => $idGrupo, 'nombreVista' => 'Nuevo Proyecto', 'iconoVista' => 'assignment']);
+        if($super == 0)
+          return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
     public function permisosGrupo(){
             if(!Auth::check()){

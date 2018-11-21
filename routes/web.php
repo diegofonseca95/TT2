@@ -95,6 +95,13 @@ Route::post('/permisosProyecto', 'ProyectosControlador@permisosProyecto');
 Route::post('/obtenerBlog', 'PublicacionControlador@obtenerBlog');
 Route::post('/obtenerProyectos', 'ProyectosControlador@obtenerProyectos');
 Route::post('/obtenerBlogs', 'PublicacionControlador@obtenerBlogs');
+Route::post('/estadisticaUsuarioGrupo', 'EstadisticasControlador@usuariosGrupo');
+Route::post('/estadisticaProyectoGrupo', 'EstadisticasControlador@proyectosGrupo');
+Route::post('/estadisticaTareaProyecto', 'EstadisticasControlador@tareasProyecto');
+Route::post('/estadisticaIteracionProyecto', 'EstadisticasControlador@iteracionesProyecto');
+Route::get('/administrarEstadisticas', 'EstadisticasControlador@verEstadisticas');
+Route::post('/estadisticaUsuarioTarea', 'EstadisticasControlador@UsuarioTareas');
+
 Route::post('/enviarMensaje', function(){
   if(!Auth::check()){
       return response()->json([

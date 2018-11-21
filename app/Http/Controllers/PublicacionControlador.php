@@ -79,7 +79,6 @@ class PublicacionControlador extends Controller
 
              array_push($validas, $value);
 
-             continue;
           }
 
 
@@ -91,8 +90,8 @@ class PublicacionControlador extends Controller
             $permisos[$value->idPublicacion]= array(
                 'eliminar' => ($id== $liderGrupo->idUsuario || ($value->estadoPublicacion==2 && $id == $value->idUsuario)),
                 'editar' => $id == $value->idUsuario,
-                'aprobar' => ($id == $liderGrupo->idUsuario && $estado == 2),
-                'rechazar' => ($id == $liderGrupo->idUsuario && $estado == 2)
+                'aprobar' => ($id == $liderGrupo->idUsuario && $value->estadoPublicacion == 2),
+                'rechazar' => ($id == $liderGrupo->idUsuario && $value->estadoPublicacion == 2)
             );
 
         }

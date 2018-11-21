@@ -22,6 +22,9 @@ class ProyectosControlador extends Controller
             return view('index');
         }
 
+        if(Superadministrador::where('idUsuario', Auth::id())->count()== 0){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
 
 
         return view('superadmin_watch_projects',  ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment']);
@@ -32,6 +35,9 @@ class ProyectosControlador extends Controller
             return view('index');
         }
 
+        if(Superadministrador::where('idUsuario', Auth::id())->count()== 0){
+            return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+        }
         return view('admin_manage_projects_list', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'computer']);
     }
 
@@ -40,29 +46,19 @@ class ProyectosControlador extends Controller
             return view('index');
         }
         $pg = ProyectoGrupo::where('idProyecto', '=', $idProyecto)->first();
-        return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto, 'idGrupo' => $pg->idGrupo]);
+        $grupoActivo = Grupo::where([['idGrupo', $pg->idGrupo],['estado', 1]])->count();
+
+        $pertenece = UsuarioProyectoGrupo::where([['idUsuario', '=', Auth::id()],['idProyectoGrupo', '=', $pg->idProyectoGrupo]])->count();
+        $activo = Proyecto::where([['idProyecto', $idProyecto],['estado', 1]])->count();
+        if($grupoActivo && $activo && ($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0))
+          return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto, 'idGrupo' => $pg->idGrupo]);
+
+        if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
+          return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
+
+        return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
     }
-    public function agregarProyecto(){
-        if(!Auth::check()){
-            return view('index');
-        }
 
-        $usuario = new User;
-        $query = $usuario->where('estado', '!=', 0)->get();
-
-        return view('admin_create_projects', [ 'usuarios' => $query]);
-    }
-
-    public function obtenerLiderTabla(){
-        if(!Auth::check()){
-            return view('index');
-        }
-
-        $usuario = new User;
-        $query = $usuario->whereIn('idUsuario', request("usuarios"))->get();
-
-        return view('tabla_lider',['usuarios' => $query]);
-    }
 
     public function agregarProyectoBD(){
         if(!Auth::check()){
@@ -72,6 +68,14 @@ class ProyectosControlador extends Controller
             ]);
         }
 
+        $grupoActivo = Grupo::where([['idGrupo', request('idGrupo')],['estado', 1]])->count();
+        $liderGrupo = AdministradorGrupo::where([['idUsuario', Auth::id()],['idGrupo', request('idGrupo')]])->count();
+        if(!$grupoActivo || !$liderGrupo ){
+          return response()->json([
+                'status' => 'ERROR',
+                'result' => 'No tienes permiso para agregar proyectos en este grupo'
+          ]);
+        }
         $filter = Proyecto::where('nombreProyecto', '=', request('nombreProyecto'))->get();
         $idsFilter = array();
         foreach ($filter as $value) {

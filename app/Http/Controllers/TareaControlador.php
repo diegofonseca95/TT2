@@ -209,8 +209,8 @@ class TareaControlador extends Controller
       try{
         $tarea = Tarea::findOrFail(request('idTarea'));
 
-        Storage::deleteDirectory('public/evidencias/'.request('idTarea'));
-        Storage::put('public/evidencias/'.request('idTarea'), request('fila'));
+        Storage::deleteDirectory('evidencias/'.request('idTarea'));
+        Storage::put('evidencias/'.request('idTarea'), request('fila'));
 
         $tarea->estado = 7;
         $tarea->save();
@@ -240,7 +240,7 @@ class TareaControlador extends Controller
       try{
 
         $tarea = Tarea::findOrFail($idTarea);
-        $files = Storage::files('public/evidencias/'.$idTarea);
+        $files = Storage::files('evidencias/'.$idTarea);
         //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
         if(empty($files)){
           return response()->json([

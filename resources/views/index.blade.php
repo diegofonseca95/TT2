@@ -98,9 +98,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-        <script src="./js/toasts.js"></script>
-        <script src="./js/forgot.js"></script>
-        <script src="./js/index.js"></script>
-        <script src="./js/login.js"></script>
+        <script src="/js/toasts.js"></script>
+        <script src="/js/forgot.js"></script>
+        <script src="/js/index.js"></script>
+        <script src="/js/login.js"></script>
     </body>
 </html>

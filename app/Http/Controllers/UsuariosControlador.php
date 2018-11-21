@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use App\Superadministrador;
 use App\AdministradorGrupo;
 use App\AdministradorProyecto;
+use App\Grupo;
+use App\Proyecto;
 
 class UsuariosControlador extends Controller
 {
@@ -22,7 +24,7 @@ class UsuariosControlador extends Controller
            if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
               return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
 
-          return view('index_admin');
+          return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
         }
     	return view('index');
     }
@@ -39,7 +41,7 @@ class UsuariosControlador extends Controller
             return view('user_watch_dashboard', ['idUsuario' => $id, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
         }
 
-        return view('admin_users');
+        return view('admin_users', ['idUsuario' => $id, 'nombreVista' => 'Usuarios', 'iconoVista' => 'contacts']);
     }
     public function agregarUsuarioBD(){
 
@@ -191,13 +193,25 @@ class UsuariosControlador extends Controller
                   ]);
         }
         try{
-            if(AdministradorGrupo::where('idUsuario', request('idUsuario'))->count()){
+            $grupos = AdministradorGrupo::where('idUsuario', request('idUsuario'))->get();
+            $flag = 0;
+            foreach ($grupos as $value) {
+               $flag = Grupo::where([['idGrupo', $value->idGrupo],['estado', 1]])->count();
+               if($flag > 0) break;
+            }
+            if($flag){
               return response()->json([
                   'status'=> 'ERROR',
                   'result'=> 'No puedes eliminar este usuario porque es lider de grupo'
                   ]);
             }
-            if(AdministradorProyecto::where('idUsuario', request('idUsuario'))->count()){
+            $proyectos = AdministradorProyecto::where('idUsuario', request('idUsuario'))->get();
+            $flag = 0;
+            foreach ($proyectos as $value) {
+               $flag = Proyecto::where([['idProyecto', $value->idProyecto],['estado', 1]])->count();
+               if($flag > 0) break;
+            }
+            if($flag > 0){
               return response()->json([
                   'status'=> 'ERROR',
                   'result'=> 'No puedes eliminar este usuario porque es lider de proyecto'

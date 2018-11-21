@@ -32,7 +32,7 @@ class UsuarioProyectoGrupoControlador extends Controller
         $respuesta = array();
         foreach ($proyectos as $value) {
             array_push(
-                $respuesta, 
+                $respuesta,
                 $this->obtenerInformacionGrupo($value->idProyecto)
             );
         }
@@ -88,9 +88,9 @@ class UsuarioProyectoGrupoControlador extends Controller
                 $usuario->idUsuario = $value;
                 $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
                 $usuario->save();
-            
+
         }
-        
+
 
         return response()->json([
             'status' => 'OK',
@@ -100,12 +100,33 @@ class UsuarioProyectoGrupoControlador extends Controller
     }
 
     public function eliminarUsuarioProyecto(){
+        if(!Auth::check()){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion para continuar'
+            ]);
+        }
         $pg = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
+        $lider = AdministradorProyecto::where('idProyecto', request('idProyecto'))->first();
+
+        if($lider->idUsuario == request('idUsuario')){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'No puedes eliminar al lider de proyecto'
+            ]);
+        }
+        if($lider->idUsuario != Auth::id()){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'Inicia sesion como lider de proyecto'
+            ]);
+        }
+
         UsuarioProyectoGrupo::where([['idProyectoGrupo', '=', $pg->idProyectoGrupo],['idUsuario', '=', request('idUsuario')]])->update(['estado' => 3]);
 
         return response()->json([
             'status' => 'OK',
-            'result' => 'Usuario eliminado'
+            'result' => 'Usuario eliminado del proyecto'
         ]);
     }
 }

@@ -8,14 +8,20 @@
     </a>
     <ul class="left">
       <li>
-        <a href="#!" class="tooltipped" data-position="right" data-tooltip="Volver al Men&uacute;">
+        <a href="javascript:history.back()" title="Atras">
+          <i class="material-icons left">arrow_back</i>
+        </a>
+      </li>
+      <li>
+        <a href="/" title="Men&uacute; Principal">
           <i class="material-icons left">view_module</i>
         </a>
       </li>
     </ul>
+
     <ul class="right">
       <li>
-        <a href="/cerrarSesion" class="tooltipped" data-position="left" data-tooltip="Cerrar Sesi&oacute;n">
+        <a href="/cerrarSesion" title="Cerrar Sesión">
           <i class="material-icons left">power_settings_new</i>
         </a>
       </li>

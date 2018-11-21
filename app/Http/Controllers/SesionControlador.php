@@ -8,6 +8,7 @@ use App\Mail\RecuperarContrasena;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Superadministrador;
+use Illuminate\Support\Facades\Log;
 
 class SesionControlador extends Controller
 {
