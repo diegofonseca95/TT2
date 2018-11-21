@@ -41,7 +41,7 @@ Vue.component('group-users-statistics-chart', {
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
           var table = new google.visualization.DataTable();
-          table.addColumn('string', 'Grupo');
+          table.addColumn('string', 'Grupos');
           table.addColumn('number', 'Usuarios Activos');
           table.addColumn('number', 'Usuarios Eliminados');
           points.map(point => {

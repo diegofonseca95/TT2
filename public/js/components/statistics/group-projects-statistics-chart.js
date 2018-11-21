@@ -41,7 +41,7 @@ Vue.component('group-projects-statistics-chart', {
         google.charts.load('current', { 'packages' : ['bar'] });
         google.charts.setOnLoadCallback(function(){
           var table = new google.visualization.DataTable();
-          table.addColumn('string', 'Grupo');
+          table.addColumn('string', 'Grupos');
           table.addColumn('number', 'Proyectos Activos');
           table.addColumn('number', 'Proyectos Eliminados');
           points.map(point => {
