@@ -14,7 +14,7 @@ Vue.component('user-tasks-statistics-chart', {
 
       // The body of our request.
       var requestBody = { 
-        idUsuario : user.idUsuario,
+        idUsuario : this.user.idUsuario,
         _token : authToken.value
       };
 
