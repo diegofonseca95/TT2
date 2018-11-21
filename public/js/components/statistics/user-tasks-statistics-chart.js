@@ -4,7 +4,7 @@ Vue.component('user-tasks-statistics-chart', {
   ],
   data : function(){
     return {
-      display : true,
+      display : false,
       loading : true
     };
   },
