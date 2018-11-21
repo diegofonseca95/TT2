@@ -31,7 +31,7 @@ Vue.component('user-tasks-statistics-chart', {
             var row = [];
             row.push(i);
             for(var j in response.result[i]){
-              row.push(response.response[i][j]);
+              row.push(response.result[i][j]);
             }
             matrix.push(row);
           }
