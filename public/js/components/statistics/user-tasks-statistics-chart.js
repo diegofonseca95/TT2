@@ -26,7 +26,12 @@ Vue.component('user-tasks-statistics-chart', {
       .then(function(response){
         console.log(response.result);
         if(response.status === 'OK'){
+          var nameRow = ['Fecha'];
           var matrix = [];
+          for(var i in response.nombres){
+            nameRow.push(response.nombres[i]);
+          }
+          matrix.push(nameRow);
           for(var i in response.result){
             var row = [];
             row.push(i);
