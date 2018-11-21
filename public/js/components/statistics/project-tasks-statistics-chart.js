@@ -51,12 +51,7 @@ Vue.component('project-tasks-statistics-chart', {
           });
           var options = {
             title : 'Tareas por Proyecto',
-            bars : 'horizontal',
-            animation : {
-              'startup' : true,
-              duration : 1000,
-              easing : 'out'
-            }
+            bars : 'horizontal'
           };
           var chart = new google.charts.Bar(
             document.querySelector(
@@ -71,7 +66,7 @@ Vue.component('project-tasks-statistics-chart', {
   },
   template : `
     <div class="card">
-      <div class="card-content">
+      <div class="card-content center-align">
         <preloader v-if="loading">
         </preloader>
         <div id="project-tasks-statistics-chart" v-if="!loading">
