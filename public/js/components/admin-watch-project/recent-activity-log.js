@@ -50,7 +50,7 @@ Vue.component('recent-activity-log', {
     this.channel = this.pusher.subscribe(
       'log.' + projectIdInput.value
     );
-    this.channel.bind('App\\Events\\Chat', function(data) {
+    this.channel.bind('App\\Events\\Logging', function(data) {
       this.messages.unshift(data.actividad);
     }.bind(this));
   },
