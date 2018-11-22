@@ -44,13 +44,13 @@ Vue.component('conversation-sidenav', {
     // Set the options.
     var options = {
       onCloseStart : function(){
-        this.$emit('conversation-closed');
         if(this.pusher !== null){
           this.pusher.unsubscribe(
-            this.conversation.canal
+            'private-chat.' + this.conversation.idConversacion
           );
           this.pusher = null;
         }
+        this.$emit('conversation-closed');
       }.bind(this),
       edge : "right"
     };
@@ -128,33 +128,33 @@ Vue.component('conversation-sidenav', {
             Messages.push(message);
           }
           this.messages = Messages;
+          // Subscribe to the conversation.
+          Pusher.logToConsole = true;
+          this.pusher = new Pusher('5527fdb0d65f00f390d4', {
+            authEndpoint : '/broadcasting/auth',
+            cluster : 'us2',
+            auth: {
+              headers: {
+                'X-CSRF-TOKEN' : authToken.value
+              }
+            }
+          });
+          this.channel = this.pusher.subscribe(
+            'private-chat.' + this.conversation.idConversacion
+          );
+          this.channel.bind('App\\Events\\Chat', function(data) {
+            var NewMessage = data.message;
+            NewMessage.idUsuario = data.user;
+            this.messages.push(NewMessage);
+            var List = document.querySelector(
+              '#conversation-message-list'
+            );
+            List.scrollTop = List.scrollHeight;
+          }.bind(this));
         }else{
           WarningToast(response.result);
         }
-      }.bind(this));
-      // Subscribe to the conversation.
-      Pusher.logToConsole = true;
-      this.pusher = new Pusher('5527fdb0d65f00f390d4', {
-        authEndpoint : '/broadcasting/auth',
-        cluster : 'us2',
-        auth: {
-          headers: {
-            'X-CSRF-TOKEN' : authToken.value
-          }
-        }
-      });
-      this.channel = this.pusher.subscribe(
-        'private-chat.' + this.conversation.idConversacion
-      );
-      this.channel.bind('App\\Events\\Chat', function(data) {
-        var NewMessage = data.message;
-        NewMessage.idUsuario = data.user;
-        this.messages.push(NewMessage);
-        var List = document.querySelector(
-          '#conversation-message-list'
-        );
-        List.scrollTop = List.scrollHeight;
-      }.bind(this));
+      }.bind(this)); 
     }
   },
   template : `
