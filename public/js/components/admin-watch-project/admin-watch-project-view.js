@@ -58,6 +58,9 @@ Vue.component('admin-watch-project-view', {
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
+    },
+    handlePermissionsUpdated : function(newPermissions){
+      this.permissions = newPermissions;
     }
   },
   beforeCreate : function(){
@@ -118,7 +121,9 @@ Vue.component('admin-watch-project-view', {
   },
   template : `
     <div class="row">
-      <project-info-card :project-members="memberList">
+      <project-info-card 
+        @permissions-updated="handlePermissionsUpdated"
+        :project-members="memberList">
       </project-info-card>
 
       <project-members-card 

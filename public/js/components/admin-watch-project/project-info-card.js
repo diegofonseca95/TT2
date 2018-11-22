@@ -124,6 +124,7 @@ Vue.component('project-info-card', {
       .then(function(response){
         if(response.status === 'OK'){
           SuccessToast(response.result);
+          this.$emit('permissions-updated', response.permiso);
         }else{
           WarningToast(response.result);
         }
