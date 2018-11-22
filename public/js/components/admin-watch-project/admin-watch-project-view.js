@@ -126,6 +126,9 @@ Vue.component('admin-watch-project-view', {
         :project-members="memberList">
       </project-info-card>
 
+      <recent-activity-log>
+      </recent-activity-log>
+
       <project-members-card 
         @member-removed="handleMemberRemoved($event)"
         @new-members-added="handleNewMembersAdded"
