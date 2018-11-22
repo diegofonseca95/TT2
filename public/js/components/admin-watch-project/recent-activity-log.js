@@ -4,6 +4,7 @@ Vue.component('recent-activity-log', {
       activities : [],
       channel : null, // The chat connection.
       pusher : null,  // The pusher object.
+      newCount : 0    // New notification count.
     };
   },
   beforeCreate : function(){
@@ -52,14 +53,20 @@ Vue.component('recent-activity-log', {
     );
     this.channel.bind('App\\Events\\Logs', function(data) {
       this.activities.unshift(data.actividad);
-      console.log(data.actividad);
+      this.newCount++;
     }.bind(this));
   },
   mounted : function(){
+    var options = {};
+    options.onOpenEnd = function(){
+      this.newCount = 0;
+    }.bind(this);
+    options.onCloseEnd = function(){
+      this.newCount = 0;
+    }.bind(this);
     M.Collapsible.init(
-      document.querySelector(
-        '#recent-activity-log'
-      )
+      document.querySelector('#recent-activity-log'), 
+      options
     );
   },
   template : `
@@ -67,6 +74,10 @@ Vue.component('recent-activity-log', {
       <li>
         <div class="collapsible-header">
           <i class="material-icons">autorenew</i>Actividad Reciente
+          <span class="new badge red" data-badge-caption="nuevas"
+            v-if="newCount > 0">
+            {{ newCount }}
+          </span>
         </div>
         <div class="collapsible-body zero-padding">
           <!-- Logs List Begins-->
