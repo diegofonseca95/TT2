@@ -5,8 +5,12 @@ Vue.component('chat-sidenav-view', {
   data : function(){
     return {
       selectedConversation : {},
+      newMessageBucket : {},
+      newMessageCount : 0,
       conversations : [],
       validUsers : [],
+      channel : null,             // The chat connection.
+      pusher : null,              // The pusher object.
       userMap : {},
       users : []
     };
@@ -65,6 +69,38 @@ Vue.component('chat-sidenav-view', {
         '#chat-sidenav-view-trigger'
       )
     );
+    // Fetch the user list.
+    fetch('/obtenerIdUsuario', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        // Subscribe to the new message channel.
+        Pusher.logToConsole = true;
+        this.pusher = new Pusher('5527fdb0d65f00f390d4', {
+          authEndpoint : '/broadcasting/auth',
+          cluster : 'us2',
+          auth: {
+            headers: {
+              'X-CSRF-TOKEN' : authToken.value
+            }
+          }
+        });
+        this.channel = this.pusher.subscribe(
+          'private-nuevo.' + response.result
+        );
+        this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
+          if(this.selectedConversation.idConversacion !== data.idConversacion){
+            if(!(data.idConversacion in this.newMessageBucket)){
+              this.newMessageBucket[data.idConversacion] = 1;
+            }else{
+              this.newMessageBucket[data.idConversacion]++;
+            }
+            this.newMessageCount++;
+          }
+        }.bind(this));
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   methods : {
     handleConversationClosed : function(){
@@ -73,6 +109,7 @@ Vue.component('chat-sidenav-view', {
           '#conversations-list-sidenav'
         )
       ).open();
+      this.selectedConversation = {};
     },
     handleConversationSelected : function(conversation){
       this.selectedConversation = conversation;
@@ -103,6 +140,9 @@ Vue.component('chat-sidenav-view', {
       return this.users.filter(function(user){
         return this.validUsers.includes(user.idUsuario);
       }.bind(this));
+    },
+    hasNewMessages : function(){
+      return this.newMessageCount > 0;
     }
   },
   template : `
@@ -123,7 +163,8 @@ Vue.component('chat-sidenav-view', {
       </new-chat-modal>
       <div class="fixed-action-btn" id="chat-sidenav-view-trigger">
         <a class="sidenav-trigger btn-floating btn-large remove-button-background"
-          data-target="conversations-list-sidenav">
+          data-target="conversations-list-sidenav"
+          :class="{ pulse : hasNewMessages }">
           <i class="large material-icons">message</i>
         </a>
         <ul>

@@ -78,7 +78,7 @@ Vue.component('recent-activity-log', {
       <li>
         <div class="collapsible-header">
           <i class="material-icons">autorenew</i>Actividad Reciente
-          <span class="new badge blue" data-badge-caption="nuevas"
+          <span class="new badge blue darken-1" data-badge-caption="nuevas"
             v-if="newCount > 0">
             {{ newCount }}
           </span>
