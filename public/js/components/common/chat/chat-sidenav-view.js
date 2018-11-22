@@ -111,6 +111,7 @@ Vue.component('chat-sidenav-view', {
               this.newMessageBucket[data.idConversacion]++;
             }
             this.newMessageCount++;
+            console.log(data);
           }
         }.bind(this));
       }
