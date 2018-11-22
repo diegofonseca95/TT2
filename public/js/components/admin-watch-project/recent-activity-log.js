@@ -48,7 +48,7 @@ Vue.component('recent-activity-log', {
       }
     });
     this.channel = this.pusher.subscribe(
-      'log.' + projectIdInput.value
+      'private-log.' + projectIdInput.value
     );
     this.channel.bind('App\\Events\\Logging', function(data) {
       this.activities.unshift(data.actividad);
