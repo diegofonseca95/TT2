@@ -132,6 +132,11 @@ Vue.component('project-info-card', {
       }.bind(this));
     }
   },
+  computed : {
+    hasAnyPermission : function(){
+      return this.projectInfo.isActive || this.editPermission;
+    }
+  },
   template : `
     <div class="card">
       <div class="card-content">
@@ -155,13 +160,14 @@ Vue.component('project-info-card', {
             v-if="!projectInfo.isActive">
             El proyecto ha sido terminado.
           </span>
-          <div class="col s12" v-if="editPermission">
+          <div class="col s12" v-if="hasAnyPermission">
             <button class="btn-floating btn-large remove-button-background right"
-              title="Terminar Proyecto" @click="handleFinishProject">
+              title="Terminar Proyecto" @click="handleFinishProject"
+              v-if="projectInfo.isActive">
               <i class="material-icons">done</i>
             </button>
-            <button title="Editar" data-target="edit-project-info-modal" 
-              class="btn-floating btn-large modal-trigger remove-button-background right low-margin-right">
+            <button class="btn-floating btn-large modal-trigger remove-button-background right low-margin-right"
+              title="Editar" data-target="edit-project-info-modal" v-if="editPermission">
               <i class="material-icons">mode_edit</i>
             </button>
           </div>
