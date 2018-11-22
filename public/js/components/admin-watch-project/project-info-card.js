@@ -1,5 +1,7 @@
 Vue.component('project-info-card', {
-  props : ['projectMembers'],
+  props : [
+    'projectMembers'
+  ],
   data : function(){
     return {
       projectInfo : {
@@ -93,6 +95,38 @@ Vue.component('project-info-card', {
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
+    },
+    handleFinishProject : function(){
+      // Get the project id from the hidden input.
+      var projectIdInput = document.querySelector('input[name="project-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : projectIdInput.value,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new information to the server.
+      fetch('/terminarProyecto', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
     }
   },
   template : `
@@ -115,6 +149,10 @@ Vue.component('project-info-card', {
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
           <div class="col s12" v-if="editPermission">
+            <button class="waves-effect waves-light btn right"
+              @click="handleFinishProject">
+              Terminar Proyecto
+            </button>
             <button title="Editar" data-target="edit-project-info-modal" 
               class="btn-floating btn-large modal-trigger remove-button-background right">
               <i class="material-icons">mode_edit</i>
