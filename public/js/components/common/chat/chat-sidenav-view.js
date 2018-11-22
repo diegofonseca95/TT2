@@ -69,7 +69,22 @@ Vue.component('chat-sidenav-view', {
         '#chat-sidenav-view-trigger'
       )
     );
-    // Fetch the user list.
+    // Fetch the user id.
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
     fetch('/obtenerIdUsuario', requestData)
     .then(response => response.json())
     .then(function(response){
