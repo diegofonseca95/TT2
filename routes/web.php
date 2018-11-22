@@ -101,7 +101,7 @@ Route::post('/estadisticaTareaProyecto', 'EstadisticasControlador@tareasProyecto
 Route::post('/estadisticaIteracionProyecto', 'EstadisticasControlador@iteracionesProyecto');
 Route::get('/administrarEstadisticas', 'EstadisticasControlador@verEstadisticas');
 Route::post('/estadisticaUsuarioTarea', 'EstadisticasControlador@UsuarioTareas');
-
+Route::post('/terminarProyecto', 'ProyectosControlador@terminarProyecto');
 Route::post('/enviarMensaje', function(){
   if(!Auth::check()){
       return response()->json([

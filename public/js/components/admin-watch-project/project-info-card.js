@@ -1,5 +1,7 @@
 Vue.component('project-info-card', {
-  props : ['projectMembers'],
+  props : [
+    'projectMembers'
+  ],
   data : function(){
     return {
       projectInfo : {
@@ -8,7 +10,8 @@ Vue.component('project-info-card', {
         leader : {},
         name : ''
       },
-      editPermission : false
+      editPermission : false,
+      isActive : false
     };
   },
   beforeCreate : function(){
@@ -48,6 +51,7 @@ Vue.component('project-info-card', {
           }
         }
         this.editPermission = result.permiso;
+        this.isActive = result.activo;
         this.projectInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
@@ -93,6 +97,46 @@ Vue.component('project-info-card', {
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
+    },
+    handleFinishProject : function(){
+      // Get the project id from the hidden input.
+      var projectIdInput = document.querySelector('input[name="project-id"]');
+
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : projectIdInput.value,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new information to the server.
+      fetch('/terminarProyecto', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.$emit('permissions-updated', response.permiso);
+          SuccessToast(response.result);
+          this.editPermission = false;
+          this.isActive = false;
+        }else{
+          WarningToast(response.result);
+        }
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    }
+  },
+  computed : {
+    hasAnyPermission : function(){
+      return this.isActive || this.editPermission;
     }
   },
   template : `
@@ -114,9 +158,18 @@ Vue.component('project-info-card', {
           <span class="title col s12" style="word-break: break-all;">
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
-          <div class="col s12" v-if="editPermission">
-            <button title="Editar" data-target="edit-project-info-modal" 
-              class="btn-floating btn-large modal-trigger remove-button-background right">
+          <span class="title col s12" style="word-break: break-all;"
+            v-if="!isActive">
+            El proyecto ha sido terminado.
+          </span>
+          <div class="col s12" v-if="hasAnyPermission">
+            <button class="btn-floating btn-large remove-button-background right"
+              title="Terminar Proyecto" @click="handleFinishProject"
+              v-if="isActive">
+              <i class="material-icons">done</i>
+            </button>
+            <button class="btn-floating btn-large modal-trigger remove-button-background right low-margin-right"
+              title="Editar" data-target="edit-project-info-modal" v-if="editPermission">
               <i class="material-icons">mode_edit</i>
             </button>
           </div>

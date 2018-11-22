@@ -42,7 +42,7 @@ Vue.component('group-projects-statistics-chart', {
           var table = new google.visualization.DataTable();
           table.addColumn('string', 'Grupos');
           table.addColumn('number', 'Proyectos Activos');
-          table.addColumn('number', 'Proyectos Eliminados');
+          table.addColumn('number', 'Proyectos Terminados');
           points.map(point => {
             table.addRow(
               [point.name, point.projects, point.deleted]

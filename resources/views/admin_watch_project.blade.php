@@ -99,6 +99,7 @@
   <script src="/js/components/admin-watch-project/task-card-group.js"></script>
   <!-- Card Groups End -->
   <!-- Others Begin -->
+  <script src="/js/components/admin-watch-project/recent-activity-log.js"></script>
   <script src="/js/components/admin-watch-project/admin-watch-project-view.js"></script>
   <!-- Others End -->
   <!-- Vue Components End -->
