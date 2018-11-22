@@ -151,7 +151,7 @@ Vue.component('project-info-card', {
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
           <span class="title col s12" style="word-break: break-all;"
-            v-if="projectInfo.isActive">
+            v-if="!projectInfo.isActive">
             El proyecto ha sido terminado.
           </span>
           <div class="col s12" v-if="editPermission">
@@ -160,7 +160,7 @@ Vue.component('project-info-card', {
               <i class="material-icons">done</i>
             </button>
             <button title="Editar" data-target="edit-project-info-modal" 
-              class="btn-floating btn-large modal-trigger remove-button-background right">
+              class="btn-floating btn-large modal-trigger remove-button-background right low-margin-right">
               <i class="material-icons">mode_edit</i>
             </button>
           </div>
