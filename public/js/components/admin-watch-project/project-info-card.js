@@ -123,8 +123,8 @@ Vue.component('project-info-card', {
       .then(response => response.json())
       .then(function(response){
         if(response.status === 'OK'){
-          SuccessToast(response.result);
           this.$emit('permissions-updated', response.permiso);
+          SuccessToast(response.result);
         }else{
           WarningToast(response.result);
         }
@@ -156,7 +156,7 @@ Vue.component('project-info-card', {
             El proyecto ha sido terminado.
           </span>
           <div class="col s12" v-if="editPermission">
-            <button class="btn-floating btn-large modal-trigger remove-button-background right"
+            <button class="btn-floating btn-large remove-button-background right"
               title="Terminar Proyecto" @click="handleFinishProject">
               <i class="material-icons">done</i>
             </button>
