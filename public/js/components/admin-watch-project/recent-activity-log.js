@@ -50,7 +50,7 @@ Vue.component('recent-activity-log', {
     this.channel = this.pusher.subscribe(
       'private-log.' + projectIdInput.value
     );
-    this.channel.bind('App\\Events\\Logging', function(data) {
+    this.channel.bind('App\\Events\\Logs', function(data) {
       this.activities.unshift(data.actividad);
       console.log(data.actividad);
     }.bind(this));
