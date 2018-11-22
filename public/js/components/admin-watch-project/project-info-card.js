@@ -44,7 +44,6 @@ Vue.component('project-info-card', {
         newInfo.description = result.proyecto.descripcion;
         newInfo.startDate = result.proyecto.fecha_inicio;
         newInfo.name = result.proyecto.nombreProyecto;
-        newInfo.isActive = result.activo;
         for(var i in this.projectMembers){
           if(this.projectMembers[i].idUsuario === result.lider){
             newInfo.leader = this.projectMembers[i];
@@ -52,6 +51,7 @@ Vue.component('project-info-card', {
           }
         }
         this.editPermission = result.permiso;
+        this.isActive = result.activo;
         this.projectInfo = newInfo;
       }
       // TODO : Handle non 'OK' status.
