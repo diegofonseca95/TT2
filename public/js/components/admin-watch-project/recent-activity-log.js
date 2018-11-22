@@ -51,7 +51,8 @@ Vue.component('recent-activity-log', {
       'log.' + projectIdInput.value
     );
     this.channel.bind('App\\Events\\Logging', function(data) {
-      this.messages.unshift(data.actividad);
+      this.activities.unshift(data.actividad);
+      console.log(data.actividad);
     }.bind(this));
   },
   mounted : function(){
