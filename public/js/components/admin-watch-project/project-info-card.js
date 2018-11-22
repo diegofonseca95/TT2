@@ -6,12 +6,12 @@ Vue.component('project-info-card', {
     return {
       projectInfo : {
         description : '',
-        isActive : false,
         startDate : '',
         leader : {},
         name : ''
       },
-      editPermission : false
+      editPermission : false,
+      isActive : false
     };
   },
   beforeCreate : function(){
@@ -125,6 +125,8 @@ Vue.component('project-info-card', {
         if(response.status === 'OK'){
           this.$emit('permissions-updated', response.permiso);
           SuccessToast(response.result);
+          this.editPermission = false;
+          this.isActive = false;
         }else{
           WarningToast(response.result);
         }
@@ -134,7 +136,7 @@ Vue.component('project-info-card', {
   },
   computed : {
     hasAnyPermission : function(){
-      return this.projectInfo.isActive || this.editPermission;
+      return this.isActive || this.editPermission;
     }
   },
   template : `
@@ -157,13 +159,13 @@ Vue.component('project-info-card', {
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
           <span class="title col s12" style="word-break: break-all;"
-            v-if="!projectInfo.isActive">
+            v-if="!isActive">
             El proyecto ha sido terminado.
           </span>
           <div class="col s12" v-if="hasAnyPermission">
             <button class="btn-floating btn-large remove-button-background right"
               title="Terminar Proyecto" @click="handleFinishProject"
-              v-if="projectInfo.isActive">
+              v-if="isActive">
               <i class="material-icons">done</i>
             </button>
             <button class="btn-floating btn-large modal-trigger remove-button-background right low-margin-right"
