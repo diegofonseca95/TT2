@@ -49,7 +49,7 @@ class ProyectosControlador extends Controller
         $grupoActivo = Grupo::where([['idGrupo', $pg->idGrupo],['estado', 1]])->count();
 
         $pertenece = UsuarioProyectoGrupo::where([['idUsuario', '=', Auth::id()],['idProyectoGrupo', '=', $pg->idProyectoGrupo]])->count();
-        $activo = Proyecto::where([['idProyecto', $idProyecto],['estado', 1]])->count();
+        $activo = Proyecto::where([['idProyecto', $idProyecto],['estado', '!=', 3]])->count();
         if($grupoActivo && $activo && ($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0))
           return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto, 'idGrupo' => $pg->idGrupo]);
 
@@ -151,10 +151,10 @@ class ProyectosControlador extends Controller
             return view('index');
         }
 
-        $grupo = new Proyecto;
+        $proyecto = new Proyecto;
         $lider = new AdministradorProyecto;
 
-        $info = $grupo->where([['idProyecto', '=', request('idProyecto')]])->get();
+        $info = $proyecto->where([['idProyecto', '=', request('idProyecto')]])->get();
         $query = $lider->where([['idProyecto', '=', request('idProyecto')]])->get();
         //$info->tesla = $query[0]->idUsuario;
         //$nueva->tesla = $query[0]->idUsuario;;
@@ -165,7 +165,8 @@ class ProyectosControlador extends Controller
                 'result'=> array(
                     'proyecto'=>$info[0],
                     'lider'=>$query[0]->idUsuario,
-                    'permiso' => ($query[0]->idUsuario == Auth::id() || $liderGrupo->idUsuario == Auth::id())
+                    'permiso' =>(($info[0]->estado == 1)&& ($query[0]->idUsuario == Auth::id() || $liderGrupo->idUsuario == Auth::id())),
+                    'activo' =>( $info[0]->estado == 1)
                 )
                 ]);
     }
@@ -246,11 +247,38 @@ class ProyectosControlador extends Controller
                 ]);
             }
             $liderProyecto = AdministradorProyecto::where('idProyecto', request('idProyecto') )->first();
+            $proyecto = Proyecto::where('idProyecto', request('idProyecto'))->first();
             return response()->json([
                 'status' => 'OK',
-                'result' => array('eliminar' => $liderProyecto->idUsuario == Auth::id(),
-                'editar' => $liderProyecto->idUsuario == Auth::id()
+                'result' => array('eliminar' => ($proyecto->estado == 1 && $liderProyecto->idUsuario == Auth::id()),
+                'editar' => ($proyecto->estado == 1 && $liderProyecto->idUsuario == Auth::id())
               )
             ]);
+    }
+    public function terminarProyecto(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+        try{
+            $proyecto = Proyecto::findOrFail(request('idProyecto'));
+            $proyecto->estado = 2;
+            $proyecto->save();
+
+            return response()->json([
+                'status' => 'OK',
+                'result' => 'El proyecto ha sido finalizado',
+                'permiso' => array('eliminar' => false,
+                'editar' => false
+              )
+            ]);
+        }catch(Exception $ex){
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Proyecto no existe'
+                ]);
+        }
     }
 }
