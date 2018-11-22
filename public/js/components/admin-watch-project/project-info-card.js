@@ -6,6 +6,7 @@ Vue.component('project-info-card', {
     return {
       projectInfo : {
         description : '',
+        isActive : false,
         startDate : '',
         leader : {},
         name : ''
@@ -43,6 +44,7 @@ Vue.component('project-info-card', {
         newInfo.description = result.proyecto.descripcion;
         newInfo.startDate = result.proyecto.fecha_inicio;
         newInfo.name = result.proyecto.nombreProyecto;
+        newInfo.isActive = result.activo;
         for(var i in this.projectMembers){
           if(this.projectMembers[i].idUsuario === result.lider){
             newInfo.leader = this.projectMembers[i];
@@ -148,10 +150,14 @@ Vue.component('project-info-card', {
           <span class="title col s12" style="word-break: break-all;">
             Fecha de inicio : {{ projectInfo.startDate }}
           </span>
+          <span class="title col s12" style="word-break: break-all;"
+            v-if="projectInfo.isActive">
+            El proyecto ha sido terminado.
+          </span>
           <div class="col s12" v-if="editPermission">
-            <button class="waves-effect waves-light btn right"
-              @click="handleFinishProject">
-              Terminar Proyecto
+            <button class="btn-floating btn-large modal-trigger remove-button-background right"
+              title="Terminar Proyecto" @click="handleFinishProject">
+              <i class="material-icons">done</i>
             </button>
             <button title="Editar" data-target="edit-project-info-modal" 
               class="btn-floating btn-large modal-trigger remove-button-background right">
