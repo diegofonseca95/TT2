@@ -228,6 +228,12 @@ class UsuariosControlador extends Controller
                   'result'=> 'No puedes eliminar este usuario porque es lider de proyecto'
                   ]);
             }
+            if(Auth::id() == request('idUsuario')){
+                return response()->json([
+                    'status'=> 'ERROR',
+                    'result'=> 'No puedes eliminar al superadministrador'
+                    ]);
+            }
             $usuario = User::findOrFail(request('idUsuario'));
             $usuario->estado = 3;
             $usuario->save();
