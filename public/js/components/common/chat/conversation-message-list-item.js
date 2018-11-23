@@ -14,7 +14,7 @@ Vue.component('conversation-message-list-item', {
         </user-full-name-span>
       </div>
       <br/>
-      <span>
+      <span style="word-break: break-all;">
         {{ message.contenido }}
       </span>
       <span class="badge">

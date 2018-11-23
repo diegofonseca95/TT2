@@ -121,7 +121,7 @@ Vue.component('blog-info-card', {
             </span>
           </div>
           <div class="card-content">
-            <p>
+            <p style="word-break: break-all;">
               {{ groupInfo.description }}
             </p>
             <br/>

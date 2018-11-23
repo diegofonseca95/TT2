@@ -36,7 +36,7 @@ Vue.component('admin-group-list-item', {
         <span class='title truncate col s12'> 
           {{ group.nombreGrupo }} 
         </span> 
-        <p class='truncate col s12'> 
+        <p class='col s12' style="word-break: break-all;"> 
           {{ group.descripcion }} 
         </p> 
         <div class='col s12'> 
