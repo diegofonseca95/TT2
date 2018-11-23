@@ -17,6 +17,9 @@ Vue.component('conversation-message-list-item', {
       <span>
         {{ message.contenido }}
       </span>
+      <span class="badge">
+        {{ message.fecha }}
+      </span>
     </div>
   `
 });
