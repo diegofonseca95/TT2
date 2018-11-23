@@ -110,12 +110,17 @@ Vue.component('chat-sidenav-view', {
           'private-nuevo.' + response.result
         );
         this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
+          if(data.tipo === 'chat'){
+            var newChat = data.conversacion;
+            newChat.users = data.integrantes;
+            this.createChat(newChat);
+            return;
+          }
           if(this.selectedConversation.idConversacion !== data.idConversacion){
             var count = this.newMessageBucket[data.idConversacion];
             this.$set(this.priorityBucket, data.idConversacion, ++this.priority);
             this.$set(this.newMessageBucket, data.idConversacion, ++count);
             this.newMessageCount++;
-            console.log(data);
           }
         }.bind(this));
       }
@@ -153,7 +158,7 @@ Vue.component('chat-sidenav-view', {
         )
       ).open();
     },
-    handleChatCreated : function(newChat){
+    createChat : function(newChat){
       this.$set(this.priorityBucket, newChat.idConversacion, ++this.priority);
       this.$set(this.newMessageBucket, newChat.idConversacion, 0);
       this.conversations.push(newChat);
@@ -184,7 +189,6 @@ Vue.component('chat-sidenav-view', {
         :users="userMap">
       </conversation-sidenav>
       <new-chat-modal
-        @chat-created="handleChatCreated"
         :users="validUsersList">
       </new-chat-modal>
       <div class="fixed-action-btn" id="chat-sidenav-view-trigger">

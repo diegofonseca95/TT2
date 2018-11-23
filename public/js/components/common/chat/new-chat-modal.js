@@ -71,9 +71,6 @@ Vue.component('new-chat-modal', {
       .then(function(response){
         if(response.status === 'OK'){
           SuccessToast(response.result);
-          var newChat = response.result;
-          newChat.users = response.users;
-          this.$emit('chat-created', newChat);
           this.newMemberList = [];
           M.Modal.getInstance(
             document.querySelector(
