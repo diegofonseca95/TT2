@@ -93,6 +93,12 @@ Vue.component('conversation-sidenav', {
     },
     resizeConversation : function(){
       ResizeConversationList();
+    },
+    scrollToBottom : function(){
+      var List = document.querySelector(
+        '#conversation-message-list'
+      );
+      List.scrollTop = List.scrollHeight;
     }
   },
   watch : {
@@ -128,6 +134,7 @@ Vue.component('conversation-sidenav', {
             Messages.push(message);
           }
           this.messages = Messages;
+          this.scrollToBottom();
           // Subscribe to the conversation.
           Pusher.logToConsole = true;
           this.pusher = new Pusher('5527fdb0d65f00f390d4', {
@@ -146,10 +153,7 @@ Vue.component('conversation-sidenav', {
             var NewMessage = data.message;
             NewMessage.idUsuario = data.user;
             this.messages.push(NewMessage);
-            var List = document.querySelector(
-              '#conversation-message-list'
-            );
-            List.scrollTop = List.scrollHeight;
+            this.scrollToBottom();
           }.bind(this));
         }else{
           WarningToast(response.result);
