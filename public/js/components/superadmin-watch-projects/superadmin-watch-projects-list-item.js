@@ -14,7 +14,8 @@ Vue.component('superadmin-watch-projects-list-item', {
         <span class="title truncate col s12 hide-on-small-only">
           {{ project.nombreProyecto }}
         </span>
-        <span class="truncate col s12 hide-on-small-only">
+        <span class="col s12 hide-on-small-only"
+          style="word-break: break-all;">
           {{ project.descripcion }}
         </span>
         <div class="right">

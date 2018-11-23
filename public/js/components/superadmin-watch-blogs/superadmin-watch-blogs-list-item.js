@@ -14,7 +14,8 @@ Vue.component('superadmin-watch-blogs-list-item', {
         <span class="title truncate col s12 hide-on-small-only">
           {{ blog.nombreGrupo }}
         </span>
-        <span class="truncate col s12 hide-on-small-only">
+        <span class="col s12 hide-on-small-only"
+          style="word-break: break-all;">
           {{ blog.descripcion }}
         </span>
         <div class="right">
