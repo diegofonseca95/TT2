@@ -128,6 +128,7 @@ Vue.component('chat-sidenav-view', {
       this.selectedConversation = {};
     },
     handleConversationSelected : function(conversation){
+      this.newMessageBucket[conversation.idConversacion] = 0;
       this.selectedConversation = conversation;
       M.Sidenav.getInstance(
         document.querySelector(
@@ -165,6 +166,7 @@ Vue.component('chat-sidenav-view', {
     <div>
       <conversations-list-sidenav
         @conversation-selected="handleConversationSelected"
+        :new-message-bucket="newMessageBucket"
         :conversations="conversations"
         :users="userMap">
       </conversations-list-sidenav>

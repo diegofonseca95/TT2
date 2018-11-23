@@ -4,8 +4,9 @@
 */
 Vue.component('conversations-list-sidenav', {
   props : [
-    'conversations',  // The conversations list.
-    'users'           // The user map.
+    'newMessageBucket', // The count of new messages for all conversations.
+    'conversations',    // The conversations list.
+    'users'             // The user map.
   ],
   mounted : function(){
     // Get the sidenav element.

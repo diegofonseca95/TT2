@@ -4,8 +4,9 @@
 */
 Vue.component('conversations-list-item', {
   props : [
-    'conversation', // The conversation represented by the component.
-    'users'         // The user map.
+    'newMessageCount',  // The new message count for this conversation.
+    'conversation',     // The conversation represented by the component.
+    'users'             // The user map.
   ],
   methods : {
     handleConversationSelected : function(){
@@ -22,6 +23,9 @@ Vue.component('conversations-list-item', {
           <user-full-name-span :user="users[userId]">
           </user-full-name-span>
         </div>
+        <span class="badge" v-if="newMessageCount > 0">
+          {{ newMessageCount }}
+        </span>
       </div>
       <div class="col s12 zero-padding">
         <div class="divider zero-margin"></div>
