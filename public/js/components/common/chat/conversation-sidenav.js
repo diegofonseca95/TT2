@@ -155,7 +155,6 @@ Vue.component('conversation-sidenav', {
             var NewMessage = data.message;
             NewMessage.idUsuario = data.user;
             this.messages.push(NewMessage);
-            //this.scrollToBottom();
           }.bind(this));
         }else{
           WarningToast(response.result);
