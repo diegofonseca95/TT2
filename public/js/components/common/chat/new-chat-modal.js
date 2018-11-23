@@ -96,6 +96,9 @@ Vue.component('new-chat-modal', {
         </new-chat-member-list>
       </div>
       <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+          Cancelar
+        </a>
         <a class="waves-effect waves-green btn-flat"
           href="#!" @click="handleModalClose">
           Listo
