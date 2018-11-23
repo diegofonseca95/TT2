@@ -55,6 +55,9 @@ Vue.component('chat-sidenav-view', {
               chat.users = response.result[i].users;
               chats.push(chat);
             }
+            chats.map(function(chat){
+              this.newMessageBucket[chat.idConversacion] = 0;
+            }.bind(this));
             this.conversations = chats;
           }
           // TODO : Handle non 'OK' status.
@@ -105,11 +108,7 @@ Vue.component('chat-sidenav-view', {
         );
         this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
           if(this.selectedConversation.idConversacion !== data.idConversacion){
-            if(!(data.idConversacion in this.newMessageBucket)){
-              this.newMessageBucket[data.idConversacion] = 1;
-            }else{
-              this.newMessageBucket[data.idConversacion]++;
-            }
+            this.newMessageBucket[data.idConversacion]++;
             this.newMessageCount++;
             console.log(data);
           }
@@ -150,6 +149,7 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     handleChatCreated : function(newChat){
+      this.newMessageBucket[newChat.idConversacion] = 0;
       this.conversations.push(newChat);
     }
   },
