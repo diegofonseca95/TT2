@@ -162,6 +162,9 @@ Vue.component('chat-sidenav-view', {
       this.$set(this.priorityBucket, newChat.idConversacion, ++this.priority);
       this.$set(this.newMessageBucket, newChat.idConversacion, 0);
       this.conversations.push(newChat);
+    },
+    windowScrollTop : function(){
+      window.scrollTo(0, 0);
     }
   },
   computed : {
@@ -199,9 +202,17 @@ Vue.component('chat-sidenav-view', {
         </a>
         <ul>
           <li>
-            <a class="btn-floating red"
+            <a title="Crear Conversación"
+              class="btn-floating red"
               @click="openNewChatModal">
               <i class="material-icons">add</i>
+            </a>
+          </li>
+          <li>
+            <a class="btn-floating green"
+              title="Ir al Principio"
+              @click"windowScrollTop">
+              <i class="material-icons">publish</i>
             </a>
           </li>
         </ul>
