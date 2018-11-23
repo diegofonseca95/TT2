@@ -13,6 +13,11 @@ Vue.component('conversations-list-item', {
       this.$emit('conversation-selected', this.conversation);
     }
   },
+  watch : {
+    newMessageCount : function(){
+      console.log(this.newMessageCount);
+    }
+  },
   template : `
     <div class="row zero-horizontal-padding zero-margin">
       <div class="col s12 low-top-padding low-line-height"
