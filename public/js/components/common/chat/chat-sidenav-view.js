@@ -202,17 +202,17 @@ Vue.component('chat-sidenav-view', {
         </a>
         <ul>
           <li>
-            <a title="Crear Conversación"
-              class="btn-floating red"
-              @click="openNewChatModal">
-              <i class="material-icons">add</i>
-            </a>
-          </li>
-          <li>
             <a class="btn-floating green"
               title="Ir al Principio"
               @click="windowScrollTop">
               <i class="material-icons">publish</i>
+            </a>
+          </li>
+          <li>
+            <a title="Crear Conversación"
+              class="btn-floating red"
+              @click="openNewChatModal">
+              <i class="material-icons">add</i>
             </a>
           </li>
         </ul>

@@ -50,6 +50,10 @@ Vue.component('doing-task-list-item', {
           'input[name="_token"]'
         );
         var file = fileInput.files[0];
+        if(file.size > 5000000){
+          WarningToast('Tamaño máximo de 5MB.');
+          return;
+        }
         var data = new FormData();
         console.log(this.task);
         data.append('idTarea', this.task.tarea.idTarea);
