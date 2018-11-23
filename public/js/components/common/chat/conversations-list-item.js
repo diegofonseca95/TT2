@@ -33,7 +33,8 @@ Vue.component('conversations-list-item', {
           <user-full-name-span :user="users[userId]">
           </user-full-name-span>
         </div>
-        <span class="badge" v-if="hasNewMessages">
+        <span class="new badge red" data-badge-caption="nuevos"
+          v-if="hasNewMessages">
           {{ newMessageBucket[conversation.idConversacion] }}
         </span>
       </div>
