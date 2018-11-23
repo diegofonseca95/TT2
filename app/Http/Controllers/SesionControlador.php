@@ -79,7 +79,7 @@ class SesionControlador extends Controller
 
     public function iniciarSesionAdmin(){
         if(Auth::check() ){
-            if(Superadministrador::where('idAdministrador', Auth::id())->count() == 0){
+            if(Superadministrador::where('idUsuario', Auth::id())->count() == 0){
                 return view('user_watch_dashboard', ['idUsuario' => Auth::id(), 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
             }
             return view('admin_index', [ 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);
