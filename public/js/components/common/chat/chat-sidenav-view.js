@@ -211,7 +211,7 @@ Vue.component('chat-sidenav-view', {
           <li>
             <a class="btn-floating green"
               title="Ir al Principio"
-              @click"windowScrollTop">
+              @click="windowScrollTop">
               <i class="material-icons">publish</i>
             </a>
           </li>
