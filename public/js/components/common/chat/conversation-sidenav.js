@@ -101,6 +101,9 @@ Vue.component('conversation-sidenav', {
       List.scrollTop = List.scrollHeight;
     }
   },
+  updated : function(){
+    this.scrollToBottom();
+  },
   watch : {
     conversation : function(){
       if(!this.conversation.hasOwnProperty('idConversacion')){
@@ -134,7 +137,6 @@ Vue.component('conversation-sidenav', {
             Messages.push(message);
           }
           this.messages = Messages;
-          this.scrollToBottom();
           // Subscribe to the conversation.
           Pusher.logToConsole = true;
           this.pusher = new Pusher('5527fdb0d65f00f390d4', {
@@ -153,7 +155,7 @@ Vue.component('conversation-sidenav', {
             var NewMessage = data.message;
             NewMessage.idUsuario = data.user;
             this.messages.push(NewMessage);
-            this.scrollToBottom();
+            //this.scrollToBottom();
           }.bind(this));
         }else{
           WarningToast(response.result);
