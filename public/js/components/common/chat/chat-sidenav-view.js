@@ -7,10 +7,12 @@ Vue.component('chat-sidenav-view', {
       selectedConversation : {},
       newMessageBucket : {},
       newMessageCount : 0,
+      priorityBucket : {},
       conversations : [],
       validUsers : [],
       channel : null,             // The chat connection.
       pusher : null,              // The pusher object.
+      priority : 0,
       userMap : {},
       users : []
     };
@@ -57,6 +59,7 @@ Vue.component('chat-sidenav-view', {
             }
             chats.map(function(chat){
               this.$set(this.newMessageBucket, chat.idConversacion, 0);
+              this.$set(this.priorityBucket, chat.idConversacion, 0);
             }.bind(this));
             this.conversations = chats;
           }
@@ -109,7 +112,8 @@ Vue.component('chat-sidenav-view', {
         this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
           if(this.selectedConversation.idConversacion !== data.idConversacion){
             var count = this.newMessageBucket[data.idConversacion];
-            this.$set(this.newMessageBucket, data.idConversacion, count + 1);
+            this.$set(this.priorityBucket, data.idConversacion, ++priority);
+            this.$set(this.newMessageBucket, data.idConversacion, ++count);
             this.newMessageCount++;
             console.log(data);
           }
@@ -150,6 +154,7 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     handleChatCreated : function(newChat){
+      this.$set(this.priorityBucket, newChat.idConversacion, ++priority);
       this.$set(this.newMessageBucket, newChat.idConversacion, 0);
       this.conversations.push(newChat);
     }
@@ -169,6 +174,7 @@ Vue.component('chat-sidenav-view', {
       <conversations-list-sidenav
         @conversation-selected="handleConversationSelected"
         :new-message-bucket="newMessageBucket"
+        :priority-bucket="priorityBucket"
         :conversations="conversations"
         :users="userMap">
       </conversations-list-sidenav>

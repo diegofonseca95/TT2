@@ -5,6 +5,7 @@
 Vue.component('conversations-list-sidenav', {
   props : [
     'newMessageBucket', // The count of new messages for all conversations.
+    'priorityBucket',   // The priority of each conversation.
     'conversations',    // The conversations list.
     'users'             // The user map.
   ],
@@ -23,6 +24,15 @@ Vue.component('conversations-list-sidenav', {
       this.$emit('conversation-selected', conversation);
     }
   },
+  computed : {
+    sortedList : function(){
+      return this.conversations.sort(function(a, b){
+        var pa = this.priorityBucket[a.idConversacion];
+        var pb = this.priorityBucket[b.idConversacion];
+        return pb - pa;
+      }.bind(this));
+    }
+  },
   template : `
     <ul id="conversations-list-sidenav" class="sidenav">
       <li>
@@ -33,7 +43,7 @@ Vue.component('conversations-list-sidenav', {
       </li>
       <li>
         <conversations-list-item
-          v-for="conversation in conversations"
+          v-for="conversation in sortedList"
           @conversation-selected="handleConversationSelected"
           :new-message-bucket="newMessageBucket"
           :key="conversation.idConversacion"
