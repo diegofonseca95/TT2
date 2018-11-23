@@ -112,7 +112,7 @@ Vue.component('chat-sidenav-view', {
         this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
           if(this.selectedConversation.idConversacion !== data.idConversacion){
             var count = this.newMessageBucket[data.idConversacion];
-            this.$set(this.priorityBucket, data.idConversacion, ++priority);
+            this.$set(this.priorityBucket, data.idConversacion, ++this.priority);
             this.$set(this.newMessageBucket, data.idConversacion, ++count);
             this.newMessageCount++;
             console.log(data);
@@ -154,7 +154,7 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     handleChatCreated : function(newChat){
-      this.$set(this.priorityBucket, newChat.idConversacion, ++priority);
+      this.$set(this.priorityBucket, newChat.idConversacion, ++this.priority);
       this.$set(this.newMessageBucket, newChat.idConversacion, 0);
       this.conversations.push(newChat);
     }
