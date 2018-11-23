@@ -4,7 +4,7 @@
 */
 Vue.component('conversations-list-item', {
   props : [
-    'newMessageCount',  // The new message count for this conversation.
+    'newMessageBucket', // The count of new messages for all conversations.
     'conversation',     // The conversation represented by the component.
     'users'             // The user map.
   ],
@@ -13,9 +13,14 @@ Vue.component('conversations-list-item', {
       this.$emit('conversation-selected', this.conversation);
     }
   },
+  computed : {
+    hasNewMessages : function(){
+      return this.newMessageBucket[this.conversation.idConversacion] > 0;
+    }
+  },
   watch : {
-    newMessageCount : function(){
-      console.log(this.newMessageCount);
+    newMessageBucket : function(){
+      console.log(this.newMessageBucket[this.conversation.idConversacion]);
     }
   },
   template : `
@@ -28,8 +33,8 @@ Vue.component('conversations-list-item', {
           <user-full-name-span :user="users[userId]">
           </user-full-name-span>
         </div>
-        <span class="badge" v-if="newMessageCount > 0">
-          {{ newMessageCount }}
+        <span class="badge" v-if="hasNewMessages">
+          {{ newMessageBucket[conversation.idConversacion] }}
         </span>
       </div>
       <div class="col s12 zero-padding">

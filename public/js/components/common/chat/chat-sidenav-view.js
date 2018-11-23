@@ -108,9 +108,9 @@ Vue.component('chat-sidenav-view', {
         );
         this.channel.bind('App\\Events\\NuevoMensaje', function(data) {
           if(this.selectedConversation.idConversacion !== data.idConversacion){
-            var bucket = this.newMessageBucket;
-            bucket[data.idConversacion]++;
-            this.newMessageBucket = bucket;
+            var count = this.newMessageBucket[data.idConversacion];
+            delete this.newMessageBucket[data.idConversacion];
+            this.newMessageBucket[data.idConversacion] = count + 1;
             this.newMessageCount++;
             console.log(data);
           }
