@@ -25,3 +25,17 @@ Broadcast::channel('chat.{id}', function ($user, $id) {
     }
     return true;
 });
+
+Broadcast::channel('log.{id}', function ($user, $id) {
+    //return ($user->idUsuario == $id || $id2 == $user->idUsuario);
+
+
+    return true;
+});
+
+Broadcast::channel('nuevo.{id}', function ($user, $id) {
+    //return ($user->idUsuario == $id || $id2 == $user->idUsuario);
+
+
+    return true;
+});

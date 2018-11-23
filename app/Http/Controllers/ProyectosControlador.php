@@ -9,10 +9,12 @@ use App\AdministradorGrupo;
 use App\UsuarioGrupo;
 use App\Proyecto;
 use App\ProyectoGrupo;
+use App\Actividad;
 use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
+use App\Events\Logs;
 use App\Superadministrador;
 
 class ProyectosControlador extends Controller
@@ -127,12 +129,19 @@ class ProyectosControlador extends Controller
             return view('index');
         }
         try{
+            $flag = false;
             $proyecto = Proyecto::findOrFail(request('idProyecto'));
+
+            if($proyecto->descripcion != request('descripcion') ||$proyecto->nombreProyecto != request('nombreProyecto'))
+              $flag = true;
+
             $proyecto->descripcion = request('descripcion');
             $proyecto->nombreProyecto = request('nombreProyecto');
             $proyecto->save();
             $administrarProyecto = AdministradorProyecto::where('idProyecto', '=', $proyecto->idProyecto)->update(['idUsuario' => request('idUsuario')]);
 
+            if($flag)
+              event(new Logs(request('idProyecto'), Auth::id(), 'ha editado la información del proyecto'));
 
             return response()->json([
                 'status'=> 'OK',
@@ -280,5 +289,18 @@ class ProyectosControlador extends Controller
                 'result'=> 'Proyecto no existe'
                 ]);
         }
+    }
+
+    public function obtenerActividades(){
+        if(!Auth::check()){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+            ]);
+        }
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> Actividad::where('idProyecto', request('idProyecto'))->get()
+            ]);
     }
 }

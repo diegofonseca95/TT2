@@ -18,7 +18,18 @@ class UsuariosControlador extends Controller
 
     	return view('registro');
     }
-
+    public function obtenerIdUsuario(){
+        if(!Auth::check()){
+          return response()->json([
+              'status'=> 'ERROR',
+              'result'=> 'Inicia Sesion'
+              ]);
+        }
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> Auth::id()
+            ]);
+    }
     public function index(){
         if(Auth::check()){
            if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)

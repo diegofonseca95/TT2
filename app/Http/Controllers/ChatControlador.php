@@ -17,6 +17,7 @@ use App\Conversacion;
 use App\UsuarioConversacion;
 use App\Mensaje;
 use App\Events\Chat;
+use App\Events\NuevoMensaje;
 
 class ChatControlador extends Controller
 {
@@ -27,8 +28,19 @@ class ChatControlador extends Controller
                 'result'=> 'Inicia sesion para continuar'
                 ]);
           }
+          $id = Auth::id();
+          $flag = false;
           $usuarios = request('usuarios');
           $canal = "private-chat";
+
+          foreach ($usuarios as $value) {
+              if($value == $id){
+                  $flag = true;
+                  break;
+              }
+          }
+          if(!$flag ) array_push($usuarios, $id);
+
           sort($usuarios);
 
           foreach ($usuarios as $value) {
@@ -55,13 +67,12 @@ class ChatControlador extends Controller
               $usuarioConversacion->idUsuario = $value;
               $usuarioConversacion->idConversacion = $conversacion->idConversacion;
               $usuarioConversacion->save();
-
+              event(new NuevoMensaje($conversacion->idConversacion, $value, "chat", $conversacion, $usuarios));
           }
 
           return response()->json([
                   'status' => 'OK',
-                  'result' => $conversacion,
-                  'users' => $usuarios
+                  'result' => 'Se ha creado la conversacion'
             ]);
 
     }

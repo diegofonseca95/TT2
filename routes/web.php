@@ -14,6 +14,7 @@
 
 
 Route::get('/', 'UsuariosControlador@index');
+Route::post('/obtenerIdUsuario', 'UsuariosControlador@obtenerIdUsuario');
 Route::post('/obtenerTodosUsuarios', 'UsuariosControlador@obtenerTodosUsuarios');
 Route::post('/nuevaConversacion', 'ChatControlador@nuevaConversacion');
 Route::get('/agregarUsuario', 'UsuariosControlador@agregarUsuario');
@@ -102,6 +103,7 @@ Route::post('/estadisticaIteracionProyecto', 'EstadisticasControlador@iteracione
 Route::get('/administrarEstadisticas', 'EstadisticasControlador@verEstadisticas');
 Route::post('/estadisticaUsuarioTarea', 'EstadisticasControlador@UsuarioTareas');
 Route::post('/terminarProyecto', 'ProyectosControlador@terminarProyecto');
+Route::post('/obtenerActividades', 'ProyectosControlador@obtenerActividades');
 Route::post('/enviarMensaje', function(){
   if(!Auth::check()){
       return response()->json([
@@ -110,9 +112,16 @@ Route::post('/enviarMensaje', function(){
       ]);
   }
   event(new App\Events\Chat(request('idConversacion'), Auth::id(), request('mensaje')));
+  $usuarioConversacion = App\UsuarioConversacion::where('idConversacion', request('idConversacion'))->get();
+
+  foreach ($usuarioConversacion as $value) {
+
+        event(new App\Events\NuevoMensaje(request('idConversacion'), $value->idUsuario, "mensaje", NULL, NULL));
+  }
 
   return response()->json([
-        'status' => 'OK'
+        'status' => 'OK',
+        'result' => 'Mensaje enviado'
   ]);
 });
 Route::get('/descargarEvidencia/{idTarea}', 'TareaControlador@descargarEvidencia');
