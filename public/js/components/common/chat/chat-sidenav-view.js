@@ -128,6 +128,7 @@ Vue.component('chat-sidenav-view', {
       this.selectedConversation = {};
     },
     handleConversationSelected : function(conversation){
+      this.newMessageCount -= this.newMessageBucket[conversation.idConversacion];
       this.newMessageBucket[conversation.idConversacion] = 0;
       this.selectedConversation = conversation;
       M.Sidenav.getInstance(

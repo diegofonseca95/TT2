@@ -34,6 +34,7 @@ Vue.component('conversations-list-sidenav', {
       <li>
         <conversations-list-item
           v-for="conversation in conversations"
+          :new-message-count="newMessageBucket[conversation.idConversacion]"
           @conversation-selected="handleConversationSelected"
           :key="conversation.idConversacion"
           :conversation="conversation"
