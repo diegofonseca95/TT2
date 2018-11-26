@@ -34,6 +34,7 @@ Vue.component('project-shared-files', {
     fetch('/obtenerArchivos', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log(response.result);
       if(response.status === 'OK'){
         var projectFiles = [];
         for(var i in response.result){
