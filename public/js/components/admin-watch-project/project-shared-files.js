@@ -40,7 +40,7 @@ Vue.component('project-shared-files', {
         for(var i in response.result){
           projectFiles.push({
             fileName : response.result[i],
-            fileId : ++fileCounter
+            fileId : ++this.fileCounter
           });
         }
       }
