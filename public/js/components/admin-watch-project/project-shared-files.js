@@ -63,6 +63,10 @@ Vue.component('project-shared-files', {
           'input[name="_token"]'
         );
         var file = fileInput.files[0];
+        if(file.size > 5000000){
+          WarningToast('Tamaño máximo de 5MB.');
+          return;
+        }
         var data = new FormData();
         data.append('idProyecto', projectIdInput.value);
         data.append('_token', authToken.value);
