@@ -77,7 +77,6 @@ Vue.component('blog-info-card', {
           'input[name="_token"]'
         );
         var file = fileInput.files[0];
-        console.log(file);
         var data = new FormData();
         data.append('idGrupo', this.groupInfo.idGrupo);
         data.append('_token', authToken.value);

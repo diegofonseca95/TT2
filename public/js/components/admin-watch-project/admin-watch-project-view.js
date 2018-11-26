@@ -145,6 +145,9 @@ Vue.component('admin-watch-project-view', {
         :project-members="memberList"
         :permissions="permissions">
       </task-card-group>
+
+      <project-shared-files>
+      </project-shared-files>
       
       <chat-sidenav-view>
       </chat-sidenav-view>
