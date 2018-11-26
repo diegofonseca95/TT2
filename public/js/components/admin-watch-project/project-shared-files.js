@@ -2,6 +2,7 @@ Vue.component('project-shared-files', {
   data : function(){
     return {
       searchInput : '', // The search pattern.
+      fileCounter : 0,  // The number of files.
       files : []        // The files.
     };
   },
@@ -66,7 +67,7 @@ Vue.component('project-shared-files', {
         data.append('idProyecto', projectIdInput.value);
         data.append('_token', authToken.value);
         data.append('file', file);
-        fetch('/subirPortada', {
+        fetch('/subirArchivo', {
           method : 'POST',
           body : data
         })
