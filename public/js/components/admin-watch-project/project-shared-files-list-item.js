@@ -10,7 +10,9 @@ Vue.component('project-shared-files-list-item', {
           {{ file.fileName }}
         </span>
         <span class="title truncate col s12">
-          <a href="#">Descargar Archivo</a>
+          <a href="#">
+            Descargar Archivo
+          </a>
         </span>
       </div>
     </li>

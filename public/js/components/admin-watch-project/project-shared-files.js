@@ -7,7 +7,45 @@ Vue.component('project-shared-files', {
     };
   },
   beforeCreate : function(){
+    // Get the project id from the hidden input.
+    var projectIdInput = document.querySelector(
+      'input[name="project-id"]'
+    );
+
+    var authToken = document.querySelector(
+      'input[name="_token"]'
+    );
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idProyecto : projectIdInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
     // Fetch the files.
+    fetch('/obtenerArchivos', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        var projectFiles = [];
+        for(var i in response.result){
+          projectFiles.push({
+            fileName : response.result[i],
+            fileId : ++fileCounter
+          });
+        }
+      }
+      this.files = projectFiles;
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   computed : {
     // The list of files that match the search pattern, if any.
