@@ -63,6 +63,7 @@ Vue.component('project-shared-files', {
           'input[name="_token"]'
         );
         var file = fileInput.files[0];
+        console.log(file.name);
         var data = new FormData();
         data.append('idProyecto', projectIdInput.value);
         data.append('_token', authToken.value);
@@ -121,7 +122,8 @@ Vue.component('project-shared-files', {
         <!-- File Collections Ends -->
         <div class="row">
           <input type="file" class="hide"
-            id="project-shared-files-file-input">
+            id="project-shared-files-file-input" 
+            @change="sendFile" />
           <div class="btn remove-button-background right"
             @click="triggerFileInput">
             <span>Subir archivo</span>
