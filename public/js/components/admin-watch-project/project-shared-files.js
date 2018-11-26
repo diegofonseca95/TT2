@@ -63,10 +63,10 @@ Vue.component('project-shared-files', {
           'input[name="_token"]'
         );
         var file = fileInput.files[0];
-        console.log(file.name);
         var data = new FormData();
         data.append('idProyecto', projectIdInput.value);
         data.append('_token', authToken.value);
+        data.append('name', file.name);
         data.append('file', file);
         fetch('/subirArchivo', {
           method : 'POST',
