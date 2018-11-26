@@ -5,6 +5,9 @@ Vue.component('project-shared-files', {
       files : []        // The files.
     };
   },
+  beforeCreate : function(){
+    // Fetch the files.
+  },
   computed : {
     // The list of files that match the search pattern, if any.
     filteredList : function(){

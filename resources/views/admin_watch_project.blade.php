@@ -68,6 +68,7 @@
   <script src="/js/components/common/chat/chat-sidenav-view.js"></script>
   <!-- Chat Ends -->
   <!-- List Items Begin -->
+  <script src="/js/components/admin-watch-project/project-shared-files-list-item.js"></script>
   <script src="/js/components/admin-watch-project/project-member-list-item.js"></script>
   <script src="/js/components/admin-watch-project/new-member-list-item.js"></script>
   <script src="/js/components/admin-watch-project/iteration-list-item.js"></script>
@@ -87,6 +88,7 @@
   <script src="/js/components/admin-watch-project/add-new-member-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
+  <script src="/js/components/admin-watch-project/project-shared-files.js"></script>
   <script src="/js/components/admin-watch-project/project-members-card.js"></script>
   <script src="/js/components/admin-watch-project/new-iteration-card.js"></script>
   <script src="/js/components/admin-watch-project/project-info-card.js"></script>
