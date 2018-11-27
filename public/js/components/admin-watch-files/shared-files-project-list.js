@@ -102,7 +102,7 @@ Vue.component('shared-files-project-list', {
         Ningún proyecto coincide con los criterios de búsqueda.
       </li>
       <shared-files-project-list-item
-        v-for="projectInfo in projectsInfo"
+        v-for="projectInfo in filteredList"
         @project-selected="handleProjectSelected"
         :key="projectInfo.idProyecto"
         :project-info="projectInfo">

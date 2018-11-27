@@ -12,19 +12,19 @@ Vue.component('shared-files-group-list-item', {
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">group</i>
       <div class="row">
-        <div class="col s12 m9">
-          <span class="title truncate col s12">
-            Nombre del grupo
-          </span>
-        </div>
-        <div class="col s12 m3">
-          <label class="right">
-            <button class="btn remove-button-background" 
-              title="Ver archivos"
-              @click="handleGroupSelected">
-              <i class="material-icons">remove_red_eye</i>
-            </button>
-          </label>
+        <span class="title truncate col s12 hide-on-small-only">
+          {{ groupInfo.nombreGrupo }}
+        </span>
+        <span class="col s12 hide-on-small-only"
+          style="word-break: break-all;">
+          {{ groupInfo.descripcion }}
+        </span>
+        <div class="col s12">
+          <button class="btn remove-button-background right" 
+            title="Ver archivos"
+            @click="handleGroupSelected">
+            <i class="material-icons">remove_red_eye</i>
+          </button>
         </div>
       </div>
     </li>

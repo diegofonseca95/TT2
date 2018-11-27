@@ -10,7 +10,33 @@ Vue.component('shared-files-group-list', {
     };
   },
   beforeCreate : function(){
-    // TODO : Fetch the list.
+    var authToken = document.querySelector(
+      'input[name="_token"]'
+    );
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the project list.
+    fetch('/obtenerGrupos', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.groupsInfo = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   computed : {
     // The list of groups that match the search pattern, if any.
@@ -77,7 +103,10 @@ Vue.component('shared-files-group-list', {
       </li>
       <!--
       <shared-files-group-list-item
-        v-for="groupInfo in filteredList">
+        v-for="groupInfo in filteredList"
+        @group-selected="handleGroupSelected"
+        :key="groupInfo.idGrupo"
+        :group-info="groupInfo">
       </shared-files-group-list-item>
       -->
     </ul>
