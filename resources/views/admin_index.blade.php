@@ -134,7 +134,7 @@
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Archivos<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Ir a Archivos</a></p>
+            <p><a href="/administrarArchivos">Ir a Archivos</a></p>
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Archivos<i class="material-icons right">close</i></span>
