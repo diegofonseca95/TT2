@@ -31,6 +31,8 @@ Vue.component('shared-files-group-list', {
     fetch('/obtenerGrupos', requestData)
     .then(response => response.json())
     .then(function(response){
+      console.log('INVITACION');
+      console.log(response);
       if(response.status === 'OK'){
         this.groupsInfo = response;
       }
