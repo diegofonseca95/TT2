@@ -45,6 +45,57 @@ Vue.component('shared-files-list', {
     }
   },
   mounted : function(){
+    var authToken = document.querySelector(
+      'input[name="_token"]'
+    );
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value
+    };
+
+    if(this.isProject){
+      requestBody.idProyecto = this.selectedProject.idGrupo;
+    }else{
+      requestBody.idGrupo = this.selectedGroup.idGrupo;
+    }
+
+    requestData.body = JSON.stringify(requestBody);
+    console.log('Mounted');
+
+    var path = (
+      this.isProject ? 
+      '/obtenerArchivosProyectos' : 
+      '/obtenerArchivosGrupos'
+    );
+
+    // Fetch the project list.
+    fetch(path, requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.fileCounter = 0;
+        var allFiles = [];
+        for(var i in response.result){
+          allFiles.push({
+            projectId : response.result[i].idProyecto,
+            fileName : response.result[i].nombre,
+            fileId : ++this.fileCounter
+          });
+        }
+        this.files = allFiles;
+      }else{
+        WarningToast(response.result);
+      }
+    }.bind(this));
+
     M.updateTextFields();
   },
   watch : {
@@ -78,7 +129,7 @@ Vue.component('shared-files-list', {
         this.groupsInfo = groups;
         // TODO : Handle non 'OK' status.
       }.bind(this));
-    },*/
+    },
     selectedGroup : function(){
       var authToken = document.querySelector(
         'input[name="_token"]'
@@ -118,7 +169,7 @@ Vue.component('shared-files-list', {
           WarningToast(response.result);
         }
       }.bind(this));
-    }
+    }*/
   },
   template : `
     <div class="card">
