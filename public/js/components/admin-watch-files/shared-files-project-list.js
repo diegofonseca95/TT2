@@ -105,7 +105,7 @@ Vue.component('shared-files-project-list', {
         v-for="projectInfo in projectsInfo"
         @project-selected="handleProjectSelected"
         :key="projectInfo.idProyecto"
-        :projectInfo="projectInfo">
+        :project-info="projectInfo">
       </shared-files-project-list-item>
     </ul>
   `
