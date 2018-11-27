@@ -17,11 +17,11 @@ Vue.component('shared-files-project-list-item', {
       <i class="material-icons circle third-background">folder</i>
       <div class="row">
         <span class="title truncate col s12 hide-on-small-only">
-          {{ project.nombreProyecto }}
+          {{ projectInfo.nombreProyecto }}
         </span>
         <span class="col s12 hide-on-small-only"
           style="word-break: break-all;">
-          {{ project.descripcion }}
+          {{ projectInfo.descripcion }}
         </span>
         <div class="col s12 m3">
           <label class="right">
