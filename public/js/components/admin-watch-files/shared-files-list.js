@@ -68,7 +68,6 @@ Vue.component('shared-files-list', {
       }
 
       requestData.body = JSON.stringify(requestBody);
-      console.log('Mounted');
 
       var path = (
         this.isProject ? 
@@ -91,6 +90,7 @@ Vue.component('shared-files-list', {
               fileId : ++this.fileCounter
             });
           }
+          console.log(allFiles);
           this.files = allFiles;
         }else{
           WarningToast(response.result);
