@@ -101,14 +101,12 @@ Vue.component('shared-files-group-list', {
         v-if="noMatch">
         Ningún grupo coincide con los criterios de búsqueda.
       </li>
-      <!--
       <shared-files-group-list-item
         v-for="groupInfo in filteredList"
         @group-selected="handleGroupSelected"
         :key="groupInfo.idGrupo"
         :group-info="groupInfo">
       </shared-files-group-list-item>
-      -->
     </ul>
   `
 }); 
