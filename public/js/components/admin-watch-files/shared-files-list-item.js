@@ -4,7 +4,7 @@ Vue.component('shared-files-list-item', {
   ],
   computed : {
     downloadLink : function(){
-      return '/descargarArchivo/' + this.file.idProyecto +
+      return '/descargarArchivo/' + this.file.projectId +
         '/file/' + this.file.fileName;
     }
   },
