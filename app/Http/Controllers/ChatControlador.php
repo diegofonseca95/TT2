@@ -18,6 +18,7 @@ use App\UsuarioConversacion;
 use App\Mensaje;
 use App\Events\Chat;
 use App\Events\NuevoMensaje;
+use Illuminate\Support\Facades\Crypt;
 
 class ChatControlador extends Controller
 {
@@ -83,7 +84,7 @@ class ChatControlador extends Controller
                   'result' => 'Inicia sesion para continuar'
             ]);
         }
-        event(new Chat(request('idConversacion'), Auth::id(), request('mensaje')));
+        event(new Chat(request('idConversacion'), Auth::id(), Crypt::encrypt(request('mensaje'))));
 
         return response()->json([
               'status' => 'OK'

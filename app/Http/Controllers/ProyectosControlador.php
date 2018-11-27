@@ -97,7 +97,7 @@ class ProyectosControlador extends Controller
         $date = new \DateTime();
         $proyecto->fecha_inicio = $date->format('Y-m-d');
         $proyecto->save();
-
+        event(new Logs($proyecto->idProyecto, Auth::id(), 'ha creado el proyecto'));
         $administrarProyecto = new AdministradorProyecto;
         $administrarProyecto->idUsuario = request("lider");
         $administrarProyecto->idProyecto = $proyecto->idProyecto;
@@ -275,7 +275,7 @@ class ProyectosControlador extends Controller
             $proyecto = Proyecto::findOrFail(request('idProyecto'));
             $proyecto->estado = 2;
             $proyecto->save();
-
+            event(new Logs(request('idProyecto'), Auth::id(), 'ha finalizado el proyecto'));
             return response()->json([
                 'status' => 'OK',
                 'result' => 'El proyecto ha sido finalizado',
