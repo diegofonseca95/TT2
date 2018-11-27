@@ -89,7 +89,8 @@ Vue.component('shared-files-view', {
             </div>
             <div class="collapsible-body zero-padding">
               <!-- Projects List Begins-->
-              <shared-files-project-list>
+              <shared-files-project-list
+                @project-selected="handleProjectSelected">
               </shared-files-project-list>
               <!-- Project List Ends-->
             </div>
