@@ -92,7 +92,7 @@ Vue.component('shared-files-list', {
 
       // The body of our request.
       var requestBody = { 
-        idProyecto : this.selectedGroup.idGrupo,
+        idGrupo : this.selectedGroup.idGrupo,
         _token : authToken.value
       };
 
