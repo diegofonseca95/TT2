@@ -71,7 +71,7 @@ Vue.component('shared-files-list', {
 
       var path = (
         this.isProject ? 
-        '/obtenerArchivos' : 
+        '/obtenerArchivosProyectos' : 
         '/obtenerArchivosGrupos'
       );
 
