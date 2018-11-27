@@ -2,6 +2,12 @@ Vue.component('shared-files-list-item', {
   props : [
     'file'  // The file information.
   ],
+  computed : {
+    downloadLink : function(){
+      return '/descargarArchivo/' + this.file.idProyecto +
+        '/file/' + this.file.fileName;
+    }
+  },
   template : `
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">attach_file</i>
@@ -10,7 +16,9 @@ Vue.component('shared-files-list-item', {
           {{ file.fileName }}
         </span>
         <span class="title truncate col s12">
-          <a href="#">Descargar Archivo</a>
+          <a :href="downloadLink" target="_blank">
+            Descargar Archivo
+          </a>
         </span>
       </div>
     </li>

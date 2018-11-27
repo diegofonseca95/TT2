@@ -92,7 +92,12 @@ Vue.component('shared-files-view', {
       </div>
       <!-- Projects Collapsible Ends -->
       <!-- Files section Begins -->
-
+      <shared-files-list
+        :selected-project="selectedProject"
+        :selected-group="selectedGroup"
+        :is-project="isProject"
+        :is-group="isGroup">
+      </shared-files-list>
       <!-- Files section Ends -->
       <chat-sidenav-view>
       </chat-sidenav-view>

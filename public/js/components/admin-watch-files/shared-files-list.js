@@ -1,12 +1,14 @@
 Vue.component('shared-files-list', {
+  props : [
+    'selectedProject',
+    'selectedGroup'
+  ],
   data : function(){
     return {
       searchInput : '', // The search pattern.
+      fileCounter : 0,
       files : []        // The files.
     };
-  },
-  beforeCreate : function(){
-    // Fetch the files.
   },
   computed : {
     // The list of files that match the search pattern, if any.
@@ -43,11 +45,83 @@ Vue.component('shared-files-list', {
   mounted : function(){
     M.updateTextFields();
   },
+  watch : {
+    selectedProject : function(){
+      var authToken = document.querySelector(
+        'input[name="_token"]'
+      );
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : selectedProject.idProyecto,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the project list.
+      fetch('/obtenerGrupos', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        var groups = [];
+        for(var i in response){
+          groups.push(response[i]);
+        }
+        this.groupsInfo = groups;
+        // TODO : Handle non 'OK' status.
+      }.bind(this));
+    },
+    selectedGroup : function(){
+      var authToken = document.querySelector(
+        'input[name="_token"]'
+      );
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        idProyecto : selectedGroup.idGrupo,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Fetch the project list.
+      fetch('/obtenerArchivosGrupos', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          this.fileCounter = 0;
+          var allFiles = [];
+          for(var i in response.result){
+            allFiles.push({
+              projectId : response.result[i].idProyecto,
+              fileName : response.result[i].nombre,
+              fileId : ++this.fileCounter
+            });
+          }
+          this.files = allFiles;
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
+    }
+  },
   template : `
     <div class="card">
       <div class="card-content">
         <span class="card-title first-text">
-          <b>Archivos Compartidos del Proyecto</b>
+          <b>Archivos Compartidos</b>
         </span>
         <!-- Search Component Begins -->
         <div class="row">
@@ -70,11 +144,11 @@ Vue.component('shared-files-list', {
             v-if="noFileMatches">
             <span>Ningún archivo coincide con el criterio de búsqueda.</span>
           </li>
-          <project-shared-files-list-item
+          <shared-files-list-item
             v-for="file in filteredList"
             :key="file.fileId"
             :file="file">
-          </project-shared-files-list-item>
+          </shared-files-list-item>
         </ul>
         <!-- File Collections Ends -->
         <div class="row">
