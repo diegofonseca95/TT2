@@ -153,14 +153,6 @@ Vue.component('shared-files-list', {
           </shared-files-list-item>
         </ul>
         <!-- File Collections Ends -->
-        <div class="row">
-          <input type="file" class="hide"
-            id="project-shared-files-file-input">
-          <div class="btn remove-button-background right"
-            @click="triggerFileInput">
-            <span>Subir archivo</span>
-          </div>
-        </div>
       </div>
     </div>
   `
