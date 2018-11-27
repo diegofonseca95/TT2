@@ -20,11 +20,13 @@ Vue.component('shared-files-view', {
       this.selectedProject = project;
       this.isProject = true;
       this.isGroup = false;
+      console.log(project);
     },
     handleGroupSelected : function(group){
       this.selectedGroup = group;
       this.isProject = false;
       this.isGroup = true;
+      console.log(group);
     }
   },
   mounted : function(){
