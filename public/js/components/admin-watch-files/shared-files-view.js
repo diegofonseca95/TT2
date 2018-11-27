@@ -58,12 +58,12 @@ Vue.component('shared-files-view', {
         <ul class="tabs" id="shared-files-tab-strip">
           <li class="tab col s12 m6">
             <a href="#shared-files-groups">
-              Archivos de Grupos
+              Grupos
             </a>
           </li>
           <li class="tab col s12 m6">
             <a href="#shared-files-projects">
-              Archivos de Proyectos
+              Proyectos
             </a>
           </li>
         </ul>

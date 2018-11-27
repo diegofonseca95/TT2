@@ -38,6 +38,16 @@ Vue.component('shared-files-list', {
         return false;
       });
     },
+    cardHeader : function(){
+      if(this.isProject){
+        return 'Archivos del proyecto "' + 
+          this.selectedProject.nombreProyecto + '"';
+      }
+      if(this.isGroup){
+        return 'Archivos del grupo "' + 
+          this.selectedGroup.nombreGrupo + '"'; 
+      }
+    },
     noFileMatches : function(){
       return this.filteredList.length === 0 
         && this.searchInput !== ''
@@ -116,6 +126,9 @@ Vue.component('shared-files-list', {
         <span class="card-title first-text">
           <b>Archivos Compartidos</b>
         </span>
+        <div class="row">
+          <h6>{{ cardHeader }}</h6>
+        </div>
         <!-- Search Component Begins -->
         <div class="row">
           <div class='input-field col s12'>
