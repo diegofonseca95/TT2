@@ -22,6 +22,8 @@ use Auth;
 use App\Http\Controllers\SprintControlador;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
+use App\Events\Logs;
+use App\Http\Controllers\NotificacionesControlador;
 
 class TareaControlador extends Controller
 {
@@ -100,7 +102,10 @@ class TareaControlador extends Controller
         }
 
         Tarea::where('idTarea', '=', request('idTarea'))->update(['estado' => 1]);
-
+        $tarea = Tarea::where('idTarea', request('idTarea'))->first();
+        $tareaProyectoGrupo = TareaProyectoGrupo::where('idTarea', $tarea->idTarea)->first();
+        $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+        event(new Logs($proyectoGrupo->idProyecto, Auth::id(), 'ha eliminado la tarea '.$tarea->descripcion ));
         return response()->json([
               'status' =>'OK',
               'result' => 'Tarea eliminada'
@@ -151,6 +156,14 @@ class TareaControlador extends Controller
         $tareasprint->idTarea = request('idTarea');
         $tareasprint->save();
 
+        $persona = User::where('idUsuario', request('idUsuario'))->first();
+        $proyectoGrupo = ProyectoGrupo::where('idProyectoGrupo', $tareaProyectoGrupo->idProyectoGrupo)->first();
+        $proyecto = Proyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
+        event(new Logs($proyectoGrupo->idProyecto, Auth::id(), 'ha asignado una tarea a '.$persona->nombre.' '.$persona->apellidoPaterno.' '.$persona->apellidoMaterno ));
+
+        $sprint = Sprint::where('idSprint', request('idSprint'))->first();
+        NotificacionesControlador::nuevaNotificacion($persona->idUsuario, 'Te han asignado una nueva tarea en el proyecto '.$proyecto->nombreProyecto.' en la iteracion '.$sprint->numeroSprint);
+
         return response()->json([
                 'status' => 'OK',
                 'result' => 'La tarea ha sido asignada correctamente'
@@ -190,7 +203,6 @@ class TareaControlador extends Controller
             $s = new SprintControlador;
             $tarea->estado = 4;
             $tarea->save();
-
             return response()->json([
                 'status' => 'OK',
                 'result' => 'Tarea iniciada',
@@ -216,6 +228,7 @@ class TareaControlador extends Controller
         $tarea->save();
         //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
         $s = new SprintControlador;
+
         return response()->json([
             'status' => 'OK',
             'result' => 'Archivo subido correctamente',
@@ -276,6 +289,13 @@ class TareaControlador extends Controller
             $tarea->estado = 5;
             $tarea->save();
             $s = new SprintControlador;
+            $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
+            $proyecto = Proyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
+            $tareasprint = TareaSprint::where('idTarea', $tarea->idTarea)->first();
+            $sprint = Sprint::where('idSprint', $tareasprint->idSprint)->first();
+
+            NotificacionesControlador::nuevaNotificacion($tareaUsuario->idUsuario, 'Te han validado la tarea '.$tarea->descripcion.' en el proyecto '.$proyecto->nombreProyecto.' en la iteracion '.$sprint->numeroSprint);
+
             return response()->json([
                 'status' => 'OK',
                 'result' => 'Tarea validada',
@@ -306,7 +326,12 @@ class TareaControlador extends Controller
             $tarea->estado = 6;
             $tarea->save();
             $s = new SprintControlador;
+            $tareaUsuario = TareaUsuario::where('idTareaProyectoGrupo', $tareaProyectoGrupo->idTareaProyectoGrupo)->first();
+            $proyecto = Proyecto::where('idProyecto', $proyectoGrupo->idProyecto)->first();
+            $tareasprint = TareaSprint::where('idTarea', $tarea->idTarea)->first();
+            $sprint = Sprint::where('idSprint', $tareasprint->idSprint)->first();
 
+            NotificacionesControlador::nuevaNotificacion($tareaUsuario->idUsuario, 'Te han rechazado la tarea '.$tarea->descripcion.' en el proyecto '.$proyecto->nombreProyecto.' en la iteracion '.$sprint->numeroSprint);
             return response()->json([
                 'status' => 'OK',
                 'result' => 'Tarea rechazada',

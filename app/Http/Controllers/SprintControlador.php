@@ -19,7 +19,7 @@ use App\Tarea;
 use App\TareaUsuario;
 use App\Usuario;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use App\Events\Logs;
 use Auth;
 
 class SprintControlador extends Controller
@@ -41,11 +41,18 @@ class SprintControlador extends Controller
         $sprint->numeroSprint = $val+1;
         $date = new \DateTime();
         $sprint->fecha_inicio = $date->format('Y-m-d');
-        $sprint->fecha_fin = request("fecha_fin");;
+        $sprint->fecha_fin = request("fecha_fin");
+
+        if($sprint->fecha_inicio >= $sprint->fecha_fin){
+          return response()->json([
+              'status'=> 'ERROR',
+              'result'=> 'La fecha de fin debe ser mayor a la de inicio'
+              ]);
+        }
         $sprint->save();
         $sprintProyectoGrupo->idSprint = $sprint->idSprint;
         $sprintProyectoGrupo->save();
-
+        event(new Logs(request('idProyecto'), Auth::id(), 'ha agregado un nuevo sprint'));
         return response()->json([
             'status' => 'OK',
             'result' => 'Iteracion agregada',
@@ -122,6 +129,7 @@ class SprintControlador extends Controller
             }
             $sprint->fecha_fin = request('fecha_fin');
             $sprint->save();
+            event(new Logs(request('idProyecto'), Auth::id(), 'ha editado el sprint '.$sprint->numeroSprint ));
             return response()->json([
                 'status'=> 'OK',
                 'result'=> 'Se editó la fecha de fin'

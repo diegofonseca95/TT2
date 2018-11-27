@@ -35,7 +35,7 @@ class Chat implements ShouldBroadcast
         $usuarioConversacion = UsuarioConversacion::where([['idConversacion', $idChat],['idUsuario', $user]])->first();
         $temp = new Mensaje;
         $temp->idUsuarioConversacion = $usuarioConversacion->idUsuarioConversacion;
-        $temp->contenido = $cifrado;
+        $temp->contenido = $message;
         $temp->save();
         $this->message = $temp;
         //$this->message->contenido = decrypt($this->message->contenido);

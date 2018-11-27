@@ -19,9 +19,16 @@
 
   {{ csrf_field() }}
 
-  <!-- Navbar Begin -->
-  @include('systemnavbar');
-  <!-- Navbar End -->
+  @auth
+    <!-- Navbar Begin -->
+    @include('systemnavbar');
+    <!-- Navbar End -->
+  @endauth
+
+  @guest
+    @include('systemnavbarnologin');
+  @endguest
+
 
   <!-- Content begin -->
   <div class="container" id="group-blog-box">

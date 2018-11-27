@@ -18,7 +18,15 @@
         </a>
       </li>
     </ul>
-
+    @if(Request::is('publicacionesGrupo/*'))
+      <ul class="right">
+        <li>
+          <a href="/cerrarSesionBlog" title="Cerrar Sesión">
+            <i class="material-icons left">power_settings_new</i>
+          </a>
+        </li>
+      </ul>
+    @else
     <ul class="right">
       <li>
         <a href="/cerrarSesion" title="Cerrar Sesión">
@@ -26,5 +34,6 @@
         </a>
       </li>
     </ul>
+    @endif
   </div>
 </nav>
