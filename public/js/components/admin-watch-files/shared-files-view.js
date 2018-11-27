@@ -18,8 +18,8 @@ Vue.component('shared-files-view', {
   methods : {
     handleProjectSelected : function(project){
       this.selectedProject = project;
-      this.isGroup = false;
       this.isProject = true;
+      this.isGroup = false;
     },
     handleGroupSelected : function(group){
       this.selectedGroup = group;

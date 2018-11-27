@@ -44,113 +44,40 @@ Vue.component('shared-files-list', {
         && this.files.length > 0;
     }
   },
-  mounted : function(){
-    var authToken = document.querySelector(
-      'input[name="_token"]'
-    );
+  methods : {
+    loadFiles : function(){
+      var authToken = document.querySelector(
+        'input[name="_token"]'
+      );
 
-    // Request data for the 'fetch' function.
-    var requestData = {
-      headers: { 'Content-Type' : 'application/json' },
-      method : 'POST'
-    };
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
 
-    // The body of our request.
-    var requestBody = { 
-      _token : authToken.value
-    };
+      // The body of our request.
+      var requestBody = { 
+        _token : authToken.value
+      };
 
-    if(this.isProject){
-      requestBody.idProyecto = this.selectedProject.idGrupo;
-    }else{
-      requestBody.idGrupo = this.selectedGroup.idGrupo;
-    }
-
-    requestData.body = JSON.stringify(requestBody);
-    console.log('Mounted');
-
-    var path = (
-      this.isProject ? 
-      '/obtenerArchivosProyectos' : 
-      '/obtenerArchivosGrupos'
-    );
-
-    // Fetch the project list.
-    fetch(path, requestData)
-    .then(response => response.json())
-    .then(function(response){
-      console.log(response);
-      if(response.status === 'OK'){
-        this.fileCounter = 0;
-        var allFiles = [];
-        for(var i in response.result){
-          allFiles.push({
-            projectId : response.result[i].idProyecto,
-            fileName : response.result[i].nombre,
-            fileId : ++this.fileCounter
-          });
-        }
-        this.files = allFiles;
+      if(this.isProject){
+        requestBody.idProyecto = this.selectedProject.idProyecto;
       }else{
-        WarningToast(response.result);
+        requestBody.idGrupo = this.selectedGroup.idGrupo;
       }
-    }.bind(this));
-
-    M.updateTextFields();
-  },
-  watch : {
-    /*selectedProject : function(){
-      var authToken = document.querySelector(
-        'input[name="_token"]'
-      );
-
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
-
-      // The body of our request.
-      var requestBody = { 
-        idProyecto : selectedProject.idProyecto,
-        _token : authToken.value
-      };
 
       requestData.body = JSON.stringify(requestBody);
+      console.log('Mounted');
 
-      // Fetch the project list.
-      fetch('/obtenerGrupos', requestData)
-      .then(response => response.json())
-      .then(function(response){
-        var groups = [];
-        for(var i in response){
-          groups.push(response[i]);
-        }
-        this.groupsInfo = groups;
-        // TODO : Handle non 'OK' status.
-      }.bind(this));
-    },
-    selectedGroup : function(){
-      var authToken = document.querySelector(
-        'input[name="_token"]'
+      var path = (
+        this.isProject ? 
+        '/obtenerArchivos' : 
+        '/obtenerArchivosGrupos'
       );
 
-      // Request data for the 'fetch' function.
-      var requestData = {
-        headers: { 'Content-Type' : 'application/json' },
-        method : 'POST'
-      };
-
-      // The body of our request.
-      var requestBody = { 
-        idGrupo : this.selectedGroup.idGrupo,
-        _token : authToken.value
-      };
-
-      requestData.body = JSON.stringify(requestBody);
-      console.log('CHANGED');
       // Fetch the project list.
-      fetch('/obtenerArchivosGrupos', requestData)
+      fetch(path, requestData)
       .then(response => response.json())
       .then(function(response){
         console.log(response);
@@ -169,7 +96,19 @@ Vue.component('shared-files-list', {
           WarningToast(response.result);
         }
       }.bind(this));
-    }*/
+    }
+  },
+  mounted : function(){
+    this.loadFiles();
+    M.updateTextFields();
+  },
+  watch : {
+    selectedProject : function(){
+      this.loadFiles();
+    },
+    selectedGroup : function(){
+      this.loadFiles();
+    }
   },
   template : `
     <div class="card">
