@@ -9,7 +9,7 @@ Vue.component('project-shared-files-list-item', {
         'input[name="project-id"]'
       );
       return '/descargarArchivo/' + projectInput.value +
-        '/file/' + file.fileName;
+        '/file/' + this.file.fileName;
     }
   },
   template : `
