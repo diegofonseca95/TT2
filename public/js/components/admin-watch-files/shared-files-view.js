@@ -71,7 +71,8 @@ Vue.component('shared-files-view', {
             </div>
             <div class="collapsible-body zero-padding">
               <!-- Groups List Begins-->
-              <shared-files-group-list>
+              <shared-files-group-list
+                @group-selected="handleGroupSelected">
               </shared-files-group-list>
               <!-- Groups List Ends-->
             </div>
