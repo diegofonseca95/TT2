@@ -18,6 +18,8 @@ use App\UsuarioConversacion;
 use App\Mensaje;
 use App\Events\Chat;
 use App\Events\NuevoMensaje;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\FileNotFoundException;
 
 class ArchivosControlador extends Controller
 {
@@ -34,17 +36,118 @@ class ArchivosControlador extends Controller
 
           $size = sizeof($files = Storage::files('archivos/'.request('idProyecto')));
           $size+= 1;
-          Storage::disk('local')->put('archivos/'.request('idProyecto').'/'.$size.request('file')->extension(), request('idProyecto'));
-
+          if(Storage::disk('local')->exists('archivos/'.request('idProyecto').'/'.request('name')))
+          return response()->json([
+              'status' => 'ERROR',
+              'result' => 'Ya existe un archivo con ese nombre'
+          ]);
+          //Storage::disk('local')->put('archivos/'.request('idProyecto').'/'.request('name').request('file')->extension(), request('file'));
+          Storage::putFileAs('archivos/'.request('idProyecto'), request('file'), request('name'));
 
           //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
 
           return response()->json([
               'status' => 'OK',
               'result' => 'Archivo subido correctamente',
-              'archivo' => 'Archivo '.$size
           ]);
+        }catch(Exception $e){
+
         }
 
+    }
+    public function obtenerArchivos(){
+          if(!Auth::check()){
+              return response()->json([
+                      'status' => 'ERROR',
+                      'result' => 'Inicia sesion para continuar'
+                ]);
+          }
+          $files = Storage::files('archivos/'.request('idProyecto'));
+          $nombres = array();
+          foreach ($files as $value) {
+              array_push($nombres, pathinfo($value, PATHINFO_BASENAME));
+          }
+          return response()->json([
+                'status' => 'OK',
+                'result' => $nombres
+          ]);
+    }
+
+    public function descargarArchivo($idProyecto, $nombre){
+        if(!Auth::check()){
+            return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Inicia sesion para continuar'
+              ]);
+        }
+        try{
+
+          //return response('Acceso denegado', 401);
+          return Storage::download('archivos/'.$idProyecto.'/'.$nombre, $nombre, []);
+        }catch(FileNotFoundException $e){
+          return response()->json([
+              'status' => 'ERROR',
+              'result' => 'Archivo no existe',
+          ]);
+        }
+    }
+
+    public function administrarArchivos(){
+        if(!Auth::check()){
+            return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Inicia sesion para continuar'
+              ]);
+        }
+
+        return view('admin_watch_files',  ['nombreVista'=> 'Archivos', 'iconoVista' => 'attach_file']);
+    }
+
+    public function obtenerArchivosGrupos(){
+        if(!Auth::check()){
+            return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'Inicia sesion para continuar'
+              ]);
+        }
+        $proyectosGrupo = ProyectoGrupo::where('idGrupo', request('idGrupo'))->get();
+        $result = array();
+        foreach ($proyectosGrupo as $value) {
+            $files = Storage::files('archivos/'.$value->idProyecto);
+
+            foreach ($files as $valor) {
+                array_push(
+                  $result,
+                  array(
+                    'idProyecto' => $value->idProyecto,
+                    'nombre' => pathinfo($valor, PATHINFO_BASENAME)
+                  )
+                );
+            }
+        }
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => $result
+        ]);
+    }
+    public function obtenerArchivosProyectos(){
+          if(!Auth::check()){
+              return response()->json([
+                      'status' => 'ERROR',
+                      'result' => 'Inicia sesion para continuar'
+                ]);
+          }
+          $files = Storage::files('archivos/'.request('idProyecto'));
+          $nombres = array();
+          foreach ($files as $value) {
+              array_push($nombres, array(
+                'idProyecto' => request('idProyecto'),
+                'nombre' => pathinfo($value, PATHINFO_BASENAME)));
+          }
+          return response()->json([
+                'status' => 'OK',
+                'result' => $nombres
+          ]);
     }
 }

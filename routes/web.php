@@ -25,6 +25,7 @@ Route::get('/administrarUsuarios','UsuariosControlador@administrarUsuarios');
 Route::get('/administrarProyectos','ProyectosControlador@administrarProyectos');
 Route::get('/administrarGrupos', 'GruposControlador@verGrupos');
 Route::get('/administrarBlogs', 'PublicacionControlador@administrarBlogs');
+Route::get('/administrarArchivos', 'ArchivosControlador@administrarArchivos');
 Route::get('/verGrupos', 'GruposControlador@verGrupos');
 Route::get('/agregarGrupo', 'GruposControlador@agregarGrupo');
 Route::post('/obtenerLiderTabla', 'GruposControlador@obtenerLiderTabla');
@@ -86,6 +87,8 @@ Route::post('/permisosDashboard', 'UsuariosControlador@permisosDashboard');
 Route::post('/editarPublicacion', 'PublicacionControlador@editarPublicacion');
 Route::post('/editarUsuario', 'UsuariosControlador@editarUsuario');
 Route::post('/subirEvidencia', 'TareaControlador@subirEvidencia');
+Route::post('/subirArchivo', 'ArchivosControlador@subirArchivo');
+Route::post('/obtenerArchivos', 'ArchivosControlador@obtenerArchivos');
 Route::post('/validarEvidencia', 'TareaControlador@validarEvidencia');
 Route::post('/rechazarEvidencia', 'TareaControlador@rechazarEvidencia');
 Route::post('/obtenerConversaciones', 'ChatControlador@obtenerConversaciones');
@@ -125,6 +128,9 @@ Route::post('/enviarMensaje', function(){
   ]);
 });
 Route::get('/descargarEvidencia/{idTarea}', 'TareaControlador@descargarEvidencia');
+Route::get('/descargarArchivo/{idProyecto}/file/{nombre}', 'ArchivosControlador@descargarArchivo');
+Route::post('/obtenerArchivosGrupos', 'ArchivosControlador@obtenerArchivosGrupos');
+Route::post('/obtenerArchivosProyectos', 'ArchivosControlador@obtenerArchivosProyectos');
 Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
 Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
 
