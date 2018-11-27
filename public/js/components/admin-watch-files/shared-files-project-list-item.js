@@ -23,14 +23,12 @@ Vue.component('shared-files-project-list-item', {
           style="word-break: break-all;">
           {{ projectInfo.descripcion }}
         </span>
-        <div class="col s12 m3">
-          <label class="right">
-            <button class="btn remove-button-background" 
-              title="Ver archivos"
-              @click="handleProjectSelected">
-              <i class="material-icons">remove_red_eye</i>
-            </button>
-          </label>
+        <div class="col s12">
+          <button class="btn remove-button-background right" 
+            title="Ver archivos"
+            @click="handleProjectSelected">
+            <i class="material-icons">remove_red_eye</i>
+          </button>
         </div>
       </div>
     </li>
