@@ -10,7 +10,33 @@ Vue.component('shared-files-project-list', {
     };
   },
   beforeCreate : function(){
-    // TODO : Fetch the list.
+    var authToken = document.querySelector(
+      'input[name="_token"]'
+    );
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the project list.
+    fetch('/obtenerProyectos', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      console.log(response);
+      if(response.status === 'OK'){
+        this.projectsInfo = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
   },
   computed : {
     // The list of projects that match the search pattern, if any.
@@ -75,6 +101,12 @@ Vue.component('shared-files-project-list', {
         v-if="noMatch">
         Ningún proyecto coincide con los criterios de búsqueda.
       </li>
+      <shared-files-project-list-item
+        v-for="projectInfo in projectsInfo"
+        @project-selected="handleProjectSelected"
+        :key="projectInfo.idProyecto"
+        :projectInfo="projectInfo">
+      </shared-files-project-list-item>
     </ul>
   `
 }); 

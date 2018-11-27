@@ -16,11 +16,13 @@ Vue.component('shared-files-project-list-item', {
     <li class="collection-item avatar">
       <i class="material-icons circle third-background">folder</i>
       <div class="row">
-        <div class="col s12 m9">
-          <span class="title truncate col s12">
-            Nombre del proyecto
-          </span>
-        </div>
+        <span class="title truncate col s12 hide-on-small-only">
+          {{ project.nombreProyecto }}
+        </span>
+        <span class="col s12 hide-on-small-only"
+          style="word-break: break-all;">
+          {{ project.descripcion }}
+        </span>
         <div class="col s12 m3">
           <label class="right">
             <button class="btn remove-button-background" 
