@@ -48,7 +48,7 @@ Vue.component('shared-files-list', {
     M.updateTextFields();
   },
   watch : {
-    selectedProject : function(){
+    /*selectedProject : function(){
       var authToken = document.querySelector(
         'input[name="_token"]'
       );
@@ -78,7 +78,7 @@ Vue.component('shared-files-list', {
         this.groupsInfo = groups;
         // TODO : Handle non 'OK' status.
       }.bind(this));
-    },
+    },*/
     selectedGroup : function(){
       var authToken = document.querySelector(
         'input[name="_token"]'
@@ -92,16 +92,17 @@ Vue.component('shared-files-list', {
 
       // The body of our request.
       var requestBody = { 
-        idProyecto : selectedGroup.idGrupo,
+        idProyecto : this.selectedGroup.idGrupo,
         _token : authToken.value
       };
 
       requestData.body = JSON.stringify(requestBody);
-
+      console.log('CHANGED');
       // Fetch the project list.
       fetch('/obtenerArchivosGrupos', requestData)
       .then(response => response.json())
       .then(function(response){
+        console.log(response);
         if(response.status === 'OK'){
           this.fileCounter = 0;
           var allFiles = [];
