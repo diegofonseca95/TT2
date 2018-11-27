@@ -1,7 +1,9 @@
 Vue.component('shared-files-list', {
   props : [
     'selectedProject',
-    'selectedGroup'
+    'selectedGroup',
+    'isProject',
+    'isGroup'
   ],
   data : function(){
     return {

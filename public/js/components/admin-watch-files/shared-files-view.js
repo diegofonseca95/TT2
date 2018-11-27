@@ -10,6 +10,11 @@ Vue.component('shared-files-view', {
       isGroup : false
     };
   },
+  computed : {
+    anythingSelected : function(){
+      return this.isGroup || this.isProject;
+    }
+  },
   methods : {
     handleProjectSelected : function(project){
       this.selectedProject = project;
@@ -95,6 +100,7 @@ Vue.component('shared-files-view', {
       <shared-files-list
         :selected-project="selectedProject"
         :selected-group="selectedGroup"
+        v-if="anythingSelected"
         :is-project="isProject"
         :is-group="isGroup">
       </shared-files-list>
