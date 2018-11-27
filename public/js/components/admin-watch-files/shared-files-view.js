@@ -1,6 +1,5 @@
 /*
-  This component represents the project list
-  in the files view.
+  This component represents the files view.
 */
 Vue.component('shared-files-view', {
   data : function(){
@@ -95,6 +94,8 @@ Vue.component('shared-files-view', {
       <!-- Files section Begins -->
 
       <!-- Files section Ends -->
+      <chat-sidenav-view>
+      </chat-sidenav-view>
     </div>
   `
 }); 
