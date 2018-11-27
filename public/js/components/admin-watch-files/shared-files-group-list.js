@@ -31,13 +31,11 @@ Vue.component('shared-files-group-list', {
     fetch('/obtenerGrupos', requestData)
     .then(response => response.json())
     .then(function(response){
-      if(response.status === 'OK'){
-        var groups = [];
-        for(var i in response){
-          groups.push(response[i]);
-        }
-        this.groupsInfo = groups;
+      var groups = [];
+      for(var i in response){
+        groups.push(response[i]);
       }
+      this.groupsInfo = groups;
       // TODO : Handle non 'OK' status.
     }.bind(this));
   },
