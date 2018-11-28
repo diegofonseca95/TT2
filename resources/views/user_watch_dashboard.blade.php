@@ -21,7 +21,7 @@
   {{ csrf_field() }}
 
   <!-- Navbar Begin -->
-  @include('systemnavbar');
+  @include('systemnavbar')
   <!-- Navbar End -->
 
   <input type="text" id="emisor" hidden=true value="1">

@@ -21,7 +21,7 @@
 
   @auth
     <!-- Navbar Begin -->
-    @include('systemnavbar');
+    @include('systemnavbar')
     <!-- Navbar End -->
   @endauth
 
