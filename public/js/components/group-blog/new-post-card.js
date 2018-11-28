@@ -185,6 +185,7 @@ Vue.component('new-post-card', {
       this.newPostContent = this.selectedPost.contenido;
       this.newPostTitle = this.selectedPost.titulo;
       // Recompute the size of the text areas.
+      console.log(this.selectedPost);
       var textarea = document.querySelector(
         '#new-post-card-title-input'
       );
