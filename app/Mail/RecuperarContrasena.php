@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use APP\Usuario;
+use APP\User;
 class RecuperarContrasena extends Mailable
 {
     use Queueable, SerializesModels;
@@ -17,7 +17,7 @@ class RecuperarContrasena extends Mailable
      *
      * @return void
      */
-    public function __construct(Usuario $usuario)
+    public function __construct(User $usuario)
     {
         $this->usuario = $usuario;
     }

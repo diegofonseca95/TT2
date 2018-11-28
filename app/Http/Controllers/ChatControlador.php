@@ -102,6 +102,7 @@ class ChatControlador extends Controller
         $conversaciones = UsuarioConversacion::where('idUsuario', Auth::id())->get();
         $result = array();
         foreach ($conversaciones as $value) {
+
             $conversacion = Conversacion::where('idConversacion', $value->idConversacion)->first();
             $usuarios = UsuarioConversacion::where('idConversacion', $value->idConversacion)->get();
             $idUsuarios = array();
@@ -112,6 +113,7 @@ class ChatControlador extends Controller
                 'conversacion' => $conversacion,
                 'users' => $idUsuarios
             ));
+            
         }
 
         return response()->json([

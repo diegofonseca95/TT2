@@ -27,13 +27,13 @@ class NotificacionesControlador extends Controller
          $conversacion = Conversacion::where('canal', 'private-chat.'.$user)->first();
          if(Conversacion::where('canal', 'private-chat.'.$user)->count() == 0){
            $nuevo = new Conversacion;
-           $nuevo->canal = 'private.chat.'.$user;
+           $nuevo->canal = 'private-chat.'.$user;
            $nuevo->save();
            $usuarioConversacion = new UsuarioConversacion;
            $usuarioConversacion->idUsuario = $user;
            $usuarioConversacion->idConversacion = $nuevo->idConversacion;
            $usuarioConversacion->save();
-           
+
            event(new NuevoMensaje($nuevo->idConversacion, $user, "chat", $nuevo, array($user)));
            event(new Chat($nuevo->idConversacion, $user, $mensaje));
            event(new NuevoMensaje($nuevo->idConversacion, $user, "mensaje", NULL, NULL));
