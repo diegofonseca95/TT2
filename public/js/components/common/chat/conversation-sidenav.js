@@ -116,6 +116,7 @@ Vue.component('conversation-sidenav', {
       if(!this.conversation.hasOwnProperty('idConversacion')){
         return;
       }
+      console.log(this.conversation);
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
