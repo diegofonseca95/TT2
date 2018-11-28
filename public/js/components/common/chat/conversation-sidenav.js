@@ -6,16 +6,23 @@ function ResizeConversationList(){
   var dividerRect = document.querySelector(
     '#conversation-sidenav-divider'
   ).getBoundingClientRect();
-  var footerRect = document.querySelector(
+  var footer = null;
+  footer = document.querySelector(
     '#conversation-sidenav-footer'
-  ).getBoundingClientRect();
+  );
+  var footerRect = null;
+  if(footer){
+    footerRect = footer.getBoundingClientRect();
+  }
   var container = document.querySelector(
     '#conversation-message-list'
   );
   var conversationHeight = window.innerHeight;
   conversationHeight -= dividerRect.height;
-  conversationHeight -= footerRect.height;
   conversationHeight -= headerRect.height;
+  if(footerRect){
+    conversationHeight -= footerRect.height;
+  }
   container.style.maxHeight = conversationHeight + 'px';
   container.style.height = conversationHeight + 'px';
 }
@@ -181,6 +188,7 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
+        v-if="conversation.users.length === 1"
         @keypress="resizeConversation">
         <div class="divider"></div>
         <conversation-new-message-box

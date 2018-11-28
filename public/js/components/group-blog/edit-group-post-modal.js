@@ -75,7 +75,7 @@ Vue.component('edit-group-post-modal', {
       this.hasValidFields = false;
       // Validate the form.
       $('#edit-group-post-modal-form').submit();
-      if(tinymce.get('edit-group-post-modal-content').getContent() === ''){
+      if(!tinymce.get('edit-group-post-modal-content').isDirty()){
         WarningToast('Ingresa el nuevo contenido.');
         return;
       }

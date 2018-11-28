@@ -68,7 +68,7 @@ Vue.component('new-post-card', {
       this.hasValidFields = false;
       // Validate the form.
       $('#new-post-card-form').submit();
-      if(tinymce.get('new-post-card-content-input').getContent() === ''){
+      if(!tinymce.get('new-post-card-content-input').isDirty()){
         WarningToast('Ingresa el contenido.');
         return;
       }
@@ -128,6 +128,7 @@ Vue.component('new-post-card', {
       .forEach(area => {
         M.textareaAutoResize(area);
       });
+      tinymce.get('new-post-card-content-input').setContent('');
       M.updateTextFields();
     }
   },
