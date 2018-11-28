@@ -5,7 +5,7 @@ const EditGroupPostModalFormValidateSettings = {
       required : true
     }
     /*,
-    'edit-group-post-modal-content-input' : {
+    'edit-group-post-modal-content' : {
       required : true
     }*/
   },
@@ -14,7 +14,7 @@ const EditGroupPostModalFormValidateSettings = {
       required : 'Ingresa el título de la publicación.'
     }
     /*,
-    'edit-group-post-modal-content-input' : {
+    'edit-group-post-modal-content' : {
       required : 'Ingresa el contenido de la publicación.'
     }*/
   },
@@ -65,8 +65,9 @@ Vue.component('edit-group-post-modal', {
     $('#edit-group-post-modal-form').validate(formSettings);
     // Initialize editor.
     var editorSettings = EditGroupPostModalTinyMCESettings;
-    editorSettings.selector = '#edit-group-post-modal-content-input';
+    editorSettings.selector = '#edit-group-post-modal-content';
     tinymce.init(editorSettings);
+    console.log(tinymce.get('edit-group-post-modal-content'));
     M.updateTextFields();
   },
   methods : {
@@ -75,7 +76,7 @@ Vue.component('edit-group-post-modal', {
       this.hasValidFields = false;
       // Validate the form.
       $('#edit-group-post-modal-form').submit();
-      if(tinymce.get('edit-group-post-modal-content-input').getContent() === ''){
+      if(tinymce.get('edit-group-post-modal-content').getContent() === ''){
         WarningToast('Ingresa el nuevo contenido.');
         return;
       }
@@ -96,7 +97,7 @@ Vue.component('edit-group-post-modal', {
 
       // The body of our request.
       var requestBody = { 
-        contenido : tinymce.get('edit-group-post-modal-content-input').getContent(),
+        contenido : tinymce.get('edit-group-post-modal-content').getContent(),
         idPublicacion : this.post.idPublicacion,
         titulo : this.newPostTitle,
         _token : authToken.value
@@ -149,13 +150,10 @@ Vue.component('edit-group-post-modal', {
       );
       textarea.value = this.post.titulo;
       M.textareaAutoResize(textarea);
-      // Initialize editor.
-      var editorSettings = EditGroupPostModalTinyMCESettings;
-      editorSettings.selector = '#edit-group-post-modal-content-input';
-      tinymce.init(editorSettings);
       tinymce.get(
-        'edit-group-post-modal-content-input'
+        'edit-group-post-modal-content'
       ).setContent(this.post.contenido);
+      tinymce.get('edit-group-post-modal-content').focus();
       M.updateTextFields();
     }
   },
@@ -180,8 +178,8 @@ Vue.component('edit-group-post-modal', {
               <div class="row">
                 <div class="input-field col s12">
                   <textarea class="materialize-textarea"
-                    name="edit-group-post-modal-content-input"
-                    id="edit-group-post-modal-content-input"></textarea>
+                    name="edit-group-post-modal-content"
+                    id="edit-group-post-modal-content"></textarea>
                 </div>
               </div>
             </form>
