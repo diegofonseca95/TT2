@@ -69,9 +69,9 @@
   <!-- Lists Begin -->
   <!-- Lists End -->
   <!-- Modals Begin -->
+  <script src="/js/components/group-blog/edit-group-post-modal.js"></script>
   <!-- Modals End -->
   <!-- Cards Begin -->
-  <script src="/js/components/group-blog/edit-group-post-card.js"></script>
   <script src="/js/components/group-blog/blog-info-card.js"></script>
   <script src="/js/components/group-blog/new-post-card.js"></script>
   <!-- Cards End -->
