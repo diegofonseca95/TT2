@@ -30,6 +30,7 @@ const EditGroupPostCardTinyMCESettings = {
   toolbar1 : 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
   image_advtab : true,
   theme : 'modern',
+  mode : 'exact',
   content_css : [
     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
     '//www.tinymce.com/css/codepen.min.css'
@@ -61,7 +62,7 @@ Vue.component('edit-group-post-card', {
     $('#edit-group-post-card-form').validate(formSettings);
     // Initialize editor.
     var editorSettings = EditGroupPostCardTinyMCESettings;
-    editorSettings.selector = '#edit-group-post-card-content';
+    editorSettings.elements = 'edit-group-post-card-content';
     tinymce.init(editorSettings);
     M.updateTextFields();
   },
