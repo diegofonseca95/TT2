@@ -57,10 +57,10 @@ Vue.component('new-post-card', {
     // Enable form validation.
     $('#new-post-card-form').validate(formSettings);
     // Initialize editor.
-    /*var editorSettings = NewPostCardTinyMCESettings;
+    var editorSettings = NewPostCardTinyMCESettings;
     editorSettings.selector = '#new-post-card-content-input';
     tinymce.init(editorSettings);
-    tinymce.get('new-post-card-content-input').setContent('');*/
+    tinymce.get('new-post-card-content-input').setContent('');
   },
   methods : {
     handlePostSubmitted : function(){

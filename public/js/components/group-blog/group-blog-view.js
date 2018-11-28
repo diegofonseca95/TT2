@@ -109,20 +109,6 @@ Vue.component('group-blog-view', {
       this.posts.push(newPost);
     }
   },
-  mounted : function(){
-      tinymce.init(
-    {
-  plugins : 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
-  toolbar1 : 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-  image_advtab : true,
-  theme : 'modern',
-  selector : 'textarea',
-  content_css : [
-    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-    '//www.tinymce.com/css/codepen.min.css'
-  ]
-});
-  },
   template : `
     <div class="row">
       <blog-info-card 
@@ -141,20 +127,13 @@ Vue.component('group-blog-view', {
         :key="post.idPublicacion"
         :post="post">
       </group-post>
-      <edit-group-post-card
+      <edit-group-post-modal
         @post-updated="handlePostUpdated"
         :post="selectedPost">
-      </edit-group-post-card>
+      </edit-group-post-modal>
       <chat-sidenav-view
         v-if="permissions.chat">
       </chat-sidenav-view>
     </div>
   `
 });
-/*
-
-      <edit-group-post-modal
-        @post-updated="handlePostUpdated"
-        :post="selectedPost">
-      </edit-group-post-modal>
-*/
