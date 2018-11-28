@@ -171,7 +171,9 @@ Vue.component('conversation-sidenav', {
   },
   computed : {
     isSystemConversation : function(){
-      return this.conversation.users.length === 1;
+      if(this.conversation.users)
+        return this.conversation.users.length === 1;
+      return false;
     }
   },
   template : `
