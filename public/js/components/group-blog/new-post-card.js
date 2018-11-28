@@ -198,11 +198,11 @@ Vue.component('new-post-card', {
   },
   computed : {
     cardTitle : function(){
-      if(editMode) return 'Editar Publicación';
+      if(this.editMode) return 'Editar Publicación';
       return 'Nueva Publicación';
     },
     buttonLabel : function(){
-      if(editMode) return 'Editar';
+      if(this.editMode) return 'Editar';
       return 'Publicar';
     }
   },
