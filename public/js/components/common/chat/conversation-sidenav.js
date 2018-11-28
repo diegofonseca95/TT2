@@ -44,7 +44,6 @@ Vue.component('conversation-sidenav', {
     };
   },
   mounted : function(){
-      console.log(this.conversation.users);
     // Get the sidenav element.
     var sidenav = document.querySelector(
       '#conversation-sidenav'
@@ -117,7 +116,6 @@ Vue.component('conversation-sidenav', {
       if(!this.conversation.hasOwnProperty('idConversacion')){
         return;
       }
-      console.log(this.conversation.users);
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
@@ -197,11 +195,11 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        :is-disabled="isSystemConversation"
         @keypress="resizeConversation">
         <div class="divider"></div>
         <conversation-new-message-box
-          @message-submitted="handleMessageSubmitted">
+          @message-submitted="handleMessageSubmitted"
+          :is-disabled="isSystemConversation">
         </conversation-new-message-box>
       </li>
     </ul>
