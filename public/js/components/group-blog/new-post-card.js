@@ -49,6 +49,7 @@ Vue.component('new-post-card', {
     tinymce.init({
       selector : '#new-post-card-content-input'
     });
+    tinymce.get('new-post-card-content-input').setContent('');
   },
   methods : {
     handlePostSubmitted : function(){
@@ -75,7 +76,8 @@ Vue.component('new-post-card', {
 
       // The body of our request.
       var requestBody = { 
-        contenido : this.newPostContent,
+        // contenido : this.newPostContent,
+        contenido : tinymce.get('new-post-card-content-input').getContent(),
         idGrupo : groupIdInput.value,
         titulo : this.newPostTitle,
         _token : authToken.value
@@ -139,8 +141,7 @@ Vue.component('new-post-card', {
                   <div class="input-field col s12">
                     <textarea class="materialize-textarea"
                       name="new-post-card-content-input"
-                      id="new-post-card-content-input"
-                      v-model:value="newPostContent"></textarea>
+                      id="new-post-card-content-input"></textarea>
                   </div>
                 </div>
               </form>
