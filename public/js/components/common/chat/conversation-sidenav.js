@@ -188,7 +188,7 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        v-if="conversation.users.length === 1"
+        v-if="conversation.users.length > 1"
         @keypress="resizeConversation">
         <div class="divider"></div>
         <conversation-new-message-box
