@@ -44,6 +44,7 @@ Vue.component('conversation-sidenav', {
     };
   },
   mounted : function(){
+      console.log(this.conversation.users);
     // Get the sidenav element.
     var sidenav = document.querySelector(
       '#conversation-sidenav'
@@ -116,7 +117,7 @@ Vue.component('conversation-sidenav', {
       if(!this.conversation.hasOwnProperty('idConversacion')){
         return;
       }
-      console.log(this.conversation);
+      console.log(this.conversation.users);
       var authToken = document.querySelector('input[name="_token"]');
 
       // Request data for the 'fetch' function.
