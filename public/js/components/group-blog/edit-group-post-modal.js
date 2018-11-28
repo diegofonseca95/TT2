@@ -150,6 +150,7 @@ Vue.component('edit-group-post-modal', {
       );
       textarea.value = this.post.titulo;
       M.textareaAutoResize(textarea);
+      console.log(tinymce.get('edit-group-post-modal-content'));
       tinymce.get(
         'edit-group-post-modal-content'
       ).setContent(this.post.contenido);
