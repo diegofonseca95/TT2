@@ -41,6 +41,10 @@ const NewPostCardTinyMCESettings = {
   in the group blog view.
 */
 Vue.component('new-post-card', {
+  props : [
+    'selectedPost',  // The post to be edited.
+    'editMode'
+  ],
   data : function(){
     return {
       newPostContent : '',    // The content of the new post.
@@ -56,6 +60,7 @@ Vue.component('new-post-card', {
     }.bind(this);
     // Enable form validation.
     $('#new-post-card-form').validate(formSettings);
+    M.updateTextFields();
     // Initialize editor.
     var editorSettings = NewPostCardTinyMCESettings;
     editorSettings.selector = '#new-post-card-content-input';
@@ -69,13 +74,55 @@ Vue.component('new-post-card', {
       // Validate the form.
       $('#new-post-card-form').submit();
       if(!tinymce.get('new-post-card-content-input').isDirty()){
-        WarningToast('Ingresa el contenido.');
-        return;
+        if(!this.editMode){
+          WarningToast('Ingresa el contenido.');
+          return;
+        }
       }
       // If the form is valid, this should be true.
       if(this.hasValidFields){
-        this.submitNewPost();
+        if(this.editMode){
+          this.updatePost();
+        }else{
+          this.submitNewPost();
+        }
       }
+    },
+    updatePost : function(){
+      // Get the group id from the hidden input.
+      var authToken = document.querySelector('input[name="_token"]');
+
+      // Request data for the 'fetch' function.
+      var requestData = {
+        headers: { 'Content-Type' : 'application/json' },
+        method : 'POST'
+      };
+
+      // The body of our request.
+      var requestBody = { 
+        contenido : tinymce.get('new-post-card-content-input').getContent(),
+        idPublicacion : this.post.idPublicacion,
+        titulo : this.newPostTitle,
+        _token : authToken.value
+      };
+
+      requestData.body = JSON.stringify(requestBody);
+
+      // Send the new post to the server.
+      fetch('/editarPublicacion', requestData)
+      .then(response => response.json())
+      .then(function(response){
+        if(response.status === 'OK'){
+          var newPost = response.publicacion;
+          newPost.permissions = response.permisos;
+          newPost.author = this.post.author;
+          this.$emit('post-updated', newPost);
+          SuccessToast(response.result);
+        }else{
+          WarningToast(response.result);
+        }
+      }.bind(this));
+      this.resetFormFields();
     },
     submitNewPost : function(){
       // Get the group id from the hidden input.
@@ -130,6 +177,23 @@ Vue.component('new-post-card', {
       });
       tinymce.get('new-post-card-content-input').setContent('');
       M.updateTextFields();
+    }
+  },
+  watch : {
+    selectedPost : function(){
+      // Update the values accordingly.
+      this.newPostContent = this.selectedPost.contenido;
+      this.newPostTitle = this.selectedPost.titulo;
+      // Recompute the size of the text areas.
+      var textarea = document.querySelector(
+        '#new-post-card-title-input'
+      );
+      textarea.value = this.post.titulo;
+      M.textareaAutoResize(textarea);
+      M.updateTextFields();
+      tinymce.get(
+        'new-post-card-content-input'
+      ).setContent(this.selectedPost.contenido);
     }
   },
   template : `

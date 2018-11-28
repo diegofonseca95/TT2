@@ -6,6 +6,7 @@ Vue.component('group-blog-view', {
     return {
       selectedPost : {},  // The post selected for editing.
       permissions : {},   // The view permissions.
+      editMode : false,
       posts : []          // The group posts.
     };
   },
@@ -77,6 +78,7 @@ Vue.component('group-blog-view', {
         }
         return updPost;
       });
+      this.editMode = false;
     },
     handlePostRejected : function(rejPost){
       // Replace the older post with the new one.
@@ -99,10 +101,11 @@ Vue.component('group-blog-view', {
     handlePostSelected : function(post){
       // Set the post for editing.
       this.selectedPost = post;
+      this.editMode = true;
       // Open the editing modal.
-      M.Modal.getInstance(
+      /*M.Modal.getInstance(
         document.querySelector('#edit-group-post-modal')
-      ).open();
+      ).open();*/
     },
     handlePostSubmitted : function(newPost){
       // Add the new post to the list.
@@ -116,7 +119,9 @@ Vue.component('group-blog-view', {
       </blog-info-card>
       <new-post-card
         @post-submitted="handlePostSubmitted"
-        v-if="permissions.crear">
+        :selected-post="selectedPost"
+        v-if="permissions.crear"
+        :edit-mode="editMode">
       </new-post-card>
       <group-post
         v-for="post in orderedList"
@@ -127,13 +132,15 @@ Vue.component('group-blog-view', {
         :key="post.idPublicacion"
         :post="post">
       </group-post>
-      <edit-group-post-modal
-        @post-updated="handlePostUpdated"
-        :post="selectedPost">
-      </edit-group-post-modal>
       <chat-sidenav-view
         v-if="permissions.chat">
       </chat-sidenav-view>
     </div>
   `
 });
+/*
+      <edit-group-post-modal
+        @post-updated="handlePostUpdated"
+        :post="selectedPost">
+      </edit-group-post-modal>
+*/

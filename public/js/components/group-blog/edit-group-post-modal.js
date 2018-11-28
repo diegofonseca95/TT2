@@ -67,7 +67,6 @@ Vue.component('edit-group-post-modal', {
     var editorSettings = EditGroupPostModalTinyMCESettings;
     editorSettings.selector = '#edit-group-post-modal-content';
     tinymce.init(editorSettings);
-    M.updateTextFields();
   },
   methods : {
     handlePostUpdated : function(){
