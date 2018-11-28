@@ -246,7 +246,7 @@ Vue.component('new-post-card', {
                   @click="handlePostSubmitted">
                   {{ buttonLabel }}
                 </a>
-                <a class="btn remove-button-background right"
+                <a class="btn remove-button-background low-margin-right right"
                   href="#!" title="Cancelar" v-if="editMode"
                   @click="handleCancelEditing">
                   Cancelar
