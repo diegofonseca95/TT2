@@ -26,7 +26,7 @@
   @endauth
 
   @guest
-    @include('systemnavbarnologin');
+    @include('systemnavbarnologin')
   @endguest
 
 
@@ -39,6 +39,7 @@
   <!-- Content End -->
 
   <!-- Scripts Begin -->
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=of56pozrmue1oxar4zrjvn2n56infrau6pczfe0jh0ij30a8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>

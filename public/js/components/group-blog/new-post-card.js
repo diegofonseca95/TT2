@@ -3,18 +3,20 @@ const NewPostCardFormValidateSettings = {
   rules : {
     'new-post-card-title-input' : {
       required : true
-    },
+    }
+    /*,
     'new-post-card-content-input' : {
       required : true
-    }
+    }*/
   },
   messages : {
     'new-post-card-title-input' : {
       required : 'Ingresa el título de la publicación.'
-    },
+    }
+    /*,
     'new-post-card-content-input' : {
       required : 'Ingresa el contenido de la publicación.'
-    }
+    }*/
   },
   errorPlacement : function(error, element){
     $(error).addClass('error-text');
@@ -43,6 +45,10 @@ Vue.component('new-post-card', {
     }.bind(this);
     // Enable form validation.
     $('#new-post-card-form').validate(formSettings);
+    // Initialize editor.
+    tinymce.init({
+      selector : '#new-post-card-content-input'
+    });
   },
   methods : {
     handlePostSubmitted : function(){
