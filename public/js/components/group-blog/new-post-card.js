@@ -141,9 +141,6 @@ Vue.component('new-post-card', {
                       name="new-post-card-content-input"
                       id="new-post-card-content-input"
                       v-model:value="newPostContent"></textarea>
-                    <label for="new-post-card-content-input">
-                      Contenido de la Publicación
-                    </label>
                   </div>
                 </div>
               </form>
