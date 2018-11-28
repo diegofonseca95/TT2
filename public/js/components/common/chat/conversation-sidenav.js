@@ -169,6 +169,11 @@ Vue.component('conversation-sidenav', {
       }.bind(this)); 
     }
   },
+  computed : {
+    isSystemConversation : function(){
+      return this.conversation.users.length === 1;
+    }
+  },
   template : `
     <ul id="conversation-sidenav" class="sidenav no-overflow">
       <li id="conversation-sidenav-header">
@@ -188,7 +193,7 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        v-if="conversation.users.length > 1"
+        :is-enabled="isSystemConversation"
         @keypress="resizeConversation">
         <div class="divider"></div>
         <conversation-new-message-box
