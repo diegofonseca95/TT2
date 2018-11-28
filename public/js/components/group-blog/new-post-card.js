@@ -101,7 +101,7 @@ Vue.component('new-post-card', {
       // The body of our request.
       var requestBody = { 
         contenido : tinymce.get('new-post-card-content-input').getContent(),
-        idPublicacion : this.post.idPublicacion,
+        idPublicacion : this.selectedPost.idPublicacion,
         titulo : this.newPostTitle,
         _token : authToken.value
       };
@@ -114,8 +114,8 @@ Vue.component('new-post-card', {
       .then(function(response){
         if(response.status === 'OK'){
           var newPost = response.publicacion;
+          newPost.author = this.selectedPost.author;
           newPost.permissions = response.permisos;
-          newPost.author = this.post.author;
           this.$emit('post-updated', newPost);
           SuccessToast(response.result);
         }else{
@@ -189,7 +189,7 @@ Vue.component('new-post-card', {
       var textarea = document.querySelector(
         '#new-post-card-title-input'
       );
-      textarea.value = this.post.titulo;
+      textarea.value = this.selectedPost.titulo;
       M.textareaAutoResize(textarea);
       M.updateTextFields();
       tinymce.get(
