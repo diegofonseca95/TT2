@@ -175,7 +175,7 @@ Vue.component('conversation-sidenav', {
     isSystemConversation : function(){
       if(this.conversation.users)
         return this.conversation.users.length === 1;
-      return false;
+      return true;
     }
   },
   template : `
