@@ -8,6 +8,7 @@ Vue.component('group-post', {
   ],
   mounted : function(){
     // Initialize the options dropdown.
+    document.getElementById(this.contentId).innerHTML = post.contenido;
     if(this.hasOptions){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
@@ -23,6 +24,9 @@ Vue.component('group-post', {
     triggerId : function(){
       // The trigger id.
       return 'group-post-trigger-' + this.post.idPublicacion;
+    },
+    contentId : function(){
+      return 'group-post-content-' + this.post.idPublicacion;
     },
     hasOptions : function(){
       return this.post.permissions.eliminar 
@@ -161,10 +165,7 @@ Vue.component('group-post', {
                 Publicado el: {{ post.fechaCreacion }}
               </span>
             </div>
-            <div class="row zero-margin">
-              <span class="col s12">
-                {{ post.contenido }}
-              </span>
+            <div class="row zero-margin" :id="contentId">
             </div>
           </div>
         </div>
