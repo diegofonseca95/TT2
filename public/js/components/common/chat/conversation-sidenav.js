@@ -195,7 +195,7 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        :is-enabled="isSystemConversation"
+        :is-disabled="isSystemConversation"
         @keypress="resizeConversation">
         <div class="divider"></div>
         <conversation-new-message-box
