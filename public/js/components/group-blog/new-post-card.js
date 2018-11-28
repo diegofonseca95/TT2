@@ -81,10 +81,10 @@ Vue.component('new-post-card', {
       }
       // If the form is valid, this should be true.
       if(this.hasValidFields){
-        if(this.editMode){
-          this.updatePost();
-        }else{
+        if(!this.editMode){
           this.submitNewPost();
+        }else{
+          this.updatePost();
         }
       }
     },
@@ -196,13 +196,23 @@ Vue.component('new-post-card', {
       ).setContent(this.selectedPost.contenido);
     }
   },
+  computed : {
+    cardTitle : function(){
+      if(editMode) return 'Editar Publicación';
+      return 'Nueva Publicación';
+    },
+    buttonLabel : function(){
+      if(editMode) return 'Editar';
+      return 'Publicar';
+    }
+  },
   template : `
     <div class="row zero-margin-bottom">
       <div class="col s12">
         <div class="card">
           <div class="card-content">
             <span class="card-title first-text">
-              <b>Nueva publicación</b>
+              <b>{{ cardTitle }}</b>
             </span>
             <div class="row">
               <form class="col s12" id="new-post-card-form">
@@ -231,7 +241,7 @@ Vue.component('new-post-card', {
                 <a class="btn remove-button-background right"
                   href="#!" title="Agregar Publicación"
                   @click="handlePostSubmitted">
-                  Publicar
+                  {{ buttonLabel }}
                 </a>
               </div>
             </div>

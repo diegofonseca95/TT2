@@ -119,6 +119,7 @@ Vue.component('group-blog-view', {
       </blog-info-card>
       <new-post-card
         @post-submitted="handlePostSubmitted"
+        @post-updated="handlePostUpdated"
         :selected-post="selectedPost"
         v-if="permissions.crear"
         :edit-mode="editMode">
