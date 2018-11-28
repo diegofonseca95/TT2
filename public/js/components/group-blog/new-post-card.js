@@ -118,11 +118,11 @@ Vue.component('new-post-card', {
           newPost.permissions = response.permisos;
           this.$emit('post-updated', newPost);
           SuccessToast(response.result);
+          this.resetFormFields();
         }else{
           WarningToast(response.result);
         }
       }.bind(this));
-      this.resetFormFields();
     },
     submitNewPost : function(){
       // Get the group id from the hidden input.
@@ -157,11 +157,11 @@ Vue.component('new-post-card', {
           newPost.author = response.autor;
           this.$emit('post-submitted', newPost);
           SuccessToast(response.result);
+          this.resetFormFields();
         }else{
           WarningToast(response.result);
         }
       }.bind(this));
-      this.resetFormFields();
     },
     resetFormFields : function(){
       // Reset component values.
@@ -208,7 +208,7 @@ Vue.component('new-post-card', {
     }
   },
   template : `
-    <div class="row zero-margin-bottom">
+    <div class="row zero-margin-bottom" id="new-post-card">
       <div class="col s12">
         <div class="card">
           <div class="card-content">

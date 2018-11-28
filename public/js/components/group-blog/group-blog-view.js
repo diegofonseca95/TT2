@@ -101,11 +101,10 @@ Vue.component('group-blog-view', {
     handlePostSelected : function(post){
       // Set the post for editing.
       this.selectedPost = post;
+      document.querySelector(
+        '#new-post-card'
+      ).scrollIntoView();
       this.editMode = true;
-      // Open the editing modal.
-      /*M.Modal.getInstance(
-        document.querySelector('#edit-group-post-modal')
-      ).open();*/
     },
     handlePostSubmitted : function(newPost){
       // Add the new post to the list.
