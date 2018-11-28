@@ -67,6 +67,7 @@ Vue.component('edit-group-post-modal', {
     var editorSettings = EditGroupPostModalTinyMCESettings;
     editorSettings.selector = '#edit-group-post-modal-content-input';
     tinymce.init(editorSettings);
+    M.updateTextFields();
   },
   methods : {
     handlePostUpdated : function(){
@@ -148,9 +149,14 @@ Vue.component('edit-group-post-modal', {
       );
       textarea.value = this.post.titulo;
       M.textareaAutoResize(textarea);
+      // Initialize editor.
+      var editorSettings = EditGroupPostModalTinyMCESettings;
+      editorSettings.selector = '#edit-group-post-modal-content-input';
+      tinymce.init(editorSettings);
       tinymce.get(
         'edit-group-post-modal-content-input'
       ).setContent(this.post.contenido);
+      M.updateTextFields();
     }
   },
   template : `
