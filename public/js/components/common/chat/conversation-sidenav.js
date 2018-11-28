@@ -109,6 +109,7 @@ Vue.component('conversation-sidenav', {
     }
   },
   updated : function(){
+    this.resizeConversation();
     this.scrollToBottom();
   },
   watch : {
@@ -163,6 +164,7 @@ Vue.component('conversation-sidenav', {
             NewMessage.idUsuario = data.user;
             this.messages.push(NewMessage);
           }.bind(this));
+          this.resizeConversation();
         }else{
           WarningToast(response.result);
         }
@@ -195,7 +197,8 @@ Vue.component('conversation-sidenav', {
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        @keypress="resizeConversation">
+        @keypress="resizeConversation"
+        v-if="!isSystemConversation">
         <div class="divider"></div>
         <conversation-new-message-box
           @message-submitted="handleMessageSubmitted"
