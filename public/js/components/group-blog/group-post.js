@@ -7,16 +7,21 @@ Vue.component('group-post', {
     'post'  // The post represented by the component.
   ],
   mounted : function(){
-    // Initialize the options dropdown.
     document.getElementById(
       this.contentId
     ).innerHTML = this.post.contenido;
+    // Initialize the options dropdown.
     if(this.hasOptions){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
         { alignment : 'right', constrainWidth : false }
       );
     }
+  },
+  updated : function(){
+    document.getElementById(
+      this.contentId
+    ).innerHTML = this.post.contenido;
   },
   computed : {
     dropdownId : function(){
