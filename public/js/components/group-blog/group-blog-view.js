@@ -127,13 +127,20 @@ Vue.component('group-blog-view', {
         :key="post.idPublicacion"
         :post="post">
       </group-post>
-      <edit-group-post-modal
+      <edit-group-post-card
         @post-updated="handlePostUpdated"
         :post="selectedPost">
-      </edit-group-post-modal>
+      </edit-group-post-card>
       <chat-sidenav-view
         v-if="permissions.chat">
       </chat-sidenav-view>
     </div>
   `
 });
+/*
+
+      <edit-group-post-modal
+        @post-updated="handlePostUpdated"
+        :post="selectedPost">
+      </edit-group-post-modal>
+*/
