@@ -177,6 +177,9 @@ Vue.component('new-post-card', {
       });
       tinymce.get('new-post-card-content-input').setContent('');
       M.updateTextFields();
+    },
+    handleCancelEditing : function(){
+      this.$emit('edit-cancelled');
     }
   },
   watch : {
@@ -185,7 +188,6 @@ Vue.component('new-post-card', {
       this.newPostContent = this.selectedPost.contenido;
       this.newPostTitle = this.selectedPost.titulo;
       // Recompute the size of the text areas.
-      console.log(this.selectedPost);
       var textarea = document.querySelector(
         '#new-post-card-title-input'
       );
@@ -243,6 +245,11 @@ Vue.component('new-post-card', {
                   href="#!" title="Agregar Publicación"
                   @click="handlePostSubmitted">
                   {{ buttonLabel }}
+                </a>
+                <a class="btn remove-button-background right"
+                  href="#!" title="Cancelar" v-if="editMode"
+                  @click="handleCancelEditing">
+                  Cancelar
                 </a>
               </div>
             </div>

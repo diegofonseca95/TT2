@@ -109,6 +109,13 @@ Vue.component('group-blog-view', {
     handlePostSubmitted : function(newPost){
       // Add the new post to the list.
       this.posts.push(newPost);
+    },
+    handleCancelEditing : function(){
+      this.selectedPost = {
+        contenido : '',
+        titulo : ''
+      };
+      this.editMode = false;
     }
   },
   template : `
@@ -118,6 +125,7 @@ Vue.component('group-blog-view', {
       </blog-info-card>
       <new-post-card
         @post-submitted="handlePostSubmitted"
+        @edit-cancelled="handleCancelEditing"
         @post-updated="handlePostUpdated"
         :selected-post="selectedPost"
         v-if="permissions.crear"
