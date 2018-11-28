@@ -8,7 +8,9 @@ Vue.component('group-post', {
   ],
   mounted : function(){
     // Initialize the options dropdown.
-    document.getElementById(this.contentId).innerHTML = post.contenido;
+    document.getElementById(
+      this.contentId
+    ).innerHTML = this.post.contenido;
     if(this.hasOptions){
       M.Dropdown.init(
         document.getElementById(this.triggerId),
