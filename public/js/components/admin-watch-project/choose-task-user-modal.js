@@ -1,41 +1,13 @@
 Vue.component('choose-task-user-modal', {
-  props : ['projectMembers'],
+  props : [
+    'runningIterations',
+    'projectMembers'
+  ],
   data : function(){
     return {
       chosenIteration : 0,
-      chosenUser : null,
-      iterations : []
+      chosenUser : null
     };
-  },
-  beforeCreate : function(){
-    // Get the project id from the hidden input.
-    var projectIdInput = document.querySelector('input[name="project-id"]');
-
-    var authToken = document.querySelector('input[name="_token"]');
-
-    // Request data for the 'fetch' function.
-    var requestData = {
-      headers: { 'Content-Type' : 'application/json' },
-      method : 'POST'
-    };
-
-    // The body of our request.
-    var requestBody = { 
-      idProyecto : projectIdInput.value,
-      _token : authToken.value
-    };
-
-    requestData.body = JSON.stringify(requestBody);
-
-    // Fetch the sprint list.
-    fetch('/obtenerSprintsActivos', requestData)
-    .then(response => response.json())
-    .then(function(response){
-      if(response.status === 'OK'){
-        this.iterations = response.result;
-      }
-      // TODO : Handle non 'OK' status.
-    }.bind(this));
   },
   methods : {
     handleTaskUserChosen : function(user){
@@ -65,7 +37,11 @@ Vue.component('choose-task-user-modal', {
   },
   mounted : function(){
     var modal = document.querySelector('#choose-task-user-modal');
-    M.Modal.init(modal);
+    M.Modal.init(modal, {
+      onOpenStart : function(){
+        this.$emit('task-modal-opened');
+      }.bind(this)
+    });
   },
   updated : function(){
     var select = document.querySelector('#task-iteration-select');
@@ -84,7 +60,7 @@ Vue.component('choose-task-user-modal', {
                   <div class="input-field col s12">
                     <select id="task-iteration-select">
                       <option value="0" disabled selected>Selecciona iteración de la tarea</option>
-                      <option v-for="iteration in iterations" 
+                      <option v-for="iteration in runningIterations" 
                         :value="iteration.idSprint">Iteración {{ iteration.numeroSprint }} 
                         [{{ iteration.fecha_inicio }} &rarr; {{ iteration.fecha_fin }}]</option>
                     </select>
@@ -112,3 +88,36 @@ Vue.component('choose-task-user-modal', {
     </div>
   `
 });
+/*,
+      iterations : []
+*/
+  /*beforeCreate : function(){
+    // Get the project id from the hidden input.
+    var projectIdInput = document.querySelector('input[name="project-id"]');
+
+    var authToken = document.querySelector('input[name="_token"]');
+
+    // Request data for the 'fetch' function.
+    var requestData = {
+      headers: { 'Content-Type' : 'application/json' },
+      method : 'POST'
+    };
+
+    // The body of our request.
+    var requestBody = { 
+      idProyecto : projectIdInput.value,
+      _token : authToken.value
+    };
+
+    requestData.body = JSON.stringify(requestBody);
+
+    // Fetch the sprint list.
+    fetch('/obtenerSprintsActivos', requestData)
+    .then(response => response.json())
+    .then(function(response){
+      if(response.status === 'OK'){
+        this.iterations = response.result;
+      }
+      // TODO : Handle non 'OK' status.
+    }.bind(this));
+  },*/

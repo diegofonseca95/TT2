@@ -1,5 +1,6 @@
 Vue.component('tasks-card', {
   props : [
+    'runningIterations',
     'projectMembers',
     'permissions',
     'tasks'
@@ -48,6 +49,9 @@ Vue.component('tasks-card', {
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
+    },
+    handleTaskModalOpened : function(){
+      this.$emit('task-modal-opened');
     }
   },
   template : `
@@ -64,6 +68,8 @@ Vue.component('tasks-card', {
         </task-list>
         <choose-task-user-modal 
           @task-user-submitted="handleTaskUserSubmitted($event)"
+          @task-modal-opened="handleTaskModalOpened"
+          :running-iterations="runningIterations"
           :project-members="projectMembers"
           v-if="permissions.editar">
         </choose-task-user-modal>
