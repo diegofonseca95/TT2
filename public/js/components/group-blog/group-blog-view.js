@@ -83,7 +83,7 @@ Vue.component('group-blog-view', {
       this.posts = this.posts.filter(post => {
         return post.idPublicacion !== updPost.idPublicacion;
       });
-      this.posts.push(updPost);
+      this.posts.unshift(updPost);
       this.editMode = false;
     },
     handlePostRejected : function(rejPost){
