@@ -196,6 +196,7 @@ Vue.component('conversation-sidenav', {
       <li id="conversation-message-list-container"
         class="zero-margin">
         <conversation-message-list
+          :is-system-conversation="isSystemConversation"
           :messages="messages"
           :users="users">
         </conversation-message-list>
