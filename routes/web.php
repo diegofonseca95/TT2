@@ -60,6 +60,7 @@ Route::post('/obtenerIdUsuariosProyecto', 'ProyectosControlador@obtenerUsuariosP
 Route::post('/agregarUsuariosProyecto', 'UsuarioProyectoGrupoControlador@agregarUsuarioProyecto');
 Route::post('/eliminarUsuarioProyecto', 'UsuarioProyectoGrupoControlador@eliminarUsuarioProyecto');
 Route::get('/cerrarSesion', 'SesionControlador@cerrarSesion');
+Route::get('/cerrarSesionBlog', 'SesionControlador@cerrarSesionBlog');
 Route::post('/obtenerProyecto', 'ProyectosControlador@obtenerProyecto');
 Route::post('/editarProyecto', 'ProyectosControlador@editarProyecto');
 Route::post('/agregarSprint', 'SprintControlador@agregarSprint');
@@ -132,12 +133,6 @@ Route::get('/descargarArchivo/{idProyecto}/file/{nombre}', 'ArchivosControlador@
 Route::post('/obtenerArchivosGrupos', 'ArchivosControlador@obtenerArchivosGrupos');
 Route::post('/obtenerArchivosProyectos', 'ArchivosControlador@obtenerArchivosProyectos');
 Route::get('/verDashboard', 'UsuariosControlador@verDashboard');
-Route::get('test/{user}/mensaje/{message}', function ($user, $message) {
-
-	  /*App\Events\Chat::dispatch('Someone');*/
-    event(new App\Events\Chat(1,2, $message));
-    return "Event has been sent!";
-});
 Route::post('/Chat', function(){
 			event(new App\Events\Chat(request('emisor'), request('receptor'), request('mensaje')));
 });

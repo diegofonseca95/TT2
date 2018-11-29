@@ -18,6 +18,7 @@ use App\UsuarioConversacion;
 use App\Mensaje;
 use App\Events\Chat;
 use App\Events\NuevoMensaje;
+use Illuminate\Support\Facades\Crypt;
 
 class ChatControlador extends Controller
 {
@@ -83,7 +84,7 @@ class ChatControlador extends Controller
                   'result' => 'Inicia sesion para continuar'
             ]);
         }
-        event(new Chat(request('idConversacion'), Auth::id(), request('mensaje')));
+        event(new Chat(request('idConversacion'), Auth::id(), Crypt::encrypt(request('mensaje'))));
 
         return response()->json([
               'status' => 'OK'
@@ -101,6 +102,7 @@ class ChatControlador extends Controller
         $conversaciones = UsuarioConversacion::where('idUsuario', Auth::id())->get();
         $result = array();
         foreach ($conversaciones as $value) {
+
             $conversacion = Conversacion::where('idConversacion', $value->idConversacion)->first();
             $usuarios = UsuarioConversacion::where('idConversacion', $value->idConversacion)->get();
             $idUsuarios = array();
@@ -111,6 +113,7 @@ class ChatControlador extends Controller
                 'conversacion' => $conversacion,
                 'users' => $idUsuarios
             ));
+            
         }
 
         return response()->json([

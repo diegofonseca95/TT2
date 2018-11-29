@@ -3,6 +3,9 @@
   in the sidenav chat.
 */
 Vue.component('conversation-new-message-box', {
+  props : [
+    'isDisabled'
+  ],
   data : function(){
     return {
       newMessage : ''   // The message to be sent.
@@ -10,6 +13,9 @@ Vue.component('conversation-new-message-box', {
   },
   methods : {
     handleMessageSubmitted : function(){
+      if(this.isDisabled){
+        return;
+      }
       // Check if the message is not empty.
       if(this.newMessage !== ''){
         // Send the new message to the parent.
@@ -40,7 +46,7 @@ Vue.component('conversation-new-message-box', {
         </div>
       </div>
       <div class="col s2">
-        <a href="#!">
+        <a href="#!" :class="{ disabled : isDisabled }">
           <i title="Enviar mensaje" class="material-icons"
             @click="handleMessageSubmitted">send</i>
         </a>

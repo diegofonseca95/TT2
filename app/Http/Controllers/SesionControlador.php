@@ -93,7 +93,10 @@ class SesionControlador extends Controller
         Auth::logout();
         return view('index');
     }
-
+    public function cerrarSesionBlog(){
+        Auth::logout();
+        return back();
+    }
     public function testChat(){
         $user = Auth::id();
         return view('user_watch_dashboard', ['idUsuario' => $user, 'nombreVista' => 'Principal', 'iconoVista' => 'contacts']);

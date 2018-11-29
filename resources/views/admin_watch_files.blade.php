@@ -18,7 +18,7 @@
   {{ csrf_field() }}
 
   <!-- Navbar Begin -->
-  @include('systemnavbar');
+  @include('systemnavbar')
   <!-- Navbar End -->
 
   <!-- Content begin -->

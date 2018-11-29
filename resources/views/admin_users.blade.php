@@ -14,7 +14,7 @@
     <body class="page-background">
         {{csrf_field()}}
         <!-- Navbar Begin -->
-          @include('systemnavbar');
+          @include('systemnavbar')
         <!-- Navbar End -->
         <!-- Content Begin -->
         <div class="container">

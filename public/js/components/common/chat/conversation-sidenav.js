@@ -6,16 +6,23 @@ function ResizeConversationList(){
   var dividerRect = document.querySelector(
     '#conversation-sidenav-divider'
   ).getBoundingClientRect();
-  var footerRect = document.querySelector(
+  var footer = null;
+  footer = document.querySelector(
     '#conversation-sidenav-footer'
-  ).getBoundingClientRect();
+  );
+  var footerRect = null;
+  if(footer){
+    footerRect = footer.getBoundingClientRect();
+  }
   var container = document.querySelector(
     '#conversation-message-list'
   );
   var conversationHeight = window.innerHeight;
   conversationHeight -= dividerRect.height;
-  conversationHeight -= footerRect.height;
   conversationHeight -= headerRect.height;
+  if(footerRect){
+    conversationHeight -= footerRect.height;
+  }
   container.style.maxHeight = conversationHeight + 'px';
   container.style.height = conversationHeight + 'px';
 }
@@ -102,6 +109,7 @@ Vue.component('conversation-sidenav', {
     }
   },
   updated : function(){
+    this.resizeConversation();
     this.scrollToBottom();
   },
   watch : {
@@ -156,18 +164,30 @@ Vue.component('conversation-sidenav', {
             NewMessage.idUsuario = data.user;
             this.messages.push(NewMessage);
           }.bind(this));
+          this.resizeConversation();
         }else{
           WarningToast(response.result);
         }
       }.bind(this)); 
     }
   },
+  computed : {
+    isSystemConversation : function(){
+      if(this.conversation.users)
+        return this.conversation.users.length === 1;
+      return true;
+    },
+    conversationLabel : function(){
+      if(this.isSystemConversation) return 'Notificaciones';
+      return 'Conversacion';
+    } 
+  },
   template : `
     <ul id="conversation-sidenav" class="sidenav no-overflow">
       <li id="conversation-sidenav-header">
         <a href="#!">
           <i class="material-icons">message</i>
-          Conversacion
+          {{ conversationLabel }}
         </a>
       </li>
       <li id="conversation-sidenav-divider">
@@ -176,15 +196,18 @@ Vue.component('conversation-sidenav', {
       <li id="conversation-message-list-container"
         class="zero-margin">
         <conversation-message-list
+          :is-system-conversation="isSystemConversation"
           :messages="messages"
           :users="users">
         </conversation-message-list>
       </li>
       <li id="conversation-sidenav-footer"
-        @keypress="resizeConversation">
+        @keypress="resizeConversation"
+        v-if="!isSystemConversation">
         <div class="divider"></div>
         <conversation-new-message-box
-          @message-submitted="handleMessageSubmitted">
+          @message-submitted="handleMessageSubmitted"
+          :is-disabled="isSystemConversation">
         </conversation-new-message-box>
       </li>
     </ul>

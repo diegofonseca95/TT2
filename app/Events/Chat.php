@@ -12,6 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\User;
 use App\Mensaje;
 use App\UsuarioConversacion;
+use Illuminate\Support\Facades\Crypt;
 
 class Chat implements ShouldBroadcast
 {
@@ -28,6 +29,7 @@ class Chat implements ShouldBroadcast
      */
     public function __construct($idChat, $user, $message)
     {
+
         $this->idChat = $idChat;
         $this->user = $user;
         $usuarioConversacion = UsuarioConversacion::where([['idConversacion', $idChat],['idUsuario', $user]])->first();
@@ -35,12 +37,8 @@ class Chat implements ShouldBroadcast
         $temp->idUsuarioConversacion = $usuarioConversacion->idUsuarioConversacion;
         $temp->contenido = $message;
         $temp->save();
-
         $this->message = $temp;
-
-
-
-
+        //$this->message->contenido = decrypt($this->message->contenido);
 
     }
 

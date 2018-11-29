@@ -15,7 +15,7 @@
 
 <body class="page-background">
   <!-- Navbar Begin -->
-  @include('systemnavbar');
+  @include('systemnavbar')
   <!-- Navbar End -->
 
   <!-- Content begin -->
@@ -90,7 +90,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{ asset('img/blog.JPG') }}">
+            <img class="activator" src="{{ asset('img/blog.jpg') }}">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Blogs<i class="material-icons right">more_vert</i></span>

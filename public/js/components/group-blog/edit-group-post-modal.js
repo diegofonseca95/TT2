@@ -3,24 +3,37 @@ const EditGroupPostModalFormValidateSettings = {
   rules : {
     'edit-group-post-modal-title-input' : {
       required : true
-    },
-    'edit-group-post-modal-content-input' : {
-      required : true
     }
+    /*,
+    'edit-group-post-modal-content' : {
+      required : true
+    }*/
   },
   messages : {
     'edit-group-post-modal-title-input' : {
       required : 'Ingresa el título de la publicación.'
-    },
-    'edit-group-post-modal-content-input' : {
-      required : 'Ingresa el contenido de la publicación.'
     }
+    /*,
+    'edit-group-post-modal-content' : {
+      required : 'Ingresa el contenido de la publicación.'
+    }*/
   },
   errorPlacement : function(error, element){
     $(error).addClass('error-text');
     error.insertAfter(element);
   },
   errorElement : 'div'
+};
+
+const EditGroupPostModalTinyMCESettings = {
+  plugins : 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
+  toolbar1 : 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+  image_advtab : true,
+  theme : 'modern',
+  content_css : [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'
+  ]
 };
 
 /*
@@ -50,6 +63,10 @@ Vue.component('edit-group-post-modal', {
     }.bind(this);
     // Enable form validation.
     $('#edit-group-post-modal-form').validate(formSettings);
+    // Initialize editor.
+    var editorSettings = EditGroupPostModalTinyMCESettings;
+    editorSettings.selector = '#edit-group-post-modal-content';
+    tinymce.init(editorSettings);
   },
   methods : {
     handlePostUpdated : function(){
@@ -57,6 +74,10 @@ Vue.component('edit-group-post-modal', {
       this.hasValidFields = false;
       // Validate the form.
       $('#edit-group-post-modal-form').submit();
+      if(!tinymce.get('edit-group-post-modal-content').isDirty()){
+        WarningToast('Ingresa el nuevo contenido.');
+        return;
+      }
       // If the form is valid, this should be true.
       if(this.hasValidFields){
         this.updatePost();
@@ -74,8 +95,8 @@ Vue.component('edit-group-post-modal', {
 
       // The body of our request.
       var requestBody = { 
+        contenido : tinymce.get('edit-group-post-modal-content').getContent(),
         idPublicacion : this.post.idPublicacion,
-        contenido : this.newPostContent,
         titulo : this.newPostTitle,
         _token : authToken.value
       };
@@ -127,11 +148,10 @@ Vue.component('edit-group-post-modal', {
       );
       textarea.value = this.post.titulo;
       M.textareaAutoResize(textarea);
-      textarea = document.querySelector(
-        '#edit-group-post-modal-content-input'
-      );
-      textarea.value = this.post.contenido;
-      M.textareaAutoResize(textarea);
+      tinymce.get(
+        'edit-group-post-modal-content'
+      ).setContent(this.post.contenido);
+      tinymce.get('edit-group-post-modal-content').render();
       M.updateTextFields();
     }
   },
@@ -156,12 +176,8 @@ Vue.component('edit-group-post-modal', {
               <div class="row">
                 <div class="input-field col s12">
                   <textarea class="materialize-textarea"
-                    name="edit-group-post-modal-content-input"
-                    id="edit-group-post-modal-content-input"
-                    v-model:value="newPostContent"></textarea>
-                  <label for="edit-group-post-modal-content-input">
-                    Contenido de la Publicación
-                  </label>
+                    name="edit-group-post-modal-content"
+                    id="edit-group-post-modal-content"></textarea>
                 </div>
               </div>
             </form>

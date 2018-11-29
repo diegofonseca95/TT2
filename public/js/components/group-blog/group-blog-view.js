@@ -6,6 +6,7 @@ Vue.component('group-blog-view', {
     return {
       selectedPost : {},  // The post selected for editing.
       permissions : {},   // The view permissions.
+      editMode : false,
       posts : []          // The group posts.
     };
   },
@@ -59,7 +60,15 @@ Vue.component('group-blog-view', {
   },
   computed : {
     orderedList : function(){
-      return this.posts.reverse();
+      return this.posts.sort(function(pA, pB){
+        if(pA.fechaCreacion < pB.fechaCreacion){
+          return +1;
+        }
+        if(pB.fechaCreacion < pA.fechaCreacion){
+          return -1;
+        }
+        return 0;
+      });
     }
   },
   methods : {
@@ -71,12 +80,11 @@ Vue.component('group-blog-view', {
     },
     handlePostUpdated : function(updPost){
       // Replace the older post with the new one.
-      this.posts = this.posts.map(post => {
-        if(post.idPublicacion !== updPost.idPublicacion){
-          return post;
-        }
-        return updPost;
+      this.posts = this.posts.filter(post => {
+        return post.idPublicacion !== updPost.idPublicacion;
       });
+      this.posts.unshift(updPost);
+      this.editMode = false;
     },
     handlePostRejected : function(rejPost){
       // Replace the older post with the new one.
@@ -99,14 +107,21 @@ Vue.component('group-blog-view', {
     handlePostSelected : function(post){
       // Set the post for editing.
       this.selectedPost = post;
-      // Open the editing modal.
-      M.Modal.getInstance(
-        document.querySelector('#edit-group-post-modal')
-      ).open();
+      document.querySelector(
+        '#new-post-card'
+      ).scrollIntoView();
+      this.editMode = true;
     },
     handlePostSubmitted : function(newPost){
       // Add the new post to the list.
       this.posts.push(newPost);
+    },
+    handleCancelEditing : function(){
+      this.selectedPost = {
+        contenido : '',
+        titulo : ''
+      };
+      this.editMode = false;
     }
   },
   template : `
@@ -116,7 +131,11 @@ Vue.component('group-blog-view', {
       </blog-info-card>
       <new-post-card
         @post-submitted="handlePostSubmitted"
-        v-if="permissions.crear">
+        @edit-cancelled="handleCancelEditing"
+        @post-updated="handlePostUpdated"
+        :selected-post="selectedPost"
+        v-if="permissions.crear"
+        :edit-mode="editMode">
       </new-post-card>
       <group-post
         v-for="post in orderedList"
@@ -127,13 +146,15 @@ Vue.component('group-blog-view', {
         :key="post.idPublicacion"
         :post="post">
       </group-post>
-      <edit-group-post-modal
-        @post-updated="handlePostUpdated"
-        :post="selectedPost">
-      </edit-group-post-modal>
       <chat-sidenav-view
         v-if="permissions.chat">
       </chat-sidenav-view>
     </div>
   `
 });
+/*
+      <edit-group-post-modal
+        @post-updated="handlePostUpdated"
+        :post="selectedPost">
+      </edit-group-post-modal>
+*/

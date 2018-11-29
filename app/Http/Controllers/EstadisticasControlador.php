@@ -66,7 +66,7 @@ class EstadisticasControlador extends Controller
                   array_push($ids, $value->idProyecto);
               }
               $estadisticas[$value->idGrupo] = Proyecto::whereIn('idProyecto', $ids)->where('estado', 1)->count();
-              $eliminados[$value->idGrupo] = Proyecto::whereIn('idProyecto', $ids)->where('estado', 3)->count();
+              $eliminados[$value->idGrupo] = Proyecto::whereIn('idProyecto', $ids)->where('estado', 2)->count();
           }
 
           return response()->json([

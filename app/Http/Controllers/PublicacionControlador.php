@@ -23,7 +23,7 @@ class PublicacionControlador extends Controller
     public function publicacionesGrupo($idGrupo){
 
       $grupo = Grupo::where('idGrupo', $idGrupo)->first();
-   		return view('group_blog', ['idGrupo'=> $idGrupo, 'nombreVista' => $grupo->nombreGrupo, 'iconoVista' => 'android']);
+   		return view('group_blog', ['idGrupo'=> $idGrupo, 'nombreVista' => $grupo->nombreGrupo, 'iconoVista' => 'rate_review']);
     }
 
     public function agregarPublicacion(){
@@ -235,6 +235,7 @@ class PublicacionControlador extends Controller
       $publicacion->contenido = request('contenido');
       $publicacion->estadoPublicacion = 2;
       $publicacion->save();
+      $publicacion = Publicaciones::findOrFail(request('idPublicacion'));
       $id = Auth::id();
       $permisos = array(
           'eliminar' => $id == $liderGrupo->idUsuario,

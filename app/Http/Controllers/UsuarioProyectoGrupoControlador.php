@@ -13,7 +13,7 @@ use App\AdministradorProyecto;
 use App\UsuarioProyectoGrupo;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use App\Events\Logs;
 class UsuarioProyectoGrupoControlador extends Controller
 {
     public function obtenerInformacion(){
@@ -71,25 +71,29 @@ class UsuarioProyectoGrupoControlador extends Controller
 
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
 
-        try{
-            foreach($nuevos as $value){
-                usuarioProyectoGrupo::where([
-                    ['idUsuario', '=', $value],
-                    ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
-                )->firstOrFail();
 
-                usuarioProyectoGrupo::where([
-                    ['idUsuario', '=', $value],
-                    ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
-                )->update(['estado' => 1]);
-            }
-        }catch(ModelNotFoundException $e){
-                $usuario = new usuarioProyectoGrupo;
-                $usuario->idUsuario = $value;
-                $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
-                $usuario->save();
+        foreach($nuevos as $value){
+          try{
+              usuarioProyectoGrupo::where([
+                  ['idUsuario', '=', $value],
+                  ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
+              )->firstOrFail();
 
+              usuarioProyectoGrupo::where([
+                  ['idUsuario', '=', $value],
+                  ['idProyectoGrupo','=', $proyectoGrupo->idProyectoGrupo]]
+              )->update(['estado' => 1]);
+          }catch(ModelNotFoundException $e){
+                  $usuario = new usuarioProyectoGrupo;
+                  $usuario->idUsuario = $value;
+                  $usuario->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
+                  $usuario->save();
+
+          }
+          $persona = User::where('idUsuario', $value)->first();
+          event(new Logs(request('idProyecto'), Auth::id(), 'ha agregado a '.$persona->nombre.' '.$persona->apellidoPaterno.' '.$persona->apellidoMaterno ));
         }
+
 
 
         return response()->json([
@@ -123,7 +127,9 @@ class UsuarioProyectoGrupoControlador extends Controller
         }
 
         UsuarioProyectoGrupo::where([['idProyectoGrupo', '=', $pg->idProyectoGrupo],['idUsuario', '=', request('idUsuario')]])->update(['estado' => 3]);
+        $persona = User::where('idUsuario', request('idUsuario'))->first();
 
+        event(new Logs(request('idProyecto'), Auth::id(), 'ha eliminado a '.$persona->nombre.' '.$persona->apellidoPaterno.' '.$persona->apellidoMaterno ));
         return response()->json([
             'status' => 'OK',
             'result' => 'Usuario eliminado del proyecto'

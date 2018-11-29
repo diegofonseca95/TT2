@@ -7,6 +7,9 @@ Vue.component('group-post', {
     'post'  // The post represented by the component.
   ],
   mounted : function(){
+    document.getElementById(
+      this.contentId
+    ).innerHTML = this.post.contenido;
     // Initialize the options dropdown.
     if(this.hasOptions){
       M.Dropdown.init(
@@ -14,6 +17,11 @@ Vue.component('group-post', {
         { alignment : 'right', constrainWidth : false }
       );
     }
+  },
+  updated : function(){
+    document.getElementById(
+      this.contentId
+    ).innerHTML = this.post.contenido;
   },
   computed : {
     dropdownId : function(){
@@ -23,6 +31,9 @@ Vue.component('group-post', {
     triggerId : function(){
       // The trigger id.
       return 'group-post-trigger-' + this.post.idPublicacion;
+    },
+    contentId : function(){
+      return 'group-post-content-' + this.post.idPublicacion;
     },
     hasOptions : function(){
       return this.post.permissions.eliminar 
@@ -161,10 +172,7 @@ Vue.component('group-post', {
                 Publicado el: {{ post.fechaCreacion }}
               </span>
             </div>
-            <div class="row zero-margin">
-              <span class="col s12">
-                {{ post.contenido }}
-              </span>
+            <div class="row zero-margin" :id="contentId">
             </div>
           </div>
         </div>
