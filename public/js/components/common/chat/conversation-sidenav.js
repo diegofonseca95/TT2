@@ -176,14 +176,18 @@ Vue.component('conversation-sidenav', {
       if(this.conversation.users)
         return this.conversation.users.length === 1;
       return true;
-    }
+    },
+    conversationLabel : function(){
+      if(this.isSystemConversation) return 'Notificaciones';
+      return 'Conversacion';
+    } 
   },
   template : `
     <ul id="conversation-sidenav" class="sidenav no-overflow">
       <li id="conversation-sidenav-header">
         <a href="#!">
           <i class="material-icons">message</i>
-          Conversacion
+          {{ conversationLabel }}
         </a>
       </li>
       <li id="conversation-sidenav-divider">

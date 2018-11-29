@@ -16,6 +16,11 @@ Vue.component('conversations-list-item', {
   computed : {
     hasNewMessages : function(){
       return this.newMessageBucket[this.conversation.idConversacion] > 0;
+    },
+    isSystemConversation : function(){
+      if(this.conversation.users)
+        return this.conversation.users.length === 1;
+      return true;
     }
   },
   watch : {
@@ -29,9 +34,14 @@ Vue.component('conversations-list-item', {
         @click="handleConversationSelected">
         <div class="chip black-text"
           v-for="userId in conversation.users"
+          v-if="!isSystemConversation"
           :key="userId">
           <user-full-name-span :user="users[userId]">
           </user-full-name-span>
+        </div>
+        <div class="chip white-text blue"
+          v-if="isSystemConversation">
+          Notificaciones
         </div>
         <span class="new badge red" data-badge-caption="nuevos"
           v-if="hasNewMessages">
