@@ -80,12 +80,10 @@ Vue.component('group-blog-view', {
     },
     handlePostUpdated : function(updPost){
       // Replace the older post with the new one.
-      this.posts = this.posts.map(post => {
-        if(post.idPublicacion !== updPost.idPublicacion){
-          return post;
-        }
-        return updPost;
+      this.posts = this.posts.filter(post => {
+        return post.idPublicacion !== updPost.idPublicacion;
       });
+      this.posts.push(updPost);
       this.editMode = false;
     },
     handlePostRejected : function(rejPost){
