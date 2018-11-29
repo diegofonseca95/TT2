@@ -235,6 +235,7 @@ class PublicacionControlador extends Controller
       $publicacion->contenido = request('contenido');
       $publicacion->estadoPublicacion = 2;
       $publicacion->save();
+      $publicacion = Publicaciones::findOrFail(request('idPublicacion'));
       $id = Auth::id();
       $permisos = array(
           'eliminar' => $id == $liderGrupo->idUsuario,
