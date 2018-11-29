@@ -51,6 +51,8 @@ Vue.component('new-iteration-card', {
           SuccessToast(response.result);
           datepicker.value = '';
           M.updateTextFields();
+        }else{
+          WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
