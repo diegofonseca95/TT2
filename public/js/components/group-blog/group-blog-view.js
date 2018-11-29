@@ -62,10 +62,10 @@ Vue.component('group-blog-view', {
     orderedList : function(){
       return this.posts.sort(function(pA, pB){
         if(pA.fechaCreacion < pB.fechaCreacion){
-          return -1;
+          return +1;
         }
         if(pB.fechaCreacion < pA.fechaCreacion){
-          return +1;
+          return -1;
         }
         return 0;
       });
