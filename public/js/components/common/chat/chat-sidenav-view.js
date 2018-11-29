@@ -59,7 +59,12 @@ Vue.component('chat-sidenav-view', {
             }
             chats.map(function(chat){
               this.$set(this.newMessageBucket, chat.idConversacion, 0);
-              this.$set(this.priorityBucket, chat.idConversacion, 0);
+              if(chat.users.length > 1){
+                this.$set(this.priorityBucket, chat.idConversacion, 0);
+              }else{                
+                this.$set(this.priorityBucket,
+                  chat.idConversacion, Number.MAX_SAFE_INTEGER);
+              }
             }.bind(this));
             this.conversations = chats;
           }
@@ -159,7 +164,13 @@ Vue.component('chat-sidenav-view', {
       ).open();
     },
     createChat : function(newChat){
-      this.$set(this.priorityBucket, newChat.idConversacion, ++this.priority);
+      if(newChat.users.length > 1){
+        this.$set(this.priorityBucket,
+          newChat.idConversacion, ++this.priority);
+      }else{                
+        this.$set(this.priorityBucket,
+          newChat.idConversacion, Number.MAX_SAFE_INTEGER);
+      }
       this.$set(this.newMessageBucket, newChat.idConversacion, 0);
       this.conversations.push(newChat);
     },
