@@ -61,8 +61,14 @@ Vue.component('group-blog-view', {
   computed : {
     orderedList : function(){
       return this.posts.sort(function(pA, pB){
-        return pA.idPublicacion - pB.idPublicacion;
-      }).reverse();
+        if(pA.fechaCreacion < pB.fechaCreacion){
+          return -1;
+        }
+        if(pB.fechaCreacion < pA.fechaCreacion){
+          return +1;
+        }
+        return 0;
+      });
     }
   },
   methods : {
