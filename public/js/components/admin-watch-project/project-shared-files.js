@@ -23,7 +23,7 @@ Vue.component('project-shared-files', {
     };
 
     // The body of our request.
-    var requestBody = { 
+    var requestBody = {
       idProyecto : projectIdInput.value,
       _token : authToken.value
     };
@@ -75,7 +75,7 @@ Vue.component('project-shared-files', {
       });
     },
     noFileMatches : function(){
-      return this.filteredList.length === 0 
+      return this.filteredList.length === 0
         && this.searchInput !== ''
         && this.files.length > 0;
     }
@@ -118,6 +118,10 @@ Vue.component('project-shared-files', {
         .then(response => response.json())
         .then(function(response){
           if(response.status === 'OK'){
+            this.files.push({
+              fileName : file.name,
+              fileId : ++this.fileCounter
+            });
             SuccessToast(response.result);
           }else{
             WarningToast(response.result);
@@ -139,7 +143,7 @@ Vue.component('project-shared-files', {
         <div class="row">
           <div class='input-field col s12'>
             <i class='material-icons prefix third-text'>search</i>
-            <input placeholder='Ingresa palabras clave' 
+            <input placeholder='Ingresa palabras clave'
               type='text' class='validate'
               v-model:value="searchInput">
             <label>Búsqueda de Archivos</label>
@@ -148,11 +152,11 @@ Vue.component('project-shared-files', {
         <!-- Search Component Ends -->
         <!-- File Collection Begins -->
         <ul class="collection scrollable-collection">
-          <li class="collection-item" 
+          <li class="collection-item"
             v-if="files.length === 0">
             <span>No hay archivos compartidos en el proyecto.</span>
           </li>
-          <li class="collection-item" 
+          <li class="collection-item"
             v-if="noFileMatches">
             <span>Ningún archivo coincide con el criterio de búsqueda.</span>
           </li>
@@ -165,7 +169,7 @@ Vue.component('project-shared-files', {
         <!-- File Collections Ends -->
         <div class="row">
           <input type="file" class="hide"
-            id="project-shared-files-file-input" 
+            id="project-shared-files-file-input"
             @change="sendFile" />
           <div class="btn remove-button-background right"
             @click="triggerFileInput">
