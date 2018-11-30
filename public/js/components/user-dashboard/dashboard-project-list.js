@@ -49,7 +49,8 @@ Vue.component('dashboard-project-list', {
   },
   template : `
     <ul class="collection scrollable-collection">
-      <li class="collection-item grey-color">
+      <li class="collection-item grey-color"
+		v-if="projectsInfo.length === 0">
         <span>
           El usuario no ha participado en algún proyecto.
         </span>

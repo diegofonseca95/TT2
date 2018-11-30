@@ -51,7 +51,8 @@ Vue.component('dashboard-task-list', {
   },
   template : `
     <ul class="collection scrollable-collection">
-      <li class="collection-item grey-color">
+      <li class="collection-item grey-color"
+		v-if="tasksInfo.length === 0">
         <span>
           El usuario no ha realizado alguna tarea.
         </span>

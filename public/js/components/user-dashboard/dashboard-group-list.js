@@ -48,7 +48,8 @@ Vue.component('dashboard-group-list', {
   },
   template : `
     <ul class="collection scrollable-collection">
-      <li class="collection-item grey-color">
+      <li class="collection-item grey-color" 
+		v-if="groupsInfo.length === 0">
         <span>
           El usuario no ha participado en algún grupo.
         </span>

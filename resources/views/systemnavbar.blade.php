@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-wrapper first-background">
-    <a href="#!" class="brand-logo center">
+    <a href="#!" class="brand-logo center truncate" style="max-width:80%;">
       <i class="material-icons hide-on-small-only">
         <?= $iconoVista ?>
       </i>
@@ -8,13 +8,13 @@
     </a>
     <a href="#" data-target="navbar-sidenav-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="left hide-on-med-and-down">
-      <li style="height:100% !important;">
+      <li>
         <a href="javascript:history.back()" title="Atras" style="height:100% !important;">
           <i class="material-icons left">arrow_back</i>
         </a>
       </li>
       <li class="valign-wrapper">
-        <a href="/" title="Men&uacute; Principal" >
+        <a href="/" title="Men&uacute; Principal" class="valign-wrapper" style="height:100% !important;">
           <!--<i class="material-icons left">view_module</i> -->
           <img class="responsive-img" src="{{ asset('img/logo-header.png') }}" >
         </a>
