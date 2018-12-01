@@ -49,10 +49,10 @@ class ProyectosControlador extends Controller
         }
         $pg = ProyectoGrupo::where('idProyecto', '=', $idProyecto)->first();
         $grupoActivo = Grupo::where([['idGrupo', $pg->idGrupo],['estado', 1]])->count();
-
+        $adminGrupo = AdministradorGrupo::where([['idGrupo', $pg->idGrupo], ['idUsuario', Auth::id()]])->count();
         $pertenece = UsuarioProyectoGrupo::where([['idUsuario', '=', Auth::id()],['idProyectoGrupo', '=', $pg->idProyectoGrupo]])->count();
         $activo = Proyecto::where([['idProyecto', $idProyecto],['estado', '!=', 3]])->count();
-        if($grupoActivo && $activo && ($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() > 0))
+        if($grupoActivo && $activo && ($pertenece || Superadministrador::where('idUsuario', Auth::id())->count() || $adminGrupo))
           return view('admin_watch_project', ['nombreVista'=> 'Proyectos', 'iconoVista' => 'assignment', 'idProyecto'=> $idProyecto, 'idGrupo' => $pg->idGrupo]);
 
         if(Superadministrador::where('idUsuario', Auth::id())->count() == 0)
