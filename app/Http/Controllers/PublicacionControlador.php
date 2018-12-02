@@ -33,6 +33,12 @@ class PublicacionControlador extends Controller
                   'result' => 'Inicia Sesion para continuar'
             ]);
         }
+        if(UsuarioGrupo::where([['idGrupo', request('idGrupo')],['idUsuario', Auth::id()]])->count() == 0){
+            return response()->json([
+                  'status' => 'ERROR',
+                  'result' => 'No tienes permiso para agregar publicaciones'
+            ]);
+        }
         $publicacion = new Publicaciones;
         $publicacion->titulo = request('titulo');
         $publicacion->contenido = request('contenido');
