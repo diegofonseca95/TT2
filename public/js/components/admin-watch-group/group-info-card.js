@@ -3,9 +3,9 @@ Vue.component('group-info-card', {
   data : function(){
     return {
       groupInfo : {
-        description : '',
-        leader : {'idUsuario':0, 'nombre':'espera'},
-        name : ''
+        description : 'Cargando',
+        leader : {'idUsuario':0, 'nombre':'Cargando...', 'apellidoMaterno':'', 'apellidoMaterno':''},
+        name : 'Cargando'
       },
       editPermission : false
     };
@@ -32,7 +32,7 @@ Vue.component('group-info-card', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the users list.
-    fetch('/obtenerGrupo', requestData)
+    await fetch('/obtenerGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
