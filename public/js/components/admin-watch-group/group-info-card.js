@@ -4,7 +4,7 @@ Vue.component('group-info-card', {
     return {
       groupInfo : {
         description : '',
-        leader : {},
+        leader : {'idUsuario':0, 'nombre':'espera'},
         name : ''
       },
       editPermission : false
