@@ -11,6 +11,7 @@ use App\Usuario;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\UsuarioGrupo;
+use App\Superadministrador;
 
 class PublicacionControlador extends Controller
 {
@@ -140,7 +141,7 @@ class PublicacionControlador extends Controller
         }
         if($publicacion->estadoPublicacion == 4){
           return response()->json([
-              'status'=> 'OK',
+              'status'=> 'ERROR',
               'result'=> 'La publicacion ya habia sido eliminada'
               ]);
         }
@@ -180,19 +181,19 @@ class PublicacionControlador extends Controller
 
       if($publicacion->estadoPublicacion == 1){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'La publicacion ya habia sido validada'
             ]);
       }
       if($publicacion->estadoPublicacion == 3){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'No puedes validar una publicación rechazada'
             ]);
       }
       if($publicacion->estadoPublicacion == 4){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'No puedes validar una publicación eliminada'
             ]);
       }
@@ -231,19 +232,19 @@ class PublicacionControlador extends Controller
       }
       if($publicacion->estadoPublicacion == 1){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'No puedes rechazar una publicación validada'
             ]);
       }
       if($publicacion->estadoPublicacion == 3){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'La publicación ya habia sido rechazada'
             ]);
       }
       if($publicacion->estadoPublicacion == 4){
         return response()->json([
-            'status'=> 'OK',
+            'status'=> 'ERROR',
             'result'=> 'No puedes validar una publicación eliminada'
             ]);
       }
@@ -399,7 +400,7 @@ class PublicacionControlador extends Controller
         ]);
     }
     public function administrarBlogs(){
-        if(!Auth::check() || Superadministrador::where('idUsuario', Auth:id())->count() == 0){
+        if(!Auth::check() || Superadministrador::where('idUsuario', Auth::id())->count() == 0){
             return view('index');
         }
 
