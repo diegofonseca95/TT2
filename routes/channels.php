@@ -1,6 +1,8 @@
 <?php
 
 use App\UsuarioConversacion;
+use App\ProyectoGrupo;
+use App\UsuarioProyectoGrupo;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +30,16 @@ Broadcast::channel('chat.{id}', function ($user, $id) {
 
 Broadcast::channel('log.{id}', function ($user, $id) {
     //return ($user->idUsuario == $id || $id2 == $user->idUsuario);
+    $proyecto = ProyectoGrupo::where('idProyecto', $id)->first();
 
+    if(UsuarioProyectoGrupo::where([['idProyectoGrupo', $id],['idUsuario', $user->idUsuario]])->count() == 0) return false;
 
     return true;
 });
 
 Broadcast::channel('nuevo.{id}', function ($user, $id) {
     //return ($user->idUsuario == $id || $id2 == $user->idUsuario);
-
+    if($id != $user->idUsuario) return false;
 
     return true;
 });
