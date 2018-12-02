@@ -3,9 +3,9 @@ Vue.component('group-info-card', {
   data : function(){
     return {
       groupInfo : {
-        description : 'Cargando',
+        description : '',
         leader : {},
-        name : 'Cargando'
+        name : ''
       },
       editPermission : false
     };
