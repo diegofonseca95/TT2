@@ -41,9 +41,9 @@ Vue.component('group-info-card', {
         newInfo.description = result.grupo.descripcion;
         newInfo.name = result.grupo.nombreGrupo;
         for(var i in this.groupMembers){
+          console.log(this.groupMembers[i]);
           if(this.groupMembers[i].idUsuario === result.lider){
             newInfo.leader = this.groupMembers[i];
-            console.log("found it");
             break;
           }
         }
