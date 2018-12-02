@@ -20,7 +20,7 @@ class UsuarioGrupoControlador extends Controller
 
     	$grupos = array();
     	foreach($query as $value){
-    		array_push($grupos, 
+    		array_push($grupos,
     			$this->obtenerInformacionGrupo($value->idGrupo));
     	}
 
@@ -59,7 +59,7 @@ class UsuarioGrupoControlador extends Controller
             $usuarioGrupo = new UsuarioGrupo;
             $adminGrupo = new AdministradorGrupo;
             $usuario = new User;
-
+            $grupo = Grupo::where('idGrupo', request('idGrupo'))->first();
             $query = $adminGrupo->where('idGrupo', '=', request('idGrupo'))->get();
 
             if($query[0]->idUsuario == request('idUsuario')){
@@ -70,6 +70,7 @@ class UsuarioGrupoControlador extends Controller
             }
 
             $userGroup = $usuarioGrupo->where([['idGrupo', '=', request('idGrupo')], ['idUsuario', '=', request('idUsuario')]])->update(['estado'=> 3]);
+            NotificacionesControlador::nuevaNotificacion(request('idUsuario'), 'Te han eliminado del grupo '.$grupo->nombreGrupo);
             return response()->json([
                 'status' => 'OK',
                 'result' => 'Usuario Eliminado'
@@ -80,8 +81,8 @@ class UsuarioGrupoControlador extends Controller
                 'result' => 'Usuario no pertenece al grupo'
             ]);
         }
-        
+
 
     }
-    
+
 }

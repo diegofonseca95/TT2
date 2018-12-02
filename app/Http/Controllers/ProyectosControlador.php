@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
 use App\Events\Logs;
 use App\Superadministrador;
-
+use App\Http\Controllers\NotificacionesControlador;
 class ProyectosControlador extends Controller
 {
     public function administrarProyectos(){
@@ -115,6 +115,7 @@ class ProyectosControlador extends Controller
             $usarioproyectogrupo->idProyectoGrupo = $proyectoGrupo->idProyectoGrupo;
             $usarioproyectogrupo->idUsuario = $value;
             $usarioproyectogrupo->save();
+            NotificacionesControlador::nuevaNotificacion($value, 'Te han agregado al proyecto '.request('nombreProyecto'));
         }
 
         return response()->json([

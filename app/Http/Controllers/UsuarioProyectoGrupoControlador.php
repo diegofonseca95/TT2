@@ -14,6 +14,7 @@ use App\UsuarioProyectoGrupo;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Events\Logs;
+use App\Http\Controllers\NotificacionesControlador;
 class UsuarioProyectoGrupoControlador extends Controller
 {
     public function obtenerInformacion(){
@@ -71,7 +72,7 @@ class UsuarioProyectoGrupoControlador extends Controller
 
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
 
-
+        $proyecto = Proyecto::where('idProyecto', request('idProyecto'))->first();
         foreach($nuevos as $value){
           try{
               usuarioProyectoGrupo::where([
@@ -92,6 +93,7 @@ class UsuarioProyectoGrupoControlador extends Controller
           }
           $persona = User::where('idUsuario', $value)->first();
           event(new Logs(request('idProyecto'), Auth::id(), 'ha agregado a '.$persona->nombre.' '.$persona->apellidoPaterno.' '.$persona->apellidoMaterno ));
+          NotificacionesControlador::nuevaNotificacion($value, 'Te han agregado al proyecto '.$proyecto->nombreProyecto);
         }
 
 
@@ -112,7 +114,7 @@ class UsuarioProyectoGrupoControlador extends Controller
         }
         $pg = ProyectoGrupo::where('idProyecto', '=', request('idProyecto'))->first();
         $lider = AdministradorProyecto::where('idProyecto', request('idProyecto'))->first();
-
+        $proyecto = Proyecto::where('idProyecto', request('idProyecto'))->first();
         if($lider->idUsuario == request('idUsuario')){
             return response()->json([
                   'status' => 'ERROR',
@@ -130,6 +132,7 @@ class UsuarioProyectoGrupoControlador extends Controller
         $persona = User::where('idUsuario', request('idUsuario'))->first();
 
         event(new Logs(request('idProyecto'), Auth::id(), 'ha eliminado a '.$persona->nombre.' '.$persona->apellidoPaterno.' '.$persona->apellidoMaterno ));
+        NotificacionesControlador::nuevaNotificacion(request('idUsuario'), 'Te han eliminado del proyecto '.$proyecto->nombreProyecto);
         return response()->json([
             'status' => 'OK',
             'result' => 'Usuario eliminado del proyecto'

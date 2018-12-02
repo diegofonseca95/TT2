@@ -14,7 +14,7 @@ use Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Superadministrador;
-
+use App\Http\Controllers\NotificacionesControlador;
 class GruposControlador extends Controller
 {
     public function administrarGrupos(){
@@ -115,6 +115,7 @@ class GruposControlador extends Controller
             $usuarioGrupo->idUsuario = $value;
             $usuarioGrupo->idGrupo = $grupo->idGrupo;
             $usuarioGrupo->save();
+            NotificacionesControlador::nuevaNotificacion($value, 'Te han agregado al grupo '.request('nombreGrupo'));
         }
 
 
@@ -143,7 +144,7 @@ class GruposControlador extends Controller
         }
 
     	$integrantes = request("integrantes");
-
+      $grupo = Grupo::where('idGrupo', request('idGrupo'))->first();
     	try{
     		foreach ($integrantes as $value) {
 	            try{
@@ -156,7 +157,7 @@ class GruposControlador extends Controller
                     $usuarioGrupo->idGrupo = $idGrupo;
                     $usuarioGrupo->save();
                 }
-
+                NotificacionesControlador::nuevaNotificacion($value, 'Te han agregado al grupo '.$grupo->nombreGrupo);
 
         	}
 
