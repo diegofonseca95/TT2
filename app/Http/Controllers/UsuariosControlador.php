@@ -219,7 +219,7 @@ class UsuariosControlador extends Controller
             $proyectos = AdministradorProyecto::where('idUsuario', request('idUsuario'))->get();
             $flag = 0;
             foreach ($proyectos as $value) {
-               $flag = Proyecto::where([['idProyecto', $value->idProyecto],['estado', 1]])->count();
+               $flag = Proyecto::where([['idProyecto', $value->idProyecto],['estado', '!=', 3]])->count();
                if($flag > 0) break;
             }
             if($flag > 0){
