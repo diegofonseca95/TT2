@@ -4,7 +4,7 @@ Vue.component('group-info-card', {
     return {
       groupInfo : {
         description : 'Cargando',
-        leader : {'idUsuario':0, 'nombre':'Cargando...', 'apellidoPaterno':'', 'apellidoMaterno':''},
+        leader : {},
         name : 'Cargando'
       },
       editPermission : false
@@ -41,7 +41,6 @@ Vue.component('group-info-card', {
         newInfo.description = result.grupo.descripcion;
         newInfo.name = result.grupo.nombreGrupo;
         for(var i in this.groupMembers){
-          console.log(this.groupMembers[i]);
           if(this.groupMembers[i].idUsuario === result.lider){
             newInfo.leader = this.groupMembers[i];
             break;
