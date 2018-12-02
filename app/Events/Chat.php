@@ -30,14 +30,21 @@ class Chat implements ShouldBroadcast
     public function __construct($idChat, $user, $message)
     {
 
+        $encriptado = Crypt::encrypt($message);
         $this->idChat = $idChat;
         $this->user = $user;
         $usuarioConversacion = UsuarioConversacion::where([['idConversacion', $idChat],['idUsuario', $user]])->first();
         $temp = new Mensaje;
         $temp->idUsuarioConversacion = $usuarioConversacion->idUsuarioConversacion;
-        $temp->contenido = $message;
+        $temp->contenido = $encriptado;
         $temp->save();
-        $this->message = $temp;
+
+        $this->message = (object) [
+          'idMensaje' => $temp->idMensaje,
+          'contenido' => $message,
+          'idUsuarioConversacion' => $temp->idUsuarioConversacion,
+          'fecha' => $temp->fecha,
+          ];
         //$this->message->contenido = decrypt($this->message->contenido);
 
     }

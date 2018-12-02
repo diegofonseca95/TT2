@@ -9,16 +9,16 @@ use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Superadministrador;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Crypt;
 class SesionControlador extends Controller
 {
     public function iniciarSesion(){
 
     	$usuario = new User;
 
-        $query = $usuario->where([['correo', '=', request('correo')],['contrasena', '=', request('contrasena')]])->get();
+        $query = $usuario->where('correo',request('correo'))->get();
 
-        if($query->isNotEmpty() && $query[0]->estado == 1){
+        if($query->isNotEmpty() && $query[0]->estado == 1 && Crypt::decrypt($query[0]->contrasena)== request('contrasena')){
 
 
             session(['usuario.nombre' => $query[0]->nombre]);
@@ -30,7 +30,7 @@ class SesionControlador extends Controller
                 'status'=> 'OK',
                 'result'=> '/iniciarSesionAdmin'
                 ]);
-        }else if($query->isNotEmpty() && $query[0]->estado == 2){
+        }else if($query->isNotEmpty() && $query[0]->estado == 2 && Crypt::decrypt($query[0]->contrasena)== request('contrasena')){
             return response()->json([
                 'status'=> 'ERROR',
                 'result'=> 'Usuario no validado. Pongase en contacto con el administrador'

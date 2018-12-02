@@ -113,7 +113,7 @@ class ChatControlador extends Controller
                 'conversacion' => $conversacion,
                 'users' => $idUsuarios
             ));
-            
+
         }
 
         return response()->json([
@@ -141,8 +141,14 @@ class ChatControlador extends Controller
       $result = array();
 
       foreach ($mensajes as  $value) {
+          $message = (object) [
+          'idMensaje' => $value->idMensaje,
+          'contenido' => Crypt::decrypt($value->contenido),
+          'idUsuarioConversacion' => $value->idUsuarioConversacion,
+          'fecha' => $value->fecha,
+          ];
           array_push($result, array(
-                'mensaje' => $value,
+                'mensaje' => $message,
                 'user' => $mapa[$value->idUsuarioConversacion]
           ));
 

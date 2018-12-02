@@ -45,7 +45,7 @@ class ArchivosControlador extends Controller
           Storage::putFileAs('archivos/'.request('idProyecto'), request('file'), request('name'));
 
           //request('fila')->storeAs('public/blog/'.request('idGrupo'), 'file.'.request('fila')->extension());
-
+          event(new Logs(request('idProyecto'), Auth::id(), 'ha subido un archivo al proyecto' ));
           return response()->json([
               'status' => 'OK',
               'result' => 'Archivo subido correctamente',

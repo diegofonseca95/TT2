@@ -11,7 +11,7 @@ use App\AdministradorGrupo;
 use App\AdministradorProyecto;
 use App\Grupo;
 use App\Proyecto;
-
+use Illuminate\Support\Facades\Crypt;
 class UsuariosControlador extends Controller
 {
     public function agregarUsuario(){
@@ -78,7 +78,7 @@ class UsuariosControlador extends Controller
     	$usuario->apellidoPaterno = request('apellidoPaterno');
     	$usuario->apellidoMaterno = request('apellidoMaterno');
     	$usuario->correo = request('correo');
-    	$usuario->contrasena = request('contrasena');
+    	$usuario->contrasena = Crypt::encrypt(request('contrasena'));
     	$usuario->telefono = request('telefono');
 
     	$usuario->save();
@@ -282,7 +282,7 @@ class UsuariosControlador extends Controller
        }
        $usuario = User::findOrFail(request('idUsuario'));
 
-       if($usuario->contrasena != request('contrasena') ){
+       if(Crypt::decrypt($usuario->contrasena) !=request('contrasena') ){
            return response()->json([
                'status' => 'ERROR',
                'result' => 'Contraseña incorrecta'
@@ -301,7 +301,7 @@ class UsuariosControlador extends Controller
        $usuario->apellidoMaterno = request('apellidoMaterno');
        $usuario->correo = request('correo');
        if(request('nuevacontrasena') != "")
-          $usuario->contrasena = request('nuevacontrasena');
+          $usuario->contrasena = Crypt::encrypt(request('nuevacontrasena'));
        $usuario->telefono = request('telefono');
        $usuario->save();
 
