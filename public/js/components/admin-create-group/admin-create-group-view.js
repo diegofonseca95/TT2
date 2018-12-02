@@ -43,7 +43,7 @@ Vue.component('admin-create-group-view', {
     };
 
     // The body of our request.
-    var requestBody = { 
+    var requestBody = {
       _token : authToken.value
     };
 
@@ -115,7 +115,7 @@ Vue.component('admin-create-group-view', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         descripcion : this.newGroupDescription,
         nombreGrupo : this.newGroupName,
         integrantes : this.newMemberIds,
@@ -132,6 +132,8 @@ Vue.component('admin-create-group-view', {
         console.log(response);
         if(response.status === 'OK'){
           SuccessToast(response.result);
+        }else{
+          ErrorToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -167,10 +169,10 @@ Vue.component('admin-create-group-view', {
             <form class="col s12" id="new-group-info-form">
               <div class="row">
                 <div class="input-field col s12">
-                  <input class="validate" type="text" 
-                    placeholder="Nombre del Grupo" 
+                  <input class="validate" type="text"
+                    placeholder="Nombre del Grupo"
                     name="new-group-name-input"
-                    id="new-group-name-input" 
+                    id="new-group-name-input"
                     v-model:value="newGroupName" />
                   <label for="new-group-name-input">
                     Nombre del Grupo
@@ -190,7 +192,7 @@ Vue.component('admin-create-group-view', {
           </div>
         </div>
       </div>
-      <add-new-member-card 
+      <add-new-member-card
         @remove-new-member="handleRemoveNewMember($event)"
         @add-new-member="handleAddNewMember($event)"
         :member-ids="newMemberIds"
@@ -203,7 +205,7 @@ Vue.component('admin-create-group-view', {
         :leader-id="newLeaderId">
       </new-leader-modal>
       <div class="row">
-        <button data-target="new-leader-modal" 
+        <button data-target="new-leader-modal"
           class="btn modal-trigger remove-button-background right">
           Seleccionar Líder
         </button>
