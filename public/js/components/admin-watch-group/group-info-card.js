@@ -32,7 +32,7 @@ Vue.component('group-info-card', {
     requestData.body = JSON.stringify(requestBody);
 
     // Fetch the users list.
-    await fetch('/obtenerGrupo', requestData)
+    fetch('/obtenerGrupo', requestData)
     .then(response => response.json())
     .then(function(response){
       if(response.status === 'OK'){
