@@ -34,6 +34,12 @@ class TareaControlador extends Controller
                 'result' => 'Inicia sesion para continuar'
             ]);
         }
+        if(AdministradorProyecto::where([['idProyecto', request('idProyecto')],['$idUsuario', Auth::id()]])->count() == 0){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'No tienes permiso para agregar tareas en este proyecto'
+            ]);
+        }
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
         $val = TareaProyectoGrupo::where('idProyectoGrupo', $proyectoGrupo->idProyectoGrupo)->count();
 
@@ -64,8 +70,20 @@ class TareaControlador extends Controller
                 'result' => 'Inicia sesion para continuar'
             ]);
         }
-
+        if(UsuarioProyectoGrupo::where([['idProyectoGrupo', $proyectoGrupo->idProyectoGrupo],['idUsuario', Auth::id()]])->count() == 0){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'No tienes permiso para ver este proyecto'
+            ]);
+        }
         $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
+        
+        if(UsuarioProyectoGrupo::where([['idProyectoGrupo', $proyectoGrupo->idProyectoGrupo],['idUsuario', Auth::id()]])->count() == 0){
+            return response()->json([
+                'status' => 'ERROR',
+                'result' => 'No tienes permiso para ver este proyecto'
+            ]);
+        }
         $respuesta = tareaProyectoGrupo::where([['idProyectoGrupo', $proyectoGrupo->idProyectoGrupo]])->get();
 
         $array = array();
