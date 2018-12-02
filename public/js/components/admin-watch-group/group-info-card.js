@@ -24,7 +24,7 @@ Vue.component('group-info-card', {
     };
 
     // The body of our request.
-    var requestBody = { 
+    var requestBody = {
       _token : authToken.value,
       idGrupo : groupId
     };
@@ -43,6 +43,7 @@ Vue.component('group-info-card', {
         for(var i in this.groupMembers){
           if(this.groupMembers[i].idUsuario === result.lider){
             newInfo.leader = this.groupMembers[i];
+            console.log("found it");
             break;
           }
         }
@@ -67,7 +68,7 @@ Vue.component('group-info-card', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         descripcion : newInfo.description,
         idUsuario : newInfo.leaderId,
         _token : authToken.value,
@@ -96,7 +97,7 @@ Vue.component('group-info-card', {
     },
     handleWatchBlog : function(){
       window.location.replace(
-        '/publicacionesGrupo/' + 
+        '/publicacionesGrupo/' +
         document.querySelector(
           'input[name="group-id"]'
         ).value
@@ -123,7 +124,7 @@ Vue.component('group-info-card', {
             <a href="#!" @click="handleWatchBlog">Ver Blog</a>
           </span>
           <div class="col s12" v-if="editPermission">
-            <button title="Editar" data-target="edit-group-info-modal" 
+            <button title="Editar" data-target="edit-group-info-modal"
               class="btn-floating btn-large modal-trigger remove-button-background right">
               <i class="material-icons">mode_edit</i>
             </button>
