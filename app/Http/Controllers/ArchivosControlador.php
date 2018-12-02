@@ -20,7 +20,7 @@ use App\Events\Chat;
 use App\Events\NuevoMensaje;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FileNotFoundException;
-
+use App\Events\Logs;
 class ArchivosControlador extends Controller
 {
     public function subirArchivo(){
