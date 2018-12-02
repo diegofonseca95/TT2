@@ -13,6 +13,7 @@ use App\User;
 use App\Mensaje;
 use App\UsuarioConversacion;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
 
 class Chat implements ShouldBroadcast
 {
@@ -38,12 +39,12 @@ class Chat implements ShouldBroadcast
         $temp->idUsuarioConversacion = $usuarioConversacion->idUsuarioConversacion;
         $temp->contenido = $encriptado;
         $temp->save();
-
+        $mytime = Carbon::now();
         $this->message = (object) [
           'idMensaje' => $temp->idMensaje,
           'contenido' => $message,
           'idUsuarioConversacion' => $temp->idUsuarioConversacion,
-          'fecha' => $temp->fecha,
+          'fecha' => $mytime->toDateTimeString(),
           ];
         //$this->message->contenido = decrypt($this->message->contenido);
 
