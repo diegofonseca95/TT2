@@ -4,7 +4,7 @@ Vue.component('group-info-card', {
     return {
       groupInfo : {
         description : 'Cargando',
-        leader : {'idUsuario':0, 'nombre':'Cargando...', 'apellidoMaterno':'', 'apellidoMaterno':''},
+        leader : {'idUsuario':0, 'nombre':'Cargando...', 'apellidoPaterno':'', 'apellidoMaterno':''},
         name : 'Cargando'
       },
       editPermission : false
