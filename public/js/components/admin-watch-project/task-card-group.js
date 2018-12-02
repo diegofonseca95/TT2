@@ -23,7 +23,7 @@ Vue.component('task-card-group', {
     };
 
     // The body of our request.
-    var requestBody = { 
+    var requestBody = {
       idProyecto : projectIdInput.value,
       _token : authToken.value
     };
@@ -64,7 +64,7 @@ Vue.component('task-card-group', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         idTarea : removeTask.idTarea,
         _token : authToken.value
       };
@@ -80,6 +80,8 @@ Vue.component('task-card-group', {
             task => task.idTarea !== removeTask.idTarea
           );
           SuccessToast(response.result);
+        }else{
+            WarningToast(response.result);
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -100,7 +102,7 @@ Vue.component('task-card-group', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         idProyecto : projectIdInput.value,
         _token : authToken.value
       };
@@ -120,7 +122,7 @@ Vue.component('task-card-group', {
   },
   template : `
     <div>
-      <tasks-card 
+      <tasks-card
         @task-assigned="handleTaskAssigned($event)"
         @task-modal-opened="loadRunningIterations"
         @remove-task="handleRemoveTask($event)"
