@@ -14,6 +14,7 @@ class SesionControlador extends Controller
 {
     public function iniciarSesion(){
 
+
     	$usuario = new User;
 
         $query = $usuario->where('correo',request('correo'))->get();
@@ -24,7 +25,11 @@ class SesionControlador extends Controller
             session(['usuario.nombre' => $query[0]->nombre]);
             session(['usuario.idUsuario' => $query[0]->idUsuario]);
 
-            Auth::login($query[0]);
+            if(Auth::check() && Auth::id() != $query[0]->idUsuario){
+                  Auth::logout();
+            }
+            if(!Auth::check())
+              Auth::login($query[0]);
 
             return response()->json([
                 'status'=> 'OK',

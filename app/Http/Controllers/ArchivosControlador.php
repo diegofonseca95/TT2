@@ -30,7 +30,19 @@ class ArchivosControlador extends Controller
                     'result' => 'Inicia sesion para continuar'
               ]);
         }
-
+        $proyecto = Proyecto::where('idProyecto', request('idProyecto'))->first();
+        if($proyecto->estado == 2){
+            return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'No puedes subir archivos a un proyecto finalizado'
+              ]);
+        }
+        if($proyecto->estado == 3){
+            return response()->json([
+                    'status' => 'ERROR',
+                    'result' => 'No puedes subir archivos a un proyecto eliminado'
+              ]);
+        }
         try{
 
 
