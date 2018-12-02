@@ -126,12 +126,30 @@ class ProyectosControlador extends Controller
 
     public function editarProyecto(){
         if(!Auth::check()){
-            return view('index');
+          return response()->json([
+              'status'=> 'ERROR',
+              'result'=> 'Proyecto no existe'
+              ]);
         }
         try{
+            $proyectoGrupo = ProyectoGrupo::where('idProyecto', request('idProyecto'))->first();
+            $adminGrupo = AdministradorGrupo::where([['idGrupo', $proyectoGrupo->idGrupo],['idUsuario', Auth::id()]])->count();
+            $adminProyecto = AdministradorProyecto::where([['idProyecto', $proyectoGrupo->idProyecto],['idUsuario', Auth::id()]])->count();
+
+            if(!$adminGrupo && !$adminProyecto){
+              return response()->json([
+                  'status'=> 'ERROR',
+                  'result'=> 'No tienes permiso para editar este proyecto'
+                  ]);
+            }
             $flag = false;
             $proyecto = Proyecto::findOrFail(request('idProyecto'));
-
+            if($proyecto->estado != 1){
+                return response()->json([
+                    'status'=> 'ERROR',
+                    'result'=> 'No tienes permiso para editar este proyecto'
+                    ]);
+            }
             if($proyecto->descripcion != request('descripcion') ||$proyecto->nombreProyecto != request('nombreProyecto'))
               $flag = true;
 
@@ -187,6 +205,12 @@ class ProyectosControlador extends Controller
 
         try{
             $proyecto = Proyecto::findOrFail(request('idProyecto'));
+            if($proyecto->estado == 3){
+              return response()->json([
+                  'status'=> 'OK',
+                  'result'=> 'El proyecto ya habia sido eliminado'
+                  ]);
+            }
             $proyecto->estado = 3;
             $proyecto->save();
 

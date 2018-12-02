@@ -132,6 +132,12 @@ class PublicacionControlador extends Controller
             ]);
 
         }
+        if($publicacion->estadoPublicacion == 4){
+          return response()->json([
+              'status'=> 'OK',
+              'result'=> 'La publicacion ya habia sido eliminada'
+              ]);
+        }
         $publicacion->estadoPublicacion = 4;
         $publicacion->save();
         return response()->json([
@@ -165,6 +171,25 @@ class PublicacionControlador extends Controller
           ]);
 
       }
+
+      if($publicacion->estadoPublicacion == 1){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'La publicacion ya habia sido validada'
+            ]);
+      }
+      if($publicacion->estadoPublicacion == 3){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'No puedes validar una publicación rechazada'
+            ]);
+      }
+      if($publicacion->estadoPublicacion == 4){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'No puedes validar una publicación eliminada'
+            ]);
+      }
       $publicacion->estadoPublicacion = 1;
       $publicacion->save();
       return response()->json([
@@ -197,6 +222,24 @@ class PublicacionControlador extends Controller
               'result' => 'No puedes rechazar esta publicacion'
           ]);
 
+      }
+      if($publicacion->estadoPublicacion == 1){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'No puedes rechazar una publicación validada'
+            ]);
+      }
+      if($publicacion->estadoPublicacion == 3){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'La publicación ya habia sido rechazada'
+            ]);
+      }
+      if($publicacion->estadoPublicacion == 4){
+        return response()->json([
+            'status'=> 'OK',
+            'result'=> 'No puedes validar una publicación eliminada'
+            ]);
       }
       $publicacion->estadoPublicacion = 3;
       $publicacion->save();
@@ -259,11 +302,26 @@ class PublicacionControlador extends Controller
     }
     public function subirPortada(){
       try{
+        if(!Auth::check()){
+          return response()->json([
+                'status' => 'ERROR',
+                'result' => 'Inicia sesion para continuar'
+          ]);
+        }
         if(request('fila')->extension() != 'jpg' && request('fila')->extension() != 'jpeg' && request('fila')->extension() != 'png'){
             return response()->json([
                   'status' => 'ERROR',
                   'result' => 'Extension invalida'
             ]);
+        }
+        $liderGrupo = AdministradorGrupo::where('idGrupo', request('idGrupo'))->first();
+        if(Auth::id() != $liderGrupo->idUsuario){
+
+            return response()->json([
+                'status'=> 'ERROR',
+                'result'=> 'Inicia Sesion para continuar'
+                ]);
+
         }
         Storage::deleteDirectory('public/blog/'.request('idGrupo'));
         Storage::put('public/blog/'.request('idGrupo'), request('fila'));
@@ -335,7 +393,7 @@ class PublicacionControlador extends Controller
         ]);
     }
     public function administrarBlogs(){
-        if(!Auth::check()){
+        if(!Auth::check() || Superadministrador::where('idUsuario', Auth:id())->count() == 0){
             return view('index');
         }
 
