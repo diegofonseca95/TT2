@@ -57,6 +57,7 @@ Vue.component('conversation-sidenav', {
           );
           this.pusher = null;
         }
+        this.messages = [];
         this.$emit('conversation-closed');
       }.bind(this),
       edge : "right"
@@ -168,7 +169,7 @@ Vue.component('conversation-sidenav', {
         }else{
           WarningToast(response.result);
         }
-      }.bind(this)); 
+      }.bind(this));
     }
   },
   computed : {
@@ -180,7 +181,7 @@ Vue.component('conversation-sidenav', {
     conversationLabel : function(){
       if(this.isSystemConversation) return 'Notificaciones';
       return 'Conversacion';
-    } 
+    }
   },
   template : `
     <ul id="conversation-sidenav" class="sidenav no-overflow">
