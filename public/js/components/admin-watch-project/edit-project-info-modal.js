@@ -25,7 +25,7 @@ Vue.component('edit-project-info-modal', {
   data : function(){
     return {
       newProjectDescription : this.projectInfo.description,
-      newLeaderId : this.projectInfo.leader.idUsuario,
+      newLeaderId : this.projectInfo.leaderId,
       newProjectName : this.projectInfo.name,
       hasValidFields : false
     };
@@ -81,9 +81,9 @@ Vue.component('edit-project-info-modal', {
           <form class="col s12" id="edit-project-info-form">
             <div class="row">
               <div class="input-field col s12">
-                <input class="validate" name="edit-project-info-modal-name-input" 
-                  id="edit-project-info-modal-name-input" type="text" 
-                  placeholder="Nombre del proyecto" 
+                <input class="validate" name="edit-project-info-modal-name-input"
+                  id="edit-project-info-modal-name-input" type="text"
+                  placeholder="Nombre del proyecto"
                   v-model:value="newProjectName" />
                 <label for="edit-project-info-modal-name-input">
                   Nombre del proyecto
@@ -91,7 +91,7 @@ Vue.component('edit-project-info-modal', {
               </div>
               <div class="input-field col s12">
                 <input class="validate" name="edit-project-info-modal-desc-input"
-                  id="edit-project-info-modal-desc-input" type="text" 
+                  id="edit-project-info-modal-desc-input" type="text"
                   placeholder="Descripción del proyecto"
                   v-model:value="newProjectDescription" />
                 <label for="edit-project-info-modal-desc-input">
@@ -111,7 +111,7 @@ Vue.component('edit-project-info-modal', {
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">
           Cancelar
         </a>
-        <a class="waves-effect waves-green btn-flat" 
+        <a class="waves-effect waves-green btn-flat"
           href="#!" @click="handleModalClose">
           Listo
         </a>

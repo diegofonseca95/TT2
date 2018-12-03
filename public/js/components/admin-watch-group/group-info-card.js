@@ -4,6 +4,7 @@ Vue.component('group-info-card', {
     return {
       groupInfo : {
         description : '',
+        leaderId : 0,
         leader : {},
         name : ''
       },
@@ -40,12 +41,7 @@ Vue.component('group-info-card', {
         var newInfo = {};
         newInfo.description = result.grupo.descripcion;
         newInfo.name = result.grupo.nombreGrupo;
-        for(var i in this.groupMembers){
-          if(this.groupMembers[i].idUsuario === result.lider){
-            newInfo.leader = this.groupMembers[i];
-            break;
-          }
-        }
+        newInfo.leaderId = result.lider;
         this.editPermission = result.permiso;
         this.groupInfo = newInfo;
       }
@@ -83,13 +79,14 @@ Vue.component('group-info-card', {
       .then(function(response){
         if(response.status === 'OK'){
           this.groupInfo.description = newInfo.description;
+          this.groupInfo.leaderId = newInfo.leaderId;
           this.groupInfo.name = newInfo.name;
-          for(var i in this.groupMembers){
+          /*for(var i in this.groupMembers){
             if(this.groupMembers[i].idUsuario === newInfo.leaderId){
               this.groupInfo.leader = this.groupMembers[i];
               break;
             }
-          }
+          }*/
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -101,6 +98,16 @@ Vue.component('group-info-card', {
           'input[name="group-id"]'
         ).value
       );
+    }
+  },
+  computed : {
+    groupLeader : function(){
+      for(var i in this.groupMembers){
+        if(this.groupMembers[i].idUsuario === this.groupInfo.leaderId){
+          return this.groupMembers[i];
+        }
+      }
+      return {};
     }
   },
   template : `
@@ -116,7 +123,7 @@ Vue.component('group-info-card', {
           <span class="title col s12" style="word-break: break-all;">
             Líder del grupo:
             <user-full-name-span
-              :user="this.groupInfo.leader">
+              :user="groupLeader">
             </user-full-name-span>
           </span>
           <span class="title truncate col s12">

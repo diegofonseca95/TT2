@@ -7,6 +7,7 @@ Vue.component('project-info-card', {
       projectInfo : {
         description : '',
         startDate : '',
+        leaderId : 0,
         leader : {},
         name : ''
       },
@@ -27,7 +28,7 @@ Vue.component('project-info-card', {
     };
 
     // The body of our request.
-    var requestBody = { 
+    var requestBody = {
       idProyecto : projectIdInput.value,
       _token : authToken.value
     };
@@ -44,12 +45,7 @@ Vue.component('project-info-card', {
         newInfo.description = result.proyecto.descripcion;
         newInfo.startDate = result.proyecto.fecha_inicio;
         newInfo.name = result.proyecto.nombreProyecto;
-        for(var i in this.projectMembers){
-          if(this.projectMembers[i].idUsuario === result.lider){
-            newInfo.leader = this.projectMembers[i];
-            break;
-          }
-        }
+        newInfo.leaderId = result.lider;
         this.editPermission = result.permiso;
         this.isActive = result.activo;
         this.projectInfo = newInfo;
@@ -71,7 +67,7 @@ Vue.component('project-info-card', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         descripcion : newInfo.description,
         idProyecto : projectIdInput.value,
         nombreProyecto : newInfo.name,
@@ -87,13 +83,14 @@ Vue.component('project-info-card', {
       .then(function(response){
         if(response.status === 'OK'){
           this.projectInfo.description = newInfo.description;
+          this.projectInfo.leaderId = newInfo.leaderId;
           this.projectInfo.name = newInfo.name;
-          for(var i in this.projectMembers){
+          /*for(var i in this.projectMembers){
             if(this.projectMembers[i].idUsuario === newInfo.leaderId){
               this.projectInfo.leader = this.projectMembers[i];
               break;
             }
-          }
+          }*/
         }
         // TODO : Handle non 'OK' status.
       }.bind(this));
@@ -111,7 +108,7 @@ Vue.component('project-info-card', {
       };
 
       // The body of our request.
-      var requestBody = { 
+      var requestBody = {
         idProyecto : projectIdInput.value,
         _token : authToken.value
       };
@@ -137,6 +134,14 @@ Vue.component('project-info-card', {
   computed : {
     hasAnyPermission : function(){
       return this.isActive || this.editPermission;
+    },
+    projectLeader : function(){
+      for(var i in this.projectMembers){
+        if(this.projectMembers[i].idUsuario === this.projectInfo.leaderId){
+          return this.projectMembers[i];
+        }
+      }
+      return {};
     }
   },
   template : `
@@ -152,7 +157,7 @@ Vue.component('project-info-card', {
           <span class="title col s12" style="word-break: break-all;">
             Líder del proyecto:
             <user-full-name-span
-              :user="this.projectInfo.leader">
+              :user="projectLeader">
             </user-full-name-span>
           </span>
           <span class="title col s12" style="word-break: break-all;">

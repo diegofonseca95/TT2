@@ -27,7 +27,7 @@ Vue.component('edit-group-info-modal', {
   data : function(){
     return {
       newGroupDescription : this.groupInfo.description,
-      newLeaderId : this.groupInfo.leader.idUsuario,
+      newLeaderId : this.groupInfo.leaderId,
       newGroupName : this.groupInfo.name,
       hasValidFields : false
     };
@@ -86,9 +86,9 @@ Vue.component('edit-group-info-modal', {
           <form class="col s12" id="edit-group-info-form">
             <div class="row">
               <div class="input-field col s12">
-                <input class="validate" name="edit-group-info-modal-name-input" 
-                  id="edit-group-info-modal-name-input" type="text" 
-                  placeholder="Nombre del grupo" 
+                <input class="validate" name="edit-group-info-modal-name-input"
+                  id="edit-group-info-modal-name-input" type="text"
+                  placeholder="Nombre del grupo"
                   v-model:value="newGroupName" />
                 <label for="edit-group-info-modal-name-input">
                   Nombre del grupo
@@ -96,7 +96,7 @@ Vue.component('edit-group-info-modal', {
               </div>
               <div class="input-field col s12">
                 <input class="validate" name="edit-group-info-modal-desc-input"
-                  id="edit-group-info-modal-desc-input" type="text" 
+                  id="edit-group-info-modal-desc-input" type="text"
                   placeholder="Descripción del grupo"
                   v-model:value="newGroupDescription" />
                 <label for="edit-group-info-modal-desc-input">
@@ -113,7 +113,7 @@ Vue.component('edit-group-info-modal', {
         </div>
       </div>
       <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat" 
+        <a class="waves-effect waves-green btn-flat"
           href="#!" @click="handleModalClose">
           Listo
         </a>
